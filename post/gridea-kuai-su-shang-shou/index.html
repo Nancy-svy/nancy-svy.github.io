@@ -1,0 +1,225 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Gridea快速上手 | Gridea</title>
+<link rel="shortcut icon" href="https://nancysvy.github.io/favicon.ico?v=1680855801956">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://nancysvy.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Gridea快速上手 | Gridea - Atom Feed" href="https://nancysvy.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="前言
+先给大家简单的介绍一下吧，Gridea是一个静态博客写作客户端，相较于其他主流的静态博客，比如之前介绍过的hexo，它更简单更容易上手，只需要了解一点点Markdown的语法进行写作就可以，这就意味着哪怕是完全没有接触过这方面的人也能..." />
+    <meta name="keywords" content="Gridea" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://nancysvy.github.io">
+  <img class="avatar" src="https://nancysvy.github.io/images/avatar.png?v=1680855801956" alt="">
+  </a>
+  <h1 class="site-title">
+    Gridea
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Gridea快速上手
+            </h2>
+            <div class="post-info">
+              <span>
+                2023-04-07
+              </span>
+              <span>
+                4 min read
+              </span>
+              
+                <a href="https://nancysvy.github.io/tag/QkP4MDT2W/" class="post-tag">
+                  # Gridea
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h1 id="前言">前言</h1>
+<p>先给大家简单的介绍一下吧，Gridea是一个静态博客写作客户端，相较于其他主流的静态博客，比如之前介绍过的hexo，它更简单更容易上手，只需要了解一点点Markdown的语法进行写作就可以，这就意味着哪怕是完全没有接触过这方面的人也能够在短短几分钟之内搭建一个自己的博客。 那么下面就是具体操作的步骤！</p>
+<h1 id="一-确定托管代码的平台">一、确定托管代码的平台</h1>
+<p>Gridea是可以将博客部署到Github、Coding和自己的服务器上的。但是很明显，服务器要花钱，选择建静态博客的大部分人，还是因为不想花非刚需的钱去买主机或者服务器。而Coding新版也是要收费的，虽然也不贵而且还有六个月的试用期，但是想要用它的pages服务还需要实名认证，这也相对繁琐。因此我推荐将博客部署到github。往下的教程也是以Github为例。*</p>
+<h1 id="二-注册github账号并创建仓库">二、注册Github账号并创建仓库</h1>
+<p>1、如果你没有Github的账号，那么可以进入官网开始注册（注意一下用户名的填写，如果不使用自定义域名，用户名将会是你的Github分配给你的域名，比如你的用户名为xxx，那么你的域名会是xxx.github,io）。</p>
+<pre><code>Github官网：https://github.com
+</code></pre>
+<p>2、新建仓库，如图所示，点击右上角的“+”号，然后点击“New respository&quot;即可。<br>
+<img src="https://nancysvy.github.io/post-images/1680851882561.png" alt="" loading="lazy"><br>
+3、配置仓库<br>
+这里推荐仓库名填写格式为：”用户名.github.io“。<br>
+然后点击”Add a README file“，再点击”Create repository“即可。<br>
+<img src="https://nancysvy.github.io/post-images/1680851895583.png" alt="" loading="lazy"></p>
+<p>4、点击仓库的”Settings“，进入”pages“。<br>
+<img src="https://nancysvy.github.io/post-images/1680851942771.png" alt="" loading="lazy"><br>
+<img src="https://nancysvy.github.io/post-images/1680851950892.png" alt="" loading="lazy"><br>
+你就会看到你的域名已经正常显示出来了。<br>
+<img src="https://nancysvy.github.io/post-images/1680851958169.png" alt="" loading="lazy"></p>
+<h1 id="三-创建github-token">三、创建Github token</h1>
+<p>1、点击右上角头像的settings，选择菜单最下面的developer settings。<br>
+<img src="https://nancysvy.github.io/post-images/1680851964605.png" alt="" loading="lazy"><br>
+<img src="https://nancysvy.github.io/post-images/1680851972305.png" alt="" loading="lazy"></p>
+<p>2、点击”Personal acces tokens“，再点击”Generate new token“。<br>
+<img src="https://nancysvy.github.io/post-images/1680852099339.png" alt="" loading="lazy"></p>
+<p>3、Note备注可以随便写，这里写个”Griddea“，然后选择”No expiration“，再把”repo“打上✓。<br>
+<img src="https://nancysvy.github.io/post-images/1680852106842.png" alt="" loading="lazy"></p>
+<p>然后下拉页面，选择”Generate token“创建token。<br>
+<img src="https://nancysvy.github.io/post-images/1680852113727.png" alt="" loading="lazy"></p>
+<p>4、复制token，记得保存好，因为只显示一次，忘了又得重新申请。<br>
+<img src="https://nancysvy.github.io/post-images/1680852119865.png" alt="" loading="lazy"></p>
+<h1 id="四-配置gridea">四、配置Gridea</h1>
+<p>准备工作都完成了接下来是配置Gridea。</p>
+<pre><code>Gridea官网： https://gridea.dev
+</code></pre>
+<p>1、进入官网，根据你的电脑系统下载好Gridea客户端，这里以windows为例。<br>
+<img src="https://nancysvy.github.io/post-images/1680852193850.png" alt="" loading="lazy"><br>
+你也可以直接在下方链接下载，因为在GIthub上下载是比较慢的。<br>
+推荐国内Gitee下载源：https://gitee.com/fehey/gridea/releases/v0.9.2<br>
+<img src="https://nancysvy.github.io/post-images/1680852210292.png" alt="" loading="lazy"></p>
+<p>2、安装好后，打开Gridea的”远程“配置你的Github信息，然后保存，如下图。<br>
+<img src="https://nancysvy.github.io/post-images/1680852215287.png" alt="" loading="lazy"></p>
+<p>然后点击左下角的检测远程链接，如果配置没问题，那就会显示远程连接成功。<br>
+如果连接失败，还请回到上述步骤自行检查。<br>
+<img src="https://nancysvy.github.io/post-images/1680852221690.png" alt="" loading="lazy"></p>
+<p>3、编辑文章。<br>
+点击文章，点击右上角的”+“号即可。<br>
+<img src="https://nancysvy.github.io/post-images/1680852311361.png" alt="" loading="lazy"><br>
+编辑完成后，点击右上角保存即可。<br>
+<img src="https://nancysvy.github.io/post-images/1680852303470.png" alt="" loading="lazy"></p>
+<p>4、预览和同步<br>
+点击预览，本地预览后没问题即可点击”同步“推送至github。<br>
+<img src="https://nancysvy.github.io/post-images/1680852293208.png" alt="" loading="lazy"></p>
+<p>当然，你还可以继续配置其他信息，比如自己的网站名字，头像，页脚，图标，加评论等等。<br>
+还可以买个域名来自定义github的域名。<br>
+<img src="https://nancysvy.github.io/post-images/1680852283579.png" alt="" loading="lazy"></p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#%E5%89%8D%E8%A8%80">前言</a></li>
+<li><a href="#%E4%B8%80-%E7%A1%AE%E5%AE%9A%E6%89%98%E7%AE%A1%E4%BB%A3%E7%A0%81%E7%9A%84%E5%B9%B3%E5%8F%B0">一、确定托管代码的平台</a></li>
+<li><a href="#%E4%BA%8C-%E6%B3%A8%E5%86%8Cgithub%E8%B4%A6%E5%8F%B7%E5%B9%B6%E5%88%9B%E5%BB%BA%E4%BB%93%E5%BA%93">二、注册Github账号并创建仓库</a></li>
+<li><a href="#%E4%B8%89-%E5%88%9B%E5%BB%BAgithub-token">三、创建Github token</a></li>
+<li><a href="#%E5%9B%9B-%E9%85%8D%E7%BD%AEgridea">四、配置Gridea</a></li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+
+        
+
+        <div class="site-footer">
+  <img style="width:32px;height:32px;margin-right: 5px" src="https://moe.blog/content/uploadfile/Links/icp.gov.moe.png" alt="">
+<a href="https://icp.gov.move" target="_blank" data-pjax-state>
+<span style="color: #ff0000;">萌</span><span style="color: #ca7900;">I</span><span style="color: #48ab18;">C</span><span style="color: #2720ac;">P</span><span style="color: #9b17ae;">备</span></a><a href="https://icp.gov.moe/?keyword=20230905" target="_blank" data-pjax-state><span style="color: #ff0000;">20</span><span style="color: #ca7900;">23</span><span style="color: #48ab18;">09</span><span style="color: #2720ac;">05</span><span style="color: #f40428;">号</span></a>
+  <a class="rss" href="https://nancysvy.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
