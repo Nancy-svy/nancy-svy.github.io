@@ -1,19 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>http://localhost:4000</id>
+    <id>https://nancy-svy.github.io</id>
     <title>Gridea</title>
-    <updated>2023-04-10T08:30:01.415Z</updated>
+    <updated>2023-04-10T09:55:06.079Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="http://localhost:4000"/>
-    <link rel="self" href="http://localhost:4000/atom.xml"/>
+    <link rel="alternate" href="https://nancy-svy.github.io"/>
+    <link rel="self" href="https://nancy-svy.github.io/atom.xml"/>
     <subtitle>温故而知新</subtitle>
-    <logo>http://localhost:4000/images/avatar.png</logo>
-    <icon>http://localhost:4000/favicon.ico</icon>
+    <logo>https://nancy-svy.github.io/images/avatar.png</logo>
+    <icon>https://nancy-svy.github.io/favicon.ico</icon>
     <rights>All rights reserved 2023, Gridea</rights>
     <entry>
+        <title type="html"><![CDATA[利用GitHub发布个人网站]]></title>
+        <id>https://nancy-svy.github.io/post/li-yong-github-fa-bu-ge-ren-wang-zhan/</id>
+        <link href="https://nancy-svy.github.io/post/li-yong-github-fa-bu-ge-ren-wang-zhan/">
+        </link>
+        <updated>2023-04-10T08:48:38.000Z</updated>
+        <content type="html"><![CDATA[<ol>
+<li>进入github, 点击Create repository创建一个仓库<br>
+<img src="https://nancy-svy.github.io/post-images/1681117633780.png" alt="" loading="lazy"></li>
+<li>建立自己的库<br>
+<img src="https://nancy-svy.github.io/post-images/1681117640648.png" alt="" loading="lazy"></li>
+<li>点击uploading an existing file 上传一个已有的文件，或将文件拖动进入<br>
+<img src="https://nancy-svy.github.io/post-images/1681117646631.png" alt="" loading="lazy"></li>
+<li>点击commit changes 上传<br>
+<img src="https://nancy-svy.github.io/post-images/1681117652676.png" alt="" loading="lazy"></li>
+<li>点击 settings<br>
+<img src="https://nancy-svy.github.io/post-images/1681117663992.png" alt="" loading="lazy"></li>
+<li>选择左侧pages菜单，source中选择分支选择main，点击save<br>
+<img src="https://nancy-svy.github.io/post-images/1681117670948.png" alt="" loading="lazy"></li>
+<li>刷新一下将出现你的静态访问网址（需要等待几分钟）</li>
+</ol>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[添加萌国ICP备案号]]></title>
-        <id>http://localhost:4000/post/tian-jia-meng-guo-icp-bei-an-hao/</id>
-        <link href="http://localhost:4000/post/tian-jia-meng-guo-icp-bei-an-hao/">
+        <id>https://nancy-svy.github.io/post/tian-jia-meng-guo-icp-bei-an-hao/</id>
+        <link href="https://nancy-svy.github.io/post/tian-jia-meng-guo-icp-bei-an-hao/">
         </link>
         <updated>2023-04-07T07:28:53.000Z</updated>
         <content type="html"><![CDATA[<h1 id="前言">前言🍭</h1>
@@ -30,17 +53,17 @@
 <li>
 <p>点击登录， 选择加入<br>
 萌国ICP主页  https://icp.gov.moe/aboutus.php<br>
-<img src="http://localhost:4000/post-images/1680853010730.png" alt="" loading="lazy"></p>
+<img src="https://nancy-svy.github.io/post-images/1680853010730.png" alt="" loading="lazy"></p>
 </li>
 <li>
 <p>点击橙色进入选择一个喜欢的号码<br>
-<img src="http://localhost:4000/post-images/1680853018966.png" alt="" loading="lazy"></p>
-<figure data-type="image" tabindex="1"><img src="http://localhost:4000/post-images/1680853027028.png" alt="" loading="lazy"></figure>
+<img src="https://nancy-svy.github.io/post-images/1680853018966.png" alt="" loading="lazy"></p>
+<figure data-type="image" tabindex="1"><img src="https://nancy-svy.github.io/post-images/1680853027028.png" alt="" loading="lazy"></figure>
 </li>
 <li>
 <p>选择好后填写常用邮箱，验证账号，并填写好网站名字和网站地址，大概5分钟时间完成验证<br>
-<img src="http://localhost:4000/post-images/1680853041573.png" alt="" loading="lazy"></p>
-<figure data-type="image" tabindex="2"><img src="http://localhost:4000/post-images/1680853062611.png" alt="" loading="lazy"></figure>
+<img src="https://nancy-svy.github.io/post-images/1680853041573.png" alt="" loading="lazy"></p>
+<figure data-type="image" tabindex="2"><img src="https://nancy-svy.github.io/post-images/1680853062611.png" alt="" loading="lazy"></figure>
 </li>
 <li>
 <p>将刚才页面的代码填入到网站页脚页面，⚠️每个人申请的都不同<br>
@@ -54,20 +77,20 @@
 </ul>
 <h1 id="效果">效果🔅</h1>
 <p>页脚效果<br>
-<img src="http://localhost:4000/post-images/1680853129791.png" alt="" loading="lazy"></p>
+<img src="https://nancy-svy.github.io/post-images/1680853129791.png" alt="" loading="lazy"></p>
 <p>点击效果<br>
-<img src="http://localhost:4000/post-images/1680853139680.png" alt="" loading="lazy"></p>
+<img src="https://nancy-svy.github.io/post-images/1680853139680.png" alt="" loading="lazy"></p>
 <h1 id="小结">小结🔖</h1>
 <p>以上就是添加萌国ICP备案信息的教程，如果后续需要更改网站信息，可以点击自己萌国ICP打开关于页面，找到下面的修改填写自己的萌国ID加绑定的邮箱即可完成修改。<br>
-<img src="http://localhost:4000/post-images/1680853150947.png" alt="" loading="lazy"></p>
+<img src="https://nancy-svy.github.io/post-images/1680853150947.png" alt="" loading="lazy"></p>
 <h1 id="致谢">致谢🎈</h1>
 <p>萌ICP备案   https://icp.gov.moe/</p>
 ]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[Gridea快速上手]]></title>
-        <id>http://localhost:4000/post/gridea-kuai-su-shang-shou/</id>
-        <link href="http://localhost:4000/post/gridea-kuai-su-shang-shou/">
+        <id>https://nancy-svy.github.io/post/gridea-kuai-su-shang-shou/</id>
+        <link href="https://nancy-svy.github.io/post/gridea-kuai-su-shang-shou/">
         </link>
         <updated>2023-04-07T06:28:35.000Z</updated>
         <content type="html"><![CDATA[<h1 id="前言">前言</h1>
@@ -78,52 +101,52 @@
 <p>🤝 1、如果你没有Github的账号，那么可以进入官网开始注册（注意一下用户名的填写，如果不使用自定义域名，用户名将会是你的Github分配给你的域名，比如你的用户名为xxx，那么你的域名会是xxx.github,io）。</p>
 <p>⛳️ Github官网：https://github.com</p>
 <p>🤝 2、新建仓库，如图所示，点击右上角的“+”号，然后点击“New respository&quot;即可。<br>
-<img src="http://localhost:4000/post-images/1680851882561.png" alt="" loading="lazy"><br>
+<img src="https://nancy-svy.github.io/post-images/1680851882561.png" alt="" loading="lazy"><br>
 🤝 3、配置仓库<br>
 这里推荐仓库名填写格式为：”用户名.github.io“。<br>
 然后点击”Add a README file“，再点击”Create repository“即可。<br>
-<img src="http://localhost:4000/post-images/1680851895583.png" alt="" loading="lazy"></p>
+<img src="https://nancy-svy.github.io/post-images/1680851895583.png" alt="" loading="lazy"></p>
 <p>🤝 4、点击仓库的”Settings“，进入”pages“。<br>
-<img src="http://localhost:4000/post-images/1680851942771.png" alt="" loading="lazy"><br>
-<img src="http://localhost:4000/post-images/1680851950892.png" alt="" loading="lazy"><br>
+<img src="https://nancy-svy.github.io/post-images/1680851942771.png" alt="" loading="lazy"><br>
+<img src="https://nancy-svy.github.io/post-images/1680851950892.png" alt="" loading="lazy"><br>
 🤝 你就会看到你的域名已经正常显示出来了。<br>
-<img src="http://localhost:4000/post-images/1680851958169.png" alt="" loading="lazy"><br>
-<img src="http://localhost:4000/post-images/1680851964605.png" alt="" loading="lazy"></p>
+<img src="https://nancy-svy.github.io/post-images/1680851958169.png" alt="" loading="lazy"><br>
+<img src="https://nancy-svy.github.io/post-images/1680851964605.png" alt="" loading="lazy"></p>
 <h1 id="三-创建github-token">🌁 三、创建Github token</h1>
 <p>🚲 1、点击右上角头像的settings，选择菜单最下面的developer settings。<br>
-<img src="http://localhost:4000/post-images/1680851972305.png" alt="" loading="lazy"></p>
+<img src="https://nancy-svy.github.io/post-images/1680851972305.png" alt="" loading="lazy"></p>
 <p>🚲 2、点击”Personal acces tokens“，再点击”Generate new token“。<br>
-<img src="http://localhost:4000/post-images/1680852099339.png" alt="" loading="lazy"></p>
+<img src="https://nancy-svy.github.io/post-images/1680852099339.png" alt="" loading="lazy"></p>
 <p>🚲 3、Note备注可以随便写，这里写个”Griddea“，然后选择”No expiration“，再把”repo“打上✓。<br>
-<img src="http://localhost:4000/post-images/1680852106842.png" alt="" loading="lazy"></p>
+<img src="https://nancy-svy.github.io/post-images/1680852106842.png" alt="" loading="lazy"></p>
 <p>然后下拉页面，选择”Generate token“创建token。<br>
-<img src="http://localhost:4000/post-images/1680852113727.png" alt="" loading="lazy"></p>
+<img src="https://nancy-svy.github.io/post-images/1680852113727.png" alt="" loading="lazy"></p>
 <p>🚲 4、复制token，记得保存好，因为只显示一次，忘了又得重新申请。<br>
-<img src="http://localhost:4000/post-images/1680852119865.png" alt="" loading="lazy"></p>
+<img src="https://nancy-svy.github.io/post-images/1680852119865.png" alt="" loading="lazy"></p>
 <h1 id="四-配置gridea">🌱 四、配置Gridea</h1>
 <p>准备工作都完成了接下来是配置Gridea。</p>
 <p>⛳️ Gridea官网： https://gridea.dev</p>
 <p>✈️ 1、进入官网，根据你的电脑系统下载好Gridea客户端，这里以windows为例。<br>
-<img src="http://localhost:4000/post-images/1680852193850.png" alt="" loading="lazy"><br>
+<img src="https://nancy-svy.github.io/post-images/1680852193850.png" alt="" loading="lazy"><br>
 你也可以直接在下方链接下载，因为在GIthub上下载是比较慢的。<br>
 推荐国内Gitee下载源：https://gitee.com/fehey/gridea/releases/v0.9.2<br>
-<img src="http://localhost:4000/post-images/1680852210292.png" alt="" loading="lazy"></p>
+<img src="https://nancy-svy.github.io/post-images/1680852210292.png" alt="" loading="lazy"></p>
 <p>✈️ 2、安装好后，打开Gridea的”远程“配置你的Github信息，然后保存，如下图。<br>
-<img src="http://localhost:4000/post-images/1680852215287.png" alt="" loading="lazy"></p>
+<img src="https://nancy-svy.github.io/post-images/1680852215287.png" alt="" loading="lazy"></p>
 <p>然后点击左下角的检测远程链接，如果配置没问题，那就会显示远程连接成功。<br>
 如果连接失败，还请回到上述步骤自行检查。<br>
-<img src="http://localhost:4000/post-images/1680852221690.png" alt="" loading="lazy"></p>
+<img src="https://nancy-svy.github.io/post-images/1680852221690.png" alt="" loading="lazy"></p>
 <p>✈️ 3、编辑文章。<br>
 点击文章，点击右上角的”+“号即可。<br>
-<img src="http://localhost:4000/post-images/1680852311361.png" alt="" loading="lazy"><br>
+<img src="https://nancy-svy.github.io/post-images/1680852311361.png" alt="" loading="lazy"><br>
 编辑完成后，点击右上角保存即可。<br>
-<img src="http://localhost:4000/post-images/1680852303470.png" alt="" loading="lazy"></p>
+<img src="https://nancy-svy.github.io/post-images/1680852303470.png" alt="" loading="lazy"></p>
 <p>✈️ 4、预览和同步<br>
 点击预览，本地预览后没问题即可点击”同步“推送至github。<br>
-<img src="http://localhost:4000/post-images/1680852293208.png" alt="" loading="lazy"></p>
+<img src="https://nancy-svy.github.io/post-images/1680852293208.png" alt="" loading="lazy"></p>
 <p>✈️ 当然，你还可以继续配置其他信息，比如自己的网站名字，头像，页脚，图标，加评论等等。<br>
 还可以买个域名来自定义github的域名。<br>
-<img src="http://localhost:4000/post-images/1680852283579.png" alt="" loading="lazy"></p>
+<img src="https://nancy-svy.github.io/post-images/1680852283579.png" alt="" loading="lazy"></p>
 <h1 id="五-更换主题">🌉 五、更换主题</h1>
 <p>🗼在 https://gridea.dev/themes/ ，寻找你喜欢的主题，然后点击【下载文件】，下载后解压<br>
 🗼 点击客户端里的【配置】，找到【 站点源文件路径 】，打开路径。退出Gridea客户端。<br>
@@ -131,11 +154,11 @@
 🗼 点击预览，即可看到新的主题页面。</p>
 <h1 id="六-开启gitalk评论系统">💬 六、开启Gitalk评论系统</h1>
 <p>🏷️ 在https://github.com/settings/applications/new注册应用。<br>
-<img src="http://localhost:4000/post-images/1681097397374.png" alt="" loading="lazy"><br>
+<img src="https://nancy-svy.github.io/post-images/1681097397374.png" alt="" loading="lazy"><br>
 🏷️ 填写后点击【Register application】，会得到【Client ID】和【Client Secret】。<br>
-<img src="http://localhost:4000/post-images/1681097290262.jpg" alt="" loading="lazy"><br>
+<img src="https://nancy-svy.github.io/post-images/1681097290262.jpg" alt="" loading="lazy"><br>
 🏷️ 打开Gridea客户端 -&gt; 远程 -&gt; 评论配置 -&gt; 平台（选中Gitalk）-&gt; 按照下面提示填写-&gt;<br>
-<img src="http://localhost:4000/post-images/1681097404152.png" alt="" loading="lazy"><br>
+<img src="https://nancy-svy.github.io/post-images/1681097404152.png" alt="" loading="lazy"><br>
 🏷️ 填完后点击【保存】-&gt;【同步】。<br>
 📋 稍等一会儿后，在浏览器打开域名，会看到文章底下显示“未找到相关的issues进行评论xxx”，点击【使用GitHub登陆】，进行授权。</p>
 ]]></content>
