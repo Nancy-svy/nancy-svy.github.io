@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://nancy-svy.github.io</id>
     <title>Gridea</title>
-    <updated>2023-04-11T09:40:30.025Z</updated>
+    <updated>2023-04-13T09:27:54.401Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://nancy-svy.github.io"/>
     <link rel="self" href="https://nancy-svy.github.io/atom.xml"/>
@@ -11,9 +11,47 @@
     <icon>https://nancy-svy.github.io/favicon.ico</icon>
     <rights>All rights reserved 2023, Gridea</rights>
     <entry>
+        <title type="html"><![CDATA[chrome问题]]></title>
+        <id>https://nancy-svy.github.io/post/chromeQuestion/</id>
+        <link href="https://nancy-svy.github.io/post/chromeQuestion/">
+        </link>
+        <updated>2023-04-12T01:05:19.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="问题">问题：</h2>
+<pre><code>    打开谷歌浏览器提示：您使用的是不受支持的命令行标记:–extensions-on-chrome-urls。稳定性和安全性会有所下降。
+</code></pre>
+<h2 id="问题分析">问题分析：</h2>
+<pre><code>    出现该提示是因为在你非官方安装插件之后
+</code></pre>
+<h2 id="解决办法">解决办法：</h2>
+<pre><code>    在Chrome导航栏中输入[Experiments](chrome://flags ),
+    搜索栏搜索【Extensions on chrome:// URLs】网址下的扩展程序，然后选择Disabled。     
+</code></pre>
+<p><img src="https://nancy-svy.github.io/post-images/1681261731032.png" alt="" loading="lazy"><br>
+disabled 关闭<br>
+enabled 启用</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[压缩包添加密码]]></title>
+        <id>https://nancy-svy.github.io/post/compressedPacketEncryption/</id>
+        <link href="https://nancy-svy.github.io/post/compressedPacketEncryption/">
+        </link>
+        <updated>2023-04-12T00:44:30.000Z</updated>
+        <content type="html"><![CDATA[<ol>
+<li>压缩文件：找到需要压缩的文件/文件夹，右击文件，点击添加到压缩文件，开始压缩。</li>
+<li>添加密码：进入压缩界面，点击添加密码</li>
+<li>输入密码：进入添加密码界面后，输入密码</li>
+<li>开始压缩：密码设置完成后，点击立即压缩，开始压缩文件并加密</li>
+<li>压缩成功：我们可以看到压缩文件和原文件都在，说明压缩成功了。</li>
+<li>解压：右击压缩文件，点击解压到，开始解压</li>
+<li>需要密码：出现解压需要密码，说明密码设置成功。</li>
+</ol>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[百度网盘设置提取码]]></title>
-        <id>https://nancy-svy.github.io/post/bai-du-wang-pan-she-zhi-ti-qu-ma/</id>
-        <link href="https://nancy-svy.github.io/post/bai-du-wang-pan-she-zhi-ti-qu-ma/">
+        <id>https://nancy-svy.github.io/post/networkDiskExtractionCode/</id>
+        <link href="https://nancy-svy.github.io/post/networkDiskExtractionCode/">
         </link>
         <updated>2023-04-11T09:20:49.000Z</updated>
         <content type="html"><![CDATA[<ol>
@@ -34,8 +72,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[利用GitHub发布个人网站]]></title>
-        <id>https://nancy-svy.github.io/post/li-yong-github-fa-bu-ge-ren-wang-zhan/</id>
-        <link href="https://nancy-svy.github.io/post/li-yong-github-fa-bu-ge-ren-wang-zhan/">
+        <id>https://nancy-svy.github.io/post/publishPersonalWebsite/</id>
+        <link href="https://nancy-svy.github.io/post/publishPersonalWebsite/">
         </link>
         <updated>2023-04-10T08:48:38.000Z</updated>
         <content type="html"><![CDATA[<ol>
@@ -57,8 +95,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[添加萌国ICP备案号]]></title>
-        <id>https://nancy-svy.github.io/post/tian-jia-meng-guo-icp-bei-an-hao/</id>
-        <link href="https://nancy-svy.github.io/post/tian-jia-meng-guo-icp-bei-an-hao/">
+        <id>https://nancy-svy.github.io/post/mengGuoICPPutOnRecord/</id>
+        <link href="https://nancy-svy.github.io/post/mengGuoICPPutOnRecord/">
         </link>
         <updated>2023-04-07T07:28:53.000Z</updated>
         <content type="html"><![CDATA[<h1 id="前言">前言🍭</h1>
@@ -111,15 +149,15 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[Gridea快速上手]]></title>
-        <id>https://nancy-svy.github.io/post/gridea-kuai-su-shang-shou/</id>
-        <link href="https://nancy-svy.github.io/post/gridea-kuai-su-shang-shou/">
+        <id>https://nancy-svy.github.io/post/grideaGetStartedQuickly/</id>
+        <link href="https://nancy-svy.github.io/post/grideaGetStartedQuickly/">
         </link>
         <updated>2023-04-07T06:28:35.000Z</updated>
         <content type="html"><![CDATA[<h1 id="前言">前言</h1>
 <p>先给大家简单的介绍一下吧，Gridea是一个静态博客写作客户端，相较于其他主流的静态博客，比如之前介绍过的hexo，它更简单更容易上手，只需要了解一点点Markdown的语法进行写作就可以，这就意味着哪怕是完全没有接触过这方面的人也能够在短短几分钟之内搭建一个自己的博客。 那么下面就是具体操作的步骤！</p>
-<h1 id="一-确定托管代码的平台">💻 一、确定托管代码的平台</h1>
+<h3 id="一-确定托管代码的平台">💻 一、确定托管代码的平台</h3>
 <p>Gridea是可以将博客部署到Github、Coding和自己的服务器上的。但是很明显，服务器要花钱，选择建静态博客的大部分人，还是因为不想花非刚需的钱去买主机或者服务器。而Coding新版也是要收费的，虽然也不贵而且还有六个月的试用期，但是想要用它的pages服务还需要实名认证，这也相对繁琐。因此我推荐将博客部署到github。往下的教程也是以Github为例。*</p>
-<h1 id="二-注册github账号并创建仓库">🍀 二、注册Github账号并创建仓库</h1>
+<h3 id="二-注册github账号并创建仓库">🍀 二、注册Github账号并创建仓库</h3>
 <p>🤝 1、如果你没有Github的账号，那么可以进入官网开始注册（注意一下用户名的填写，如果不使用自定义域名，用户名将会是你的Github分配给你的域名，比如你的用户名为xxx，那么你的域名会是xxx.github,io）。</p>
 <p>⛳️ Github官网：https://github.com</p>
 <p>🤝 2、新建仓库，如图所示，点击右上角的“+”号，然后点击“New respository&quot;即可。<br>
@@ -134,7 +172,7 @@
 🤝 你就会看到你的域名已经正常显示出来了。<br>
 <img src="https://nancy-svy.github.io/post-images/1680851958169.png" alt="" loading="lazy"><br>
 <img src="https://nancy-svy.github.io/post-images/1680851964605.png" alt="" loading="lazy"></p>
-<h1 id="三-创建github-token">🌁 三、创建Github token</h1>
+<h3 id="三-创建github-token">🌁 三、创建Github token</h3>
 <p>🚲 1、点击右上角头像的settings，选择菜单最下面的developer settings。<br>
 <img src="https://nancy-svy.github.io/post-images/1680851972305.png" alt="" loading="lazy"></p>
 <p>🚲 2、点击”Personal acces tokens“，再点击”Generate new token“。<br>
@@ -145,7 +183,7 @@
 <img src="https://nancy-svy.github.io/post-images/1680852113727.png" alt="" loading="lazy"></p>
 <p>🚲 4、复制token，记得保存好，因为只显示一次，忘了又得重新申请。<br>
 <img src="https://nancy-svy.github.io/post-images/1680852119865.png" alt="" loading="lazy"></p>
-<h1 id="四-配置gridea">🌱 四、配置Gridea</h1>
+<h3 id="四-配置gridea">🌱 四、配置Gridea</h3>
 <p>准备工作都完成了接下来是配置Gridea。</p>
 <p>⛳️ Gridea官网： https://gridea.dev</p>
 <p>✈️ 1、进入官网，根据你的电脑系统下载好Gridea客户端，这里以windows为例。<br>
@@ -169,7 +207,7 @@
 <p>✈️ 当然，你还可以继续配置其他信息，比如自己的网站名字，头像，页脚，图标，加评论等等。<br>
 还可以买个域名来自定义github的域名。<br>
 <img src="https://nancy-svy.github.io/post-images/1680852283579.png" alt="" loading="lazy"></p>
-<h1 id="五-更换主题">🌉 五、更换主题</h1>
+<h3 id="五-更换主题">🌉 五、更换主题</h3>
 <p>🗼在 https://gridea.dev/themes/ ，寻找你喜欢的主题，然后点击【下载文件】，下载后解压<br>
 🗼 点击客户端里的【配置】，找到【 站点源文件路径 】，打开路径。退出Gridea客户端。<br>
 🗼 选择【themes】文件夹，把刚刚解压的主题文件夹复制过来，重新打开Gridea客户端，打开【主题】，选择主题，滚动下鼠标，选中刚刚复制进去的主题名称，保存。<br>
@@ -183,6 +221,640 @@
 <img src="https://nancy-svy.github.io/post-images/1681097404152.png" alt="" loading="lazy"><br>
 🏷️ 填完后点击【保存】-&gt;【同步】。<br>
 📋 稍等一会儿后，在浏览器打开域名，会看到文章底下显示“未找到相关的issues进行评论xxx”，点击【使用GitHub登陆】，进行授权。</p>
+<h3 id="六-基本操作">📝 六、基本操作</h3>
+<ol>
+<li>输入文章标题  ### 标题三</li>
+<li>输入无序列表   - 无序列表，数字列表    1. 数字列表</li>
+<li>输入代码虚假的代码,(虚假的代码左右各一个&quot;`&quot;)输入代码段虚假的代码段.(虚假的代码段,左右各有3个```)</li>
+<li>输入数学公式: <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">数</mi><mi mathvariant="normal">学</mi><mi mathvariant="normal">公</mi><mi mathvariant="normal">式</mi></mrow><annotation encoding="application/x-tex">数学公式</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0em;vertical-align:0em;"></span><span class="mord cjk_fallback">数</span><span class="mord cjk_fallback">学</span><span class="mord cjk_fallback">公</span><span class="mord cjk_fallback">式</span></span></span></span>.</li>
+<li>插入图片: 直接拖入以 【 <img src="%E5%9B%BE%E7%89%87%E5%9C%B0%E5%9D%80" alt="图片名称" loading="lazy"> 】 的形式给出</li>
+<li>插入链接: 以【<a href="%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80">链接名称</a>】的形式给出</li>
+</ol>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[解决小程序自定义tabbar在ios手机上无法显示问题]]></title>
+        <id>https://nancy-svy.github.io/post/unableToDisplay/</id>
+        <link href="https://nancy-svy.github.io/post/unableToDisplay/">
+        </link>
+        <updated>2023-02-21T06:46:39.000Z</updated>
+        <content type="html"><![CDATA[<p><strong>在custom-tab-bar文件夹中，index.js文件中，</strong></p>
+<pre><code>Component({
+  data: {
+    selected: 0,
+    color: &quot;#B2B2B2&quot;,
+    selectedColor: &quot;#FF502F&quot;,
+	allList: [{
+		// cheguanyuan
+		vehicleControllerList: [{
+			pagePath: &quot;/pages/home/home&quot;,
+			iconPath: &quot;/static/images/tab0_icon.png&quot;,
+			selectedIconPath: &quot;/static/images/tab0_active.png&quot;,
+			text: &quot;首页&quot;
+		}, {
+			pagePath: &quot;/pages/deliverGoods/deliverGoods&quot;,
+			iconPath: &quot;/static/images/tab1.png&quot;,
+			selectedIconPath: &quot;/static/images/tab1.png&quot;,
+			text: &quot;发货&quot;
+		},{
+			pagePath: &quot;/pages/mine/mine&quot;,
+			iconPath: &quot;/static/images/tab2_icon.png&quot;,
+			selectedIconPath: &quot;/static/images/tab2_active.png&quot;,
+			text: &quot;我的&quot;
+		}],
+		// siji
+		driverList: [{
+			pagePath: &quot;/pages/home/home&quot;,
+			iconPath: &quot;/static/images/tab0_icon.png&quot;,
+			selectedIconPath: &quot;/static/images/tab0_active.png&quot;,
+			text: &quot;首页&quot;
+		}, {
+			pagePath: &quot;/pages/mine/mine&quot;,
+			iconPath: &quot;/static/images/tab2_icon.png&quot;,
+			selectedIconPath: &quot;/static/images/tab2_active.png&quot;,
+			text: &quot;我的&quot;
+		}]
+	}],
+	list: []
+  },
+  attached() {
+	  
+	if(wx.getStorageSync('userInfo')){
+		const role = wx.getStorageSync('userInfo').role
+		if(role == 2){ // 车管员
+			this.setData({
+				list: this.data.allList[0].vehicleControllerList
+			})
+		}else if(role == 3){ // 司机
+			this.setData({
+				list: this.data.allList[0].driverList
+			})
+		}
+	}
+  },
+  methods: {
+    switchTab(e) {
+      const data = e.currentTarget.dataset
+      const url = data.path
+	  this.setData({
+	    selected: data.index
+	  })
+      wx.switchTab({url})
+    },
+
+	// 初始化赋值
+	init() {
+		if(wx.getStorageSync('userInfo')){
+			const role = wx.getStorageSync('userInfo').role
+			if(role == 2){ // 车管员
+				this.setData({
+					list: this.data.allList[0].vehicleControllerList
+				})
+			}else if(role == 3){ // 司机
+				this.setData({
+					list: this.data.allList[0].driverList
+				})
+			}
+		}
+	}
+  }
+})
+ 
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[手写签名]]></title>
+        <id>https://nancy-svy.github.io/post/handwrittenSignature/</id>
+        <link href="https://nancy-svy.github.io/post/handwrittenSignature/">
+        </link>
+        <updated>2023-02-03T02:10:06.000Z</updated>
+        <content type="html"><![CDATA[<p><strong>html</strong></p>
+<pre><code>&lt;template&gt;
+	&lt;view class=&quot;autograph&quot;&gt;
+		&lt;!-- 点击触发写字板 --&gt;
+		&lt;view class=&quot;canvasbox&quot; @click='createCanvas'&gt;
+			&lt;!-- canvas --&gt;
+			&lt;canvas 
+			class=&quot;mycanvas&quot; 
+			canvas-id=&quot;mycanvas&quot;
+			@touchstart=&quot;touchstart&quot;
+			@touchmove=&quot;touchmove&quot; 
+			@touchend=&quot;touchend&quot;
+			&gt;&lt;/canvas&gt;
+		&lt;/view&gt;
+		&lt;!-- 底部操作按钮 --&gt;
+		&lt;view class=&quot;footer&quot;&gt;
+			&lt;button type=&quot;primary&quot; plain @click=&quot;finish&quot;&gt;保存&lt;/button&gt;
+			&lt;button type=&quot;default&quot; plain @click=&quot;clear&quot;&gt;清除&lt;/button&gt;
+		&lt;/view&gt;
+	&lt;/view&gt;
+&lt;/template&gt;
+ 
+</code></pre>
+<p><strong>js</strong></p>
+<pre><code>&lt;script&gt;
+	export default {
+		data() {
+			return {
+				//绘图图像
+				ctx: '', 
+				//路径点集合
+				points: [], 
+				//签名图片
+				SignatureImg: ''
+			}
+		},
+		methods: {
+			// 初始化绘图--点击触发写字板
+		    createCanvas() {
+		        //创建绘图对象
+		        this.ctx = uni.createCanvasContext('mycanvas', this);
+		        //设置画笔样式
+		        this.ctx.lineWidth = 4;
+		        this.ctx.lineCap = 'round';
+		        this.ctx.lineJoin = 'round';
+		    },
+			// 开始绘图
+		    touchstart(e) {
+		        let startX = e.changedTouches[0].x;
+		        let startY = e.changedTouches[0].y;
+		        let startPoint = { X: startX, Y: startY };
+		        this.points.push(startPoint);
+		        //每次触摸开始，开启新的路径
+		        this.ctx.beginPath();
+			},
+			// 移动 绘制中
+		   touchmove(e) {
+		        let moveX = e.changedTouches[0].x;
+		        let moveY = e.changedTouches[0].y;
+		        let movePoint = { X: moveX, Y: moveY };
+		        this.points.push(movePoint); //存点
+		        let len = this.points.length;
+		        if (len &gt;= 2) {
+		            this.draw(); //绘制路径
+		        }
+			},
+			// 结束绘图
+		   touchend() {
+		        this.points = [];
+			},
+			//绘制路径
+		   draw() {
+		        let point1 = this.points[0];
+		        let point2 = this.points[1];
+		        this.points.shift();
+		        this.ctx.moveTo(point1.X, point1.Y);
+		        this.ctx.lineTo(point2.X, point2.Y);
+		        this.ctx.stroke();
+		        this.ctx.draw(true);
+		    },
+			// 清除
+		   clear() {
+		        uni.getSystemInfo({
+					success: (res) =&gt; {
+						let canvasw = res.windowWidth;
+						let canvash = res.windowHeight;
+						this.ctx.clearRect(0, 0, canvasw, canvash);
+						this.ctx.draw(true);
+						this.SignatureImg = ''
+					}
+		        });
+		    },
+			// 生成签名图片
+		   finish() {
+		        uni.canvasToTempFilePath({
+		            canvasId: 'mycanvas',
+		            success: (res) =&gt; {
+						//这里的res.tempFilePath就是生成的签字图片
+						console.log('保存的图片路径',res.tempFilePath);
+						this.SignatureImg = res.tempFilePath
+		            }
+		        });
+		   },
+		}
+	}
+&lt;/script&gt;
+
+ 
+</code></pre>
+<p><strong>css</strong></p>
+<pre><code>&lt;style lang=&quot;less&quot; scoped&gt;
+.autograph{
+	padding: 36rpx;
+}
+.canvasbox{
+	width: 100%;
+	height: 400rpx;
+	background: #F3F4F5;
+	border-radius: 10rpx 10rpx 10rpx 10rpx;
+	.mycanvas{
+		width: 100%;
+		height: 100%;
+	}
+}
+.footer{
+	padding: 20rpx 32rpx;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+&lt;/style&gt;
+
+ 
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[uniapp 使用echarts并解决echarts文件过大的问题]]></title>
+        <id>https://nancy-svy.github.io/post/echartsFileSizeIssue/</id>
+        <link href="https://nancy-svy.github.io/post/echartsFileSizeIssue/">
+        </link>
+        <updated>2023-01-09T06:44:35.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="方法一">方法一</h3>
+<h5 id="一-uni-app引用echarts">一、uni-app引用echarts</h5>
+<p>####### 首先，要去下载插件（用hbuilder编辑器下载特别方便）<br>
+l-echarts   DCloud插件市场 <a href="https://ext.dcloud.net.cn/plugin?id=4899"></a><br>
+<strong>##</strong> 使用</p>
+<pre><code>&lt;template&gt;
+	&lt;view&gt;&lt;l-echart ref=&quot;chart&quot; @finished=&quot;init&quot;&gt;&lt;/l-echart&gt;&lt;/view&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+	import LEchart from '@/uni_modules/lime-echart/components/l-echart/l-echart.vue';
+	export default {
+		components: {
+			LEchart
+		}
+,
+		data(){
+			return{
+				option: {
+	                tooltip: {
+	                    trigger: 'axis',
+	                    axisPointer: {
+	                        type: 'shadow' 
+	                    },
+	                    confine: true
+	                },
+	                legend: {
+	                    data: ['热度', '正面', '负面']
+	                },
+	                grid: {
+	                    left: 20,
+	                    right: 20,
+	                    bottom: 15,
+	                    top: 40,
+	                    containLabel: true
+	                },
+	                xAxis: [
+	                    {
+	                        type: 'value',
+	                        axisLine: {
+	                            lineStyle: {
+	                                color: '#999999'
+	                            }
+	                        },
+	                        axisLabel: {
+	                            color: '#666666'
+	                        }
+	                    }
+	                ],
+	                yAxis: [
+	                    {
+	                        type: 'category',
+	                        axisTick: { show: false },
+	                        data: ['汽车之家', '今日头条', '百度贴吧', '一点资讯', '微信', '微博', '知乎'],
+	                        axisLine: {
+	                            lineStyle: {
+	                                color: '#999999'
+	                            }
+	                        },
+	                        axisLabel: {
+	                            color: '#666666'
+	                        }
+	                    }
+	                ],
+	                series: [
+	                    {
+	                        name: '热度',
+	                        type: 'bar',
+	                        label: {
+	                            normal: {
+	                                show: true,
+	                                position: 'inside'
+	                            }
+	                        },
+	                        data: [300, 270, 340, 344, 300, 320, 310],
+	                    },
+	                    {
+	                        name: '正面',
+	                        type: 'bar',
+	                        stack: '总量',
+	                        label: {
+	                            normal: {
+	                                show: true
+	                            }
+	                        },
+	                        data: [120, 102, 141, 174, 190, 250, 220]
+	                    },
+	                    {
+	                        name: '负面',
+	                        type: 'bar',
+	                        stack: '总量',
+	                        label: {
+	                            normal: {
+	                                show: true,
+	                                position: 'left'
+	                            }
+	                        },
+	                        data: [-20, -32, -21, -34, -90, -130, -110]
+	                    }
+	                ]
+	            },
+			}
+		},
+
+		// 组件能被调用必须是组件的节点已经被渲染到页面上
+	    // 1、在页面mounted里调用，有时候mounted 组件也未必渲染完成
+	    mounted() {
+	        // init(echarts, theme?:string, opts?:{}, chart =&gt; {})
+	        // echarts 必填， 非nvue必填，nvue不用填
+	        // theme 可选，应用的主题，目前只支持名称，如：'dark'
+	        // opts = { // 可选
+	        //  locale?: string  // 从 `5.0.0` 开始支持
+	        // }
+	        // chart =&gt; {} ， callback 必填，返回图表实例
+	        this.$refs.chart.init(echarts, chart =&gt; {
+	            chart.setOption(this.option);
+	        });
+	    },
+
+		// 2、或者使用组件的finished事件里调用
+	    methods: {
+	        init() {
+	            this.$refs.chart.init(echarts, chart =&gt; {
+	                chart.setOption(this.option);
+	            });
+	        }
+	    }
+
+	}
+&lt;/script&gt;
+
+</code></pre>
+<h5 id="二-解决ecahrtsjs文件过大的问题">二、解决ecahrts.js文件过大的问题</h5>
+<p>####### 首先，要去echarts官网自定义构建并下载文件<br>
+ECharts 在线构建 (apache.org) <a href="https://echarts.apache.org/zh/builder.html"></a><br>
+下载的是echarts.min.js文件<br>
+其次就是替换文件了<br>
+将项目中的echarts.js替换成echarts.min.js文件<br>
+<img src="https://nancy-svy.github.io/post-images/1681376499522.png" alt="" loading="lazy"></p>
+<h3 id="方法二">方法二</h3>
+<h5 id="微信小程序-ecahrts">微信小程序 ecahrts</h5>
+<h6 id="正文">正文</h6>
+<h6 id="一-uni-app引用echarts-2">一、uni-app引用echarts</h6>
+<p>######## 首先，要去下载插件（用hbuilder编辑器下载特别方便）<br>
+echarts-for-wx   DCloud插件市场 <a href="https://ext.dcloud.net.cn/plugin?id=1538"></a></p>
+<p>使用HBuilder导入之后，会生成一个js_sdk目录<br>
+######## 其次，只需要将js_sdk下的uni-ec-canvas目录复制到components目录下面就成功引入了<br>
+######## 之后，在pages中建立页面并复制如下代码就可以展示图表了<br>
+<strong>##</strong> 折线图</p>
+<pre><code>&lt;template&gt;
+  &lt;view&gt;
+    &lt;uni-ec-canvas class=&quot;uni-ec-canvas&quot; id=&quot;uni-ec-canvas&quot; ref=&quot;canvas&quot; canvas-id=&quot;uni-ec-canvas&quot; :ec=&quot;ec&quot;&gt;
+    &lt;/uni-ec-canvas&gt;
+  &lt;/view&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+  import uniEcCanvas from '@/components/uni-ec-canvas/uni-ec-canvas.vue'
+  import * as echarts from '@/components/uni-ec-canvas/echarts'
+  let chart = null
+  export default {
+    components: {
+      uniEcCanvas
+    },
+    data() {
+      return {
+        ec: {
+          lazyLoad: true
+        },
+        option: {
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: { // 坐标轴指示器，坐标轴触发有效
+              type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+            }
+          },
+          grid: {
+            left: '40',
+            right: '40',
+            bottom: '3%',
+            containLabel: true
+          },
+          xAxis: {
+            type: 'category',
+            axisTick: {
+              show: false,
+            },
+            nameTextStyle: {
+              color: '#666666'
+            },
+            axisLabel: {
+              show: true,
+              textStyle: {
+                color: '#666',
+                fontSize: '12',
+                fontWeight:'bold'
+              }
+            },
+            axisLine: {
+              lineStyle: {
+                color: '#666',
+                width: 1
+              }
+            },
+            data: [&quot;寿险&quot;, &quot;重疾&quot;, &quot;意外&quot;, &quot;医疗&quot;, &quot;年金&quot;],
+          },
+          yAxis: {
+            type: 'value',
+            axisLine: {
+              show: false, //y轴线消失
+ 
+            },
+            axisLabel: {
+              show: true,
+              textStyle: {
+                color: '#666',
+                fontSize: '11'
+              }
+            },
+ 
+            axisTick: {
+              show: false,
+            },
+          },
+          series: [{
+            barWidth: 20,
+            type: 'bar',
+            data: [20, 50, 40, 10, 20],
+            itemStyle: {
+              normal: {
+                //每根柱子颜色设置
+                color: function(params) {
+                  const colorList = [&quot;#FFC600&quot;, &quot;#21A5FF&quot;, &quot;#FF6000&quot;, &quot;#00D69C&quot;,
+                    &quot;#998BFF&quot;
+                  ];
+                  return colorList[params.dataIndex];
+                }
+              }
+            },
+            label: {
+              show: true,
+              position: 'top',
+              formatter: '{c}万',
+              color: '#666666',
+              fontStyle: 'PingFang SC',
+              fontWeight: 'bold',
+              fontSize:'8'
+            }
+          }]
+        },
+      }
+    },
+    methods: {
+      initChart(canvas, width, height, canvasDpr) {
+        console.log(canvas, width, height, canvasDpr)
+        chart = echarts.init(canvas, null, {
+          width: width,
+          height: height,
+          devicePixelRatio: canvasDpr
+        })
+        canvas.setChart(chart)
+        chart.setOption(this.option)
+        return chart
+      },
+    },
+    onLoad() {
+      setTimeout(() =&gt; {
+        console.log(this.$refs)
+      }, 2000)
+      this.$refs.canvas.init(this.initChart)
+    },
+  }
+&lt;/script&gt;
+ 
+</code></pre>
+<p>// 这里一定要注意 设置该组件宽高 以及display:block来确保canvas初始化的时候是有宽高的</p>
+<pre><code>&lt;style&gt;
+  .uni-ec-canvas {
+    width: 100%;
+    height: 500rpx;
+    display: block;
+    margin-top: 30rpx;
+  }
+&lt;/style&gt;
+ 
+</code></pre>
+<h5 id="二-解决ecahrtsjs文件过大的问题-2">二、解决ecahrts.js文件过大的问题</h5>
+<p>####### 首先，要去echarts官网自定义构建并下载文件<br>
+ECharts 在线构建 (apache.org) <a href="https://echarts.apache.org/zh/builder.html"></a><br>
+下载的是echarts.min.js文件<br>
+<img src="https://nancy-svy.github.io/post-images/1681376652702.png" alt="" loading="lazy"></p>
+<p>####### 其次就是替换文件了<br>
+将项目中的echarts.js替换成echarts.min.js文件</p>
+<blockquote>
+<p>并修改导入的文件<br>
+有两个文件要修改:  一是uni-ec-canvas.vue，二是我们建立的test.vue<br>
+将echarts.js修改成echarts.min.js<br>
+修改完之后会报错了，解决方法：<br>
+打开echarts.min.js    搜索字符串  t.addEventListener<br>
+<img src="https://nancy-svy.github.io/post-images/1681376703104.png" alt="" loading="lazy"><br>
+<img src="https://nancy-svy.github.io/post-images/1681376718477.png" alt="" loading="lazy"><br>
+搜索到之后，在 t.addEventListener 后面添加   ?.<br>
+<img src="https://nancy-svy.github.io/post-images/1681376739197.png" alt="" loading="lazy"></p>
+</blockquote>
+<h3 id="页面滚动时图表抖动-加-force-use-old-canvastrue-这个属性">页面滚动时，图表抖动 加 force-use-old-canvas=&quot;true&quot; 这个属性</h3>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[封装axios]]></title>
+        <id>https://nancy-svy.github.io/post/uniapp-package-axios/</id>
+        <link href="https://nancy-svy.github.io/post/uniapp-package-axios/">
+        </link>
+        <updated>2023-01-09T06:35:19.000Z</updated>
+        <content type="html"><![CDATA[<h4 id="requestjs">request.js</h4>
+<pre><code>const baseURL = 'https://app.lfywkeji.com'
+
+function request(url, method, params) {
+    return new Promise((resolve, reject) =&gt; {
+        uni.request({
+            url: baseURL + url,
+            method: method,
+            timeout: 10000,
+            header: {
+                &quot;Accept&quot;: &quot;application/json&quot;,
+                &quot;content-type&quot;: &quot;application/json; charset=UTF-8&quot;,
+                &quot;Authorization&quot;: uni.getStorageSync('token') ? uni.getStorageSync('token') : ''
+            },
+            data: params ? params : '',
+        }).then(res =&gt; {
+			if(res[1].data.code == 200){
+				resolve(res[1])
+			}else if(res[1].data.code == 401){
+				uni.removeStorageSync('token')
+				uni.removeStorageSync('myInfo')
+			}else if(res[1].data.code == 1502){
+				uni.removeStorageSync('token')
+				uni.removeStorageSync('myInfo')
+				uni.showModal({
+					title: '提示',
+					showCancel: false,
+					content: '登录已过期，请重新登录',
+					success: (res) =&gt; {
+						if(res.confirm){
+							uni.reLaunch({
+								url: '/pages/login/index'
+							})
+						}
+					}
+				})
+				
+			}else{
+				uni.showToast({
+					icon:&quot;none&quot;,
+					title: res[1].data.message,
+					duration: 2000
+				})
+			}
+        }).catch(err =&gt; {
+            reject(err[1])
+        })
+    })
+}
+
+function get(url, params) {
+    return request(url, 'GET', params)
+}
+
+function post(url, params) {
+    return request(url, 'POST', params)
+}
+
+export {
+    get,
+    post
+}
+ 
+</code></pre>
+<h4 id="apijs">api.js</h4>
+<pre><code>const request = require('./request.js');
+
+// 登录
+export const authLogin = (params) =&gt; request.get('/rest/authLogin', params);
+
+</code></pre>
 ]]></content>
     </entry>
 </feed>
