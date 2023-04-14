@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://nancy-svy.github.io</id>
     <title>Gridea</title>
-    <updated>2023-04-13T09:27:54.401Z</updated>
+    <updated>2023-04-14T10:06:06.287Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://nancy-svy.github.io"/>
     <link rel="self" href="https://nancy-svy.github.io/atom.xml"/>
@@ -10,6 +10,41 @@
     <logo>https://nancy-svy.github.io/images/avatar.png</logo>
     <icon>https://nancy-svy.github.io/favicon.ico</icon>
     <rights>All rights reserved 2023, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[uniapp 引入外部字体]]></title>
+        <id>https://nancy-svy.github.io/post/importFontFile/</id>
+        <link href="https://nancy-svy.github.io/post/importFontFile/">
+        </link>
+        <updated>2023-04-14T09:50:09.000Z</updated>
+        <content type="html"><![CDATA[<p>uni-app 支持使用字体图标，请仔细阅读官方文档：<a href="https://uniapp.dcloud.net.cn/tutorial/syntax-css.html#%E5%AD%97%E4%BD%93%E5%9B%BE%E6%A0%87">地址</a></p>
+<h3 id="一-当字体文件小于40kb时uni-app-会自动将其转化为-base64-格式直接引入即可">一、当字体文件小于40kb时，uni-app 会自动将其转化为 base64 格式，直接引入即可</h3>
+<pre><code>@font-face {
+     font-family: xxxxx;
+     src: url('~@/static/xxxx.ttf');
+ }
+</code></pre>
+<h3 id="当字体文件大于40kb时需要自己转化成base64格式">当字体文件大于40kb时，需要自己转化成base64格式：</h3>
+<h6 id="1-将下载好的字体文件转换成base64格式转换地址">1、将下载好的字体文件转换成base64格式，<a href="https://transfonter.org/">转换地址</a></h6>
+<p><img src="https://nancy-svy.github.io/post-images/1681464749478.png" alt="" loading="lazy"><br>
+####### 步骤：<br>
+<img src="https://nancy-svy.github.io/post-images/1681465633635.webp" alt="" loading="lazy"></p>
+<ol>
+<li>点击【Add fonts】,选择文件</li>
+<li>打开【Base64 encode】</li>
+<li>点击【Covert】</li>
+<li>点击【Download】下载文件并解压，打开 stylesheet.css 文件，复制代码</li>
+</ol>
+<h6 id="2-转换完成后下载文件解压后将这三个文件放入项目中的static目录下">2、转换完成后，下载文件，解压后将这三个文件放入项目中的static目录下:</h6>
+<figure data-type="image" tabindex="1"><img src="https://nancy-svy.github.io/post-images/1681464757016.png" alt="" loading="lazy"></figure>
+<h6 id="3-在appvue中引入该文件">3、在App.vue中引入该文件</h6>
+<pre><code>@import url(&quot;./static/fonts/stylesheet.css&quot;);
+</code></pre>
+<h6 id="4-在代码中正常使用即可">4、在代码中正常使用即可：</h6>
+<pre><code>例如：font-family: YOUSHEhaoshenti;
+</code></pre>
+<h3 id="或者在阿里巴巴矢量图标图-地址-中查找需要下载的字体文件">或者在阿里巴巴矢量图标图 <a href="https://www.iconfont.cn/">地址</a> 中查找需要下载的字体文件</h3>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[chrome问题]]></title>
         <id>https://nancy-svy.github.io/post/chromeQuestion/</id>
@@ -223,12 +258,61 @@ enabled 启用</p>
 📋 稍等一会儿后，在浏览器打开域名，会看到文章底下显示“未找到相关的issues进行评论xxx”，点击【使用GitHub登陆】，进行授权。</p>
 <h3 id="六-基本操作">📝 六、基本操作</h3>
 <ol>
-<li>输入文章标题  ### 标题三</li>
-<li>输入无序列表   - 无序列表，数字列表    1. 数字列表</li>
-<li>输入代码虚假的代码,(虚假的代码左右各一个&quot;`&quot;)输入代码段虚假的代码段.(虚假的代码段,左右各有3个```)</li>
-<li>输入数学公式: <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">数</mi><mi mathvariant="normal">学</mi><mi mathvariant="normal">公</mi><mi mathvariant="normal">式</mi></mrow><annotation encoding="application/x-tex">数学公式</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0em;vertical-align:0em;"></span><span class="mord cjk_fallback">数</span><span class="mord cjk_fallback">学</span><span class="mord cjk_fallback">公</span><span class="mord cjk_fallback">式</span></span></span></span>.</li>
-<li>插入图片: 直接拖入以 【 <img src="%E5%9B%BE%E7%89%87%E5%9C%B0%E5%9D%80" alt="图片名称" loading="lazy"> 】 的形式给出</li>
-<li>插入链接: 以【<a href="%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80">链接名称</a>】的形式给出</li>
+<li>
+<p>输入文章标题<br>
+(1.)使用 = 和 - 标记一级和二级标题<br>
+注意：由于分割线也是 “---”， 因此在使用分割线时，一定要空一行，不然会把上方的文字识别为第二级标题<br>
+(2.)使用#号标记<br>
+在行首插入 1 到 6 个 # 再加空格，对应到标题 1 到 6级<br>
+（注意：#号后面一定要有一个空格）</p>
+</li>
+<li>
+<p>输入无序列表   - 无序列表，数字列表    1. 数字列表</p>
+</li>
+<li>
+<p>输入代码虚假的代码,(虚假的代码左右各一个&quot;`&quot;)输入代码段虚假的代码段.(虚假的代码段,左右各有3个```)</p>
+</li>
+<li>
+<p>输入数学公式: <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">数</mi><mi mathvariant="normal">学</mi><mi mathvariant="normal">公</mi><mi mathvariant="normal">式</mi></mrow><annotation encoding="application/x-tex">数学公式</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0em;vertical-align:0em;"></span><span class="mord cjk_fallback">数</span><span class="mord cjk_fallback">学</span><span class="mord cjk_fallback">公</span><span class="mord cjk_fallback">式</span></span></span></span>.</p>
+</li>
+<li>
+<p>插入图片: 直接拖入以 【 <img src="%E5%9B%BE%E7%89%87%E5%9C%B0%E5%9D%80" alt="图片名称" loading="lazy"> 】 的形式给出</p>
+</li>
+<li>
+<p>插入链接: 以【<a href="%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80">链接名称</a>】的形式给出</p>
+</li>
+<li>
+<p>字体<br>
+（1）<em>斜体文本</em><br>
+（2）<em>斜体文本</em><br>
+（3）<strong>粗体文本</strong><br>
+（4）<strong>粗体文本</strong><br>
+（5）<em><strong>粗斜体文本</strong></em><br>
+（6）<em><strong>粗斜体文本</strong></em></p>
+</li>
+<li>
+<p>分割线<br>
+在一行中用三个以上的星号、减号、底线来建立一个分隔线，行内不能有其他东西。你也可以在星号或是减号中间插入空格。</p>
+<hr>
+<hr>
+</li>
+<li>
+<p>删除线<br>
+<s>删除线</s><br>
+<u>下划线</u><br>
+脚注[^脚注]</p>
+</li>
+<li>
+<p>列表<br>
+（1）无序列表使用星号(*)、加号(+)或是减号(-)作为列表标记，这些标记后面要添加一个空格，然后再填写内容<br>
+（2）列表嵌套<br>
+列表嵌套只需在子列表中的选项前面添加四个空格即可<br>
+（3）在段落开头使用 &gt; 符号 ，然后后面紧跟一个空格符号：<br>
+另外区块是可以嵌套的，一个 &gt; 符号是最外层，两个 &gt; 符号是第一层嵌套，以此类推<br>
+（4）区块中使用列表<br>
+列表中使用区块<br>
+如果要在列表项目内放进区块，那么就需要在 &gt; 前添加四个空格的缩进</p>
+</li>
 </ol>
 ]]></content>
     </entry>
@@ -324,536 +408,898 @@ enabled 启用</p>
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[手写签名]]></title>
-        <id>https://nancy-svy.github.io/post/handwrittenSignature/</id>
-        <link href="https://nancy-svy.github.io/post/handwrittenSignature/">
+        <title type="html"><![CDATA[pnpm和vite]]></title>
+        <id>https://nancy-svy.github.io/post/pnpmAndVite/</id>
+        <link href="https://nancy-svy.github.io/post/pnpmAndVite/">
         </link>
-        <updated>2023-02-03T02:10:06.000Z</updated>
-        <content type="html"><![CDATA[<p><strong>html</strong></p>
+        <updated>2023-02-09T09:14:51.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="pnpm">pnpm</h3>
+<pre><code>pnpm 节约磁盘空间并提升安装速度
+
+pnpm import package-lock.json
+
+运行   pnpm dev
+
+用于安装项目所有依赖（忽略） pnpm install 
+ 
+</code></pre>
+<h3 id="vite">vite</h3>
+<pre><code>vite 前端构建工具
+
+Vite 是 vue 的作者尤雨溪在开发 vue3.0 的时候开发的一个 web 开发构建工具。由于其原生 ES 模块导入方式，可以实现闪电般的冷服务器启动。
+ 
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[仿美团选择预计送达时间组件]]></title>
+        <id>https://nancy-svy.github.io/post/deliveryTime/</id>
+        <link href="https://nancy-svy.github.io/post/deliveryTime/">
+        </link>
+        <updated>2023-02-03T07:40:44.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="readmemd">README.md</h2>
+<h3 id="仿美团选择预送达时间组件delivery-time-op-点餐-时间选择-送达时间">仿美团选择预送达时间组件delivery-time-op 点餐 时间选择 送达时间</h3>
+<p>[^简单实用的选择时间组件，源码简单易懂注释清楚，可根据需求随意更改方案]</p>
+<h6 id="引用组件">引用组件</h6>
+<pre><code>import deliveryTimeOp from '@/components/delivery-time-op/delivery-time-op.vue'
+</code></pre>
+<h6 id="注册组件">注册组件</h6>
+<pre><code>components: {
+   deliveryTimeOp
+},
+</code></pre>
+<h6 id="使用组件">使用组件</h6>
+<pre><code> &lt;delivery-time-op
+          @dataCallback=&quot;dataCallback&quot;
+          @timeCallback=&quot;timeCallback&quot;
+          @close=&quot;close&quot;
+          :model='model'
+          :showYes='showYes'
+          :content=&quot;content&quot;
+          :barHidth='600'
+          title=&quot;选择预送达时间&quot;&gt;
+   &lt;/delivery-time-op&gt;
+</code></pre>
+<h6 id="参数说明">参数说明</h6>
+<pre><code>@dataCallback:选择日期的回调
+
+@timeCallback:选择时间的回调
+
+@close：隐藏事件（点击iocn关闭弹框）
+
+model：显示或隐藏（true/false）
+
+showYes：点击模态框是否关闭弹框（true/false）
+
+content：需要传递展示的日期时间数据（数组）
+
+barHidth：弹出框高度(数字)
+
+title:标题
+</code></pre>
+<h6 id="数据格式">数据格式</h6>
+<pre><code> content:[{
+   &quot;timezh&quot;: &quot;今天 (周三)&quot;,
+   &quot;timeformatter&quot;: &quot;8-10&quot;,
+   &quot;timelist&quot;: [
+       {
+        &quot;timestr&quot;: &quot;立即送达&quot;,
+    }, {
+        &quot;timestr&quot;: &quot;15:35&quot;,
+    }, {
+        &quot;timestr&quot;: &quot;16:05&quot;,
+    }, {
+        &quot;timestr&quot;: &quot;16:35&quot;,
+    }, {
+        &quot;timestr&quot;: &quot;17:05&quot;,
+    }, {
+        &quot;timestr&quot;: &quot;17:35&quot;,
+    }, {
+        &quot;timestr&quot;: &quot;18:05&quot;,
+    }, {
+        &quot;timestr&quot;: &quot;18:35&quot;,
+    }]
+ }]
+</code></pre>
+<h2 id="deliverytimevue">deliveryTime.vue</h2>
+<h6 id="html">html</h6>
 <pre><code>&lt;template&gt;
-	&lt;view class=&quot;autograph&quot;&gt;
-		&lt;!-- 点击触发写字板 --&gt;
-		&lt;view class=&quot;canvasbox&quot; @click='createCanvas'&gt;
-			&lt;!-- canvas --&gt;
-			&lt;canvas 
-			class=&quot;mycanvas&quot; 
-			canvas-id=&quot;mycanvas&quot;
-			@touchstart=&quot;touchstart&quot;
-			@touchmove=&quot;touchmove&quot; 
-			@touchend=&quot;touchend&quot;
-			&gt;&lt;/canvas&gt;
+  &lt;view&gt;
+	  &lt;view class=&quot;pinck-box&quot;&gt;
+	    &lt;view class=&quot;picker-up-title&quot;&gt;取货时间&lt;/view&gt;
+	    &lt;view class=&quot;pick-item&quot;&gt;
+	      &lt;view class=&quot;block-up-title&quot;&gt;{{bhTxt}}&lt;/view&gt;
+	      &lt;view class=&quot;block-up-time&quot; @click=&quot;showModel&quot;&gt;
+	        &lt;text&gt;{{chooseDay}} {{chooseTime}}&lt;/text&gt;
+	        &lt;uni-icons type=&quot;right&quot; /&gt;
+	      &lt;/view&gt;
+	    &lt;/view&gt;
+	  &lt;/view&gt;
+	  
+	  &lt;deliveryTimeOp
+	  	  v-if=&quot;content &amp;&amp; content.length != 0&quot; 
+	  	  @dataCallback=&quot;dataCallback&quot; 
+	  	  @timeCallback=&quot;timeCallback&quot; 
+	  	  @close=&quot;close&quot; 
+	  	  :model='model' 
+	  	  :showYes=&quot;model&quot; 
+	  	  :content=&quot;content&quot; 
+	  	  :barHidth='600' 
+	  	  title=&quot;选择取货时间&quot;
+	  &gt;
+	  &lt;/deliveryTimeOp&gt;
+  &lt;/view&gt;
+&lt;/template&gt;
+ 
+</code></pre>
+<h6 id="1-js-推荐使用">1. js (推荐使用)</h6>
+<pre><code>&lt;script&gt;
+import deliveryTimeOp from '@/components/delivery-time-op.vue'
+export default {
+  components: {
+    deliveryTimeOp,
+  },
+  data(){
+	return{
+		
+	}
+  },
+  mounted(){},
+  methods{
+			// 时间
+			getDliveryTime(){
+				let today = '';
+				let nextDay = '';
+				let threeDay = ''
+				let timeformatter = ''
+
+				let now = new Date();
+				// 获取星期
+				let week = now.getDay();
+				let deliveryTimeList = [];
+				// 年
+				let Y = now.getFullYear();
+				// 月份
+				let M = now.getMonth() + 1;
+				M = M &lt; 10 ? &quot;0&quot; + M : M;
+				// 日
+				let D = now.getDate();
+				switch(week){
+					case 0:
+						today = &quot;今天（周日）&quot;;
+						nextDay = &quot;明天（周一）&quot;;
+						threeDay = &quot;后天（周二）&quot;;
+						break;
+					case 1:
+						today = &quot;今天（周一）&quot;;
+						nextDay = &quot;明天（周二）&quot;;
+						threeDay = &quot;后天（周三）&quot;;
+						break;
+					case 2:
+						today = &quot;今天（周二）&quot;;
+						nextDay = &quot;明天（周三）&quot;;
+						threeDay = &quot;后天（周四）&quot;;
+						break;
+					case 3:
+						today = &quot;今天（周三）&quot;;
+						nextDay = &quot;明天（周四）&quot;;
+						threeDay = &quot;后天（周五）&quot;;
+						break;
+					case 4:
+						today = &quot;今天（周四）&quot;;
+						nextDay = &quot;明天（周五）&quot;;
+						threeDay = &quot;后天（周六）&quot;;
+						break;
+					case 5:
+						today = &quot;今天（周五）&quot;;
+						nextDay = &quot;明天（周六）&quot;;
+						threeDay = &quot;后天（周日）&quot;;
+						break;
+					case 6:
+						today = &quot;今天（周六）&quot;;
+						nextDay = &quot;明天（周日）&quot;;
+						threeDay = &quot;后天（周一）&quot;;
+						break;
+				}
+				
+				// 判断是否是20点以后, 20点以后则默认值为第二天第一个
+				let endTimeStamp = new Date(new Date().setHours(20)).getTime()
+				let nowStamp = new Date().getTime()
+				
+				if(nowStamp &gt; endTimeStamp) {
+					let todayStr = this.getTimeList('two');
+					let nowDayList = this.getTimeObj(todayStr)
+					let D1 = new Date(new Date().setDate(new Date().getDate() + 1)).getDate().toString()
+					
+					let todayYMD = Y + '-'+ M + '-' + D1.padStart(2, '0')
+					
+					deliveryTimeList.push({ timezh: nextDay, timeformatter: todayYMD, timelist: nowDayList });
+					this.content = deliveryTimeList
+					
+					let nextDayStr = this.getTimeList('three');
+					let nextDayList = this.getTimeObj(nextDayStr)
+					
+					let D2 = new Date(new Date().setDate(new Date().getDate() + 2)).getDate().toString()
+					let nextYMD = Y + '-'+ M + '-' + D2.padStart(2, '0')
+					deliveryTimeList.push({ timezh: threeDay, timeformatter: nextYMD, timelist: nowDayList });
+					this.content = []
+					this.content = deliveryTimeList
+				} else {
+					let todayStr = this.getTimeList('one');
+					let nowDayList = this.getTimeObj(todayStr)
+					
+					let todayYMD = Y + '-'+ M + '-' + D.toString().padStart(2, '0')
+					deliveryTimeList.push({ timezh: today, timeformatter: todayYMD, timelist: nowDayList });
+					this.content = deliveryTimeList
+					
+					let nextDayStr = this.getTimeList('two');
+					let nextDayList = this.getTimeObj(nextDayStr)
+					let D2 = new Date(new Date().setDate(new Date().getDate() + 1)).getDate().toString()
+					let nextYMD = Y + '-' + M + '-' + D2.padStart(2, '0')
+					deliveryTimeList.push({ timezh: nextDay, timeformatter: nextYMD, timelist: nextDayList });
+					this.content = []
+					this.content = deliveryTimeList
+					
+				}
+				
+				this.chooseDate = this.content[0].timeformatter
+				this.chooseDay = this.content[0].timezh
+                this.chooseTime = this.content[0].timelist[0].timestr
+			},
+			// 获取时间段
+			getTimeList(type) {
+				let timeListTodayAll = [];
+				let timeList = []
+				let startTime 
+				
+				let now = new Date()
+				let tommorrow = new Date().setDate(new Date().getDate() + 1)
+				let three = new Date().setDate(new Date().getDate() + 2)
+				let todayStart = new Date().getFullYear() + '-' + (new Date().getMonth()+1).toString().padStart(2, '0') + '-' + new Date().getDate() + ' 09:00:00'
+				
+				let allTimes = (21 - 9) * 60 / 40
+				for(let i = 0; i &lt; allTimes; i++) {
+					let setTodayTime = new Date(todayStart).setMinutes(40*i)
+					timeListTodayAll.push(formatTime(setTodayTime))
+					timeList.push(formatTime(setTodayTime).substring(11, 16))
+				}
+				if(type == 'one') {
+					let nowTimeStamp = new Date().setMinutes(new Date().getMinutes() + 20)
+					for(let j = 0; j &lt; timeListTodayAll.length; j++) {
+						let itemStamp = new Date(timeListTodayAll[j]).getTime()
+						if(itemStamp &gt;= nowTimeStamp) {
+							timeList = timeList.slice(j)
+							break
+						}
+					}
+				}
+				return timeList
+			},
+			// 根据时间段转为数组对象
+			getTimeObj(todayStr){
+				// 将数组中的时间段字符串分割
+				let todayArr = []
+				todayStr.forEach(item =&gt; {
+					todayArr.push(...item.split('-'))
+				})
+				// 将分割后的数组去重
+				let todayDup = []
+				todayArr.forEach(item =&gt; {
+					if(todayDup.indexOf(item) == -1){
+						todayDup.push(item)
+					}
+				})
+				// 将去重后的数组转为数组对象
+				let todayList = []
+				todayDup.forEach(item =&gt; {
+					todayList.push({
+						timestr: item
+					})
+				})
+				return todayList;
+			},
+
+			// 点击显示时间弹窗
+			showModel(){
+				this.model = true;
+			},
+
+			// 选择日期的回调
+			dataCallback(item,index){
+				this.chooseDay = item.timezh
+				this.chooseDate = item.timeformatter
+			},
+
+			// 选择时间的回调
+			timeCallback(item,index){
+				if(this.now == this.formData.chooseDate){
+					this.chooseDay = this.content[0].timezh
+					this.chooseDate = this.now
+				}else{
+					this.chooseDay = this.content[1].timezh
+					this.chooseDate = this.content[1].timeformatter
+				}
+				this.chooseTime = item.timestr
+				
+				if(this.chooseDay != this.content[0].timezh || this.chooseTime != this.content[0].timelist[0].timestr) {
+					this.bhTxt = '指定时间'
+				} else {
+					this.bhTxt = '尽快取货'
+				}
+				this.model = false;
+			},
+
+			// 隐藏事件
+			close(){
+				this.model = false 
+			},
+  },
+
+  onshow(){
+		let now = new Date();
+		let year = now.getFullYear()
+		let month = now.getMonth() + 1
+		month = month &lt; 10 ? &quot;0&quot; + month : month;
+		let date = now.getDate() 
+		date = date &lt; 10 ? '0' + date : date
+		this.chooseDate = `${year}-${month}-${date}`
+		this.now = `${year}-${month}-${date}`
+		this.getDliveryTime()
+  },
+
+}
+&lt;/script&gt;
+ 
+</code></pre>
+<h6 id="2-js">2. js</h6>
+<pre><code>&lt;script&gt;
+import deliveryTimeOp from '@/components/delivery-time-op.vue'
+export default {
+  components: {
+    deliveryTimeOp,
+  },
+  data() {
+    return {
+      // 控制显示隐藏
+      model: false,
+      // 需要传递展示的日期时间数据
+      content: [
+        // {timezh: &quot;&quot;,timeformatter: &quot;&quot;, timelist: []},
+      ],
+      chooseTime: '',
+      // 时间
+      chooseDay: '',
+      //星期
+	  chooseDate: '', // 年月日
+	  bhTxt: '尽快取货', // 取货时间文字
+    }
+  },
+  mounted() {
+    this.$nextTick(() =&gt; {
+      this.getDliveryTime()
+    })
+  },
+  methods: {
+    // 时间
+    getDliveryTime() {
+      let now = new Date();
+      // 获取星期
+      let week = now.getDay();
+      let today = '';
+      // 今天星期 文字
+      let nextDay = '';
+     // 明天星期 文字
+      let timeformatter = ''
+     // 年月日
+      let deliveryTimeList = []
+	  // 获取当前的月份
+      let M = now.getMonth() + 1
+      M = M &lt; 10 ? '0' + M : M
+	  // 获取当前的日
+      let D = now.getDate()
+      switch (week) {
+        case 0:
+          today = '今天（周日）'
+          nextDay = '明天（周一）'
+          break
+        case 1:
+          today = '今天（周一）'
+          nextDay = '明天（周二）'
+          break
+        case 2:
+          today = '今天（周二）'
+          nextDay = '明天（周三）'
+          break
+        case 3:
+          today = '今天（周三）'
+          nextDay = '明天（周四）'
+          break
+        case 4:
+          today = '今天（周四）'
+          nextDay = '明天（周五）'
+          break
+        case 5:
+          today = '今天（周五）'
+          nextDay = '明天（周六）'
+          break
+        case 6:
+          today = '今天（周六）'
+          nextDay = '明天（周日）'
+          break
+      }
+
+      let timeDate = new Date(now.getTime() + 3600000);
+      
+	  // 今天的时间段
+      let todayStr = this.getTimeList(
+        timeDate.getHours(),
+        timeDate.getMinutes()
+      );
+      let nowDayList = this.getTimeObj(todayStr);
+	  // 日 补零
+	  let dnum = D
+	  dnum = dnum &lt; 10 ? '0' + dnum : dnum;
+	  // 年 月 日
+	  let todayYMD = Y + '-' + 'M' + '-' + dnum;
+      deliveryTimeList.push({
+        timezh: today,
+        timeformatter: todayYMD,
+        timelist: nowDayList,
+      });
+      this.content = deliveryTimeList;
+
+      // 明天的时间段
+      let nextDayStr = this.getTimeList(9, 0);
+      let nextDayList = this.getTimeObj(nextDayStr);
+	  // 日 补零
+	  let DNum = D + 1;
+	  DNum = DNum &lt; 10 ? '0' + DNum : DNum;
+	  // 年 月 日
+	  let nextYMD = Y + '-' + M + '-' + DNum;
+      deliveryTimeList.push({
+        timezh: nextDay,
+        timeformatter: nextYMD,
+        timelist: nextDayList,
+      });
+      this.content = [];
+      this.content = deliveryTimeList;
+		
+	  this.chooseDay = this.content[0].timezh
+      this.chooseTime = this.content[0].timelist[0].timestr
+
+    },
+    // 获取时间段
+    getTimeList(hour, minut) {
+      let timeList = [];
+	  let times = 0;
+	  let timei = 0;
+      let startTime = hour &lt; 9 ? 9 : hour;
+      if (minut &lt; 20) {
+        for (let i = 0; i &lt; 21 - startTime; i++) {
+          for (let j = 0; j &lt; 2; j++) {
+            if (j % 2 === 0) {
+              times = startTime + i;
+			  times = times &lt; 10 ? '0' + times : times;
+			  timeList.push(
+				 times + &quot;:00&quot; + &quot;-&quot; + (times) + &quot;:20&quot;
+			  );
+
+            } else {
+              times = times = startTime + i;
+			  times = times &lt; 10 ? '0' + times : times;
+			  timei = startTime + i + 1;
+			  timei = timei &lt; 10 ? '0' + timei : timei;
+			  timeList.push(
+				 times + &quot;:40&quot; + &quot;-&quot; + (timei) + &quot;:00&quot;
+			   );
+
+            }
+          }
+        }
+      } else {
+		times = 0;
+		timei = 0;
+        for (let i = 0; i &lt; 21 - startTime; i++) {
+          for (let j = 0; j &lt; 2; j++) {
+            if (j % 2) {
+              if (i !== 20 - startTime) {
+                times = startTime + i;
+				times = times &lt; 10 ? '0' + times : times;
+				timei = startTime + 1 + i;
+				timei = timei &lt; 10 ? '0' + timei : timei;
+				timeList.push(
+					timei + &quot;:00&quot; + &quot;-&quot; + (timei) + &quot;:20&quot;
+				);
+
+              }
+            } else {
+              times = startTime + i;
+			  times = times &lt; 10 ? '0' + times : times;
+			  timei = timei = startTime + i + 1;
+			  timei &lt; 10 ? '0' + timei : timei;
+			  timeList.push(
+				 times + &quot;:40&quot; + &quot;-&quot; + (timei) + &quot;:00&quot;
+			  );
+            }
+          }
+        }
+      }
+      return timeList
+    },
+    // 根据时间段转为数组对象
+    getTimeObj(todayStr) {
+      // 将数组中的时间段字符串分割
+      let todayArr = []
+      todayStr.forEach((item) =&gt; {
+        todayArr.push(...item.split('-'))
+      })
+      // 将分割后的数组去重
+      let todayDup = []
+      todayArr.forEach((item) =&gt; {
+        if (todayDup.indexOf(item) == -1) {
+          todayDup.push(item)
+        }
+      })
+      // 将去重后的数组转为数组对象
+      let todayList = []
+      todayDup.forEach((item) =&gt; {
+        todayList.push({
+          timestr: item,
+        })
+      })
+      return todayList
+    },
+    // 控制弹窗显示
+    showModel() {
+        this.model = true
+    },
+    // 选择日期的回调
+    dataCallback(item, index) {
+      this.chooseDay = item.timezh
+	  this.chooseDate = item.timeformatter
+    },
+    // 选择时间的回调
+    timeCallback(item, index) {
+       if(this.now == this.content[0].timeformatter){
+			this.chooseDay = this.content[0].timezh
+			this.chooseDate = this.now
+		}else{
+			this.chooseDay = this.content[1].timezh
+			this.chooseDate = this.content[1].timeformatter
+		}
+		this.chooseTime = item.timestr
+		
+		if(this.chooseDay != this.content[0].timezh || this.chooseTime != this.content[0].timelist[0].timestr) {
+			this.bhTxt = '指定时间'
+		} else {
+			this.bhTxt = '尽快取货'
+		}
+		this.model = false;
+    },
+    // 隐藏事件
+    close() {
+      this.model = false
+    },
+  },
+  onshow(){
+		let now = new Date();
+		let year = now.getFullYear()
+		let month = now.getMonth() + 1
+		month = month &lt; 10 ? &quot;0&quot; + month : month;
+		let date = now.getDate() 
+		date = date &lt; 10 ? '0' + date : date
+		this.chooseDate = `${year}-${month}-${date}`
+		this.now = `${year}-${month}-${date}`
+		this.getDliveryTime()
+  },
+}
+&lt;/script&gt;
+
+ 
+</code></pre>
+<h6 id="css">css</h6>
+<pre><code>&lt;style lang=&quot;less&quot; scoped&gt;
+.pinck-box {
+  background: #ffffff;
+  padding: 0 32rpx 17rpx 32rpx;
+  .picker-up-title {
+    font-size: 32rpx;
+    font-weight: 500;
+    color: #000000;
+    padding: 20rpx 0;
+  }
+  .pick-item {
+    height: 88rpx;
+    background: #f4f4f4;
+    border-radius: 24rpx 24rpx 24rpx 24rpx;
+    padding: 0 32rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .block-up-title {
+      font-size: 28rpx;
+      font-weight: 400;
+      color: #ff502f;
+    }
+    .block-up-time {
+      font-size: 24rpx;
+      font-weight: 400;
+      color: #999999;
+      display: flex;
+      align-items: center;
+      /deep/.uni-icons {
+        font-size: 24rpx !important;
+        color: #999999 !important;
+      }
+    }
+  }
+}
+&lt;/style&gt;
+ 
+</code></pre>
+<h2 id="components文件">components文件</h2>
+<h4 id="delivery-time-opvue">delivery-time-op.vue</h4>
+<h6 id="html-2">html</h6>
+<pre><code>&lt;template&gt;
+	&lt;view&gt;
+		&lt;!-- 模态框 --&gt;
+		&lt;view @click=&quot;Modal&quot; :class=&quot;{mask:model}&quot;&gt;&lt;/view&gt;
+		&lt;!-- 弹窗主体 --&gt;
+		&lt;view :style=&quot;{'height':barHidth+'rpx'}&quot; class=&quot;active&quot; :class=&quot;{add:model}&quot;&gt;
+			&lt;view class=&quot;title&quot;&gt;{{title}} &lt;text @click=&quot;showModal&quot;&gt;X&lt;/text&gt;&lt;/view&gt;
+			&lt;view class=&quot;cont&quot; :style=&quot;{height:barHidth-80 +'rpx'}&quot;&gt;
+				&lt;view class=&quot;day&quot;&gt;
+					&lt;view 
+					:class=&quot;index === isIndex ? 'active_copy' : ''&quot; 
+					v-for=&quot;(item,index) in content&quot; 
+					:key=&quot;index&quot;
+					@click=&quot;dataCallback(item,index)&quot;
+					&gt;{{item.timezh}}&lt;/view&gt;
+				&lt;/view&gt;
+
+				&lt;scroll-view class=&quot;content&quot; :scroll-y=&quot;true&quot; :scroll-top=&quot;scrollTop&quot;&gt;
+					&lt;view class=&quot;appoint&quot; 
+					:class=&quot;index === Indexes ? 'longActive' : ''&quot; 
+					@click=&quot;timeCallback(item,index)&quot;
+					v-for=&quot;(item,index) in Days&quot; 
+					:key=&quot;index&quot;
+					&gt;
+						{{item.timestr}}
+						&lt;text :class=&quot;index === Indexes ? 'cuIcon-check' : ''&quot;&gt;&lt;/text&gt;
+					&lt;/view&gt;
+				&lt;/scroll-view&gt;
+			&lt;/view&gt;
 		&lt;/view&gt;
-		&lt;!-- 底部操作按钮 --&gt;
-		&lt;view class=&quot;footer&quot;&gt;
-			&lt;button type=&quot;primary&quot; plain @click=&quot;finish&quot;&gt;保存&lt;/button&gt;
-			&lt;button type=&quot;default&quot; plain @click=&quot;clear&quot;&gt;清除&lt;/button&gt;
-		&lt;/view&gt;
+
 	&lt;/view&gt;
 &lt;/template&gt;
  
 </code></pre>
-<p><strong>js</strong></p>
+<h6 id="js">js</h6>
 <pre><code>&lt;script&gt;
 	export default {
+		props: {
+			//控制弹窗的隐藏显示
+			model: {
+				type: Boolean,
+				default: false
+			},
+			//弹窗标题
+			title: {
+				type: String,
+				default: '弹窗测试'
+			},
+			//弹窗内容
+			content: {
+				type: Array,
+				default: [{
+					content: '我是弹窗内容'
+				}]
+			},
+			//弹窗 窗口高度
+			barHidth: {
+				type: Number,
+				default: 400
+			},
+			//点击模态框是否能关闭弹窗
+			showYes: {
+				type: Boolean,
+				default: false
+			}
+		},
 		data() {
 			return {
-				//绘图图像
-				ctx: '', 
-				//路径点集合
-				points: [], 
-				//签名图片
-				SignatureImg: ''
+				scrollTop: 0,
+				isIndex: 0,
+				Indexes: 0,
+				Days: [],
 			}
 		},
+		mounted(){
+			// 初始化
+			this.Days = this.content[0].timelist;
+		},
+
 		methods: {
-			// 初始化绘图--点击触发写字板
-		    createCanvas() {
-		        //创建绘图对象
-		        this.ctx = uni.createCanvasContext('mycanvas', this);
-		        //设置画笔样式
-		        this.ctx.lineWidth = 4;
-		        this.ctx.lineCap = 'round';
-		        this.ctx.lineJoin = 'round';
-		    },
-			// 开始绘图
-		    touchstart(e) {
-		        let startX = e.changedTouches[0].x;
-		        let startY = e.changedTouches[0].y;
-		        let startPoint = { X: startX, Y: startY };
-		        this.points.push(startPoint);
-		        //每次触摸开始，开启新的路径
-		        this.ctx.beginPath();
+			// 关闭窗口
+			showModal() {
+				this.$emit('close', false)
 			},
-			// 移动 绘制中
-		   touchmove(e) {
-		        let moveX = e.changedTouches[0].x;
-		        let moveY = e.changedTouches[0].y;
-		        let movePoint = { X: moveX, Y: moveY };
-		        this.points.push(movePoint); //存点
-		        let len = this.points.length;
-		        if (len &gt;= 2) {
-		            this.draw(); //绘制路径
-		        }
+			// 点击模态框关闭窗口
+			Modal() {
+				if (this.showYes) {
+					this.$emit('close', false)
+				}
 			},
-			// 结束绘图
-		   touchend() {
-		        this.points = [];
+			//配送时间切换回顶
+			gotop() {
+				this.scrollTop = 1;
+				this.$nextTick(function() {
+					this.scrollTop = 0;
+				});
 			},
-			//绘制路径
-		   draw() {
-		        let point1 = this.points[0];
-		        let point2 = this.points[1];
-		        this.points.shift();
-		        this.ctx.moveTo(point1.X, point1.Y);
-		        this.ctx.lineTo(point2.X, point2.Y);
-		        this.ctx.stroke();
-		        this.ctx.draw(true);
-		    },
-			// 清除
-		   clear() {
-		        uni.getSystemInfo({
-					success: (res) =&gt; {
-						let canvasw = res.windowWidth;
-						let canvash = res.windowHeight;
-						this.ctx.clearRect(0, 0, canvasw, canvash);
-						this.ctx.draw(true);
-						this.SignatureImg = ''
-					}
-		        });
-		    },
-			// 生成签名图片
-		   finish() {
-		        uni.canvasToTempFilePath({
-		            canvasId: 'mycanvas',
-		            success: (res) =&gt; {
-						//这里的res.tempFilePath就是生成的签字图片
-						console.log('保存的图片路径',res.tempFilePath);
-						this.SignatureImg = res.tempFilePath
-		            }
-		        });
-		   },
+
+			//切换日期
+			dataCallback(item,index) {
+				this.isIndex = index;
+				this.Days = this.content[index].timelist;
+				this.Indexes = null;
+				this.gotop();
+				this.$emit('dataCallback', item, index)
+			},
+
+			//选择时间
+			timeCallback(item,index) {
+				this.Indexes = index;
+				this.modalName = null;
+				this.$emit('timeCallback', item, index)
+			},
 		}
 	}
 &lt;/script&gt;
 
  
 </code></pre>
-<p><strong>css</strong></p>
-<pre><code>&lt;style lang=&quot;less&quot; scoped&gt;
-.autograph{
-	padding: 36rpx;
-}
-.canvasbox{
-	width: 100%;
-	height: 400rpx;
-	background: #F3F4F5;
-	border-radius: 10rpx 10rpx 10rpx 10rpx;
-	.mycanvas{
+<h6 id="css-2">css</h6>
+<pre><code>&lt;style scoped&gt;
+	.mask {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: #000;
+		animation: getInto .5s 1;
+		opacity: 0.5;
+		z-index: 999;
+	}
+
+
+	@keyframes getInto {
+		0% {
+			opacity: 0;
+		}
+
+		100% {
+			opacity: 0.5;
+		}
+
+	}
+
+	.active {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		z-index: 1000;
 		width: 100%;
-		height: 100%;
+		height: 400rpx;
+		border-top-left-radius: 16rpx;
+		border-top-right-radius: 16rpx;
+		overflow: hidden;
+		transform: translateY(100%);
+		transition: .4s;
 	}
-}
-.footer{
-	padding: 20rpx 32rpx;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-}
+
+	.add {
+		transform: translateY(0);
+	}
+
+
+	.title {
+		position: relative;
+		text-align: center;
+		background-color: #fff;
+		padding: 20rpx 0;
+		border-bottom: 2rpx solid #eee;
+	}
+
+	.title&gt;text {
+		position: absolute;
+		right: 14rpx;
+		width: 40rpx;
+		height: 40prx;
+		background-color: #ccc;
+		color: #666;
+		border-radius: 50%;
+		font-size: 32rpx;
+	}
+
+	.cont {
+		display: flex;
+		background-color: #fff;
+		overflow-y: scroll;
+	}
+
+	.day {
+		flex: 2;
+		background-color: #F3F4F5;
+		border-right: 2rpx solid #f8f8f8;
+		text-align: center;
+
+	}
+
+	.day view {
+		padding: 30rpx 12rpx;
+		font-size: 28rpx;
+		box-sizing: border-box;
+	}
+
+	.content {
+		flex: 4;
+		font-size: 28rpx;
+		border-bottom: 40rpx solid #fff;
+		background-color: #fff;
+	}
+
+	.appoint {
+		text-align: left;
+		padding: 30rpx;
+		border-bottom: 2rpx solid #f8f8f8;
+	}
+
+
+	.appoint text {
+		margin-right: 30rpx;
+	}
+
+	.active_copy {
+		position: relative;
+		background-color: #fff;
+		color: #000000;
+		box-sizing: border-box;
+
+	}
+
+	.active_copy::after {
+		content: '';
+		width: 5rpx;
+		height: 94rpx;
+		background: #fff;
+		position: absolute;
+		top: 0;
+		right: 0;
+
+	}
+
+	.longActive {
+		color: #FF502F;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		font-size: 32rpx;
+		font-weight: 500;
+	}
+	
+	.cuIcon-check{
+		width: 30rpx;
+		height: 16rpx;
+		border-bottom: 4rpx solid #FF502F;
+		border-left: 4rpx solid #FF502F;
+		transform: rotate(-45deg);
+	}
 &lt;/style&gt;
 
  
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[uniapp 使用echarts并解决echarts文件过大的问题]]></title>
-        <id>https://nancy-svy.github.io/post/echartsFileSizeIssue/</id>
-        <link href="https://nancy-svy.github.io/post/echartsFileSizeIssue/">
-        </link>
-        <updated>2023-01-09T06:44:35.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="方法一">方法一</h3>
-<h5 id="一-uni-app引用echarts">一、uni-app引用echarts</h5>
-<p>####### 首先，要去下载插件（用hbuilder编辑器下载特别方便）<br>
-l-echarts   DCloud插件市场 <a href="https://ext.dcloud.net.cn/plugin?id=4899"></a><br>
-<strong>##</strong> 使用</p>
-<pre><code>&lt;template&gt;
-	&lt;view&gt;&lt;l-echart ref=&quot;chart&quot; @finished=&quot;init&quot;&gt;&lt;/l-echart&gt;&lt;/view&gt;
-&lt;/template&gt;
-
-&lt;script&gt;
-	import LEchart from '@/uni_modules/lime-echart/components/l-echart/l-echart.vue';
-	export default {
-		components: {
-			LEchart
-		}
-,
-		data(){
-			return{
-				option: {
-	                tooltip: {
-	                    trigger: 'axis',
-	                    axisPointer: {
-	                        type: 'shadow' 
-	                    },
-	                    confine: true
-	                },
-	                legend: {
-	                    data: ['热度', '正面', '负面']
-	                },
-	                grid: {
-	                    left: 20,
-	                    right: 20,
-	                    bottom: 15,
-	                    top: 40,
-	                    containLabel: true
-	                },
-	                xAxis: [
-	                    {
-	                        type: 'value',
-	                        axisLine: {
-	                            lineStyle: {
-	                                color: '#999999'
-	                            }
-	                        },
-	                        axisLabel: {
-	                            color: '#666666'
-	                        }
-	                    }
-	                ],
-	                yAxis: [
-	                    {
-	                        type: 'category',
-	                        axisTick: { show: false },
-	                        data: ['汽车之家', '今日头条', '百度贴吧', '一点资讯', '微信', '微博', '知乎'],
-	                        axisLine: {
-	                            lineStyle: {
-	                                color: '#999999'
-	                            }
-	                        },
-	                        axisLabel: {
-	                            color: '#666666'
-	                        }
-	                    }
-	                ],
-	                series: [
-	                    {
-	                        name: '热度',
-	                        type: 'bar',
-	                        label: {
-	                            normal: {
-	                                show: true,
-	                                position: 'inside'
-	                            }
-	                        },
-	                        data: [300, 270, 340, 344, 300, 320, 310],
-	                    },
-	                    {
-	                        name: '正面',
-	                        type: 'bar',
-	                        stack: '总量',
-	                        label: {
-	                            normal: {
-	                                show: true
-	                            }
-	                        },
-	                        data: [120, 102, 141, 174, 190, 250, 220]
-	                    },
-	                    {
-	                        name: '负面',
-	                        type: 'bar',
-	                        stack: '总量',
-	                        label: {
-	                            normal: {
-	                                show: true,
-	                                position: 'left'
-	                            }
-	                        },
-	                        data: [-20, -32, -21, -34, -90, -130, -110]
-	                    }
-	                ]
-	            },
-			}
-		},
-
-		// 组件能被调用必须是组件的节点已经被渲染到页面上
-	    // 1、在页面mounted里调用，有时候mounted 组件也未必渲染完成
-	    mounted() {
-	        // init(echarts, theme?:string, opts?:{}, chart =&gt; {})
-	        // echarts 必填， 非nvue必填，nvue不用填
-	        // theme 可选，应用的主题，目前只支持名称，如：'dark'
-	        // opts = { // 可选
-	        //  locale?: string  // 从 `5.0.0` 开始支持
-	        // }
-	        // chart =&gt; {} ， callback 必填，返回图表实例
-	        this.$refs.chart.init(echarts, chart =&gt; {
-	            chart.setOption(this.option);
-	        });
-	    },
-
-		// 2、或者使用组件的finished事件里调用
-	    methods: {
-	        init() {
-	            this.$refs.chart.init(echarts, chart =&gt; {
-	                chart.setOption(this.option);
-	            });
-	        }
-	    }
-
-	}
-&lt;/script&gt;
-
-</code></pre>
-<h5 id="二-解决ecahrtsjs文件过大的问题">二、解决ecahrts.js文件过大的问题</h5>
-<p>####### 首先，要去echarts官网自定义构建并下载文件<br>
-ECharts 在线构建 (apache.org) <a href="https://echarts.apache.org/zh/builder.html"></a><br>
-下载的是echarts.min.js文件<br>
-其次就是替换文件了<br>
-将项目中的echarts.js替换成echarts.min.js文件<br>
-<img src="https://nancy-svy.github.io/post-images/1681376499522.png" alt="" loading="lazy"></p>
-<h3 id="方法二">方法二</h3>
-<h5 id="微信小程序-ecahrts">微信小程序 ecahrts</h5>
-<h6 id="正文">正文</h6>
-<h6 id="一-uni-app引用echarts-2">一、uni-app引用echarts</h6>
-<p>######## 首先，要去下载插件（用hbuilder编辑器下载特别方便）<br>
-echarts-for-wx   DCloud插件市场 <a href="https://ext.dcloud.net.cn/plugin?id=1538"></a></p>
-<p>使用HBuilder导入之后，会生成一个js_sdk目录<br>
-######## 其次，只需要将js_sdk下的uni-ec-canvas目录复制到components目录下面就成功引入了<br>
-######## 之后，在pages中建立页面并复制如下代码就可以展示图表了<br>
-<strong>##</strong> 折线图</p>
-<pre><code>&lt;template&gt;
-  &lt;view&gt;
-    &lt;uni-ec-canvas class=&quot;uni-ec-canvas&quot; id=&quot;uni-ec-canvas&quot; ref=&quot;canvas&quot; canvas-id=&quot;uni-ec-canvas&quot; :ec=&quot;ec&quot;&gt;
-    &lt;/uni-ec-canvas&gt;
-  &lt;/view&gt;
-&lt;/template&gt;
-
-&lt;script&gt;
-  import uniEcCanvas from '@/components/uni-ec-canvas/uni-ec-canvas.vue'
-  import * as echarts from '@/components/uni-ec-canvas/echarts'
-  let chart = null
-  export default {
-    components: {
-      uniEcCanvas
-    },
-    data() {
-      return {
-        ec: {
-          lazyLoad: true
-        },
-        option: {
-          tooltip: {
-            trigger: 'axis',
-            axisPointer: { // 坐标轴指示器，坐标轴触发有效
-              type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-            }
-          },
-          grid: {
-            left: '40',
-            right: '40',
-            bottom: '3%',
-            containLabel: true
-          },
-          xAxis: {
-            type: 'category',
-            axisTick: {
-              show: false,
-            },
-            nameTextStyle: {
-              color: '#666666'
-            },
-            axisLabel: {
-              show: true,
-              textStyle: {
-                color: '#666',
-                fontSize: '12',
-                fontWeight:'bold'
-              }
-            },
-            axisLine: {
-              lineStyle: {
-                color: '#666',
-                width: 1
-              }
-            },
-            data: [&quot;寿险&quot;, &quot;重疾&quot;, &quot;意外&quot;, &quot;医疗&quot;, &quot;年金&quot;],
-          },
-          yAxis: {
-            type: 'value',
-            axisLine: {
-              show: false, //y轴线消失
- 
-            },
-            axisLabel: {
-              show: true,
-              textStyle: {
-                color: '#666',
-                fontSize: '11'
-              }
-            },
- 
-            axisTick: {
-              show: false,
-            },
-          },
-          series: [{
-            barWidth: 20,
-            type: 'bar',
-            data: [20, 50, 40, 10, 20],
-            itemStyle: {
-              normal: {
-                //每根柱子颜色设置
-                color: function(params) {
-                  const colorList = [&quot;#FFC600&quot;, &quot;#21A5FF&quot;, &quot;#FF6000&quot;, &quot;#00D69C&quot;,
-                    &quot;#998BFF&quot;
-                  ];
-                  return colorList[params.dataIndex];
-                }
-              }
-            },
-            label: {
-              show: true,
-              position: 'top',
-              formatter: '{c}万',
-              color: '#666666',
-              fontStyle: 'PingFang SC',
-              fontWeight: 'bold',
-              fontSize:'8'
-            }
-          }]
-        },
-      }
-    },
-    methods: {
-      initChart(canvas, width, height, canvasDpr) {
-        console.log(canvas, width, height, canvasDpr)
-        chart = echarts.init(canvas, null, {
-          width: width,
-          height: height,
-          devicePixelRatio: canvasDpr
-        })
-        canvas.setChart(chart)
-        chart.setOption(this.option)
-        return chart
-      },
-    },
-    onLoad() {
-      setTimeout(() =&gt; {
-        console.log(this.$refs)
-      }, 2000)
-      this.$refs.canvas.init(this.initChart)
-    },
-  }
-&lt;/script&gt;
- 
-</code></pre>
-<p>// 这里一定要注意 设置该组件宽高 以及display:block来确保canvas初始化的时候是有宽高的</p>
-<pre><code>&lt;style&gt;
-  .uni-ec-canvas {
-    width: 100%;
-    height: 500rpx;
-    display: block;
-    margin-top: 30rpx;
-  }
-&lt;/style&gt;
- 
-</code></pre>
-<h5 id="二-解决ecahrtsjs文件过大的问题-2">二、解决ecahrts.js文件过大的问题</h5>
-<p>####### 首先，要去echarts官网自定义构建并下载文件<br>
-ECharts 在线构建 (apache.org) <a href="https://echarts.apache.org/zh/builder.html"></a><br>
-下载的是echarts.min.js文件<br>
-<img src="https://nancy-svy.github.io/post-images/1681376652702.png" alt="" loading="lazy"></p>
-<p>####### 其次就是替换文件了<br>
-将项目中的echarts.js替换成echarts.min.js文件</p>
-<blockquote>
-<p>并修改导入的文件<br>
-有两个文件要修改:  一是uni-ec-canvas.vue，二是我们建立的test.vue<br>
-将echarts.js修改成echarts.min.js<br>
-修改完之后会报错了，解决方法：<br>
-打开echarts.min.js    搜索字符串  t.addEventListener<br>
-<img src="https://nancy-svy.github.io/post-images/1681376703104.png" alt="" loading="lazy"><br>
-<img src="https://nancy-svy.github.io/post-images/1681376718477.png" alt="" loading="lazy"><br>
-搜索到之后，在 t.addEventListener 后面添加   ?.<br>
-<img src="https://nancy-svy.github.io/post-images/1681376739197.png" alt="" loading="lazy"></p>
-</blockquote>
-<h3 id="页面滚动时图表抖动-加-force-use-old-canvastrue-这个属性">页面滚动时，图表抖动 加 force-use-old-canvas=&quot;true&quot; 这个属性</h3>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[封装axios]]></title>
-        <id>https://nancy-svy.github.io/post/uniapp-package-axios/</id>
-        <link href="https://nancy-svy.github.io/post/uniapp-package-axios/">
-        </link>
-        <updated>2023-01-09T06:35:19.000Z</updated>
-        <content type="html"><![CDATA[<h4 id="requestjs">request.js</h4>
-<pre><code>const baseURL = 'https://app.lfywkeji.com'
-
-function request(url, method, params) {
-    return new Promise((resolve, reject) =&gt; {
-        uni.request({
-            url: baseURL + url,
-            method: method,
-            timeout: 10000,
-            header: {
-                &quot;Accept&quot;: &quot;application/json&quot;,
-                &quot;content-type&quot;: &quot;application/json; charset=UTF-8&quot;,
-                &quot;Authorization&quot;: uni.getStorageSync('token') ? uni.getStorageSync('token') : ''
-            },
-            data: params ? params : '',
-        }).then(res =&gt; {
-			if(res[1].data.code == 200){
-				resolve(res[1])
-			}else if(res[1].data.code == 401){
-				uni.removeStorageSync('token')
-				uni.removeStorageSync('myInfo')
-			}else if(res[1].data.code == 1502){
-				uni.removeStorageSync('token')
-				uni.removeStorageSync('myInfo')
-				uni.showModal({
-					title: '提示',
-					showCancel: false,
-					content: '登录已过期，请重新登录',
-					success: (res) =&gt; {
-						if(res.confirm){
-							uni.reLaunch({
-								url: '/pages/login/index'
-							})
-						}
-					}
-				})
-				
-			}else{
-				uni.showToast({
-					icon:&quot;none&quot;,
-					title: res[1].data.message,
-					duration: 2000
-				})
-			}
-        }).catch(err =&gt; {
-            reject(err[1])
-        })
-    })
-}
-
-function get(url, params) {
-    return request(url, 'GET', params)
-}
-
-function post(url, params) {
-    return request(url, 'POST', params)
-}
-
-export {
-    get,
-    post
-}
- 
-</code></pre>
-<h4 id="apijs">api.js</h4>
-<pre><code>const request = require('./request.js');
-
-// 登录
-export const authLogin = (params) =&gt; request.get('/rest/authLogin', params);
-
 </code></pre>
 ]]></content>
     </entry>
