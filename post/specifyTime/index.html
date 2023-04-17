@@ -8,7 +8,7 @@
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>utils.js | Gridea</title>
+<title>仿美团选择预送达时间或指定时间组件 | Gridea</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1681725693976">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -41,7 +41,7 @@
 
 
 
-  <meta name="description" content="utils.js" />
+  <meta name="description" content="仿美团选择预送达时间或指定时间组件" />
   <meta name="keywords" content="uniapp" />
 </head>
 
@@ -175,8 +175,7 @@
       <div class="sidebar-body gemini" id="sidebar_body">
         
           
-            <div class="post-side-meta" id="post_side_meta">
-              
+            
 <div class="sidebar-wrapper box-shadow-wrapper bg-color">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="/images/avatar.png"/>
@@ -208,200 +207,6 @@
 
 
 </div>
-            </div>
-            <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
-              <div class="toc-box right-motion">
-  <div class="toc-wrapper  auto"
-    id="toc_wrapper">
-    <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#1-%E4%B8%B4%E6%97%B6%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%84%E8%BD%AC%E4%B8%BAbase64">1. 临时图片路径转为base64</a></li>
-<li><a href="#2-crypto%E5%8A%A0%E8%A7%A3%E5%AF%86">2. crypto加解密</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-  </div>
-</div>
-
-<script>
-
-  let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1;
-  let active = 'active-show', activeClass = 'active-current';
-  let tocWrapper = document.querySelector('#toc_wrapper');
-  let tocContent = tocWrapper.children[0];
-  let autoNumber = tocWrapper && tocWrapper.classList.contains('auto-number');
-
-  function addTocNumber(elem, deep) {
-    if (!elem) {
-      return;
-    }
-    let prop = elem.__proto__;
-
-    if (prop === HTMLUListElement.prototype) {
-      for (let i = 0; i < elem.children.length; i++) {
-        addTocNumber(elem.children[i], deep + (i + 1) + '.');
-      }
-    } else if (prop === HTMLLIElement.prototype) {
-      // 保存li元素
-      if (elem.children[0] && elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
-        lList.push(elem);
-      }
-      for (let i = 0; i < elem.children.length; i++) {
-        let cur = elem.children[i];
-        if (cur.__proto__ === HTMLAnchorElement.prototype) {
-          if (autoNumber) {
-            cur.text = deep + ' ' + cur.text;
-          }
-        } else if (cur.__proto__ === HTMLUListElement.prototype) {
-          addTocNumber(cur, deep);
-        }
-      }
-    }
-  }
-
-  function removeParentActiveClass() {
-    let parents = tocContent.querySelectorAll('.' + active)
-    parents.forEach(function (elem) {
-      elem.classList.remove(active);
-    });
-  }
-
-  function addActiveClass(index) {
-    if (index >= 0 && index < hList.length) {
-      lList[index].classList.add(activeClass);
-    }
-  }
-
-  function removeActiveClass(index) {
-    if (index >= 0 && index < hList.length) {
-      lList[index].classList.remove(activeClass);
-    }
-  }
-
-  function addActiveLiElemment(elem, parent) {
-    if (!elem || elem === parent) {
-      return;
-    } else {
-      if (elem.__proto__ === HTMLLIElement.prototype) {
-        elem.classList.add(active);
-      }
-      addActiveLiElemment(elem.parentElement, parent);
-    }
-  }
-
-  function showToc() {
-    if (tocWrapper) {
-      postBody = document.querySelector('#post_body');
-      for (let i = 0; i < postBody.children.length; i++) {
-        if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
-          hList.push(postBody.children[i]);
-        }
-      }
-      if (tocWrapper.classList.contains('compress')) {
-        tocContent.classList.add('closed');
-      } else if (tocWrapper.classList.contains('no_compress')) {
-        tocContent.classList.add('expanded');
-      } else {
-        if (hList.length > 10) {
-          active = 'active-hidden'
-          tocContent.classList.add('closed');
-        } else {
-          tocContent.classList.add('expanded');
-        }
-      }
-    }
-  }
-
-  (function () {
-    // 处理不是从#一级标题开始目录
-    if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
-      let con = tocContent.children[0].children[0];
-      tocContent.innerHTML = con.innerHTML;
-    }
-    let markdownItTOC = document.querySelector('.markdownIt-TOC');
-    let innerHeight = window.innerHeight;
-    markdownItTOC.style = `max-height: ${innerHeight - 80 > 0 ? innerHeight - 80 : innerHeight}px`
-    addTocNumber(tocContent, '');
-  })();
-
-  document.addEventListener('scroll', function (e) {
-    if (lList.length <= 0) {
-      return;
-    }
-    let scrollTop = document.scrollingElement.scrollTop + 10;
-    let dir;
-
-    if (lastTop - scrollTop > 0) {
-      dir = 'up';
-    } else {
-      dir = 'down';
-    }
-
-    lastTop = scrollTop;
-    if (scrollTop <= 0) {
-      if (lastIndex >= 0 && lastIndex < hList.length) {
-        lList[lastIndex].classList.remove(activeClass);
-      }
-      return;
-    }
-
-    let current = 0, hasFind = false;
-    for (let i = 0; i < hList.length; i++) {
-      if (hList[i].offsetTop > scrollTop) {
-        current = i;
-        hasFind = true;
-        break;
-      }
-    }
-    if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
-      current = hList.length - 1;
-    } else {
-      current--;
-    }
-    if (dir === 'down') {
-      if (current > lastIndex) {
-        addActiveClass(current);
-        removeActiveClass(lastIndex)
-        lastIndex = current;
-        removeParentActiveClass();
-        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
-      }
-    } else {
-      if (current < lastIndex) {
-        addActiveClass(current);
-        removeActiveClass(lastIndex);
-        lastIndex = current;
-        removeParentActiveClass();
-        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
-      }
-    }
-  });
-
-
-  window.addEventListener('load', function () {
-    showToc();
-    document.querySelector('#sidebar').style = 'display: block;';
-    tocWrapper.classList.add('toc-active');
-    setTimeout(function () {
-      if ("createEvent" in document) {
-        let evt = document.createEvent("HTMLEvents");
-        evt.initEvent("scroll", false, true);
-        document.dispatchEvent(evt);
-      }
-      else {
-        document.fireEvent("scroll");
-      }
-    }, 500)
-  })
-
-</script>
-            </div>
           
         
       </div>
@@ -489,14 +294,14 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://nancy-svy.github.io/post/uniappUtils/"> utils.js </a>
+    <a class="post-title-link" href="https://nancy-svy.github.io/post/specifyTime/"> 仿美团选择预送达时间或指定时间组件 </a>
   </h1>
   <div class="post-meta">
     
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2023-02-03 09:46:22">2023-02-03</span>
+      <span class="publish-time" data-t="2023-04-05 15:12:01">2023-04-05</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
@@ -514,7 +319,7 @@
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
       <span
-        >2<span class="language" data-lan="minute"
+        >11<span class="language" data-lan="minute"
           >分钟</span
         ></span
       >
@@ -523,7 +328,7 @@
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
       <span
-        >313<span class="pc-show language" data-lan="words"
+        >1782<span class="pc-show language" data-lan="words"
           >字数</span
         ></span
       >
@@ -533,86 +338,555 @@
 </section>
 
             <div class="post-body next-md-body" id="post_body">
-              <h3 id="1-临时图片路径转为base64">1. 临时图片路径转为base64</h3>
-<pre><code>/**
- * 临时图片路径转base64
- * @param {Object} param 传一个对象，对象里包括
- * url: 临时图片存放路径，图片路径是相对路径
- * type: 图片类型，如：png
- */
-export function base64Image(url, type) {
-    return new Promise((resolve, reject) =&gt; {
-        if (!!uni.getFileSystemManager()) {
-            uni.getFileSystemManager().readFile({
-                filePath: url, // 图片路径是相对路径
-                encoding: &quot;base64&quot;, // 编码格式
-                success: (res) =&gt; {
-                    resolve(&quot;data:image/&quot; + type.toLocaleLowerCase() + &quot;;base64,&quot; + res.data);
-                },
-                fail: (error) =&gt; {
-					reject(error.errMsg)
-				},
-            });
-        } else {
-            uni.request({
-                url: url,
-                method: &quot;GET&quot;,
-                responseType: &quot;arraybuffer&quot;,
-                success: (res) =&gt; {
-                    let base64 = wx.arrayBufferToBase64(res.data); // 把arraybuffer转成base64
-                    base64 = &quot;data:image/jpeg;base64,&quot; + base64; // 不加上这串字符，在页面无法显示
-                    resolve(base64);
-                },
-                fail: (error) =&gt; {
-					reject(error.errMsg)
-				},
-            });
-        }
-    });
-}
+              <p><strong>子组件</strong><br>
+<em>components/delivery-time-op.vue</em></p>
+<p>html</p>
+<pre><code>&lt;template&gt;
+	&lt;view&gt;
+		&lt;!-- 模态框 --&gt;
+		&lt;view @click=&quot;Modal&quot; :class=&quot;{mask:model}&quot;&gt;&lt;/view&gt;
+		&lt;!-- 弹窗主体 --&gt;
+		&lt;view :style=&quot;{'height':barHidth + 'rpx'}&quot; class=&quot;active&quot; :class=&quot;{add:model}&quot;&gt;
+			&lt;view class=&quot;title&quot;&gt;{{title}} 
+				&lt;!-- &lt;text @click=&quot;showModal&quot;&gt;X&lt;/text&gt; --&gt;
+			&lt;/view&gt;
+			&lt;view class=&quot;cont&quot; :style=&quot;{height: barHidth - 80 + 'rpx'}&quot;&gt;
+				&lt;view class=&quot;day&quot;&gt;
+					&lt;view 
+					:class=&quot;index === isIndex ? 'active_copy' : ''&quot; 
+					v-for=&quot;(item,index) in content&quot; 
+					:key=&quot;index&quot;
+					@click=&quot;dataCallback(item,index)&quot;
+					&gt;{{item.timezh}}&lt;/view&gt;
+				&lt;/view&gt;
+
+				&lt;scroll-view class=&quot;content&quot; :scroll-y=&quot;true&quot; :scroll-top=&quot;scrollTop&quot;&gt;
+					&lt;view class=&quot;appoint&quot; 
+					:class=&quot;index === Indexes ? 'longActive' : ''&quot; 
+					@click=&quot;timeCallback(item,index)&quot;
+					v-for=&quot;(item,index) in Days&quot; 
+					:key=&quot;index&quot;
+					&gt;
+						{{item.timestr}}
+						&lt;text :class=&quot;index === Indexes ? 'cuIcon-check' : ''&quot;&gt;&lt;/text&gt;
+					&lt;/view&gt;
+				&lt;/scroll-view&gt;
+			&lt;/view&gt;
+		&lt;/view&gt;
+
+	&lt;/view&gt;
+&lt;/template&gt;
 </code></pre>
-<h3 id="2-crypto加解密">2. crypto加解密</h3>
-<pre><code>/**
- * crypto加解密
- **/
+<p>js</p>
+<pre><code>&lt;script&gt;
+	export default {
+		props: {
+			//控制弹窗的隐藏显示
+			model: {
+				type: Boolean,
+				default: false
+			},
+			//弹窗标题
+			title: {
+				type: String,
+				default: '弹窗测试'
+			},
+			//弹窗内容
+			content: {
+				type: Array,
+				default: [{
+					content: '我是弹窗内容'
+				}]
+			},
+			//弹窗 窗口高度
+			barHidth: {
+				type: Number,
+				default: 400
+			},
+			//点击模态框是否能关闭弹窗
+			showYes: {
+				type: Boolean,
+				default: false
+			}
+		},
+		data() {
+			return {
+				scrollTop: 0,
+				isIndex: 0,
+				Indexes: 0,
+				Days: [],
+			}
+		},
+		mounted(){
+			// 初始化
+			this.Days = this.content[0].timelist;
+		},
 
-引入crypto-js.js
-crypto.js地址：[]( https://blog-static.cnblogs.com/files/gygg/crypto-js.js)
+		methods: {
+			// 关闭窗口
+			showModal() {
+				this.$emit('close', false)
+			},
+			// 点击模态框关闭窗口
+			Modal() {
+				if (this.showYes) {
+					this.$emit('close', false)
+				}
+			},
+			//配送时间切换回顶
+			gotop() {
+				this.scrollTop = 1;
+				this.$nextTick(function() {
+					this.scrollTop = 0;
+				});
+			},
 
-utils文件夹下新建crypto-js.js文件
+			//切换日期
+			dataCallback(item,index) {
+				this.isIndex = index;
+				this.Days = this.content[index].timelist;
+				this.Indexes = null;
+				this.gotop();
+				this.$emit('dataCallback', item, index)
+			},
+
+			//选择时间
+			timeCallback(item,index) {
+				this.Indexes = index;
+				this.modalName = null;
+				this.$emit('timeCallback', item, index)
+			},
+		}
+	}
+&lt;/script&gt;
+</code></pre>
+<p>css</p>
+<pre><code>&lt;style scoped&gt;
+	.mask {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: #000;
+		animation: getInto .5s 1;
+		opacity: 0.5;
+		z-index: 999;
+	}
 
 
-// 引用
-let CryptoJS = require('@/utils/crypto-js.js');
-// 密钥16位
-let key = 'rds2n1tlkvlo1k9h';
-// 初始向量 initial vector 16 位
-let iv = 'rds2n1tlkvlo1k9h';
-// key 和 iv 可以一致
-key = CryptoJS.enc.Utf8.parse(key);
-iv = CryptoJS.enc.Utf8.parse(iv);
+	@keyframes getInto {
+		0% {
+			opacity: 0;
+		}
 
-// 加密
-export function encrypted(param) {
-  var encrypted = CryptoJS.AES.encrypt(param, key, {
-    iv: iv,
-    mode: CryptoJS.mode.CBC,
-    padding: CryptoJS.pad.Pkcs7
-  });
-  encrypted = encrypted.toString();
-  return encrypted;
+		100% {
+			opacity: 0.5;
+		}
+
+	}
+
+	.active {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		z-index: 1000;
+		width: 100%;
+		height: 400rpx;
+		border-top-left-radius: 16rpx;
+		border-top-right-radius: 16rpx;
+		overflow: hidden;
+		transform: translateY(100%);
+		transition: .4s;
+	}
+
+	.add {
+		transform: translateY(0);
+	}
+
+
+	.title {
+		position: relative;
+		text-align: center;
+		background-color: #fff;
+		padding: 20rpx 0;
+		border-bottom: 2rpx solid #eee;
+	}
+
+	.title&gt;text {
+		position: absolute;
+		right: 14rpx;
+		width: 40rpx;
+		height: 40prx;
+		background-color: #ccc;
+		color: #666;
+		border-radius: 50%;
+		font-size: 32rpx;
+	}
+
+	.cont {
+		display: flex;
+		background-color: #fff;
+		overflow-y: scroll;
+	}
+
+	.day {
+		flex: 2;
+		background-color: #F3F4F5;
+		border-right: 2rpx solid #f8f8f8;
+		text-align: center;
+
+	}
+
+	.day view {
+		padding: 30rpx 12rpx;
+		font-size: 28rpx;
+		box-sizing: border-box;
+	}
+
+	.content {
+		flex: 4;
+		font-size: 28rpx;
+		border-bottom: 40rpx solid #fff;
+		background-color: #fff;
+	}
+
+	.appoint {
+		text-align: left;
+		padding: 30rpx;
+		border-bottom: 2rpx solid #f8f8f8;
+	}
+
+
+	.appoint text {
+		margin-right: 30rpx;
+	}
+
+	.active_copy {
+		position: relative;
+		background-color: #fff;
+		color: #000000;
+		box-sizing: border-box;
+
+	}
+
+	.active_copy::after {
+		content: '';
+		width: 5rpx;
+		height: 94rpx;
+		background: #fff;
+		position: absolute;
+		top: 0;
+		right: 0;
+
+	}
+
+	.longActive {
+		color: #FF502F;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		font-size: 32rpx;
+		font-weight: 500;
+	}
+	
+	.cuIcon-check{
+		width: 30rpx;
+		height: 16rpx;
+		border-bottom: 4rpx solid #FF502F;
+		border-left: 4rpx solid #FF502F;
+		transform: rotate(-45deg);
+	}
+&lt;/style&gt;
+</code></pre>
+<p><strong>父组件</strong><br>
+html</p>
+<pre><code>&lt;template&gt;
+  &lt;view&gt;
+	   &lt;view class=&quot;pinck-box&quot;&gt;
+		&lt;view class=&quot;picker-up-title&quot;&gt;取货时间&lt;/view&gt;
+		&lt;view class=&quot;pick-item&quot;&gt;
+		  &lt;view class=&quot;block-up-title&quot;&gt;{{bhTxt}}&lt;/view&gt;
+		  &lt;view class=&quot;block-up-time&quot; @click=&quot;showModel&quot;&gt;
+			&lt;text&gt;{{chooseDay}} {{chooseTime}}&lt;/text&gt;
+			&lt;uni-icons type=&quot;right&quot; /&gt;
+		  &lt;/view&gt;
+		&lt;/view&gt;
+	  &lt;/view&gt;
+
+	  
+	  &lt;deliveryTimeOp
+	  	  v-if=&quot;content &amp;&amp; content.length != 0&quot; 
+	  	  @dataCallback=&quot;dataCallback&quot; 
+	  	  @timeCallback=&quot;timeCallback&quot; 
+	  	  :model='model' 
+	  	  :showYes=&quot;model&quot; 
+	  	  :content=&quot;content&quot; 
+	  	  :barHidth='600' 
+	  	  title=&quot;选择取货时间&quot;
+	  &gt;
+	  &lt;/deliveryTimeOp&gt;
+  &lt;/view&gt;
+&lt;/template&gt;
+</code></pre>
+<p>js</p>
+<pre><code>&lt;script&gt;
+import deliveryTimeOp from './components/delivery-time-op.vue'
+export default {
+  components: {
+    deliveryTimeOp,
+  },
+  data() {
+    return {
+		// 控制显示隐藏
+		model: false,
+		// 需要传递展示的日期时间数据
+		content: [
+			// {timezh: &quot;&quot;,timeformatter: &quot;&quot;, timelist: []},
+		],
+		chooseTime: '', // 时间
+		chooseDay: '', //星期
+      	chooseDate: '', // 年月日
+      	bhTxt: '尽快取货', // 取货时间文字
+		now: '', // 当前的时间
+    }
+  },
+  mounted() {
+    
+  },
+  methods: {
+    // 时间
+    getDliveryTime(){
+		let today = '';
+		let nextDay = '';
+		let threeDay = '';
+		let timeformatter = '';
+		let deliveryTimeList = [];
+		// 当前时间戳
+    	let now = new Date();
+    	// 获取星期
+    	let week = now.getDay();
+		// 获取年
+    	let Y = now.getFullYear();
+		// 获取月
+    	let M = now.getMonth() + 1;
+    	M = M &lt; 10 ? &quot;0&quot; + M : M;
+		// 获取日
+    	let D = now.getDate();
+    	switch(week){
+    		case 0:
+    			today = &quot;今天（周日）&quot;;
+    			nextDay = &quot;明天（周一）&quot;;
+    			threeDay = &quot;后天（周二）&quot;;
+    			break;
+    		case 1:
+    			today = &quot;今天（周一）&quot;;
+    			nextDay = &quot;明天（周二）&quot;;
+    			threeDay = &quot;后天（周三）&quot;;
+    			break;
+    		case 2:
+    			today = &quot;今天（周二）&quot;;
+    			nextDay = &quot;明天（周三）&quot;;
+    			threeDay = &quot;后天（周四）&quot;;
+    			break;
+    		case 3:
+    			today = &quot;今天（周三）&quot;;
+    			nextDay = &quot;明天（周四）&quot;;
+    			threeDay = &quot;后天（周五）&quot;;
+    			break;
+    		case 4:
+    			today = &quot;今天（周四）&quot;;
+    			nextDay = &quot;明天（周五）&quot;;
+    			threeDay = &quot;后天（周六）&quot;;
+    			break;
+    		case 5:
+    			today = &quot;今天（周五）&quot;;
+    			nextDay = &quot;明天（周六）&quot;;
+    			threeDay = &quot;后天（周日）&quot;;
+    			break;
+    		case 6:
+    			today = &quot;今天（周六）&quot;;
+    			nextDay = &quot;明天（周日）&quot;;
+    			threeDay = &quot;后天（周一）&quot;;
+    			break;
+    	}
+    	
+		// 判断是否是20点以后, 20点以后则默认值为第二天第一个
+		let endTimeStamp = new Date(new Date().setHours(20)).getTime()
+		let nowStamp = new Date().getTime()
+		
+    	if(nowStamp &gt; endTimeStamp) {
+    		let todayStr = this.getTimeList('two');
+    		let nowDayList = this.getTimeObj(todayStr)
+    		let D1 = new Date(new Date().setDate(new Date().getDate() + 1)).getDate().toString()
+    		
+    		let todayYMD = Y + '-'+ M + '-' + D1.padStart(2, '0')
+    		
+    		deliveryTimeList.push({ timezh: nextDay, timeformatter: todayYMD, timelist: nowDayList });
+    		this.content = deliveryTimeList
+    		
+    		let nextDayStr = this.getTimeList('three');
+    		let nextDayList = this.getTimeObj(nextDayStr)
+    		
+    		let D2 = new Date(new Date().setDate(new Date().getDate() + 2)).getDate().toString()
+    		let nextYMD = Y + '-'+ M + '-' + D2.padStart(2, '0')
+    		deliveryTimeList.push({ timezh: threeDay, timeformatter: nextYMD, timelist: nowDayList });
+    		this.content = []
+    		this.content = deliveryTimeList
+    	} else {
+    		let todayStr = this.getTimeList('one');
+    		let nowDayList = this.getTimeObj(todayStr)
+    		
+    		let todayYMD = Y + '-'+ M + '-' + D.toString().padStart(2, '0')
+    		deliveryTimeList.push({ timezh: today, timeformatter: todayYMD, timelist: nowDayList });
+    		this.content = deliveryTimeList
+    		
+    		let nextDayStr = this.getTimeList('two');
+    		let nextDayList = this.getTimeObj(nextDayStr)
+    		let D2 = new Date(new Date().setDate(new Date().getDate() + 1)).getDate().toString()
+    		let nextYMD = Y + '-' + M + '-' + D2.padStart(2, '0')
+    		deliveryTimeList.push({ timezh: nextDay, timeformatter: nextYMD, timelist: nextDayList });
+    		this.content = []
+    		this.content = deliveryTimeList
+    		
+    	}
+    	
+    	this.chooseDate = this.content[0].timeformatter
+    	this.chooseDay = this.content[0].timezh
+        this.chooseTime = this.content[0].timelist[0].timestr
+    },
+    // 获取时间段
+    getTimeList(hour, minut) {
+    	let timeListTodayAll = [];
+    	let timeList = []
+		
+    	let now = new Date()
+    	let tommorrow = new Date().setDate(new Date().getDate() + 1)
+    	let three = new Date().setDate(new Date().getDate() + 2)
+    	let todayStart = new Date().getFullYear() + '-' + (new Date().getMonth() + 1).toString().padStart(2, '0') + '-' + new Date().getDate() + ' 09:00:00'
+    	
+    	let allTimes = (21 - 9) * 60 / 40
+    	for(let i = 0; i &lt; allTimes; i++) {
+    		let setTodayTime = new Date(todayStart).setMinutes(40 * i)
+    		timeListTodayAll.push(formatTime(setTodayTime))
+    		timeList.push(formatTime(setTodayTime).substring(11, 16))
+    	}
+		if(type == 'one') {
+			let nowTimeStamp = new Date().setMinutes(new Date().getMinutes() + 20)
+			for(let j = 0; j &lt; timeListTodayAll.length; j++) {
+				let itemStamp = new Date(timeListTodayAll[j]).getTime()
+				if(itemStamp &gt;= nowTimeStamp) {
+					timeList = timeList.slice(j)
+					break
+				}
+			}
+		}
+		return timeList
+    },
+    // 根据时间段转为数组对象
+    getTimeObj(todayStr){
+    	// 将数组中的时间段字符串分割
+    	let todayArr = []
+    	todayStr.forEach(item =&gt; {
+    		todayArr.push(...item.split('-'))
+    	})
+    	// 将分割后的数组去重
+    	let todayDup = []
+    	todayArr.forEach(item =&gt; {
+    		if(todayDup.indexOf(item) == -1){
+    			todayDup.push(item)
+    		}
+    	})
+    	// 将去重后的数组转为数组对象
+    	let todayList = []
+    	todayDup.forEach(item =&gt; {
+    		todayList.push({
+    			timestr: item
+    		})
+    	})
+    	return todayList;
+    },
+    
+    // 控制弹窗显示
+    showModel(){
+    	this.model = true;
+    },
+    // 选择日期的回调
+    dataCallback(item,index){
+    	this.chooseDay = item.timezh
+    	this.chooseDate = item.timeformatter
+    },
+    // 选择时间的回调
+    timeCallback(item,index){
+    	if(this.now == this.chooseDate){
+    		this.chooseDay = this.content[0].timezh
+    		this.chooseDate = this.now
+    	}else{
+    		this.chooseDay = this.content[1].timezh
+    		this.chooseDate = this.content[1].timeformatter
+    	}
+    	this.chooseTime = item.timestr
+    	
+    	if(this.chooseDay != this.content[0].timezh || this.chooseTime != this.content[0].timelist[0].timestr) {
+    		this.bhTxt = '指定时间'
+    	} else {
+    		this.bhTxt = '尽快取货'
+    	}
+    	this.model = false;
+    },
+  },
+  onshow(){
+	  let now = new Date();
+	  let year = now.getFullYear()
+	  let month = now.getMonth() + 1
+	  month = month &lt; 10 ? &quot;0&quot; + month : month;
+	  let date = now.getDate() 
+	  date = date &lt; 10 ? '0' + date : date
+	  this.chooseDate = `${year}-${month}-${date}`
+	  this.now = `${year}-${month}-${date}`
+	  this.getDliveryTime()
+  }
 }
-// 解密
-export function decrypted(param) {
-  var decrypted = CryptoJS.AES.decrypt(param, key, {
-    iv: iv,
-    mode: CryptoJS.mode.CBC,
-    padding: CryptoJS.pad.Pkcs7
-  });
-  decrypted = CryptoJS.enc.Utf8.stringify(decrypted);
-  return decrypted;
+&lt;/script&gt;
+</code></pre>
+<p>css</p>
+<pre><code>&lt;style lang=&quot;less&quot; scoped&gt;
+.pinck-box {
+  background: #ffffff;
+  padding: 0 32rpx 17rpx 32rpx;
+  .picker-up-title {
+    font-size: 32rpx;
+    font-weight: 500;
+    color: #000000;
+    padding: 20rpx 0;
+  }
+  .pick-item {
+    height: 88rpx;
+    background: #f4f4f4;
+    border-radius: 24rpx 24rpx 24rpx 24rpx;
+    padding: 0 32rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .block-up-title {
+      font-size: 28rpx;
+      font-weight: 400;
+      color: #ff502f;
+    }
+    .block-up-time {
+      font-size: 24rpx;
+      font-weight: 400;
+      color: #999999;
+      display: flex;
+      align-items: center;
+      /deep/.uni-icons {
+        font-size: 24rpx !important;
+        color: #999999 !important;
+      }
+    }
+  }
 }
- 
+&lt;/style&gt;
 </code></pre>
 
             </div>
@@ -626,7 +900,7 @@ export function decrypted(param) {
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://nancy-svy.github.io/post/uniappUtils/" title="utils.js">https://nancy-svy.github.io/post/uniappUtils/</a>
+      <a href="https://nancy-svy.github.io/post/specifyTime/" title="仿美团选择预送达时间或指定时间组件">https://nancy-svy.github.io/post/specifyTime/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -642,14 +916,14 @@ export function decrypted(param) {
     <div class="nav-prev">
       
         <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="手写签名" href="https://nancy-svy.github.io/post/handwrittenSignature/">手写签名</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="手写签名" href="https://nancy-svy.github.io/post/handwrittenSignature/">上一篇</a>
+        <a class="nav-pc-next" title="动态创建form并校验" href="https://nancy-svy.github.io/post/dynamicallyCreateAForms/">动态创建form并校验</a class="nav-pc-next">
+        <a class="nav-mobile-prev" title="动态创建form并校验" href="https://nancy-svy.github.io/post/dynamicallyCreateAForms/">上一篇</a>
       
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="了解Arco Design Vue" href="https://nancy-svy.github.io/post/liao-jie-arco-design-vue/">了解Arco Design Vue</a>
-        <a class="nav-mobile-next" title="了解Arco Design Vue" href="https://nancy-svy.github.io/post/liao-jie-arco-design-vue/">下一篇</a>
+        <a class="nav-pc-next" title="解决小程序自定义tabbar在ios手机上无法显示问题" href="https://nancy-svy.github.io/post/unableToDisplay/">解决小程序自定义tabbar在ios手机上无法显示问题</a>
+        <a class="nav-mobile-next" title="解决小程序自定义tabbar在ios手机上无法显示问题" href="https://nancy-svy.github.io/post/unableToDisplay/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>

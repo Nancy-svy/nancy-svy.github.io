@@ -8,7 +8,7 @@
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>utils.js | Gridea</title>
+<title>时间表 | Gridea</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1681725693976">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -41,7 +41,7 @@
 
 
 
-  <meta name="description" content="utils.js" />
+  <meta name="description" content="时间表" />
   <meta name="keywords" content="uniapp" />
 </head>
 
@@ -175,8 +175,7 @@
       <div class="sidebar-body gemini" id="sidebar_body">
         
           
-            <div class="post-side-meta" id="post_side_meta">
-              
+            
 <div class="sidebar-wrapper box-shadow-wrapper bg-color">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="/images/avatar.png"/>
@@ -208,200 +207,6 @@
 
 
 </div>
-            </div>
-            <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
-              <div class="toc-box right-motion">
-  <div class="toc-wrapper  auto"
-    id="toc_wrapper">
-    <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#1-%E4%B8%B4%E6%97%B6%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%84%E8%BD%AC%E4%B8%BAbase64">1. 临时图片路径转为base64</a></li>
-<li><a href="#2-crypto%E5%8A%A0%E8%A7%A3%E5%AF%86">2. crypto加解密</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-  </div>
-</div>
-
-<script>
-
-  let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1;
-  let active = 'active-show', activeClass = 'active-current';
-  let tocWrapper = document.querySelector('#toc_wrapper');
-  let tocContent = tocWrapper.children[0];
-  let autoNumber = tocWrapper && tocWrapper.classList.contains('auto-number');
-
-  function addTocNumber(elem, deep) {
-    if (!elem) {
-      return;
-    }
-    let prop = elem.__proto__;
-
-    if (prop === HTMLUListElement.prototype) {
-      for (let i = 0; i < elem.children.length; i++) {
-        addTocNumber(elem.children[i], deep + (i + 1) + '.');
-      }
-    } else if (prop === HTMLLIElement.prototype) {
-      // 保存li元素
-      if (elem.children[0] && elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
-        lList.push(elem);
-      }
-      for (let i = 0; i < elem.children.length; i++) {
-        let cur = elem.children[i];
-        if (cur.__proto__ === HTMLAnchorElement.prototype) {
-          if (autoNumber) {
-            cur.text = deep + ' ' + cur.text;
-          }
-        } else if (cur.__proto__ === HTMLUListElement.prototype) {
-          addTocNumber(cur, deep);
-        }
-      }
-    }
-  }
-
-  function removeParentActiveClass() {
-    let parents = tocContent.querySelectorAll('.' + active)
-    parents.forEach(function (elem) {
-      elem.classList.remove(active);
-    });
-  }
-
-  function addActiveClass(index) {
-    if (index >= 0 && index < hList.length) {
-      lList[index].classList.add(activeClass);
-    }
-  }
-
-  function removeActiveClass(index) {
-    if (index >= 0 && index < hList.length) {
-      lList[index].classList.remove(activeClass);
-    }
-  }
-
-  function addActiveLiElemment(elem, parent) {
-    if (!elem || elem === parent) {
-      return;
-    } else {
-      if (elem.__proto__ === HTMLLIElement.prototype) {
-        elem.classList.add(active);
-      }
-      addActiveLiElemment(elem.parentElement, parent);
-    }
-  }
-
-  function showToc() {
-    if (tocWrapper) {
-      postBody = document.querySelector('#post_body');
-      for (let i = 0; i < postBody.children.length; i++) {
-        if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
-          hList.push(postBody.children[i]);
-        }
-      }
-      if (tocWrapper.classList.contains('compress')) {
-        tocContent.classList.add('closed');
-      } else if (tocWrapper.classList.contains('no_compress')) {
-        tocContent.classList.add('expanded');
-      } else {
-        if (hList.length > 10) {
-          active = 'active-hidden'
-          tocContent.classList.add('closed');
-        } else {
-          tocContent.classList.add('expanded');
-        }
-      }
-    }
-  }
-
-  (function () {
-    // 处理不是从#一级标题开始目录
-    if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
-      let con = tocContent.children[0].children[0];
-      tocContent.innerHTML = con.innerHTML;
-    }
-    let markdownItTOC = document.querySelector('.markdownIt-TOC');
-    let innerHeight = window.innerHeight;
-    markdownItTOC.style = `max-height: ${innerHeight - 80 > 0 ? innerHeight - 80 : innerHeight}px`
-    addTocNumber(tocContent, '');
-  })();
-
-  document.addEventListener('scroll', function (e) {
-    if (lList.length <= 0) {
-      return;
-    }
-    let scrollTop = document.scrollingElement.scrollTop + 10;
-    let dir;
-
-    if (lastTop - scrollTop > 0) {
-      dir = 'up';
-    } else {
-      dir = 'down';
-    }
-
-    lastTop = scrollTop;
-    if (scrollTop <= 0) {
-      if (lastIndex >= 0 && lastIndex < hList.length) {
-        lList[lastIndex].classList.remove(activeClass);
-      }
-      return;
-    }
-
-    let current = 0, hasFind = false;
-    for (let i = 0; i < hList.length; i++) {
-      if (hList[i].offsetTop > scrollTop) {
-        current = i;
-        hasFind = true;
-        break;
-      }
-    }
-    if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
-      current = hList.length - 1;
-    } else {
-      current--;
-    }
-    if (dir === 'down') {
-      if (current > lastIndex) {
-        addActiveClass(current);
-        removeActiveClass(lastIndex)
-        lastIndex = current;
-        removeParentActiveClass();
-        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
-      }
-    } else {
-      if (current < lastIndex) {
-        addActiveClass(current);
-        removeActiveClass(lastIndex);
-        lastIndex = current;
-        removeParentActiveClass();
-        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
-      }
-    }
-  });
-
-
-  window.addEventListener('load', function () {
-    showToc();
-    document.querySelector('#sidebar').style = 'display: block;';
-    tocWrapper.classList.add('toc-active');
-    setTimeout(function () {
-      if ("createEvent" in document) {
-        let evt = document.createEvent("HTMLEvents");
-        evt.initEvent("scroll", false, true);
-        document.dispatchEvent(evt);
-      }
-      else {
-        document.fireEvent("scroll");
-      }
-    }, 500)
-  })
-
-</script>
-            </div>
           
         
       </div>
@@ -489,14 +294,14 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://nancy-svy.github.io/post/uniappUtils/"> utils.js </a>
+    <a class="post-title-link" href="https://nancy-svy.github.io/post/timeTable/"> 时间表 </a>
   </h1>
   <div class="post-meta">
     
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2023-02-03 09:46:22">2023-02-03</span>
+      <span class="publish-time" data-t="2023-04-17 11:37:44">2023-04-17</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
@@ -514,7 +319,7 @@
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
       <span
-        >2<span class="language" data-lan="minute"
+        >5<span class="language" data-lan="minute"
           >分钟</span
         ></span
       >
@@ -523,7 +328,7 @@
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
       <span
-        >313<span class="pc-show language" data-lan="words"
+        >795<span class="pc-show language" data-lan="words"
           >字数</span
         ></span
       >
@@ -533,86 +338,208 @@
 </section>
 
             <div class="post-body next-md-body" id="post_body">
-              <h3 id="1-临时图片路径转为base64">1. 临时图片路径转为base64</h3>
-<pre><code>/**
- * 临时图片路径转base64
- * @param {Object} param 传一个对象，对象里包括
- * url: 临时图片存放路径，图片路径是相对路径
- * type: 图片类型，如：png
- */
-export function base64Image(url, type) {
-    return new Promise((resolve, reject) =&gt; {
-        if (!!uni.getFileSystemManager()) {
-            uni.getFileSystemManager().readFile({
-                filePath: url, // 图片路径是相对路径
-                encoding: &quot;base64&quot;, // 编码格式
-                success: (res) =&gt; {
-                    resolve(&quot;data:image/&quot; + type.toLocaleLowerCase() + &quot;;base64,&quot; + res.data);
-                },
-                fail: (error) =&gt; {
-					reject(error.errMsg)
-				},
-            });
-        } else {
-            uni.request({
-                url: url,
-                method: &quot;GET&quot;,
-                responseType: &quot;arraybuffer&quot;,
-                success: (res) =&gt; {
-                    let base64 = wx.arrayBufferToBase64(res.data); // 把arraybuffer转成base64
-                    base64 = &quot;data:image/jpeg;base64,&quot; + base64; // 不加上这串字符，在页面无法显示
-                    resolve(base64);
-                },
-                fail: (error) =&gt; {
-					reject(error.errMsg)
-				},
-            });
-        }
-    });
-}
+              <p>效果图<br>
+<img src="https://nancy-svy.github.io/post-images/1681714897240.png" alt="" loading="lazy"></p>
+<p><strong>html</strong></p>
+<pre><code>&lt;template&gt;
+	&lt;view class=&quot;container&quot;&gt;
+		&lt;view class=&quot;timetable&quot;&gt;
+			&lt;view class=&quot;header&quot;&gt;
+				&lt;view class=&quot;day&quot; @click=&quot;handlePreviousDay&quot;&gt;
+					&lt;uni-icons type=&quot;left&quot; color=&quot;#333333&quot; size=&quot;12&quot;&gt;&lt;/uni-icons&gt;
+					前一天
+				&lt;/view&gt;
+				&lt;view class=&quot;date&quot;&gt;{{nowTime}}&lt;/view&gt;
+				&lt;view class=&quot;day&quot; @click=&quot;handleNextDay&quot;&gt;
+					后一天
+					&lt;uni-icons type=&quot;right&quot; color=&quot;#333333&quot; size=&quot;12&quot;&gt;&lt;/uni-icons&gt;
+				&lt;/view&gt;
+			&lt;/view&gt;
+			&lt;view class=&quot;time_list&quot;&gt;
+				&lt;!-- 时间表上时间显示的区域 --&gt;
+				&lt;view 
+				:class=&quot;['leave_box', item &amp;&amp; item.my ? 'yellowBg' : 'blueBg']&quot;
+				v-for=&quot;(item,index) in tableList&quot;
+				:key=&quot;index&quot;
+				:style=&quot;{height: `${item.height}rpx`, top: `${item.top}rpx`}&quot;
+				&gt;
+				&lt;text&gt;名称&lt;/text&gt;
+				&lt;/view&gt;
+				&lt;!-- 时间表表格 --&gt;
+				&lt;view class=&quot;time_item&quot; v-for=&quot;(item,index) in timeList&quot; :key=&quot;index&quot;&gt;
+					&lt;view class=&quot;time_item_text&quot;&gt;{{item}}:00&lt;/view&gt;
+					&lt;view class=&quot;time_item_leave&quot;&gt;&lt;/view&gt;
+				&lt;/view&gt;
+			&lt;/view&gt;
+		&lt;/view&gt;
+	&lt;/view&gt;
+	
+&lt;/template&gt;
 </code></pre>
-<h3 id="2-crypto加解密">2. crypto加解密</h3>
-<pre><code>/**
- * crypto加解密
- **/
+<p><strong>js</strong></p>
+<pre><code>&lt;script&gt;
+	import { createTime } from '@/utils/utils.js'
+	export default {
+		name:&quot;timetable&quot;,
+		data() {
+			return {
+				timeList: [
+					'00','01','02','03','04','05','06','07','08','09','10','11',
+					'12','13','14','15','16','17','18','19','20','21','22','23'
+				],
+				 // 当前日期
+				nowTime: '', // xx年xx月xx日
+				nowParams: '', // xx/xx/xx
+				 // 列表单行高度
+				li_H: 62,
+				// 时间表
+				renderSchedule: [
+					{ formetter: '2023/03/09', time: '01:00-04:00', my: false },
+					{ formetter: '2023/03/09', time: '08:00-10:10', my: false },
+					{ formetter: '2023/03/09', time: '05:36-06:50', my: true },
+					{ formetter: '2023/03/09', time: '17:30-19:30', my: true }
+				],
+				// 数据处理后渲染数据
+				tableList: [],
+			};
+		},
+		mounted(){
+			let now = new Date()
+			this.creationTime(now)
+			this.processData()
+		},
+		methods:{
+			// 获取当前日期
+			creationTime(date){
+				let timeParams = createTime(date)
+				this.nowTime = `${timeParams.year}年${timeParams.month}月${timeParams.day}日 ${timeParams.weekday}`
+				let timeP = createTime(date)
+				this.nowParams = `${timeP.year}/${timeP.month}/${timeP.day}`
+			},
+			// 前一天
+			handlePreviousDay(){
+				let beforeDate = new Date(this.nowParams)
+				beforeDate.setDate(beforeDate.getDate() - 1);
+				this.creationTime(beforeDate)
+			},
+			// 后一天
+			handleNextDay(){
+				let afterDate = new Date(this.nowParams);
+				afterDate.setDate(afterDate.getDate() + 1);
+				this.creationTime(afterDate)
+			},
+			// 处理渲染的时间表数据
+			processData(){
+				this.renderSchedule.forEach(item =&gt; {
+					let timedata = item.time.split('-');
+					// 小时
+					let startHour = timedata[0].slice(0, 2);
+					let endHour = timedata[1].slice(0, 2);
+					// 分钟
+					let startMinute = timedata[0].slice(-2);
+					let endMinute = timedata[1].slice(-2);
+					// 开始时间的与结束时间相差几小时
+					let myhour = Math.abs(endHour) - Math.abs(startHour);
+					// 开始时间与结束时间相差几分钟
+					let minute = Math.abs(endMinute) - Math.abs(startMinute);
+					// dom高度
+					let dom_height = dom_height = (myhour * this.li_H) + (minute * (this.li_H / 60));
+					// console.log('高度', dom_height);
+					item.height = parseInt(dom_height);
+					// dom顶部偏移量
+					let dom_top = (Math.abs(startHour) * this.li_H) + (Math.abs(startMinute) * (this.li_H / 60));
+					// console.log('dom_top', dom_top);
+					item.top = parseInt(dom_top);
+				})
+				this.tableList = this.renderSchedule;
+			},
+		},
+	}
+&lt;/script&gt;
 
-引入crypto-js.js
-crypto.js地址：[]( https://blog-static.cnblogs.com/files/gygg/crypto-js.js)
-
-utils文件夹下新建crypto-js.js文件
-
-
-// 引用
-let CryptoJS = require('@/utils/crypto-js.js');
-// 密钥16位
-let key = 'rds2n1tlkvlo1k9h';
-// 初始向量 initial vector 16 位
-let iv = 'rds2n1tlkvlo1k9h';
-// key 和 iv 可以一致
-key = CryptoJS.enc.Utf8.parse(key);
-iv = CryptoJS.enc.Utf8.parse(iv);
-
-// 加密
-export function encrypted(param) {
-  var encrypted = CryptoJS.AES.encrypt(param, key, {
-    iv: iv,
-    mode: CryptoJS.mode.CBC,
-    padding: CryptoJS.pad.Pkcs7
-  });
-  encrypted = encrypted.toString();
-  return encrypted;
+</code></pre>
+<p><strong>css</strong></p>
+<pre><code>&lt;style lang=&quot;less&quot; scoped&gt;
+.container{
+	padding: 20rpx 32rpx;
 }
-// 解密
-export function decrypted(param) {
-  var decrypted = CryptoJS.AES.decrypt(param, key, {
-    iv: iv,
-    mode: CryptoJS.mode.CBC,
-    padding: CryptoJS.pad.Pkcs7
-  });
-  decrypted = CryptoJS.enc.Utf8.stringify(decrypted);
-  return decrypted;
+.timetable{
+	border-radius: 20rpx 20rpx 0rpx 0rpx;
+	border: 1px solid #DFE0EB;
+	.header{
+		height: 80rpx;
+		background: rgba(223,224,235,0.3);
+		padding:0 19rpx;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		border-bottom: 1px solid #DFE0EB;
+		.day{
+			font-size: 24rpx;
+			font-family: 'SourceHanSansCN-Regular';
+			font-weight: 400;
+			color: #333333;
+		}
+		.date{
+			font-size: 28rpx;
+			font-family: 'Source Han Sans CN-Medium';
+			font-weight: 500;
+			color: #333333;
+		}
+	}
+	.time_list{
+		position: relative;
+		.time_item{
+			height: 61rpx;
+			display: flex;
+			border-bottom: 1px solid #DFE0EB;
+			&amp;:last-child{
+				border-bottom: 0px solid #DFE0EB;
+				.time_item_text,
+				.time_item_leave{
+					border-bottom: 0px solid #DFE0EB;
+				}
+			}
+			.time_item_text{
+				width: 84rpx;
+				height: 61rpx;
+				background: #F7F9FB;
+				border-right: 1px solid #DFE0EB;
+				text-align: center;
+				line-height: 61rpx;
+				font-size: 20rpx;
+				font-family: 'SourceHanSansCN-Regular';
+				font-weight: 400;
+				color: #333333;
+			}
+			.time_item_leave{
+				flex: 1;
+				height: 61rpx;
+			}
+		}
+		.leave_box{
+			position: absolute;
+			right: 0;
+			width: calc(100% - 84rpx);
+			font-size: 24rpx;
+			font-family: 'SourceHanSansCN-Regular';
+			font-weight: 400;
+			color: #333333;
+			text{
+				line-height: 60rpx;
+				padding-left: 20rpx;
+			}
+		}
+		.yellowBg{
+			background: rgba(255, 204, 0, 0.5);
+		}
+		.blueBg{
+			background: rgba(0, 122, 255, 0.5);
+		}
+	}
 }
- 
+		
+&lt;/style&gt;
 </code></pre>
 
             </div>
@@ -626,7 +553,7 @@ export function decrypted(param) {
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://nancy-svy.github.io/post/uniappUtils/" title="utils.js">https://nancy-svy.github.io/post/uniappUtils/</a>
+      <a href="https://nancy-svy.github.io/post/timeTable/" title="时间表">https://nancy-svy.github.io/post/timeTable/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -641,15 +568,11 @@ export function decrypted(param) {
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="手写签名" href="https://nancy-svy.github.io/post/handwrittenSignature/">手写签名</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="手写签名" href="https://nancy-svy.github.io/post/handwrittenSignature/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="了解Arco Design Vue" href="https://nancy-svy.github.io/post/liao-jie-arco-design-vue/">了解Arco Design Vue</a>
-        <a class="nav-mobile-next" title="了解Arco Design Vue" href="https://nancy-svy.github.io/post/liao-jie-arco-design-vue/">下一篇</a>
+        <a class="nav-pc-next" title="uniapp 引入外部字体" href="https://nancy-svy.github.io/post/importFontFile/">uniapp 引入外部字体</a>
+        <a class="nav-mobile-next" title="uniapp 引入外部字体" href="https://nancy-svy.github.io/post/importFontFile/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>

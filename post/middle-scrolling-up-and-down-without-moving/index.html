@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>布局(页面上下不动，中间滚动) | Gridea</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1681466552182">
+<link rel="shortcut icon" href="/favicon.ico?v=1681725693976">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -186,7 +186,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">41</span>
+        <span class="site-item-stat-count">45</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -911,6 +911,214 @@
     <div class="result" id="result">
       
       <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/timeTable/"" data-c="
+          &lt;p&gt;效果图&lt;br&gt;
+&lt;img src=&#34;https://nancy-svy.github.io/post-images/1681714897240.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;html&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;template&amp;gt;
+	&amp;lt;view class=&amp;quot;container&amp;quot;&amp;gt;
+		&amp;lt;view class=&amp;quot;timetable&amp;quot;&amp;gt;
+			&amp;lt;view class=&amp;quot;header&amp;quot;&amp;gt;
+				&amp;lt;view class=&amp;quot;day&amp;quot; @click=&amp;quot;handlePreviousDay&amp;quot;&amp;gt;
+					&amp;lt;uni-icons type=&amp;quot;left&amp;quot; color=&amp;quot;#333333&amp;quot; size=&amp;quot;12&amp;quot;&amp;gt;&amp;lt;/uni-icons&amp;gt;
+					前一天
+				&amp;lt;/view&amp;gt;
+				&amp;lt;view class=&amp;quot;date&amp;quot;&amp;gt;{{nowTime}}&amp;lt;/view&amp;gt;
+				&amp;lt;view class=&amp;quot;day&amp;quot; @click=&amp;quot;handleNextDay&amp;quot;&amp;gt;
+					后一天
+					&amp;lt;uni-icons type=&amp;quot;right&amp;quot; color=&amp;quot;#333333&amp;quot; size=&amp;quot;12&amp;quot;&amp;gt;&amp;lt;/uni-icons&amp;gt;
+				&amp;lt;/view&amp;gt;
+			&amp;lt;/view&amp;gt;
+			&amp;lt;view class=&amp;quot;time_list&amp;quot;&amp;gt;
+				&amp;lt;!-- 时间表上时间显示的区域 --&amp;gt;
+				&amp;lt;view 
+				:class=&amp;quot;[&#39;leave_box&#39;, item &amp;amp;&amp;amp; item.my ? &#39;yellowBg&#39; : &#39;blueBg&#39;]&amp;quot;
+				v-for=&amp;quot;(item,index) in tableList&amp;quot;
+				:key=&amp;quot;index&amp;quot;
+				:style=&amp;quot;{height: `${item.height}rpx`, top: `${item.top}rpx`}&amp;quot;
+				&amp;gt;
+				&amp;lt;text&amp;gt;名称&amp;lt;/text&amp;gt;
+				&amp;lt;/view&amp;gt;
+				&amp;lt;!-- 时间表表格 --&amp;gt;
+				&amp;lt;view class=&amp;quot;time_item&amp;quot; v-for=&amp;quot;(item,index) in timeList&amp;quot; :key=&amp;quot;index&amp;quot;&amp;gt;
+					&amp;lt;view class=&amp;quot;time_item_text&amp;quot;&amp;gt;{{item}}:00&amp;lt;/view&amp;gt;
+					&amp;lt;view class=&amp;quot;time_item_leave&amp;quot;&amp;gt;&amp;lt;/view&amp;gt;
+				&amp;lt;/view&amp;gt;
+			&amp;lt;/view&amp;gt;
+		&amp;lt;/view&amp;gt;
+	&amp;lt;/view&amp;gt;
+	
+&amp;lt;/template&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;js&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;script&amp;gt;
+	import { createTime } from &#39;@/utils/utils.js&#39;
+	export default {
+		name:&amp;quot;timetable&amp;quot;,
+		data() {
+			return {
+				timeList: [
+					&#39;00&#39;,&#39;01&#39;,&#39;02&#39;,&#39;03&#39;,&#39;04&#39;,&#39;05&#39;,&#39;06&#39;,&#39;07&#39;,&#39;08&#39;,&#39;09&#39;,&#39;10&#39;,&#39;11&#39;,
+					&#39;12&#39;,&#39;13&#39;,&#39;14&#39;,&#39;15&#39;,&#39;16&#39;,&#39;17&#39;,&#39;18&#39;,&#39;19&#39;,&#39;20&#39;,&#39;21&#39;,&#39;22&#39;,&#39;23&#39;
+				],
+				 // 当前日期
+				nowTime: &#39;&#39;, // xx年xx月xx日
+				nowParams: &#39;&#39;, // xx/xx/xx
+				 // 列表单行高度
+				li_H: 62,
+				// 时间表
+				renderSchedule: [
+					{ formetter: &#39;2023/03/09&#39;, time: &#39;01:00-04:00&#39;, my: false },
+					{ formetter: &#39;2023/03/09&#39;, time: &#39;08:00-10:10&#39;, my: false },
+					{ formetter: &#39;2023/03/09&#39;, time: &#39;05:36-06:50&#39;, my: true },
+					{ formetter: &#39;2023/03/09&#39;, time: &#39;17:30-19:30&#39;, my: true }
+				],
+				// 数据处理后渲染数据
+				tableList: [],
+			};
+		},
+		mounted(){
+			let now = new Date()
+			this.creationTime(now)
+			this.processData()
+		},
+		methods:{
+			// 获取当前日期
+			creationTime(date){
+				let timeParams = createTime(date)
+				this.nowTime = `${timeParams.year}年${timeParams.month}月${timeParams.day}日 ${timeParams.weekday}`
+				let timeP = createTime(date)
+				this.nowParams = `${timeP.year}/${timeP.month}/${timeP.day}`
+			},
+			// 前一天
+			handlePreviousDay(){
+				let beforeDate = new Date(this.nowParams)
+				beforeDate.setDate(beforeDate.getDate() - 1);
+				this.creationTime(beforeDate)
+			},
+			// 后一天
+			handleNextDay(){
+				let afterDate = new Date(this.nowParams);
+				afterDate.setDate(afterDate.getDate() + 1);
+				this.creationTime(afterDate)
+			},
+			// 处理渲染的时间表数据
+			processData(){
+				this.renderSchedule.forEach(item =&amp;gt; {
+					let timedata = item.time.split(&#39;-&#39;);
+					// 小时
+					let startHour = timedata[0].slice(0, 2);
+					let endHour = timedata[1].slice(0, 2);
+					// 分钟
+					let startMinute = timedata[0].slice(-2);
+					let endMinute = timedata[1].slice(-2);
+					// 开始时间的与结束时间相差几小时
+					let myhour = Math.abs(endHour) - Math.abs(startHour);
+					// 开始时间与结束时间相差几分钟
+					let minute = Math.abs(endMinute) - Math.abs(startMinute);
+					// dom高度
+					let dom_height = dom_height = (myhour * this.li_H) + (minute * (this.li_H / 60));
+					// console.log(&#39;高度&#39;, dom_height);
+					item.height = parseInt(dom_height);
+					// dom顶部偏移量
+					let dom_top = (Math.abs(startHour) * this.li_H) + (Math.abs(startMinute) * (this.li_H / 60));
+					// console.log(&#39;dom_top&#39;, dom_top);
+					item.top = parseInt(dom_top);
+				})
+				this.tableList = this.renderSchedule;
+			},
+		},
+	}
+&amp;lt;/script&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;css&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;style lang=&amp;quot;less&amp;quot; scoped&amp;gt;
+.container{
+	padding: 20rpx 32rpx;
+}
+.timetable{
+	border-radius: 20rpx 20rpx 0rpx 0rpx;
+	border: 1px solid #DFE0EB;
+	.header{
+		height: 80rpx;
+		background: rgba(223,224,235,0.3);
+		padding:0 19rpx;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		border-bottom: 1px solid #DFE0EB;
+		.day{
+			font-size: 24rpx;
+			font-family: &#39;SourceHanSansCN-Regular&#39;;
+			font-weight: 400;
+			color: #333333;
+		}
+		.date{
+			font-size: 28rpx;
+			font-family: &#39;Source Han Sans CN-Medium&#39;;
+			font-weight: 500;
+			color: #333333;
+		}
+	}
+	.time_list{
+		position: relative;
+		.time_item{
+			height: 61rpx;
+			display: flex;
+			border-bottom: 1px solid #DFE0EB;
+			&amp;amp;:last-child{
+				border-bottom: 0px solid #DFE0EB;
+				.time_item_text,
+				.time_item_leave{
+					border-bottom: 0px solid #DFE0EB;
+				}
+			}
+			.time_item_text{
+				width: 84rpx;
+				height: 61rpx;
+				background: #F7F9FB;
+				border-right: 1px solid #DFE0EB;
+				text-align: center;
+				line-height: 61rpx;
+				font-size: 20rpx;
+				font-family: &#39;SourceHanSansCN-Regular&#39;;
+				font-weight: 400;
+				color: #333333;
+			}
+			.time_item_leave{
+				flex: 1;
+				height: 61rpx;
+			}
+		}
+		.leave_box{
+			position: absolute;
+			right: 0;
+			width: calc(100% - 84rpx);
+			font-size: 24rpx;
+			font-family: &#39;SourceHanSansCN-Regular&#39;;
+			font-weight: 400;
+			color: #333333;
+			text{
+				line-height: 60rpx;
+				padding-left: 20rpx;
+			}
+		}
+		.yellowBg{
+			background: rgba(255, 204, 0, 0.5);
+		}
+		.blueBg{
+			background: rgba(0, 122, 255, 0.5);
+		}
+	}
+}
+		
+&amp;lt;/style&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+">时间表</a>
+      </div>
+      
+      <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/importFontFile/"" data-c="
           &lt;p&gt;uni-app 支持使用字体图标，请仔细阅读官方文档：&lt;a href=&#34;https://uniapp.dcloud.net.cn/tutorial/syntax-css.html#%E5%AD%97%E4%BD%93%E5%9B%BE%E6%A0%87&#34;&gt;地址&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;一-当字体文件小于40kb时uni-app-会自动将其转化为-base64-格式直接引入即可&#34;&gt;一、当字体文件小于40kb时，uni-app 会自动将其转化为 base64 格式，直接引入即可&lt;/h3&gt;
@@ -1026,20 +1234,20 @@ enabled 启用&lt;/p&gt;
 &lt;p&gt;萌国ICP备案是第三方的备案平台，站长在注册通过后选择一个备案号码，然后将生成的备案链接添加到网站的页脚标签页中。&lt;/p&gt;
 &lt;h1 id=&#34;添加教程&#34;&gt;添加教程✅&lt;/h1&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;点击登录， 选择加入&lt;br&gt;
-萌国ICP主页  https://icp.gov.moe/aboutus.php&lt;br&gt;
-&lt;img src=&#34;https://nancy-svy.github.io/post-images/1680853010730.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;点击登录， 选择加入&lt;br&gt;
+&lt;a href=&#34;https://icp.gov.moe/aboutus.php&#34;&gt;萌国ICP主页&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://nancy-svy.github.io/post-images/1680853010730.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;点击橙色进入选择一个喜欢的号码&lt;br&gt;
 &lt;img src=&#34;https://nancy-svy.github.io/post-images/1680853018966.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
-&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://nancy-svy.github.io/post-images/1680853027028.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;2&#34;&gt;&lt;img src=&#34;https://nancy-svy.github.io/post-images/1680853027028.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;选择好后填写常用邮箱，验证账号，并填写好网站名字和网站地址，大概5分钟时间完成验证&lt;br&gt;
 &lt;img src=&#34;https://nancy-svy.github.io/post-images/1680853041573.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
-&lt;figure data-type=&#34;image&#34; tabindex=&#34;2&#34;&gt;&lt;img src=&#34;https://nancy-svy.github.io/post-images/1680853062611.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;3&#34;&gt;&lt;img src=&#34;https://nancy-svy.github.io/post-images/1680853062611.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;将刚才页面的代码填入到网站页脚页面，⚠️每个人申请的都不同&lt;br&gt;
@@ -1060,7 +1268,7 @@ enabled 启用&lt;/p&gt;
 &lt;p&gt;以上就是添加萌国ICP备案信息的教程，如果后续需要更改网站信息，可以点击自己萌国ICP打开关于页面，找到下面的修改填写自己的萌国ID加绑定的邮箱即可完成修改。&lt;br&gt;
 &lt;img src=&#34;https://nancy-svy.github.io/post-images/1680853150947.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
 &lt;h1 id=&#34;致谢&#34;&gt;致谢🎈&lt;/h1&gt;
-&lt;p&gt;萌ICP备案   https://icp.gov.moe/&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://icp.gov.moe/&#34;&gt;萌ICP备案&lt;/a&gt;&lt;/p&gt;
 ">添加萌国ICP备案号</a>
       </div>
       
@@ -1193,6 +1401,811 @@ enabled 启用&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 ">Gridea快速上手</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/anchorPointPositioning/"" data-c="
+          &lt;p&gt;html&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;template&amp;gt;
+	&amp;lt;view class=&amp;quot;container&amp;quot;&amp;gt;
+		&amp;lt;!-- 左边内容 --&amp;gt;
+		&amp;lt;scroll-view 
+		class=&amp;quot;scroller&amp;quot; 
+		:scroll-into-view=&amp;quot;toView&amp;quot; 
+		scroll-y=&amp;quot;true&amp;quot; 
+		scroll-with-animation=&amp;quot;true&amp;quot;
+		@scroll=&amp;quot;cateScroll&amp;quot;
+		&amp;gt;
+			&amp;lt;view 
+			:id=&amp;quot;item&amp;quot; 
+			class=&amp;quot;left&amp;quot; 
+			v-for=&amp;quot;item in list&amp;quot;
+			&amp;gt;
+				{{item.toUpperCase()}}
+			&amp;lt;/view&amp;gt;
+		&amp;lt;/scroll-view&amp;gt;
+		&amp;lt;!-- 右边索引 --&amp;gt;
+		&amp;lt;view&amp;gt;
+			&amp;lt;view 
+			:data-id=&amp;quot;item&amp;quot; 
+			v-for=&amp;quot;item in list&amp;quot; 
+			@tap=&amp;quot;bindToView&amp;quot;&amp;gt;{{item}}
+			&amp;lt;/view&amp;gt;
+		&amp;lt;/view&amp;gt;
+	&amp;lt;/view&amp;gt;
+&amp;lt;/template&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;js&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;script&amp;gt;
+	export default {
+		data() {
+			return {
+				list:[
+					&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;,&#39;e&#39;,&#39;f&#39;,&#39;g&#39;,&#39;h&#39;,&#39;i&#39;,&#39;j&#39;,
+					&#39;k&#39;,&#39;l&#39;,&#39;m&#39;,&#39;n&#39;,&#39;o&#39;,&#39;p&#39;,&#39;q&#39;,&#39;r&#39;,&#39;s&#39;,&#39;t&#39;,
+					&#39;u&#39;,&#39;v&#39;,&#39;w&#39;,&#39;x&#39;,&#39;y&#39;,&#39;z&#39;
+				],
+				toView:&#39;&#39;,
+			}
+		},
+		methods:{
+			bindToView(event){
+				let id = event.currentTarget.dataset.id;
+				this.toView = id;
+			},
+			/*滑动*/
+			cateScroll() {
+				const query = uni.createSelectorQuery().in(this);
+				query.selectAll(&#39;.aaaaa&#39;).boundingClientRect(data =&amp;gt; {
+					for (var cate = 0; cate &amp;lt; data.length; cate++) {
+						if (data[cate].top &amp;lt; 120 &amp;amp;&amp;amp; data[cate].top &amp;gt; 0) {
+							this.toview = data[cate].id;
+						}
+					}
+				}).exec();
+			}
+		},
+	}
+&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;css&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;style  lang=&amp;quot;scss&amp;quot; scoped&amp;gt;
+	.container{
+		width: 100%;
+		display: flex;
+		scroll-view{
+			height: 100vh;
+			.left{
+				font-size: 50rpx;
+				line-height: 150rpx;
+			}
+		}
+		&amp;gt; view{
+			position: fixed;
+			right: 10rpx;
+		}
+	}
+&amp;lt;/style&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;效果&lt;br&gt;
+&lt;img src=&#34;https://nancy-svy.github.io/post-images/1681724154044.gif&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;需要注意的是scroll-view必须设置高度，不设置的话没效果，但不要设置100%，除非父元素写了高&lt;/strong&gt;&lt;br&gt;
+&lt;img src=&#34;https://nancy-svy.github.io/post-images/1681724191543.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+&lt;a href=&#34;https://uniapp.dcloud.io/component/scroll-view&#34;&gt;附上官方文档&lt;/a&gt;&lt;/p&gt;
+">简单的锚点定位</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/dynamicallyCreateAForms/"" data-c="
+          &lt;p&gt;效果图&lt;br&gt;
+&lt;img src=&#34;https://nancy-svy.github.io/post-images/1681715723244.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+点击新增&lt;br&gt;
+&lt;img src=&#34;https://nancy-svy.github.io/post-images/1681715739290.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+点击提交&lt;br&gt;
+&lt;img src=&#34;https://nancy-svy.github.io/post-images/1681715751339.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;css&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;template&amp;gt;
+	&amp;lt;view class=&amp;quot;container&amp;quot;&amp;gt;
+		&amp;lt;uni-section :title=&amp;quot;&#39;新增数据&#39; + index&amp;quot; 
+		type=&amp;quot;line&amp;quot; 
+		v-for=&amp;quot;(item, index) in dynamicLists&amp;quot; 
+		:key=&amp;quot;index&amp;quot;
+		&amp;gt;
+		    &amp;lt;uni-forms ref=&amp;quot;baseForm&amp;quot; :modelValue=&#39;dynamicLists[index]&#39; :rules=&amp;quot;rules&amp;quot;&amp;gt;
+		    	&amp;lt;uni-forms-item label=&amp;quot;姓名&amp;quot; name=&amp;quot;name&amp;quot;&amp;gt;
+		    		&amp;lt;input v-model=&amp;quot;item.name&amp;quot; placeholder=&amp;quot;请输入姓名&amp;quot;/&amp;gt;
+				&amp;lt;/uni-forms-item&amp;gt;
+				&amp;lt;uni-forms-item label=&amp;quot;手机号&amp;quot; name=&amp;quot;phone&amp;quot;&amp;gt;
+					&amp;lt;input v-model=&amp;quot;item.phone&amp;quot; placeholder=&amp;quot;请输入手机号&amp;quot;/&amp;gt;
+				&amp;lt;/uni-forms-item&amp;gt;
+		    &amp;lt;/uni-forms&amp;gt;
+		&amp;lt;/uni-section&amp;gt;
+		&amp;lt;view class=&amp;quot;button-group&amp;quot;&amp;gt;
+			&amp;lt;button type=&amp;quot;primary&amp;quot; plain=&amp;quot;true&amp;quot; class=&amp;quot;button&amp;quot; size=&amp;quot;mini&amp;quot; @click=&amp;quot;add&amp;quot;&amp;gt;新增&amp;lt;/button&amp;gt;
+			&amp;lt;button type=&amp;quot;warn&amp;quot; plain=&amp;quot;true&amp;quot; class=&amp;quot;button&amp;quot; size=&amp;quot;mini&amp;quot; @click=&amp;quot;submit&amp;quot;&amp;gt;提交&amp;lt;/button&amp;gt;
+		&amp;lt;/view&amp;gt;
+	&amp;lt;/view&amp;gt;
+&amp;lt;/template&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;js&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;script&amp;gt;
+	export default {
+		data() {
+			return {
+				dynamicLists: [
+					{    
+		                id: Date.now(),
+						name: &#39;&#39;,
+						phone: &#39;&#39;,
+					}
+				],
+				rules: {
+					name: {
+						rules: [{
+							required: true,
+							errorMessage: &#39;姓名必填&#39;
+						}]
+					},
+					phone: {
+						rules: [
+							{required: true, errorMessage: &#39;手机号必填&#39;},
+							{required: true, validateFunction: (rule,value,data,callback)=&amp;gt;{
+									let reg = /^1(3\d|4[5-9]|5[0-35-9]|6[567]|7[0-8]|8\d|9[0-35-9])\d{8}$/;
+									if(reg.test(value) == false){
+										callback(&#39;请输入合法的手机号&#39;)
+									}
+									return true;
+								}
+							},
+						]
+					}
+				}
+			}
+		},
+		onReady(){
+			// 需要在onReady中设置规则
+			this.$nextTick(()=&amp;gt;{
+				this.dynamicLists.map((item, index) =&amp;gt; {
+					this.$refs.baseForm[index].setRules(this.rules)
+				})
+			})
+		},
+		methods: {
+			// 新增
+			add(){
+			    this.dynamicLists.push({
+				    id: Date.now(),
+					name: &#39;&#39;,
+					phone: &#39;&#39;,
+				})
+				this.$nextTick(() =&amp;gt; {
+					this.dynamicLists.map((item,index) =&amp;gt; {
+						this.$refs.baseForm[index].setRules(this.rules)
+					})
+				})
+			},
+			// validate方法是针对对象来说的，数组时不能使用该方法的
+			// 解决方法 
+			async handleValidte() {
+				const promises = this.dynamicLists.map((item, index) =&amp;gt; {
+					return new Promise(resolve =&amp;gt; {
+						this.$refs.baseForm[index].validate(err =&amp;gt; {
+							resolve(err)
+						})
+					})
+				})
+				return await Promise.all(promises)
+			},
+			
+			// 提交
+			async submit() {
+				let validtateList = await this.handleValidte()
+			    // 扁平化
+				let flat = validtateList.flat(2)
+				const isTrue = flat.every(item =&amp;gt; {
+					return item === null
+				})
+				if(isTrue) {
+					uni.showToast({
+						title: `提交成功`
+					})
+			        // 清数组
+					this.dynamicLists = [{
+						id: Date.now(),
+						name: &#39;&#39;,
+						phone: &#39;&#39;,
+					}]
+				}
+			},
+
+		}
+	}
+&amp;lt;/script&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;css&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;style lang=&amp;quot;less&amp;quot; scoped&amp;gt;
+.container{
+	padding: 20rpx 32rpx;
+	/deep/.uni-forms{
+		padding-left: 50rpx;
+		.uni-forms-item{
+			align-items: center;
+			.uni-forms-item__label{
+				font-size: 32rpx!important;
+				font-weight: 400;
+				color: #333333!important;
+			}
+			input{
+				font-size: 32rpx;
+			}
+		}
+	}
+	.button-group{
+		display: flex;
+		align-items: center;
+		justify-content: space-evenly;
+	}
+}
+&amp;lt;/style&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+">动态创建form并校验</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/specifyTime/"" data-c="
+          &lt;p&gt;&lt;strong&gt;子组件&lt;/strong&gt;&lt;br&gt;
+&lt;em&gt;components/delivery-time-op.vue&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;html&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;template&amp;gt;
+	&amp;lt;view&amp;gt;
+		&amp;lt;!-- 模态框 --&amp;gt;
+		&amp;lt;view @click=&amp;quot;Modal&amp;quot; :class=&amp;quot;{mask:model}&amp;quot;&amp;gt;&amp;lt;/view&amp;gt;
+		&amp;lt;!-- 弹窗主体 --&amp;gt;
+		&amp;lt;view :style=&amp;quot;{&#39;height&#39;:barHidth + &#39;rpx&#39;}&amp;quot; class=&amp;quot;active&amp;quot; :class=&amp;quot;{add:model}&amp;quot;&amp;gt;
+			&amp;lt;view class=&amp;quot;title&amp;quot;&amp;gt;{{title}} 
+				&amp;lt;!-- &amp;lt;text @click=&amp;quot;showModal&amp;quot;&amp;gt;X&amp;lt;/text&amp;gt; --&amp;gt;
+			&amp;lt;/view&amp;gt;
+			&amp;lt;view class=&amp;quot;cont&amp;quot; :style=&amp;quot;{height: barHidth - 80 + &#39;rpx&#39;}&amp;quot;&amp;gt;
+				&amp;lt;view class=&amp;quot;day&amp;quot;&amp;gt;
+					&amp;lt;view 
+					:class=&amp;quot;index === isIndex ? &#39;active_copy&#39; : &#39;&#39;&amp;quot; 
+					v-for=&amp;quot;(item,index) in content&amp;quot; 
+					:key=&amp;quot;index&amp;quot;
+					@click=&amp;quot;dataCallback(item,index)&amp;quot;
+					&amp;gt;{{item.timezh}}&amp;lt;/view&amp;gt;
+				&amp;lt;/view&amp;gt;
+
+				&amp;lt;scroll-view class=&amp;quot;content&amp;quot; :scroll-y=&amp;quot;true&amp;quot; :scroll-top=&amp;quot;scrollTop&amp;quot;&amp;gt;
+					&amp;lt;view class=&amp;quot;appoint&amp;quot; 
+					:class=&amp;quot;index === Indexes ? &#39;longActive&#39; : &#39;&#39;&amp;quot; 
+					@click=&amp;quot;timeCallback(item,index)&amp;quot;
+					v-for=&amp;quot;(item,index) in Days&amp;quot; 
+					:key=&amp;quot;index&amp;quot;
+					&amp;gt;
+						{{item.timestr}}
+						&amp;lt;text :class=&amp;quot;index === Indexes ? &#39;cuIcon-check&#39; : &#39;&#39;&amp;quot;&amp;gt;&amp;lt;/text&amp;gt;
+					&amp;lt;/view&amp;gt;
+				&amp;lt;/scroll-view&amp;gt;
+			&amp;lt;/view&amp;gt;
+		&amp;lt;/view&amp;gt;
+
+	&amp;lt;/view&amp;gt;
+&amp;lt;/template&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;js&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;script&amp;gt;
+	export default {
+		props: {
+			//控制弹窗的隐藏显示
+			model: {
+				type: Boolean,
+				default: false
+			},
+			//弹窗标题
+			title: {
+				type: String,
+				default: &#39;弹窗测试&#39;
+			},
+			//弹窗内容
+			content: {
+				type: Array,
+				default: [{
+					content: &#39;我是弹窗内容&#39;
+				}]
+			},
+			//弹窗 窗口高度
+			barHidth: {
+				type: Number,
+				default: 400
+			},
+			//点击模态框是否能关闭弹窗
+			showYes: {
+				type: Boolean,
+				default: false
+			}
+		},
+		data() {
+			return {
+				scrollTop: 0,
+				isIndex: 0,
+				Indexes: 0,
+				Days: [],
+			}
+		},
+		mounted(){
+			// 初始化
+			this.Days = this.content[0].timelist;
+		},
+
+		methods: {
+			// 关闭窗口
+			showModal() {
+				this.$emit(&#39;close&#39;, false)
+			},
+			// 点击模态框关闭窗口
+			Modal() {
+				if (this.showYes) {
+					this.$emit(&#39;close&#39;, false)
+				}
+			},
+			//配送时间切换回顶
+			gotop() {
+				this.scrollTop = 1;
+				this.$nextTick(function() {
+					this.scrollTop = 0;
+				});
+			},
+
+			//切换日期
+			dataCallback(item,index) {
+				this.isIndex = index;
+				this.Days = this.content[index].timelist;
+				this.Indexes = null;
+				this.gotop();
+				this.$emit(&#39;dataCallback&#39;, item, index)
+			},
+
+			//选择时间
+			timeCallback(item,index) {
+				this.Indexes = index;
+				this.modalName = null;
+				this.$emit(&#39;timeCallback&#39;, item, index)
+			},
+		}
+	}
+&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;css&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;style scoped&amp;gt;
+	.mask {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: #000;
+		animation: getInto .5s 1;
+		opacity: 0.5;
+		z-index: 999;
+	}
+
+
+	@keyframes getInto {
+		0% {
+			opacity: 0;
+		}
+
+		100% {
+			opacity: 0.5;
+		}
+
+	}
+
+	.active {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		z-index: 1000;
+		width: 100%;
+		height: 400rpx;
+		border-top-left-radius: 16rpx;
+		border-top-right-radius: 16rpx;
+		overflow: hidden;
+		transform: translateY(100%);
+		transition: .4s;
+	}
+
+	.add {
+		transform: translateY(0);
+	}
+
+
+	.title {
+		position: relative;
+		text-align: center;
+		background-color: #fff;
+		padding: 20rpx 0;
+		border-bottom: 2rpx solid #eee;
+	}
+
+	.title&amp;gt;text {
+		position: absolute;
+		right: 14rpx;
+		width: 40rpx;
+		height: 40prx;
+		background-color: #ccc;
+		color: #666;
+		border-radius: 50%;
+		font-size: 32rpx;
+	}
+
+	.cont {
+		display: flex;
+		background-color: #fff;
+		overflow-y: scroll;
+	}
+
+	.day {
+		flex: 2;
+		background-color: #F3F4F5;
+		border-right: 2rpx solid #f8f8f8;
+		text-align: center;
+
+	}
+
+	.day view {
+		padding: 30rpx 12rpx;
+		font-size: 28rpx;
+		box-sizing: border-box;
+	}
+
+	.content {
+		flex: 4;
+		font-size: 28rpx;
+		border-bottom: 40rpx solid #fff;
+		background-color: #fff;
+	}
+
+	.appoint {
+		text-align: left;
+		padding: 30rpx;
+		border-bottom: 2rpx solid #f8f8f8;
+	}
+
+
+	.appoint text {
+		margin-right: 30rpx;
+	}
+
+	.active_copy {
+		position: relative;
+		background-color: #fff;
+		color: #000000;
+		box-sizing: border-box;
+
+	}
+
+	.active_copy::after {
+		content: &#39;&#39;;
+		width: 5rpx;
+		height: 94rpx;
+		background: #fff;
+		position: absolute;
+		top: 0;
+		right: 0;
+
+	}
+
+	.longActive {
+		color: #FF502F;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		font-size: 32rpx;
+		font-weight: 500;
+	}
+	
+	.cuIcon-check{
+		width: 30rpx;
+		height: 16rpx;
+		border-bottom: 4rpx solid #FF502F;
+		border-left: 4rpx solid #FF502F;
+		transform: rotate(-45deg);
+	}
+&amp;lt;/style&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;父组件&lt;/strong&gt;&lt;br&gt;
+html&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;template&amp;gt;
+  &amp;lt;view&amp;gt;
+	   &amp;lt;view class=&amp;quot;pinck-box&amp;quot;&amp;gt;
+		&amp;lt;view class=&amp;quot;picker-up-title&amp;quot;&amp;gt;取货时间&amp;lt;/view&amp;gt;
+		&amp;lt;view class=&amp;quot;pick-item&amp;quot;&amp;gt;
+		  &amp;lt;view class=&amp;quot;block-up-title&amp;quot;&amp;gt;{{bhTxt}}&amp;lt;/view&amp;gt;
+		  &amp;lt;view class=&amp;quot;block-up-time&amp;quot; @click=&amp;quot;showModel&amp;quot;&amp;gt;
+			&amp;lt;text&amp;gt;{{chooseDay}} {{chooseTime}}&amp;lt;/text&amp;gt;
+			&amp;lt;uni-icons type=&amp;quot;right&amp;quot; /&amp;gt;
+		  &amp;lt;/view&amp;gt;
+		&amp;lt;/view&amp;gt;
+	  &amp;lt;/view&amp;gt;
+
+	  
+	  &amp;lt;deliveryTimeOp
+	  	  v-if=&amp;quot;content &amp;amp;&amp;amp; content.length != 0&amp;quot; 
+	  	  @dataCallback=&amp;quot;dataCallback&amp;quot; 
+	  	  @timeCallback=&amp;quot;timeCallback&amp;quot; 
+	  	  :model=&#39;model&#39; 
+	  	  :showYes=&amp;quot;model&amp;quot; 
+	  	  :content=&amp;quot;content&amp;quot; 
+	  	  :barHidth=&#39;600&#39; 
+	  	  title=&amp;quot;选择取货时间&amp;quot;
+	  &amp;gt;
+	  &amp;lt;/deliveryTimeOp&amp;gt;
+  &amp;lt;/view&amp;gt;
+&amp;lt;/template&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;js&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;script&amp;gt;
+import deliveryTimeOp from &#39;./components/delivery-time-op.vue&#39;
+export default {
+  components: {
+    deliveryTimeOp,
+  },
+  data() {
+    return {
+		// 控制显示隐藏
+		model: false,
+		// 需要传递展示的日期时间数据
+		content: [
+			// {timezh: &amp;quot;&amp;quot;,timeformatter: &amp;quot;&amp;quot;, timelist: []},
+		],
+		chooseTime: &#39;&#39;, // 时间
+		chooseDay: &#39;&#39;, //星期
+      	chooseDate: &#39;&#39;, // 年月日
+      	bhTxt: &#39;尽快取货&#39;, // 取货时间文字
+		now: &#39;&#39;, // 当前的时间
+    }
+  },
+  mounted() {
+    
+  },
+  methods: {
+    // 时间
+    getDliveryTime(){
+		let today = &#39;&#39;;
+		let nextDay = &#39;&#39;;
+		let threeDay = &#39;&#39;;
+		let timeformatter = &#39;&#39;;
+		let deliveryTimeList = [];
+		// 当前时间戳
+    	let now = new Date();
+    	// 获取星期
+    	let week = now.getDay();
+		// 获取年
+    	let Y = now.getFullYear();
+		// 获取月
+    	let M = now.getMonth() + 1;
+    	M = M &amp;lt; 10 ? &amp;quot;0&amp;quot; + M : M;
+		// 获取日
+    	let D = now.getDate();
+    	switch(week){
+    		case 0:
+    			today = &amp;quot;今天（周日）&amp;quot;;
+    			nextDay = &amp;quot;明天（周一）&amp;quot;;
+    			threeDay = &amp;quot;后天（周二）&amp;quot;;
+    			break;
+    		case 1:
+    			today = &amp;quot;今天（周一）&amp;quot;;
+    			nextDay = &amp;quot;明天（周二）&amp;quot;;
+    			threeDay = &amp;quot;后天（周三）&amp;quot;;
+    			break;
+    		case 2:
+    			today = &amp;quot;今天（周二）&amp;quot;;
+    			nextDay = &amp;quot;明天（周三）&amp;quot;;
+    			threeDay = &amp;quot;后天（周四）&amp;quot;;
+    			break;
+    		case 3:
+    			today = &amp;quot;今天（周三）&amp;quot;;
+    			nextDay = &amp;quot;明天（周四）&amp;quot;;
+    			threeDay = &amp;quot;后天（周五）&amp;quot;;
+    			break;
+    		case 4:
+    			today = &amp;quot;今天（周四）&amp;quot;;
+    			nextDay = &amp;quot;明天（周五）&amp;quot;;
+    			threeDay = &amp;quot;后天（周六）&amp;quot;;
+    			break;
+    		case 5:
+    			today = &amp;quot;今天（周五）&amp;quot;;
+    			nextDay = &amp;quot;明天（周六）&amp;quot;;
+    			threeDay = &amp;quot;后天（周日）&amp;quot;;
+    			break;
+    		case 6:
+    			today = &amp;quot;今天（周六）&amp;quot;;
+    			nextDay = &amp;quot;明天（周日）&amp;quot;;
+    			threeDay = &amp;quot;后天（周一）&amp;quot;;
+    			break;
+    	}
+    	
+		// 判断是否是20点以后, 20点以后则默认值为第二天第一个
+		let endTimeStamp = new Date(new Date().setHours(20)).getTime()
+		let nowStamp = new Date().getTime()
+		
+    	if(nowStamp &amp;gt; endTimeStamp) {
+    		let todayStr = this.getTimeList(&#39;two&#39;);
+    		let nowDayList = this.getTimeObj(todayStr)
+    		let D1 = new Date(new Date().setDate(new Date().getDate() + 1)).getDate().toString()
+    		
+    		let todayYMD = Y + &#39;-&#39;+ M + &#39;-&#39; + D1.padStart(2, &#39;0&#39;)
+    		
+    		deliveryTimeList.push({ timezh: nextDay, timeformatter: todayYMD, timelist: nowDayList });
+    		this.content = deliveryTimeList
+    		
+    		let nextDayStr = this.getTimeList(&#39;three&#39;);
+    		let nextDayList = this.getTimeObj(nextDayStr)
+    		
+    		let D2 = new Date(new Date().setDate(new Date().getDate() + 2)).getDate().toString()
+    		let nextYMD = Y + &#39;-&#39;+ M + &#39;-&#39; + D2.padStart(2, &#39;0&#39;)
+    		deliveryTimeList.push({ timezh: threeDay, timeformatter: nextYMD, timelist: nowDayList });
+    		this.content = []
+    		this.content = deliveryTimeList
+    	} else {
+    		let todayStr = this.getTimeList(&#39;one&#39;);
+    		let nowDayList = this.getTimeObj(todayStr)
+    		
+    		let todayYMD = Y + &#39;-&#39;+ M + &#39;-&#39; + D.toString().padStart(2, &#39;0&#39;)
+    		deliveryTimeList.push({ timezh: today, timeformatter: todayYMD, timelist: nowDayList });
+    		this.content = deliveryTimeList
+    		
+    		let nextDayStr = this.getTimeList(&#39;two&#39;);
+    		let nextDayList = this.getTimeObj(nextDayStr)
+    		let D2 = new Date(new Date().setDate(new Date().getDate() + 1)).getDate().toString()
+    		let nextYMD = Y + &#39;-&#39; + M + &#39;-&#39; + D2.padStart(2, &#39;0&#39;)
+    		deliveryTimeList.push({ timezh: nextDay, timeformatter: nextYMD, timelist: nextDayList });
+    		this.content = []
+    		this.content = deliveryTimeList
+    		
+    	}
+    	
+    	this.chooseDate = this.content[0].timeformatter
+    	this.chooseDay = this.content[0].timezh
+        this.chooseTime = this.content[0].timelist[0].timestr
+    },
+    // 获取时间段
+    getTimeList(hour, minut) {
+    	let timeListTodayAll = [];
+    	let timeList = []
+		
+    	let now = new Date()
+    	let tommorrow = new Date().setDate(new Date().getDate() + 1)
+    	let three = new Date().setDate(new Date().getDate() + 2)
+    	let todayStart = new Date().getFullYear() + &#39;-&#39; + (new Date().getMonth() + 1).toString().padStart(2, &#39;0&#39;) + &#39;-&#39; + new Date().getDate() + &#39; 09:00:00&#39;
+    	
+    	let allTimes = (21 - 9) * 60 / 40
+    	for(let i = 0; i &amp;lt; allTimes; i++) {
+    		let setTodayTime = new Date(todayStart).setMinutes(40 * i)
+    		timeListTodayAll.push(formatTime(setTodayTime))
+    		timeList.push(formatTime(setTodayTime).substring(11, 16))
+    	}
+		if(type == &#39;one&#39;) {
+			let nowTimeStamp = new Date().setMinutes(new Date().getMinutes() + 20)
+			for(let j = 0; j &amp;lt; timeListTodayAll.length; j++) {
+				let itemStamp = new Date(timeListTodayAll[j]).getTime()
+				if(itemStamp &amp;gt;= nowTimeStamp) {
+					timeList = timeList.slice(j)
+					break
+				}
+			}
+		}
+		return timeList
+    },
+    // 根据时间段转为数组对象
+    getTimeObj(todayStr){
+    	// 将数组中的时间段字符串分割
+    	let todayArr = []
+    	todayStr.forEach(item =&amp;gt; {
+    		todayArr.push(...item.split(&#39;-&#39;))
+    	})
+    	// 将分割后的数组去重
+    	let todayDup = []
+    	todayArr.forEach(item =&amp;gt; {
+    		if(todayDup.indexOf(item) == -1){
+    			todayDup.push(item)
+    		}
+    	})
+    	// 将去重后的数组转为数组对象
+    	let todayList = []
+    	todayDup.forEach(item =&amp;gt; {
+    		todayList.push({
+    			timestr: item
+    		})
+    	})
+    	return todayList;
+    },
+    
+    // 控制弹窗显示
+    showModel(){
+    	this.model = true;
+    },
+    // 选择日期的回调
+    dataCallback(item,index){
+    	this.chooseDay = item.timezh
+    	this.chooseDate = item.timeformatter
+    },
+    // 选择时间的回调
+    timeCallback(item,index){
+    	if(this.now == this.chooseDate){
+    		this.chooseDay = this.content[0].timezh
+    		this.chooseDate = this.now
+    	}else{
+    		this.chooseDay = this.content[1].timezh
+    		this.chooseDate = this.content[1].timeformatter
+    	}
+    	this.chooseTime = item.timestr
+    	
+    	if(this.chooseDay != this.content[0].timezh || this.chooseTime != this.content[0].timelist[0].timestr) {
+    		this.bhTxt = &#39;指定时间&#39;
+    	} else {
+    		this.bhTxt = &#39;尽快取货&#39;
+    	}
+    	this.model = false;
+    },
+  },
+  onshow(){
+	  let now = new Date();
+	  let year = now.getFullYear()
+	  let month = now.getMonth() + 1
+	  month = month &amp;lt; 10 ? &amp;quot;0&amp;quot; + month : month;
+	  let date = now.getDate() 
+	  date = date &amp;lt; 10 ? &#39;0&#39; + date : date
+	  this.chooseDate = `${year}-${month}-${date}`
+	  this.now = `${year}-${month}-${date}`
+	  this.getDliveryTime()
+  }
+}
+&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;css&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;style lang=&amp;quot;less&amp;quot; scoped&amp;gt;
+.pinck-box {
+  background: #ffffff;
+  padding: 0 32rpx 17rpx 32rpx;
+  .picker-up-title {
+    font-size: 32rpx;
+    font-weight: 500;
+    color: #000000;
+    padding: 20rpx 0;
+  }
+  .pick-item {
+    height: 88rpx;
+    background: #f4f4f4;
+    border-radius: 24rpx 24rpx 24rpx 24rpx;
+    padding: 0 32rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .block-up-title {
+      font-size: 28rpx;
+      font-weight: 400;
+      color: #ff502f;
+    }
+    .block-up-time {
+      font-size: 24rpx;
+      font-weight: 400;
+      color: #999999;
+      display: flex;
+      align-items: center;
+      /deep/.uni-icons {
+        font-size: 24rpx !important;
+        color: #999999 !important;
+      }
+    }
+  }
+}
+&amp;lt;/style&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+">仿美团选择预送达时间或指定时间组件</a>
       </div>
       
       <div class="item">
@@ -2178,9 +3191,8 @@ export default {
           &lt;p&gt;&lt;strong&gt;html&lt;/strong&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;&amp;lt;template&amp;gt;
 	&amp;lt;view class=&amp;quot;autograph&amp;quot;&amp;gt;
-		&amp;lt;!-- 点击触发写字板 --&amp;gt;
-		&amp;lt;view class=&amp;quot;canvasbox&amp;quot; @click=&#39;createCanvas&#39;&amp;gt;
-			&amp;lt;!-- canvas --&amp;gt;
+		&amp;lt;!-- 点击触发写字板   @click=&#39;createCanvas&#39; --&amp;gt;
+		&amp;lt;view class=&amp;quot;canvasbox&amp;quot; &amp;gt;
 			&amp;lt;canvas 
 			class=&amp;quot;mycanvas&amp;quot; 
 			canvas-id=&amp;quot;mycanvas&amp;quot;
@@ -2211,6 +3223,9 @@ export default {
 				SignatureImg: &#39;&#39;
 			}
 		},
+        mounted(){
+           this. createCanvas()
+        },
 		methods: {
 			// 初始化绘图--点击触发写字板
 		    createCanvas() {
@@ -2842,6 +3857,8 @@ page{
 &lt;pre&gt;&lt;code&gt;    sass: &#39;^1.26.5&#39;
     sass-loader: &#39;^8.0.2&#39;
 &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.yisu.com/zixun/622837.html&#34;&gt;参考文章&lt;/a&gt;&lt;br&gt;
+&lt;a href=&#34;https://www.npmjs.com/package/node-sass&#34;&gt;node-sass文档&lt;/a&gt;&lt;/p&gt;
 ">npm install时 node-sass npm ERR command failed问题解决</a>
       </div>
       

@@ -8,7 +8,7 @@
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>utils.js | Gridea</title>
+<title>简单的锚点定位 | Gridea</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1681725693976">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -41,7 +41,7 @@
 
 
 
-  <meta name="description" content="utils.js" />
+  <meta name="description" content="简单的锚点定位" />
   <meta name="keywords" content="uniapp" />
 </head>
 
@@ -175,8 +175,7 @@
       <div class="sidebar-body gemini" id="sidebar_body">
         
           
-            <div class="post-side-meta" id="post_side_meta">
-              
+            
 <div class="sidebar-wrapper box-shadow-wrapper bg-color">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="/images/avatar.png"/>
@@ -208,200 +207,6 @@
 
 
 </div>
-            </div>
-            <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
-              <div class="toc-box right-motion">
-  <div class="toc-wrapper  auto"
-    id="toc_wrapper">
-    <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#1-%E4%B8%B4%E6%97%B6%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%84%E8%BD%AC%E4%B8%BAbase64">1. 临时图片路径转为base64</a></li>
-<li><a href="#2-crypto%E5%8A%A0%E8%A7%A3%E5%AF%86">2. crypto加解密</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-  </div>
-</div>
-
-<script>
-
-  let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1;
-  let active = 'active-show', activeClass = 'active-current';
-  let tocWrapper = document.querySelector('#toc_wrapper');
-  let tocContent = tocWrapper.children[0];
-  let autoNumber = tocWrapper && tocWrapper.classList.contains('auto-number');
-
-  function addTocNumber(elem, deep) {
-    if (!elem) {
-      return;
-    }
-    let prop = elem.__proto__;
-
-    if (prop === HTMLUListElement.prototype) {
-      for (let i = 0; i < elem.children.length; i++) {
-        addTocNumber(elem.children[i], deep + (i + 1) + '.');
-      }
-    } else if (prop === HTMLLIElement.prototype) {
-      // 保存li元素
-      if (elem.children[0] && elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
-        lList.push(elem);
-      }
-      for (let i = 0; i < elem.children.length; i++) {
-        let cur = elem.children[i];
-        if (cur.__proto__ === HTMLAnchorElement.prototype) {
-          if (autoNumber) {
-            cur.text = deep + ' ' + cur.text;
-          }
-        } else if (cur.__proto__ === HTMLUListElement.prototype) {
-          addTocNumber(cur, deep);
-        }
-      }
-    }
-  }
-
-  function removeParentActiveClass() {
-    let parents = tocContent.querySelectorAll('.' + active)
-    parents.forEach(function (elem) {
-      elem.classList.remove(active);
-    });
-  }
-
-  function addActiveClass(index) {
-    if (index >= 0 && index < hList.length) {
-      lList[index].classList.add(activeClass);
-    }
-  }
-
-  function removeActiveClass(index) {
-    if (index >= 0 && index < hList.length) {
-      lList[index].classList.remove(activeClass);
-    }
-  }
-
-  function addActiveLiElemment(elem, parent) {
-    if (!elem || elem === parent) {
-      return;
-    } else {
-      if (elem.__proto__ === HTMLLIElement.prototype) {
-        elem.classList.add(active);
-      }
-      addActiveLiElemment(elem.parentElement, parent);
-    }
-  }
-
-  function showToc() {
-    if (tocWrapper) {
-      postBody = document.querySelector('#post_body');
-      for (let i = 0; i < postBody.children.length; i++) {
-        if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
-          hList.push(postBody.children[i]);
-        }
-      }
-      if (tocWrapper.classList.contains('compress')) {
-        tocContent.classList.add('closed');
-      } else if (tocWrapper.classList.contains('no_compress')) {
-        tocContent.classList.add('expanded');
-      } else {
-        if (hList.length > 10) {
-          active = 'active-hidden'
-          tocContent.classList.add('closed');
-        } else {
-          tocContent.classList.add('expanded');
-        }
-      }
-    }
-  }
-
-  (function () {
-    // 处理不是从#一级标题开始目录
-    if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
-      let con = tocContent.children[0].children[0];
-      tocContent.innerHTML = con.innerHTML;
-    }
-    let markdownItTOC = document.querySelector('.markdownIt-TOC');
-    let innerHeight = window.innerHeight;
-    markdownItTOC.style = `max-height: ${innerHeight - 80 > 0 ? innerHeight - 80 : innerHeight}px`
-    addTocNumber(tocContent, '');
-  })();
-
-  document.addEventListener('scroll', function (e) {
-    if (lList.length <= 0) {
-      return;
-    }
-    let scrollTop = document.scrollingElement.scrollTop + 10;
-    let dir;
-
-    if (lastTop - scrollTop > 0) {
-      dir = 'up';
-    } else {
-      dir = 'down';
-    }
-
-    lastTop = scrollTop;
-    if (scrollTop <= 0) {
-      if (lastIndex >= 0 && lastIndex < hList.length) {
-        lList[lastIndex].classList.remove(activeClass);
-      }
-      return;
-    }
-
-    let current = 0, hasFind = false;
-    for (let i = 0; i < hList.length; i++) {
-      if (hList[i].offsetTop > scrollTop) {
-        current = i;
-        hasFind = true;
-        break;
-      }
-    }
-    if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
-      current = hList.length - 1;
-    } else {
-      current--;
-    }
-    if (dir === 'down') {
-      if (current > lastIndex) {
-        addActiveClass(current);
-        removeActiveClass(lastIndex)
-        lastIndex = current;
-        removeParentActiveClass();
-        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
-      }
-    } else {
-      if (current < lastIndex) {
-        addActiveClass(current);
-        removeActiveClass(lastIndex);
-        lastIndex = current;
-        removeParentActiveClass();
-        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
-      }
-    }
-  });
-
-
-  window.addEventListener('load', function () {
-    showToc();
-    document.querySelector('#sidebar').style = 'display: block;';
-    tocWrapper.classList.add('toc-active');
-    setTimeout(function () {
-      if ("createEvent" in document) {
-        let evt = document.createEvent("HTMLEvents");
-        evt.initEvent("scroll", false, true);
-        document.dispatchEvent(evt);
-      }
-      else {
-        document.fireEvent("scroll");
-      }
-    }, 500)
-  })
-
-</script>
-            </div>
           
         
       </div>
@@ -489,14 +294,14 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://nancy-svy.github.io/post/uniappUtils/"> utils.js </a>
+    <a class="post-title-link" href="https://nancy-svy.github.io/post/anchorPointPositioning/"> 简单的锚点定位 </a>
   </h1>
   <div class="post-meta">
     
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2023-02-03 09:46:22">2023-02-03</span>
+      <span class="publish-time" data-t="2023-04-05 15:38:10">2023-04-05</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
@@ -523,7 +328,7 @@
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
       <span
-        >313<span class="pc-show language" data-lan="words"
+        >286<span class="pc-show language" data-lan="words"
           >字数</span
         ></span
       >
@@ -533,87 +338,93 @@
 </section>
 
             <div class="post-body next-md-body" id="post_body">
-              <h3 id="1-临时图片路径转为base64">1. 临时图片路径转为base64</h3>
-<pre><code>/**
- * 临时图片路径转base64
- * @param {Object} param 传一个对象，对象里包括
- * url: 临时图片存放路径，图片路径是相对路径
- * type: 图片类型，如：png
- */
-export function base64Image(url, type) {
-    return new Promise((resolve, reject) =&gt; {
-        if (!!uni.getFileSystemManager()) {
-            uni.getFileSystemManager().readFile({
-                filePath: url, // 图片路径是相对路径
-                encoding: &quot;base64&quot;, // 编码格式
-                success: (res) =&gt; {
-                    resolve(&quot;data:image/&quot; + type.toLocaleLowerCase() + &quot;;base64,&quot; + res.data);
-                },
-                fail: (error) =&gt; {
-					reject(error.errMsg)
-				},
-            });
-        } else {
-            uni.request({
-                url: url,
-                method: &quot;GET&quot;,
-                responseType: &quot;arraybuffer&quot;,
-                success: (res) =&gt; {
-                    let base64 = wx.arrayBufferToBase64(res.data); // 把arraybuffer转成base64
-                    base64 = &quot;data:image/jpeg;base64,&quot; + base64; // 不加上这串字符，在页面无法显示
-                    resolve(base64);
-                },
-                fail: (error) =&gt; {
-					reject(error.errMsg)
-				},
-            });
-        }
-    });
-}
+              <p>html</p>
+<pre><code>&lt;template&gt;
+	&lt;view class=&quot;container&quot;&gt;
+		&lt;!-- 左边内容 --&gt;
+		&lt;scroll-view 
+		class=&quot;scroller&quot; 
+		:scroll-into-view=&quot;toView&quot; 
+		scroll-y=&quot;true&quot; 
+		scroll-with-animation=&quot;true&quot;
+		@scroll=&quot;cateScroll&quot;
+		&gt;
+			&lt;view 
+			:id=&quot;item&quot; 
+			class=&quot;left&quot; 
+			v-for=&quot;item in list&quot;
+			&gt;
+				{{item.toUpperCase()}}
+			&lt;/view&gt;
+		&lt;/scroll-view&gt;
+		&lt;!-- 右边索引 --&gt;
+		&lt;view&gt;
+			&lt;view 
+			:data-id=&quot;item&quot; 
+			v-for=&quot;item in list&quot; 
+			@tap=&quot;bindToView&quot;&gt;{{item}}
+			&lt;/view&gt;
+		&lt;/view&gt;
+	&lt;/view&gt;
+&lt;/template&gt;
 </code></pre>
-<h3 id="2-crypto加解密">2. crypto加解密</h3>
-<pre><code>/**
- * crypto加解密
- **/
-
-引入crypto-js.js
-crypto.js地址：[]( https://blog-static.cnblogs.com/files/gygg/crypto-js.js)
-
-utils文件夹下新建crypto-js.js文件
-
-
-// 引用
-let CryptoJS = require('@/utils/crypto-js.js');
-// 密钥16位
-let key = 'rds2n1tlkvlo1k9h';
-// 初始向量 initial vector 16 位
-let iv = 'rds2n1tlkvlo1k9h';
-// key 和 iv 可以一致
-key = CryptoJS.enc.Utf8.parse(key);
-iv = CryptoJS.enc.Utf8.parse(iv);
-
-// 加密
-export function encrypted(param) {
-  var encrypted = CryptoJS.AES.encrypt(param, key, {
-    iv: iv,
-    mode: CryptoJS.mode.CBC,
-    padding: CryptoJS.pad.Pkcs7
-  });
-  encrypted = encrypted.toString();
-  return encrypted;
-}
-// 解密
-export function decrypted(param) {
-  var decrypted = CryptoJS.AES.decrypt(param, key, {
-    iv: iv,
-    mode: CryptoJS.mode.CBC,
-    padding: CryptoJS.pad.Pkcs7
-  });
-  decrypted = CryptoJS.enc.Utf8.stringify(decrypted);
-  return decrypted;
-}
- 
+<p>js</p>
+<pre><code>&lt;script&gt;
+	export default {
+		data() {
+			return {
+				list:[
+					'a','b','c','d','e','f','g','h','i','j',
+					'k','l','m','n','o','p','q','r','s','t',
+					'u','v','w','x','y','z'
+				],
+				toView:'',
+			}
+		},
+		methods:{
+			bindToView(event){
+				let id = event.currentTarget.dataset.id;
+				this.toView = id;
+			},
+			/*滑动*/
+			cateScroll() {
+				const query = uni.createSelectorQuery().in(this);
+				query.selectAll('.aaaaa').boundingClientRect(data =&gt; {
+					for (var cate = 0; cate &lt; data.length; cate++) {
+						if (data[cate].top &lt; 120 &amp;&amp; data[cate].top &gt; 0) {
+							this.toview = data[cate].id;
+						}
+					}
+				}).exec();
+			}
+		},
+	}
+&lt;/script&gt;
 </code></pre>
+<p>css</p>
+<pre><code>&lt;style  lang=&quot;scss&quot; scoped&gt;
+	.container{
+		width: 100%;
+		display: flex;
+		scroll-view{
+			height: 100vh;
+			.left{
+				font-size: 50rpx;
+				line-height: 150rpx;
+			}
+		}
+		&gt; view{
+			position: fixed;
+			right: 10rpx;
+		}
+	}
+&lt;/style&gt;
+</code></pre>
+<p>效果<br>
+<img src="https://nancy-svy.github.io/post-images/1681724154044.gif" alt="" loading="lazy"></p>
+<p><strong>需要注意的是scroll-view必须设置高度，不设置的话没效果，但不要设置100%，除非父元素写了高</strong><br>
+<img src="https://nancy-svy.github.io/post-images/1681724191543.png" alt="" loading="lazy"><br>
+<a href="https://uniapp.dcloud.io/component/scroll-view">附上官方文档</a></p>
 
             </div>
             
@@ -626,7 +437,7 @@ export function decrypted(param) {
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://nancy-svy.github.io/post/uniappUtils/" title="utils.js">https://nancy-svy.github.io/post/uniappUtils/</a>
+      <a href="https://nancy-svy.github.io/post/anchorPointPositioning/" title="简单的锚点定位">https://nancy-svy.github.io/post/anchorPointPositioning/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -642,14 +453,14 @@ export function decrypted(param) {
     <div class="nav-prev">
       
         <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="手写签名" href="https://nancy-svy.github.io/post/handwrittenSignature/">手写签名</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="手写签名" href="https://nancy-svy.github.io/post/handwrittenSignature/">上一篇</a>
+        <a class="nav-pc-next" title="Gridea快速上手" href="https://nancy-svy.github.io/post/grideaGetStartedQuickly/">Gridea快速上手</a class="nav-pc-next">
+        <a class="nav-mobile-prev" title="Gridea快速上手" href="https://nancy-svy.github.io/post/grideaGetStartedQuickly/">上一篇</a>
       
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="了解Arco Design Vue" href="https://nancy-svy.github.io/post/liao-jie-arco-design-vue/">了解Arco Design Vue</a>
-        <a class="nav-mobile-next" title="了解Arco Design Vue" href="https://nancy-svy.github.io/post/liao-jie-arco-design-vue/">下一篇</a>
+        <a class="nav-pc-next" title="动态创建form并校验" href="https://nancy-svy.github.io/post/dynamicallyCreateAForms/">动态创建form并校验</a>
+        <a class="nav-mobile-next" title="动态创建form并校验" href="https://nancy-svy.github.io/post/dynamicallyCreateAForms/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>
