@@ -8,8 +8,8 @@
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>根据屏幕大小来改变echarts的大小 | Gridea</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1681789019701">
+<title>vue  根据屏幕大小来改变echarts的大小 | Gridea</title>
+<link rel="shortcut icon" href="/favicon.ico?v=1681896934752">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -41,7 +41,7 @@
 
 
 
-  <meta name="description" content="根据屏幕大小来改变echarts的大小" />
+  <meta name="description" content="vue  根据屏幕大小来改变echarts的大小" />
   <meta name="keywords" content="vue" />
 </head>
 
@@ -186,13 +186,13 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">45</span>
+        <span class="site-item-stat-count">47</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
     <div class="sidebar-item-box">
       <a href="/tags/">
-        <span class="site-item-stat-count">15</span>
+        <span class="site-item-stat-count">16</span>
         <span class="site-item-stat-name language" data-lan="tag">标签</span>
       </a>
     </div>
@@ -294,7 +294,7 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://nancy-svy.github.io/post/echartsSize/"> 根据屏幕大小来改变echarts的大小 </a>
+    <a class="post-title-link" href="https://nancy-svy.github.io/post/echartsSize/"> vue  根据屏幕大小来改变echarts的大小 </a>
   </h1>
   <div class="post-meta">
     
@@ -497,7 +497,7 @@
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://nancy-svy.github.io/post/echartsSize/" title="根据屏幕大小来改变echarts的大小">https://nancy-svy.github.io/post/echartsSize/</a>
+      <a href="https://nancy-svy.github.io/post/echartsSize/" title="vue  根据屏幕大小来改变echarts的大小">https://nancy-svy.github.io/post/echartsSize/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -513,8 +513,8 @@
     <div class="nav-prev">
       
         <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="刻度尺" href="https://nancy-svy.github.io/post/dividingRule/">刻度尺</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="刻度尺" href="https://nancy-svy.github.io/post/dividingRule/">上一篇</a>
+        <a class="nav-pc-next" title="vue  刻度尺效果" href="https://nancy-svy.github.io/post/dividingRule/">vue  刻度尺效果</a class="nav-pc-next">
+        <a class="nav-mobile-prev" title="vue  刻度尺效果" href="https://nancy-svy.github.io/post/dividingRule/">上一篇</a>
       
     </div>
     <div class="nav-next">
@@ -1023,6 +1023,358 @@
     <div class="result" id="result">
       
       <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/organizationalManagement/"" data-c="
+          &lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://nancy-svy.github.io/post-images/1681896820412.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;html&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;template&amp;gt;
+	&amp;lt;view class=&amp;quot;container&amp;quot;&amp;gt;
+		&amp;lt;view class=&amp;quot;department_container d-flex f-direction&amp;quot;&amp;gt;
+			&amp;lt;view class=&amp;quot;tab_wrapper&amp;quot;&amp;gt;
+				&amp;lt;view class=&amp;quot;tab_content&amp;quot;&amp;gt;
+					&amp;lt;scroll-view scroll-x=&amp;quot;true&amp;quot; :scroll-left=&amp;quot;scrollLeft&amp;quot; @scroll=&amp;quot;handleScroll&amp;quot;&amp;gt;
+						&amp;lt;view class=&amp;quot;ul&amp;quot;&amp;gt;
+							&amp;lt;view class=&amp;quot;li d-flex a-center f-32 color-9&amp;quot; id=&amp;quot;title&amp;quot; &amp;gt;
+								&amp;lt;view id=&amp;quot;choTxt&amp;quot; v-if=&amp;quot;curItem == null&amp;quot;&amp;gt;请选择&amp;lt;/view&amp;gt;
+								&amp;lt;view id=&amp;quot;choTxt&amp;quot; v-else @click=&amp;quot;handleDepartmentHomepage&amp;quot;&amp;gt;
+									首页
+									&amp;lt;uni-icons type=&amp;quot;right&amp;quot; color=&amp;quot;#999&amp;quot; v-if=&amp;quot;curItem.title != item.title&amp;quot;&amp;gt;&amp;lt;/uni-icons&amp;gt;
+								&amp;lt;/view&amp;gt;
+								&amp;lt;view id=&amp;quot;choTxt&amp;quot; v-for=&amp;quot;(item,index) in chooseArr&amp;quot; :key=&amp;quot;index&amp;quot; @click=&amp;quot;handleTitle(item,index)&amp;quot;&amp;gt;
+									&amp;lt;text :class=&amp;quot;curItem.title == item.title ? &#39;color-02&#39; : &#39;color-9&#39;&amp;quot;&amp;gt;{{item.title}}&amp;lt;/text&amp;gt;
+									&amp;lt;uni-icons type=&amp;quot;right&amp;quot; color=&amp;quot;#999&amp;quot; v-if=&amp;quot;curItem.title != item.title&amp;quot;&amp;gt;&amp;lt;/uni-icons&amp;gt;
+								&amp;lt;/view&amp;gt;
+							&amp;lt;/view&amp;gt;
+						&amp;lt;/view&amp;gt;
+					&amp;lt;/scroll-view&amp;gt;
+				&amp;lt;/view&amp;gt;
+			&amp;lt;/view&amp;gt;
+			&amp;lt;view class=&amp;quot;department_list safeArea&amp;quot;&amp;gt;
+				&amp;lt;scroll-view scroll-y=&amp;quot;true&amp;quot;&amp;gt;
+					&amp;lt;view class=&amp;quot;ul&amp;quot;&amp;gt;
+						&amp;lt;view class=&amp;quot;li&amp;quot; v-for=&amp;quot;(item,index) in list&amp;quot; :key=&amp;quot;index&amp;quot;&amp;gt;
+							&amp;lt;uni-row&amp;gt;
+								&amp;lt;uni-col :span=&amp;quot;18&amp;quot;&amp;gt;
+									&amp;lt;view class=&amp;quot;f-32 color-3&amp;quot; @click=&amp;quot;handleSelect(item)&amp;quot;&amp;gt;{{item.title}}&amp;lt;/view&amp;gt;
+								&amp;lt;/uni-col&amp;gt;
+								&amp;lt;uni-col :span=&amp;quot;6&amp;quot; v-if=&amp;quot;item.children &amp;amp;&amp;amp; item.children.length != 0&amp;quot;&amp;gt;
+									&amp;lt;view class=&amp;quot;subordinate f-28 color-02&amp;quot; @click=&amp;quot;handleNext(item, index)&amp;quot;&amp;gt;
+										下级
+										&amp;lt;uni-icons type=&amp;quot;right&amp;quot; color=&amp;quot;#02C2B0&amp;quot;&amp;gt;&amp;lt;/uni-icons&amp;gt;
+									&amp;lt;/view&amp;gt;
+								&amp;lt;/uni-col&amp;gt;
+							&amp;lt;/uni-row&amp;gt;
+						&amp;lt;/view&amp;gt;
+					&amp;lt;/view&amp;gt;
+				&amp;lt;/scroll-view&amp;gt;
+			&amp;lt;/view&amp;gt;
+		&amp;lt;/view&amp;gt;
+	&amp;lt;/view&amp;gt;
+&amp;lt;/template&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;js&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;script&amp;gt;
+	export default {
+		data() {
+			return {
+				scrollLeft: 0, // 横向滚动条的位置
+				titleWidth: 0, // tab每个li的宽度
+				chooseArr: [], // 选中的进入下一级
+				curItem: null, // 当前选中的
+				selectArr: [], // 选中的
+				list: [
+					{id: &#39;0&#39;, title: &#39;一级&#39;, children: [
+						{id: &#39;00&#39;, title: &#39;十一级&#39;, children: [
+							{id: &#39;001&#39;, title: &#39;101某某部门&#39;, children: [
+								{id: &#39;0001&#39;, title: &#39;1001某某部门&#39;, children: [
+									{id: &#39;00001&#39;, title: &#39;10001某某部门&#39;, children: [
+										{id: &#39;000001&#39;, title: &#39;000001某某部门&#39;},
+										{id: &#39;000002&#39;, title: &#39;000002某某部门&#39;},
+										{id: &#39;000003&#39;, title: &#39;000003某某部门&#39;},
+										{id: &#39;000004&#39;, title: &#39;000004某某部门&#39;},
+										{id: &#39;000005&#39;, title: &#39;000005某某部门&#39;}
+									]},
+									{id: &#39;00002&#39;, title: &#39;10002某某部门&#39;},
+									{id: &#39;00003&#39;, title: &#39;10003某某部门&#39;},
+									{id: &#39;00004&#39;, title: &#39;10004某某部门&#39;},
+									{id: &#39;00005&#39;, title: &#39;10005某某部门&#39;}
+								]},
+								{id: &#39;0002&#39;, title: &#39;1002某某部门&#39;},
+								{id: &#39;0003&#39;, title: &#39;1003某某部门&#39;},
+								{id: &#39;0004&#39;, title: &#39;1004某某部门&#39;},
+								{id: &#39;0005&#39;, title: &#39;1005某某部门&#39;}
+							]},
+							{id: &#39;001&#39;, title: &#39;102某某部门&#39;},
+							{id: &#39;001&#39;, title: &#39;103某某部门&#39;},
+							{id: &#39;001&#39;, title: &#39;104某某部门&#39;},
+							{id: &#39;001&#39;, title: &#39;105某某部门&#39;}
+						]},
+						{id: &#39;01&#39;, title: &#39;十二级&#39;,children: [
+							{id: &#39;001&#39;, title: &#39;121级&#39;},
+							{id: &#39;001&#39;, title: &#39;122级&#39;},
+							{id: &#39;001&#39;, title: &#39;123级&#39;},
+							{id: &#39;001&#39;, title: &#39;124级&#39;},
+							{id: &#39;001&#39;, title: &#39;125级&#39;}
+						]},
+						{id: &#39;02&#39;, title: &#39;十三级&#39;},
+						{id: &#39;03&#39;, title: &#39;十四级&#39;},
+						{id: &#39;03&#39;, title: &#39;十五级&#39;}
+					]},
+					{id: &#39;1&#39;, title: &#39;二级&#39;, children: [
+						{id: &#39;10&#39;, title: &#39;二一级&#39;},
+						{id: &#39;11&#39;, title: &#39;二二级&#39;},
+						{id: &#39;12&#39;, title: &#39;二三级&#39;},
+						{id: &#39;13&#39;, title: &#39;二四级&#39;},
+						{id: &#39;13&#39;, title: &#39;二五级&#39;}
+					]},
+					{id: &#39;2&#39;, title: &#39;三级&#39;},
+					{id: &#39;3&#39;, title: &#39;四级&#39;},
+					{id: &#39;4&#39;, title: &#39;五级&#39;},
+					{id: &#39;5&#39;, title: &#39;六级&#39;},
+					{id: &#39;6&#39;, title: &#39;七级&#39;},
+					{id: &#39;7&#39;, title: &#39;八级&#39;},
+					{id: &#39;8&#39;, title: &#39;九级&#39;},
+					{id: &#39;9&#39;, title: &#39;十级&#39;},
+					{id: &#39;10&#39;, title: &#39;十一级&#39;},
+					{id: &#39;11&#39;, title: &#39;十二级&#39;},
+					{id: &#39;12&#39;, title: &#39;十三级&#39;},
+					{id: &#39;13&#39;, title: &#39;十四级&#39;},
+					{id: &#39;14&#39;, title: &#39;十五级&#39;},
+				],
+			
+			}
+		},
+		onLoad() {
+			
+		},
+		mounted() {
+			let that = this
+			const query = uni.createSelectorQuery().in(this);
+			query.select(&#39;#title&#39;).boundingClientRect(data =&amp;gt; {
+				that.titleWidth = data.width
+			}).exec();
+		},
+		methods: {
+			// 部门的首级
+			handleDepartmentHomepage(){
+				this.chooseArr = [] // 选中的进入下一级
+				this.curItem = null // 当前选中的
+				this.selectArr = []
+				this.list = [
+					{id: &#39;0&#39;, title: &#39;一级&#39;, children: [
+						{id: &#39;00&#39;, title: &#39;十一级&#39;, children: [
+							{id: &#39;001&#39;, title: &#39;101某某部门&#39;, children: [
+								{id: &#39;0001&#39;, title: &#39;1001某某部门&#39;, children: [
+									{id: &#39;00001&#39;, title: &#39;10001某某部门&#39;, children: [
+										{id: &#39;000001&#39;, title: &#39;000001某某部门&#39;},
+										{id: &#39;000002&#39;, title: &#39;000002某某部门&#39;},
+										{id: &#39;000003&#39;, title: &#39;000003某某部门&#39;},
+										{id: &#39;000004&#39;, title: &#39;000004某某部门&#39;},
+										{id: &#39;000005&#39;, title: &#39;000005某某部门&#39;}
+									]},
+									{id: &#39;00002&#39;, title: &#39;10002某某部门&#39;},
+									{id: &#39;00003&#39;, title: &#39;10003某某部门&#39;},
+									{id: &#39;00004&#39;, title: &#39;10004某某部门&#39;},
+									{id: &#39;00005&#39;, title: &#39;10005某某部门&#39;}
+								]},
+								{id: &#39;0002&#39;, title: &#39;1002某某部门&#39;},
+								{id: &#39;0003&#39;, title: &#39;1003某某部门&#39;},
+								{id: &#39;0004&#39;, title: &#39;1004某某部门&#39;},
+								{id: &#39;0005&#39;, title: &#39;1005某某部门&#39;}
+							]},
+							{id: &#39;001&#39;, title: &#39;102某某部门&#39;},
+							{id: &#39;001&#39;, title: &#39;103某某部门&#39;},
+							{id: &#39;001&#39;, title: &#39;104某某部门&#39;},
+							{id: &#39;001&#39;, title: &#39;105某某部门&#39;}
+						]},
+						{id: &#39;01&#39;, title: &#39;十二级&#39;,children: [
+							{id: &#39;001&#39;, title: &#39;121级&#39;},
+							{id: &#39;001&#39;, title: &#39;122级&#39;},
+							{id: &#39;001&#39;, title: &#39;123级&#39;},
+							{id: &#39;001&#39;, title: &#39;124级&#39;},
+							{id: &#39;001&#39;, title: &#39;125级&#39;}
+						]},
+						{id: &#39;02&#39;, title: &#39;十三级&#39;},
+						{id: &#39;03&#39;, title: &#39;十四级&#39;},
+						{id: &#39;03&#39;, title: &#39;十五级&#39;}
+					]},
+					{id: &#39;1&#39;, title: &#39;二级&#39;, children: [
+						{id: &#39;10&#39;, title: &#39;二一级&#39;},
+						{id: &#39;11&#39;, title: &#39;二二级&#39;},
+						{id: &#39;12&#39;, title: &#39;二三级&#39;},
+						{id: &#39;13&#39;, title: &#39;二四级&#39;},
+						{id: &#39;13&#39;, title: &#39;二五级&#39;}
+					]},
+					{id: &#39;2&#39;, title: &#39;三级&#39;},
+					{id: &#39;3&#39;, title: &#39;四级&#39;},
+					{id: &#39;4&#39;, title: &#39;五级&#39;},
+					{id: &#39;5&#39;, title: &#39;六级&#39;},
+					{id: &#39;6&#39;, title: &#39;七级&#39;},
+					{id: &#39;7&#39;, title: &#39;八级&#39;},
+					{id: &#39;8&#39;, title: &#39;九级&#39;},
+					{id: &#39;9&#39;, title: &#39;十级&#39;},
+					{id: &#39;10&#39;, title: &#39;十一级&#39;},
+					{id: &#39;11&#39;, title: &#39;十二级&#39;},
+					{id: &#39;12&#39;, title: &#39;十三级&#39;},
+					{id: &#39;13&#39;, title: &#39;十四级&#39;},
+					{id: &#39;14&#39;, title: &#39;十五级&#39;},
+				]
+			},
+			// 选中
+			handleSelect(val){
+				this.selectArr.push(...this.chooseArr,val)
+			},
+			// 进入下一级
+			handleNext(val){
+				this.curItem = val
+				this.chooseArr.push(val)
+				//获取选择终层后滚动条的走向
+				let that = this
+				const query = uni.createSelectorQuery().in(this);
+				query.selectAll(&#39;#choTxt&#39;).boundingClientRect(data =&amp;gt; {
+					let left = that.titleWidth - data[data.length - 1].left + 68
+					that.scrollLeft = left
+				}).exec();
+				this.list = val.children
+			},
+			// 横向滚动
+			handleScroll(e){
+				this.scrollLeft = e.detail.scrollLeft
+			},
+			// 返回上一级
+			handleTitle(val,idx){
+				if (this.curItem.title != val.title) {
+					this.curItem = val
+					let arr = this.chooseArr // 截取前的数据
+					let sliceArr = []; // 截取后的数据
+					sliceArr = arr.slice(0,idx+1)
+					this.chooseArr = sliceArr
+					this.list = val.children
+				}
+			},
+			
+		}
+	}
+&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;css&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;style lang=&amp;quot;less&amp;quot; scoped&amp;gt;
+.department_container{
+	background-color: #F0F5FA;
+	.tab_wrapper{
+		height: 91rpx;
+		padding: 0 32rpx;
+		overflow: hidden;
+		margin-bottom: 20rpx;
+		scroll-view{
+			width: 100%;
+		}
+		.tab_content{
+			width: 100%;
+			height: 90%;
+			border-bottom: 1px solid #DDDDDD;
+		}
+		.ul{
+			height: 100%;
+			flex-wrap: nowrap;
+			.li{
+				height: 100%;
+				line-height: 91rpx;
+				white-space: nowrap;
+			}
+		}
+	}
+	.department_list{
+		flex: 1;
+		box-sizing: border-box;
+		overflow-y: hidden;
+		scroll-view{
+			height: 100%;
+		}
+		.ul{
+			padding-left: 32rpx;
+			padding-right: 32rpx;
+			background-color: #fff;
+		}
+		.li{
+			height: 96rpx;
+			line-height: 96rpx;
+			border-bottom: 1px solid #DFE0EB;
+			.subordinate{
+				text-align: right;
+			}
+			&amp;amp;:last-child{
+				border-bottom: 0px solid #DFE0EB;
+			}
+		}
+	}
+}
+&amp;lt;/style&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+">uniapp  实现组织管理效果</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/gitIgnoringFiles/"" data-c="
+          &lt;h3 id=&#34;创建-gitignore文件&#34;&gt;创建 .gitignore文件&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;第一种方式&lt;/strong&gt;&lt;br&gt;
+在项目根目录下直接创建一个文件，后缀改成 .gitignore 即可。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;第二种方式&lt;/strong&gt;&lt;br&gt;
+用git创建，到根目录下，执行 touch .gitignore，即可看见目录下已经出现了该忽略文件。&lt;br&gt;
+如果遇到提示‘touch’ 不是内部或外部命令，也不是可运行的程序或批处理文件。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;echo test&amp;gt;.gitignore
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;看到.gitignore文件, 把下列代码添加到.gitignore文件里面&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;.DS_Store
+node_modules
+/dist
+unpackage
+
+
+# local env files
+.env.local
+.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.zip
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;添加忽略规则&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# 忽略所有以 .a 结尾的文件
+*.a
+
+# 不能忽略所有 lib.a 文件
+!lib.a
+
+# 仅仅忽略当前目录下的 TODO 文件
+/TODO
+
+# 忽略 build 目录下的所有文件
+build/
+
+# 仅仅忽略 doc 一个目录下的所有 .txt 文件
+doc/*.txt
+
+# 忽略 doc 目录下（包括子目录）的所有 .pdf 文件
+doc/**/*.pdf
+
+&lt;/code&gt;&lt;/pre&gt;
+">git提交忽略文件</a>
+      </div>
+      
+      <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/timeTable/"" data-c="
           &lt;p&gt;效果图&lt;br&gt;
 &lt;img src=&#34;https://nancy-svy.github.io/post-images/1681714897240.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
@@ -1227,7 +1579,7 @@
 		
 &amp;lt;/style&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-">时间表</a>
+">uniapp 时间表</a>
       </div>
       
       <div class="item">
@@ -1604,7 +1956,7 @@ enabled 启用&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;需要注意的是scroll-view必须设置高度，不设置的话没效果，但不要设置100%，除非父元素写了高&lt;/strong&gt;&lt;br&gt;
 &lt;img src=&#34;https://nancy-svy.github.io/post-images/1681724191543.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
 &lt;a href=&#34;https://uniapp.dcloud.io/component/scroll-view&#34;&gt;附上官方文档&lt;/a&gt;&lt;/p&gt;
-">简单的锚点定位</a>
+">uniapp 简单的锚点定位</a>
       </div>
       
       <div class="item">
@@ -1762,7 +2114,7 @@ enabled 启用&lt;/p&gt;
 &amp;lt;/style&amp;gt;
 
 &lt;/code&gt;&lt;/pre&gt;
-">动态创建form并校验</a>
+">uniapp 动态创建form并校验</a>
       </div>
       
       <div class="item">
@@ -2317,7 +2669,7 @@ export default {
 }
 &amp;lt;/style&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-">仿美团选择预送达时间或指定时间组件</a>
+">uniapp 仿美团选择预送达时间或指定时间组件</a>
       </div>
       
       <div class="item">
@@ -2405,7 +2757,7 @@ export default {
 })
  
 &lt;/code&gt;&lt;/pre&gt;
-">解决小程序自定义tabbar在ios手机上无法显示问题</a>
+">uniapp 解决小程序自定义tabbar在ios手机上无法显示问题</a>
       </div>
       
       <div class="item">
@@ -2426,7 +2778,7 @@ pnpm import package-lock.json
 Vite 是 vue 的作者尤雨溪在开发 vue3.0 的时候开发的一个 web 开发构建工具。由于其原生 ES 模块导入方式，可以实现闪电般的冷服务器启动。
  
 &lt;/code&gt;&lt;/pre&gt;
-">pnpm和vite</a>
+">vue3  了解pnpm和vite</a>
       </div>
       
       <div class="item">
@@ -3295,7 +3647,7 @@ export default {
 
  
 &lt;/code&gt;&lt;/pre&gt;
-">仿美团选择预计送达时间组件</a>
+">uniapp 仿美团选择预计送达时间组件(废弃)</a>
       </div>
       
       <div class="item">
@@ -3436,7 +3788,7 @@ export default {
 
  
 &lt;/code&gt;&lt;/pre&gt;
-">手写签名</a>
+">uniapp 手写签名</a>
       </div>
       
       <div class="item">
@@ -3522,7 +3874,7 @@ export function decrypted(param) {
 }
  
 &lt;/code&gt;&lt;/pre&gt;
-">utils.js</a>
+">uniapp  utils.js文件</a>
       </div>
       
       <div class="item">
@@ -3535,13 +3887,46 @@ export function decrypted(param) {
 &lt;h3 id=&#34;api文件夹-请求接口url&#34;&gt;api文件夹  请求接口url&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;import axios from &#39;axios&#39;;
 
-
 // 订单列表和查询
 export function orderList(params: any) {
     return axios.post(&#39;/logistics/pc/orderInfo/pageList&#39;, params);
 }
 &lt;/code&gt;&lt;/pre&gt;
-">了解Arco Design Vue</a>
+&lt;h3 id=&#34;路由与菜单&#34;&gt;路由与菜单&lt;/h3&gt;
+&lt;p&gt;在【routes】文件夹   -&amp;gt;  【modules】文件夹 创建文件&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;import { DEFAULT_LAYOUT } from &#39;../base&#39;;
+import { AppRouteRecordRaw } from &#39;../types&#39;;
+
+const PRACTICE: AppRouteRecordRaw = {
+  path: &#39;/practice&#39;,
+  name: &#39;practice&#39;,
+  component: DEFAULT_LAYOUT,
+  meta: {
+    locale: &#39;menu.practice&#39;, // 一级菜单名（语言包键名）
+    icon: &#39;icon-settings&#39;, // 菜单配置icon
+    requiresAuth: true, // 是否需要登录鉴权
+    order: 6, // 排序路由菜单项。如果设置该值，值越高，越靠前
+    hideChildrenInMenu: true, // 强制在左侧菜单中显示单项
+	// roles: [&#39;admin&#39;], // 配置能访问该页面的角色，如果不匹配，则会被禁止访问该路由页面
+  },
+  redirect: &#39;/practice/index&#39;, // 重定向
+  // 子级
+  children: [
+    {
+      path: &#39;index&#39;,
+      name: &#39;index&#39;,
+      component: () =&amp;gt; import(&#39;@/views/practice/index.vue&#39;),
+      meta: {
+        locale: &#39;menu.practice&#39;, // 一级菜单名（语言包键名）
+        requiresAuth: true, // 是否需要登录鉴权
+      }
+    }
+  ]
+}
+
+export default PRACTICE;
+&lt;/code&gt;&lt;/pre&gt;
+">vue3  了解Arco Design Vue</a>
       </div>
       
       <div class="item">
@@ -3943,7 +4328,7 @@ page{
 	}
 }
 &lt;/code&gt;&lt;/pre&gt;
-">布局(页面上下不动，中间滚动)</a>
+">uniapp  布局(页面上下不动，中间滚动)</a>
       </div>
       
       <div class="item">
@@ -4657,7 +5042,7 @@ export default {
 &amp;lt;/style&amp;gt;
  
 &lt;/code&gt;&lt;/pre&gt;
-">刻度尺</a>
+">vue  刻度尺效果</a>
       </div>
       
       <div class="item">
@@ -4809,7 +5194,7 @@ export default {
 	}
 }
 &lt;/code&gt;&lt;/pre&gt;
-">根据屏幕大小来改变echarts的大小</a>
+">vue  根据屏幕大小来改变echarts的大小</a>
       </div>
       
       <div class="item">
@@ -5026,7 +5411,7 @@ console.log(getMonthBetween(&#39;2018-09&#39;,&#39;2020-02&#39;));&lt;br&gt;
 &lt;p&gt;测试结果：&lt;br&gt;
 console.log(getYearBetween(&#39;2017&#39;,&#39;2020&#39;));&lt;br&gt;
 &lt;img src=&#34;https://nancy-svy.github.io/post-images/1681264343167.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
-">获取一段时间、两个日期间的所有日期(天数)、所有月份、所有年份</a>
+">js  获取一段时间、两个日期间的所有日期(天数)、所有月份、所有年份</a>
       </div>
       
       <div class="item">
@@ -5108,7 +5493,7 @@ console.log(getYearBetween(&#39;2017&#39;,&#39;2020&#39;));&lt;br&gt;
 	color: #999;
 }
 &lt;/code&gt;&lt;/pre&gt;
-">五星评价功能</a>
+">微信小程序  五星评价功能</a>
       </div>
       
       <div class="item">
@@ -5136,7 +5521,7 @@ console.log(getYearBetween(&#39;2017&#39;,&#39;2020&#39;));&lt;br&gt;
 })
  
 &lt;/code&gt;&lt;/pre&gt;
-">获取自定义tabbar的高度</a>
+">微信小程序 获取自定义tabbar的高度</a>
       </div>
       
       <div class="item">
@@ -5165,7 +5550,7 @@ console.log(getYearBetween(&#39;2017&#39;,&#39;2020&#39;));&lt;br&gt;
 })
 
 &lt;/code&gt;&lt;/pre&gt;
-">存储手机状态栏高度</a>
+">微信小程序  存储手机状态栏高度</a>
       </div>
       
       <div class="item">
@@ -5190,7 +5575,7 @@ console.log(getYearBetween(&#39;2017&#39;,&#39;2020&#39;));&lt;br&gt;
 })
 
 &lt;/code&gt;&lt;/pre&gt;
-">使用wx.login</a>
+">微信小程序  使用wx.login</a>
       </div>
       
       <div class="item">
@@ -5348,7 +5733,7 @@ export {
 export const authLogin = (params) =&amp;gt; request.get(&#39;/rest/authLogin&#39;, params);
  
 &lt;/code&gt;&lt;/pre&gt;
-">封装axios</a>
+">微信小程序 封装axios</a>
       </div>
       
       <div class="item">
@@ -5399,72 +5784,189 @@ export const authLogin = (params) =&amp;gt; request.get(&#39;/rest/authLogin&#39
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;效果：&lt;br&gt;
 &lt;img src=&#34;https://nancy-svy.github.io/post-images/1681263822071.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
-">对话框气泡</a>
+">css 对话框气泡</a>
       </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/recursiveUploadOfImages/"" data-c="
-          &lt;pre&gt;&lt;code&gt;&amp;lt;script&amp;gt;
-
-    addPic:() =&amp;gt; {
-                let token = this.token()
-                let UploadUrla = this.UploadUrl + &#39;api/shop/public/upload_picture&#39;
-                let url = UploadUrla
-                //console.log(url)
-                var that = this;
-                uni.chooseImage({
-                    count: 9,
-                    sizeType: [&#39;original&#39;, &#39;compressed&#39;], //可以指定是原图还是压缩图，默认二者都有
-                    sourceType: [&#39;album&#39;,&#39;camera&#39;], //从相册选择
-                    success: function (res) {
-                        var arr = res.tempFilePaths
-                        var i = 0; 
-						var length = arr.length;
-                        var upload = function() {
-                            uni.uploadFile({
-                                // localId:arr[i],
-                                url : url,
-                                header: {
-                                    &#39;X-Token&#39;: token //自定义请求头信息
-                                },
-                                filePath: arr[i],
-                                name: &#39;pic&#39;,
-                                success: function(uploadFileRes) {
-                                    //图片显示赋值
-                                    const back = JSON.parse(uploadFileRes.data);
-                                    //图片显示赋值
-                                    var backArr = back.data.pic;
-                                    if(that.thumbnail==&#39;&#39;){ //缩略图
-                                        that.thumbnail = backArr;
-                                    }else{
-                                        that.thumbnail = that.thumbnail +&amp;quot;;&amp;quot; +backArr;
-                                    }
-                                    that.picGoods.push(backArr)
-                                    var detailUrl = that.UploadUrl.substr(0, that.UploadUrl.length - 1) + back.data.pic;
-                                    that.goodspic.push(detailUrl)
-                                    //如果还有照片，继续上传
-                                    i++;
-                                    if (i &amp;lt; length) {
-                                        upload();
-                                    }
-                                }
-,
+          &lt;p&gt;html&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;template&amp;gt;
+	&amp;lt;view class=&amp;quot;container&amp;quot;&amp;gt;
+		&amp;lt;view class=&amp;quot;text f-32 color-3 d-flex a-center j-between&amp;quot;&amp;gt;
+			&amp;lt;view&amp;gt;图片&amp;lt;/view&amp;gt;
+			&amp;lt;view class=&amp;quot;f-28&amp;quot;&amp;gt;{{goodspic.length}}/9&amp;lt;/view&amp;gt;
+		&amp;lt;/view&amp;gt;
+		&amp;lt;view class=&amp;quot;pictures d-flex&amp;quot;&amp;gt;
+			&amp;lt;view class=&amp;quot;ul d-flex&amp;quot; v-if=&amp;quot;goodspic.length != 0&amp;quot;&amp;gt;
+				&amp;lt;view class=&amp;quot;li&amp;quot; v-for=&amp;quot;(item,index) in goodspic&amp;quot; :key=&amp;quot;index&amp;quot;&amp;gt;
+					&amp;lt;image src=&amp;quot;https://web-assets.dcloud.net.cn/unidoc/zh/shuijiao.jpg&amp;quot; mode=&amp;quot;&amp;quot;&amp;gt;&amp;lt;/image&amp;gt;
+					&amp;lt;view class=&amp;quot;icon-del-box&amp;quot; @click=&amp;quot;handleDel(item,index)&amp;quot;&amp;gt;
+						&amp;lt;view class=&amp;quot;icon-del&amp;quot;&amp;gt;&amp;lt;/view&amp;gt;
+						&amp;lt;view class=&amp;quot;icon-del rotate&amp;quot;&amp;gt;&amp;lt;/view&amp;gt;
+					&amp;lt;/view&amp;gt;
+				&amp;lt;/view&amp;gt;
+			&amp;lt;/view&amp;gt;
+			&amp;lt;view class=&amp;quot;pictures_wrapper&amp;quot; @click=&amp;quot;handlePictures&amp;quot; v-if=&amp;quot;goodspic.length &amp;lt; 9&amp;quot;&amp;gt;
+				&amp;lt;uni-icons type=&amp;quot;plusempty&amp;quot; color=&amp;quot;#707070&amp;quot;&amp;gt;&amp;lt;/uni-icons&amp;gt;
+			&amp;lt;/view&amp;gt; 
+		&amp;lt;/view&amp;gt;
+	&amp;lt;/view&amp;gt;
+&amp;lt;/template&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;js&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;script&amp;gt;
+	export default {
+		data() {
+			return {
+				picGoods: [],
+				goodspic: [],
+				UploadUrl: [],
+				thumbnail: &#39;&#39;,
+			}
+		},
+		methods: {
+			// 上传图片
+			handlePictures(){
+				let token = &#39;21839asd1489s490asdsad14sd014d01AS4&#39;; // 仅为示例，非真实的
+				let url = &#39;https://www.example.com/upload&#39;; // 仅为示例，非真实的接口地址
+				let that = this;
+				uni.chooseImage({
+					count: 9,
+					sizeType: [&#39;original&#39;, &#39;compressed&#39;], //可以指定是原图还是压缩图，默认二者都有
+					sourceType: [&#39;album&#39;,&#39;camera&#39;], //从相册选择
+					success: (res) =&amp;gt; {
+						let arr = res.tempFilePaths
+						let i = 0; 
+						let length = arr.length;
+						let upload = () =&amp;gt; {
+							uni.uploadFile({
+								url : url,
+								header: {
+									&#39;X-Token&#39;: token //自定义请求头信息
+								},
+								filePath: arr[i],
+								name: &#39;pic&#39;,
+								success: (uploadFileRes) =&amp;gt; {
+									//图片显示赋值
+									const back = JSON.parse(uploadFileRes.data);
+									//图片显示赋值
+									let backArr = back.data.pic;
+									if(that.thumbnail==&#39;&#39;){ //缩略图
+										that.thumbnail = backArr;
+									}else{
+										that.thumbnail = that.thumbnail +&amp;quot;;&amp;quot; +backArr;
+									}
+									that.picGoods.push(backArr)
+									console.log(&#39;picGoods&#39;,picGoods)
+									let detailUrl = that.UploadUrl.substr(0, that.UploadUrl.length - 1) + back.data.pic;
+									that.goodspic.push(detailUrl)
+									console.log(&#39;goodspic&#39;,goodspic)
+									//如果还有照片，继续上传
+									i++;
+									if (i &amp;lt; length) {
+										upload();
+									}
+								},
 								fail:(err)=&amp;gt;{
 									console.log(err)
 								}
-                            });                    
-                        };
-                        upload();
-                    },
-                    error:(e)=&amp;gt;{
-                    }
-                });
-            },
+							});                    
+						};
+						upload();
+					},
+					error:(err)=&amp;gt;{
+						console.log(&#39;选择图片错误&#39;, err)
+					}
+				});
 
+			},
+			// 删除
+			handleDel(val,idx){
+				this.goodspic.splice(idx, 1)
+			},
+		}
+	}
 &amp;lt;/script&amp;gt;
- 
 &lt;/code&gt;&lt;/pre&gt;
-">递归上传图片</a>
+&lt;p&gt;css&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;style scoped lang=&amp;quot;less&amp;quot;&amp;gt;
+.f-32{
+	font-size: 32rpx;
+} 
+.color-3{
+	color: #333;
+} 
+.d-flex{
+	display: flex;
+} 
+.a-center{
+	align-items: center;
+} 
+.j-between{
+	justify-content: space-between;
+}
+.container{
+	padding: 40rpx 32rpx;
+	.text{
+		padding-bottom: 30rpx;
+	}
+	.pictures{
+		flex-wrap: wrap;
+		.pictures_wrapper{
+			width: 160rpx;
+			height: 160rpx;
+			border-radius: 8rpx;
+			border: 1px solid #DDDDDD;
+			background-color: #F5F5F5;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		.ul{
+			margin-left: 20rpx;
+		}
+		.li{
+			width: 160rpx;
+			height: 160rpx;
+			border-radius: 8rpx;
+			overflow: hidden;
+			position: relative;
+			margin-right: 80rpx;
+			margin-bottom: 20rpx;
+			image{
+				width: 100%;
+				height: 100%;
+			}
+			.icon-del-box{
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				position: absolute;
+				top: 0;
+				right: 0;
+				height: 52rpx;
+				width: 52rpx;
+				border-radius: 50%;
+				background-color: rgba(0, 0, 0, 0.5);
+				z-index: 2;
+				transform: rotate(-45deg);
+				.icon-del{
+					width: 30rpx;
+					height: 4rpx;
+					background-color: #fff;
+					border-radius: 4rpx;
+				}
+				.rotate {
+					position: absolute;
+				    transform: rotate(90deg);
+				}
+			}
+		}
+	}
+}
+&amp;lt;/style&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+">uniapp 递归上传图片</a>
       </div>
       
       <div class="item">
@@ -5658,7 +6160,7 @@ export const login = (params) =&amp;gt; get(&amp;quot;/szhyq/screen/login&amp;qu
 }
  
 &lt;/code&gt;&lt;/pre&gt;
-">封装axios</a>
+">vue 封装axios</a>
       </div>
       
       <div class="item">
@@ -5904,7 +6406,7 @@ Vue.mixin({
 &lt;pre&gt;&lt;code&gt;&amp;lt;tab :current=&amp;quot;0&amp;quot;&amp;gt;&amp;lt;/tab&amp;gt;
  
 &lt;/code&gt;&lt;/pre&gt;
-">自定义tabbar</a>
+">uniapp  自定义tabbar</a>
       </div>
       
       <div class="item">
@@ -5967,7 +6469,7 @@ Vue.mixin({
 	console.log(err)
 })
 &lt;/code&gt;&lt;/pre&gt;
-">导出文件功能</a>
+">vue 导出文件功能</a>
       </div>
       
       <div class="item">
@@ -6145,7 +6647,7 @@ export {
 export const authLogin = (params) =&amp;gt; request.get(&#39;/rest/authLogin&#39;, params);
 
 &lt;/code&gt;&lt;/pre&gt;
-">封装axios</a>
+">uniapp  封装axios</a>
       </div>
       
       <div class="item">
@@ -6400,7 +6902,7 @@ new Vue({
 })
 
 &lt;/code&gt;&lt;/pre&gt;
-">绑定手机号</a>
+">mui 绑定手机号</a>
       </div>
       
       <div class="item">
@@ -6668,7 +7170,7 @@ console.log(&#39;上传图片&#39;,uploadImgList.join())
 })
 
 &lt;/code&gt;&lt;/pre&gt;
-">上传图片</a>
+">mui 上传图片</a>
       </div>
       
       <div class="item">
@@ -6738,7 +7240,7 @@ getCodes.addEventListener(&#39;tap&#39;, function() {
 
 
 &lt;/code&gt;&lt;/pre&gt;
-">手机验证码</a>
+">mui 手机验证码</a>
       </div>
       
       <div class="item">
@@ -6810,7 +7312,7 @@ getCodes.addEventListener(&#39;tap&#39;, function() {
 	}
 }
 &lt;/code&gt;&lt;/pre&gt;
-">全屏</a>
+">vue 全屏</a>
       </div>
       
       <div class="item">
@@ -6851,7 +7353,7 @@ getCodes.addEventListener(&#39;tap&#39;, function() {
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;效果：&lt;br&gt;
 &lt;img src=&#34;https://nancy-svy.github.io/post-images/1681263922337.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
-">四个角的颜色</a>
+">html 四个角的颜色</a>
       </div>
       
       <div class="item">
@@ -6875,7 +7377,7 @@ getCodes.addEventListener(&#39;tap&#39;, function() {
 
 &amp;lt;/html&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-">网页标题栏和收藏夹显示网站logo</a>
+">html 网页标题栏和收藏夹显示网站logo</a>
       </div>
       
       <div class="item">

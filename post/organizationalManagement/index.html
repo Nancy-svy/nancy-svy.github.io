@@ -8,7 +8,7 @@
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>npm install时 node-sass npm ERR command failed问题解决 | Gridea</title>
+<title>uniapp  实现组织管理效果 | Gridea</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1681896934752">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -41,8 +41,8 @@
 
 
 
-  <meta name="description" content="npm install时 node-sass npm ERR command failed问题解决" />
-  <meta name="keywords" content="npm" />
+  <meta name="description" content="uniapp  实现组织管理效果" />
+  <meta name="keywords" content="uniapp" />
 </head>
 
 <body>
@@ -175,8 +175,7 @@
       <div class="sidebar-body gemini" id="sidebar_body">
         
           
-            <div class="post-side-meta" id="post_side_meta">
-              
+            
 <div class="sidebar-wrapper box-shadow-wrapper bg-color">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="/images/avatar.png"/>
@@ -208,201 +207,6 @@
 
 
 </div>
-            </div>
-            <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
-              <div class="toc-box right-motion">
-  <div class="toc-wrapper  auto"
-    id="toc_wrapper">
-    <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#%E9%97%AE%E9%A2%98">问题</a></li>
-<li><a href="#%E7%89%88%E6%9C%AC%E9%97%AE%E9%A2%98">版本问题</a></li>
-<li><a href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95">解决方法</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-  </div>
-</div>
-
-<script>
-
-  let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1;
-  let active = 'active-show', activeClass = 'active-current';
-  let tocWrapper = document.querySelector('#toc_wrapper');
-  let tocContent = tocWrapper.children[0];
-  let autoNumber = tocWrapper && tocWrapper.classList.contains('auto-number');
-
-  function addTocNumber(elem, deep) {
-    if (!elem) {
-      return;
-    }
-    let prop = elem.__proto__;
-
-    if (prop === HTMLUListElement.prototype) {
-      for (let i = 0; i < elem.children.length; i++) {
-        addTocNumber(elem.children[i], deep + (i + 1) + '.');
-      }
-    } else if (prop === HTMLLIElement.prototype) {
-      // 保存li元素
-      if (elem.children[0] && elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
-        lList.push(elem);
-      }
-      for (let i = 0; i < elem.children.length; i++) {
-        let cur = elem.children[i];
-        if (cur.__proto__ === HTMLAnchorElement.prototype) {
-          if (autoNumber) {
-            cur.text = deep + ' ' + cur.text;
-          }
-        } else if (cur.__proto__ === HTMLUListElement.prototype) {
-          addTocNumber(cur, deep);
-        }
-      }
-    }
-  }
-
-  function removeParentActiveClass() {
-    let parents = tocContent.querySelectorAll('.' + active)
-    parents.forEach(function (elem) {
-      elem.classList.remove(active);
-    });
-  }
-
-  function addActiveClass(index) {
-    if (index >= 0 && index < hList.length) {
-      lList[index].classList.add(activeClass);
-    }
-  }
-
-  function removeActiveClass(index) {
-    if (index >= 0 && index < hList.length) {
-      lList[index].classList.remove(activeClass);
-    }
-  }
-
-  function addActiveLiElemment(elem, parent) {
-    if (!elem || elem === parent) {
-      return;
-    } else {
-      if (elem.__proto__ === HTMLLIElement.prototype) {
-        elem.classList.add(active);
-      }
-      addActiveLiElemment(elem.parentElement, parent);
-    }
-  }
-
-  function showToc() {
-    if (tocWrapper) {
-      postBody = document.querySelector('#post_body');
-      for (let i = 0; i < postBody.children.length; i++) {
-        if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
-          hList.push(postBody.children[i]);
-        }
-      }
-      if (tocWrapper.classList.contains('compress')) {
-        tocContent.classList.add('closed');
-      } else if (tocWrapper.classList.contains('no_compress')) {
-        tocContent.classList.add('expanded');
-      } else {
-        if (hList.length > 10) {
-          active = 'active-hidden'
-          tocContent.classList.add('closed');
-        } else {
-          tocContent.classList.add('expanded');
-        }
-      }
-    }
-  }
-
-  (function () {
-    // 处理不是从#一级标题开始目录
-    if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
-      let con = tocContent.children[0].children[0];
-      tocContent.innerHTML = con.innerHTML;
-    }
-    let markdownItTOC = document.querySelector('.markdownIt-TOC');
-    let innerHeight = window.innerHeight;
-    markdownItTOC.style = `max-height: ${innerHeight - 80 > 0 ? innerHeight - 80 : innerHeight}px`
-    addTocNumber(tocContent, '');
-  })();
-
-  document.addEventListener('scroll', function (e) {
-    if (lList.length <= 0) {
-      return;
-    }
-    let scrollTop = document.scrollingElement.scrollTop + 10;
-    let dir;
-
-    if (lastTop - scrollTop > 0) {
-      dir = 'up';
-    } else {
-      dir = 'down';
-    }
-
-    lastTop = scrollTop;
-    if (scrollTop <= 0) {
-      if (lastIndex >= 0 && lastIndex < hList.length) {
-        lList[lastIndex].classList.remove(activeClass);
-      }
-      return;
-    }
-
-    let current = 0, hasFind = false;
-    for (let i = 0; i < hList.length; i++) {
-      if (hList[i].offsetTop > scrollTop) {
-        current = i;
-        hasFind = true;
-        break;
-      }
-    }
-    if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
-      current = hList.length - 1;
-    } else {
-      current--;
-    }
-    if (dir === 'down') {
-      if (current > lastIndex) {
-        addActiveClass(current);
-        removeActiveClass(lastIndex)
-        lastIndex = current;
-        removeParentActiveClass();
-        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
-      }
-    } else {
-      if (current < lastIndex) {
-        addActiveClass(current);
-        removeActiveClass(lastIndex);
-        lastIndex = current;
-        removeParentActiveClass();
-        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
-      }
-    }
-  });
-
-
-  window.addEventListener('load', function () {
-    showToc();
-    document.querySelector('#sidebar').style = 'display: block;';
-    tocWrapper.classList.add('toc-active');
-    setTimeout(function () {
-      if ("createEvent" in document) {
-        let evt = document.createEvent("HTMLEvents");
-        evt.initEvent("scroll", false, true);
-        document.dispatchEvent(evt);
-      }
-      else {
-        document.fireEvent("scroll");
-      }
-    }, 500)
-  })
-
-</script>
-            </div>
           
         
       </div>
@@ -490,14 +294,14 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://nancy-svy.github.io/post/nodeSassProblem/"> npm install时 node-sass npm ERR command failed问题解决 </a>
+    <a class="post-title-link" href="https://nancy-svy.github.io/post/organizationalManagement/"> uniapp  实现组织管理效果 </a>
   </h1>
   <div class="post-meta">
     
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2022-12-15 09:34:44">2022-12-15</span>
+      <span class="publish-time" data-t="2023-04-19 17:29:11">2023-04-19</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
@@ -505,8 +309,8 @@
       <i class="fa fa-folder-o"></i>
       <span class="pc-show language" data-lan="category-in">标签:</span>
        
-      <a href="https://nancy-svy.github.io/tag/-XeLHcR-9/">
-        <span>npm</span>
+      <a href="https://nancy-svy.github.io/tag/XXkeG_S1Z/">
+        <span>uniapp</span>
       </a>
        
     </span>
@@ -515,7 +319,7 @@
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
       <span
-        >1<span class="language" data-lan="minute"
+        >8<span class="language" data-lan="minute"
           >分钟</span
         ></span
       >
@@ -524,7 +328,7 @@
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
       <span
-        >129<span class="pc-show language" data-lan="words"
+        >1392<span class="pc-show language" data-lan="words"
           >字数</span
         ></span
       >
@@ -534,29 +338,293 @@
 </section>
 
             <div class="post-body next-md-body" id="post_body">
-              <h3 id="问题">问题</h3>
-<p>在用npm install时报错</p>
-<pre><code>    npm ERR! code 1
-    npm ERR! path D:\....\node-sass
-    npm ERR! command failed
-    ....
+              <figure data-type="image" tabindex="1"><img src="https://nancy-svy.github.io/post-images/1681896820412.png" alt="" loading="lazy"></figure>
+<p>html</p>
+<pre><code>&lt;template&gt;
+	&lt;view class=&quot;container&quot;&gt;
+		&lt;view class=&quot;department_container d-flex f-direction&quot;&gt;
+			&lt;view class=&quot;tab_wrapper&quot;&gt;
+				&lt;view class=&quot;tab_content&quot;&gt;
+					&lt;scroll-view scroll-x=&quot;true&quot; :scroll-left=&quot;scrollLeft&quot; @scroll=&quot;handleScroll&quot;&gt;
+						&lt;view class=&quot;ul&quot;&gt;
+							&lt;view class=&quot;li d-flex a-center f-32 color-9&quot; id=&quot;title&quot; &gt;
+								&lt;view id=&quot;choTxt&quot; v-if=&quot;curItem == null&quot;&gt;请选择&lt;/view&gt;
+								&lt;view id=&quot;choTxt&quot; v-else @click=&quot;handleDepartmentHomepage&quot;&gt;
+									首页
+									&lt;uni-icons type=&quot;right&quot; color=&quot;#999&quot; v-if=&quot;curItem.title != item.title&quot;&gt;&lt;/uni-icons&gt;
+								&lt;/view&gt;
+								&lt;view id=&quot;choTxt&quot; v-for=&quot;(item,index) in chooseArr&quot; :key=&quot;index&quot; @click=&quot;handleTitle(item,index)&quot;&gt;
+									&lt;text :class=&quot;curItem.title == item.title ? 'color-02' : 'color-9'&quot;&gt;{{item.title}}&lt;/text&gt;
+									&lt;uni-icons type=&quot;right&quot; color=&quot;#999&quot; v-if=&quot;curItem.title != item.title&quot;&gt;&lt;/uni-icons&gt;
+								&lt;/view&gt;
+							&lt;/view&gt;
+						&lt;/view&gt;
+					&lt;/scroll-view&gt;
+				&lt;/view&gt;
+			&lt;/view&gt;
+			&lt;view class=&quot;department_list safeArea&quot;&gt;
+				&lt;scroll-view scroll-y=&quot;true&quot;&gt;
+					&lt;view class=&quot;ul&quot;&gt;
+						&lt;view class=&quot;li&quot; v-for=&quot;(item,index) in list&quot; :key=&quot;index&quot;&gt;
+							&lt;uni-row&gt;
+								&lt;uni-col :span=&quot;18&quot;&gt;
+									&lt;view class=&quot;f-32 color-3&quot; @click=&quot;handleSelect(item)&quot;&gt;{{item.title}}&lt;/view&gt;
+								&lt;/uni-col&gt;
+								&lt;uni-col :span=&quot;6&quot; v-if=&quot;item.children &amp;&amp; item.children.length != 0&quot;&gt;
+									&lt;view class=&quot;subordinate f-28 color-02&quot; @click=&quot;handleNext(item, index)&quot;&gt;
+										下级
+										&lt;uni-icons type=&quot;right&quot; color=&quot;#02C2B0&quot;&gt;&lt;/uni-icons&gt;
+									&lt;/view&gt;
+								&lt;/uni-col&gt;
+							&lt;/uni-row&gt;
+						&lt;/view&gt;
+					&lt;/view&gt;
+				&lt;/scroll-view&gt;
+			&lt;/view&gt;
+		&lt;/view&gt;
+	&lt;/view&gt;
+&lt;/template&gt;
+
 </code></pre>
-<h3 id="版本问题">版本问题</h3>
-<p>可能是node.js的版本和node-sass的版本不合</p>
-<h3 id="解决方法">解决方法</h3>
-<p>根据node版本安装相对应的sass<br>
-我自己的安装的node版本  相对应的sass版本号为 1.26.5<br>
-<img src="https://nancy-svy.github.io/post-images/1681263447630.jpg" alt="" loading="lazy"><br>
-从仓库中拉取下来的项目，package.json 文件中的sass都是</p>
-<pre><code>    node-sass：‘^x.x.x’
-    sass-loader: '^x.x.x'
+<p>js</p>
+<pre><code>&lt;script&gt;
+	export default {
+		data() {
+			return {
+				scrollLeft: 0, // 横向滚动条的位置
+				titleWidth: 0, // tab每个li的宽度
+				chooseArr: [], // 选中的进入下一级
+				curItem: null, // 当前选中的
+				selectArr: [], // 选中的
+				list: [
+					{id: '0', title: '一级', children: [
+						{id: '00', title: '十一级', children: [
+							{id: '001', title: '101某某部门', children: [
+								{id: '0001', title: '1001某某部门', children: [
+									{id: '00001', title: '10001某某部门', children: [
+										{id: '000001', title: '000001某某部门'},
+										{id: '000002', title: '000002某某部门'},
+										{id: '000003', title: '000003某某部门'},
+										{id: '000004', title: '000004某某部门'},
+										{id: '000005', title: '000005某某部门'}
+									]},
+									{id: '00002', title: '10002某某部门'},
+									{id: '00003', title: '10003某某部门'},
+									{id: '00004', title: '10004某某部门'},
+									{id: '00005', title: '10005某某部门'}
+								]},
+								{id: '0002', title: '1002某某部门'},
+								{id: '0003', title: '1003某某部门'},
+								{id: '0004', title: '1004某某部门'},
+								{id: '0005', title: '1005某某部门'}
+							]},
+							{id: '001', title: '102某某部门'},
+							{id: '001', title: '103某某部门'},
+							{id: '001', title: '104某某部门'},
+							{id: '001', title: '105某某部门'}
+						]},
+						{id: '01', title: '十二级',children: [
+							{id: '001', title: '121级'},
+							{id: '001', title: '122级'},
+							{id: '001', title: '123级'},
+							{id: '001', title: '124级'},
+							{id: '001', title: '125级'}
+						]},
+						{id: '02', title: '十三级'},
+						{id: '03', title: '十四级'},
+						{id: '03', title: '十五级'}
+					]},
+					{id: '1', title: '二级', children: [
+						{id: '10', title: '二一级'},
+						{id: '11', title: '二二级'},
+						{id: '12', title: '二三级'},
+						{id: '13', title: '二四级'},
+						{id: '13', title: '二五级'}
+					]},
+					{id: '2', title: '三级'},
+					{id: '3', title: '四级'},
+					{id: '4', title: '五级'},
+					{id: '5', title: '六级'},
+					{id: '6', title: '七级'},
+					{id: '7', title: '八级'},
+					{id: '8', title: '九级'},
+					{id: '9', title: '十级'},
+					{id: '10', title: '十一级'},
+					{id: '11', title: '十二级'},
+					{id: '12', title: '十三级'},
+					{id: '13', title: '十四级'},
+					{id: '14', title: '十五级'},
+				],
+			
+			}
+		},
+		onLoad() {
+			
+		},
+		mounted() {
+			let that = this
+			const query = uni.createSelectorQuery().in(this);
+			query.select('#title').boundingClientRect(data =&gt; {
+				that.titleWidth = data.width
+			}).exec();
+		},
+		methods: {
+			// 部门的首级
+			handleDepartmentHomepage(){
+				this.chooseArr = [] // 选中的进入下一级
+				this.curItem = null // 当前选中的
+				this.selectArr = []
+				this.list = [
+					{id: '0', title: '一级', children: [
+						{id: '00', title: '十一级', children: [
+							{id: '001', title: '101某某部门', children: [
+								{id: '0001', title: '1001某某部门', children: [
+									{id: '00001', title: '10001某某部门', children: [
+										{id: '000001', title: '000001某某部门'},
+										{id: '000002', title: '000002某某部门'},
+										{id: '000003', title: '000003某某部门'},
+										{id: '000004', title: '000004某某部门'},
+										{id: '000005', title: '000005某某部门'}
+									]},
+									{id: '00002', title: '10002某某部门'},
+									{id: '00003', title: '10003某某部门'},
+									{id: '00004', title: '10004某某部门'},
+									{id: '00005', title: '10005某某部门'}
+								]},
+								{id: '0002', title: '1002某某部门'},
+								{id: '0003', title: '1003某某部门'},
+								{id: '0004', title: '1004某某部门'},
+								{id: '0005', title: '1005某某部门'}
+							]},
+							{id: '001', title: '102某某部门'},
+							{id: '001', title: '103某某部门'},
+							{id: '001', title: '104某某部门'},
+							{id: '001', title: '105某某部门'}
+						]},
+						{id: '01', title: '十二级',children: [
+							{id: '001', title: '121级'},
+							{id: '001', title: '122级'},
+							{id: '001', title: '123级'},
+							{id: '001', title: '124级'},
+							{id: '001', title: '125级'}
+						]},
+						{id: '02', title: '十三级'},
+						{id: '03', title: '十四级'},
+						{id: '03', title: '十五级'}
+					]},
+					{id: '1', title: '二级', children: [
+						{id: '10', title: '二一级'},
+						{id: '11', title: '二二级'},
+						{id: '12', title: '二三级'},
+						{id: '13', title: '二四级'},
+						{id: '13', title: '二五级'}
+					]},
+					{id: '2', title: '三级'},
+					{id: '3', title: '四级'},
+					{id: '4', title: '五级'},
+					{id: '5', title: '六级'},
+					{id: '6', title: '七级'},
+					{id: '7', title: '八级'},
+					{id: '8', title: '九级'},
+					{id: '9', title: '十级'},
+					{id: '10', title: '十一级'},
+					{id: '11', title: '十二级'},
+					{id: '12', title: '十三级'},
+					{id: '13', title: '十四级'},
+					{id: '14', title: '十五级'},
+				]
+			},
+			// 选中
+			handleSelect(val){
+				this.selectArr.push(...this.chooseArr,val)
+			},
+			// 进入下一级
+			handleNext(val){
+				this.curItem = val
+				this.chooseArr.push(val)
+				//获取选择终层后滚动条的走向
+				let that = this
+				const query = uni.createSelectorQuery().in(this);
+				query.selectAll('#choTxt').boundingClientRect(data =&gt; {
+					let left = that.titleWidth - data[data.length - 1].left + 68
+					that.scrollLeft = left
+				}).exec();
+				this.list = val.children
+			},
+			// 横向滚动
+			handleScroll(e){
+				this.scrollLeft = e.detail.scrollLeft
+			},
+			// 返回上一级
+			handleTitle(val,idx){
+				if (this.curItem.title != val.title) {
+					this.curItem = val
+					let arr = this.chooseArr // 截取前的数据
+					let sliceArr = []; // 截取后的数据
+					sliceArr = arr.slice(0,idx+1)
+					this.chooseArr = sliceArr
+					this.list = val.children
+				}
+			},
+			
+		}
+	}
+&lt;/script&gt;
 </code></pre>
-<p>更改为：</p>
-<pre><code>    sass: '^1.26.5'
-    sass-loader: '^8.0.2'
+<p>css</p>
+<pre><code>&lt;style lang=&quot;less&quot; scoped&gt;
+.department_container{
+	background-color: #F0F5FA;
+	.tab_wrapper{
+		height: 91rpx;
+		padding: 0 32rpx;
+		overflow: hidden;
+		margin-bottom: 20rpx;
+		scroll-view{
+			width: 100%;
+		}
+		.tab_content{
+			width: 100%;
+			height: 90%;
+			border-bottom: 1px solid #DDDDDD;
+		}
+		.ul{
+			height: 100%;
+			flex-wrap: nowrap;
+			.li{
+				height: 100%;
+				line-height: 91rpx;
+				white-space: nowrap;
+			}
+		}
+	}
+	.department_list{
+		flex: 1;
+		box-sizing: border-box;
+		overflow-y: hidden;
+		scroll-view{
+			height: 100%;
+		}
+		.ul{
+			padding-left: 32rpx;
+			padding-right: 32rpx;
+			background-color: #fff;
+		}
+		.li{
+			height: 96rpx;
+			line-height: 96rpx;
+			border-bottom: 1px solid #DFE0EB;
+			.subordinate{
+				text-align: right;
+			}
+			&amp;:last-child{
+				border-bottom: 0px solid #DFE0EB;
+			}
+		}
+	}
+}
+&lt;/style&gt;
 </code></pre>
-<p><a href="https://www.yisu.com/zixun/622837.html">参考文章</a><br>
-<a href="https://www.npmjs.com/package/node-sass">node-sass文档</a></p>
 
             </div>
             
@@ -569,7 +637,7 @@
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://nancy-svy.github.io/post/nodeSassProblem/" title="npm install时 node-sass npm ERR command failed问题解决">https://nancy-svy.github.io/post/nodeSassProblem/</a>
+      <a href="https://nancy-svy.github.io/post/organizationalManagement/" title="uniapp  实现组织管理效果">https://nancy-svy.github.io/post/organizationalManagement/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -578,21 +646,17 @@
   </ul>
   <div class="tags">
     
-      <a href="https://nancy-svy.github.io/tag/-XeLHcR-9/"># npm</a>
+      <a href="https://nancy-svy.github.io/tag/XXkeG_S1Z/"># uniapp</a>
     
   </div>
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="uniapp  布局(页面上下不动，中间滚动)" href="https://nancy-svy.github.io/post/middle-scrolling-up-and-down-without-moving/">uniapp  布局(页面上下不动，中间滚动)</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="uniapp  布局(页面上下不动，中间滚动)" href="https://nancy-svy.github.io/post/middle-scrolling-up-and-down-without-moving/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="elementUI table" href="https://nancy-svy.github.io/post/elementUiTable/">elementUI table</a>
-        <a class="nav-mobile-next" title="elementUI table" href="https://nancy-svy.github.io/post/elementUiTable/">下一篇</a>
+        <a class="nav-pc-next" title="git提交忽略文件" href="https://nancy-svy.github.io/post/gitIgnoringFiles/">git提交忽略文件</a>
+        <a class="nav-mobile-next" title="git提交忽略文件" href="https://nancy-svy.github.io/post/gitIgnoringFiles/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>
