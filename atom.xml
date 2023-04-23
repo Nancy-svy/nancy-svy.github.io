@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>http://localhost:4000</id>
+    <id>https://nancy-svy.github.io</id>
     <title>Gridea</title>
-    <updated>2023-04-23T11:32:34.030Z</updated>
+    <updated>2023-04-23T11:34:22.382Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="http://localhost:4000"/>
-    <link rel="self" href="http://localhost:4000/atom.xml"/>
+    <link rel="alternate" href="https://nancy-svy.github.io"/>
+    <link rel="self" href="https://nancy-svy.github.io/atom.xml"/>
     <subtitle>温故而知新</subtitle>
-    <logo>http://localhost:4000/images/avatar.png</logo>
-    <icon>http://localhost:4000/favicon.ico</icon>
+    <logo>https://nancy-svy.github.io/images/avatar.png</logo>
+    <icon>https://nancy-svy.github.io/favicon.ico</icon>
     <rights>All rights reserved 2023, Gridea</rights>
     <entry>
         <title type="html"><![CDATA[vue项目运行时遇到的问题]]></title>
-        <id>http://localhost:4000/post/projectOperationIssues/</id>
-        <link href="http://localhost:4000/post/projectOperationIssues/">
+        <id>https://nancy-svy.github.io/post/projectOperationIssues/</id>
+        <link href="https://nancy-svy.github.io/post/projectOperationIssues/">
         </link>
         <updated>2023-04-20T02:29:30.000Z</updated>
         <content type="html"><![CDATA[<h3 id="一-module-build-failed-from-node_modulesless-loaderdistcjsjs-typeerror-thisgetoptions">一.  Module build failed (from ./node_modules/less-loader/dist/cjs.js): TypeError: this.getOptions</h3>
@@ -22,7 +22,7 @@
 npm install less-loader@7.3.0 --save-dev</p>
 <h3 id="二-vue-error-index-is-defined-but-never-used-vueno-unused-vars">二.  vue error ‘index‘ is defined but never used vue/no-unused-vars</h3>
 <p>在运行vue项目时，界面写了个一个for循环，但是却报错。界面关键部分代码如下。因为index没有使用过，所以报错<br>
-<img src="http://localhost:4000/post-images/1681958282676.png" alt="" loading="lazy"></p>
+<img src="https://nancy-svy.github.io/post-images/1681958282676.png" alt="" loading="lazy"></p>
 <p><strong>原因分析</strong><br>
 应该是eslint校验导致的，开始想改变eslint校验规则，但是那个没有起效。于是换了一种办法新建vue.config.js文件，然后加入以下代码。重新运行后即可。</p>
 <pre><code>module.exports = {
@@ -30,16 +30,16 @@ npm install less-loader@7.3.0 --save-dev</p>
 }
 </code></pre>
 <p>关于lintOnsave的解释可点击查看详细配置哦~<a href="https://cli.vuejs.org/zh/config/#pages">配置参考</a><br>
-<img src="http://localhost:4000/post-images/1681958383332.png" alt="" loading="lazy"></p>
+<img src="https://nancy-svy.github.io/post-images/1681958383332.png" alt="" loading="lazy"></p>
 ]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[uniapp  实现组织管理效果]]></title>
-        <id>http://localhost:4000/post/organizationalManagement/</id>
-        <link href="http://localhost:4000/post/organizationalManagement/">
+        <id>https://nancy-svy.github.io/post/organizationalManagement/</id>
+        <link href="https://nancy-svy.github.io/post/organizationalManagement/">
         </link>
         <updated>2023-04-19T09:29:11.000Z</updated>
-        <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="http://localhost:4000/post-images/1681896820412.png" alt="" loading="lazy"></figure>
+        <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://nancy-svy.github.io/post-images/1681896820412.png" alt="" loading="lazy"></figure>
 <p>html</p>
 <pre><code>&lt;template&gt;
 	&lt;view class=&quot;container&quot;&gt;
@@ -330,8 +330,8 @@ npm install less-loader@7.3.0 --save-dev</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[git提交忽略文件]]></title>
-        <id>http://localhost:4000/post/gitIgnoringFiles/</id>
-        <link href="http://localhost:4000/post/gitIgnoringFiles/">
+        <id>https://nancy-svy.github.io/post/gitIgnoringFiles/</id>
+        <link href="https://nancy-svy.github.io/post/gitIgnoringFiles/">
         </link>
         <updated>2023-04-19T01:04:25.000Z</updated>
         <content type="html"><![CDATA[<h3 id="创建-gitignore文件">创建 .gitignore文件</h3>
@@ -393,12 +393,12 @@ doc/**/*.pdf
     </entry>
     <entry>
         <title type="html"><![CDATA[uniapp 时间表]]></title>
-        <id>http://localhost:4000/post/timeTable/</id>
-        <link href="http://localhost:4000/post/timeTable/">
+        <id>https://nancy-svy.github.io/post/timeTable/</id>
+        <link href="https://nancy-svy.github.io/post/timeTable/">
         </link>
         <updated>2023-04-17T03:37:44.000Z</updated>
         <content type="html"><![CDATA[<p>效果图<br>
-<img src="http://localhost:4000/post-images/1681714897240.png" alt="" loading="lazy"></p>
+<img src="https://nancy-svy.github.io/post-images/1681714897240.png" alt="" loading="lazy"></p>
 <p><strong>html</strong></p>
 <pre><code>&lt;template&gt;
 	&lt;view class=&quot;container&quot;&gt;
@@ -604,8 +604,8 @@ doc/**/*.pdf
     </entry>
     <entry>
         <title type="html"><![CDATA[uniapp 引入外部字体]]></title>
-        <id>http://localhost:4000/post/importFontFile/</id>
-        <link href="http://localhost:4000/post/importFontFile/">
+        <id>https://nancy-svy.github.io/post/importFontFile/</id>
+        <link href="https://nancy-svy.github.io/post/importFontFile/">
         </link>
         <updated>2023-04-14T09:50:09.000Z</updated>
         <content type="html"><![CDATA[<p>uni-app 支持使用字体图标，请仔细阅读官方文档：<a href="https://uniapp.dcloud.net.cn/tutorial/syntax-css.html#%E5%AD%97%E4%BD%93%E5%9B%BE%E6%A0%87">地址</a></p>
@@ -617,9 +617,9 @@ doc/**/*.pdf
 </code></pre>
 <h3 id="当字体文件大于40kb时需要自己转化成base64格式">当字体文件大于40kb时，需要自己转化成base64格式：</h3>
 <h6 id="1-将下载好的字体文件转换成base64格式转换地址">1、将下载好的字体文件转换成base64格式，<a href="https://transfonter.org/">转换地址</a></h6>
-<p><img src="http://localhost:4000/post-images/1681464749478.png" alt="" loading="lazy"><br>
+<p><img src="https://nancy-svy.github.io/post-images/1681464749478.png" alt="" loading="lazy"><br>
 ####### 步骤：<br>
-<img src="http://localhost:4000/post-images/1681465633635.webp" alt="" loading="lazy"></p>
+<img src="https://nancy-svy.github.io/post-images/1681465633635.webp" alt="" loading="lazy"></p>
 <ol>
 <li>点击【Add fonts】,选择文件</li>
 <li>打开【Base64 encode】</li>
@@ -627,7 +627,7 @@ doc/**/*.pdf
 <li>点击【Download】下载文件并解压，打开 stylesheet.css 文件，复制代码</li>
 </ol>
 <h6 id="2-转换完成后下载文件解压后将这三个文件放入项目中的static目录下">2、转换完成后，下载文件，解压后将这三个文件放入项目中的static目录下:</h6>
-<figure data-type="image" tabindex="1"><img src="http://localhost:4000/post-images/1681464757016.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://nancy-svy.github.io/post-images/1681464757016.png" alt="" loading="lazy"></figure>
 <h6 id="3-在appvue中引入该文件">3、在App.vue中引入该文件</h6>
 <pre><code>@import url(&quot;./static/fonts/stylesheet.css&quot;);
 </code></pre>
@@ -639,8 +639,8 @@ doc/**/*.pdf
     </entry>
     <entry>
         <title type="html"><![CDATA[chrome问题]]></title>
-        <id>http://localhost:4000/post/chromeQuestion/</id>
-        <link href="http://localhost:4000/post/chromeQuestion/">
+        <id>https://nancy-svy.github.io/post/chromeQuestion/</id>
+        <link href="https://nancy-svy.github.io/post/chromeQuestion/">
         </link>
         <updated>2023-04-12T01:05:19.000Z</updated>
         <content type="html"><![CDATA[<h2 id="问题">问题：</h2>
@@ -653,15 +653,15 @@ doc/**/*.pdf
 <pre><code>    在Chrome导航栏中输入[Experiments](chrome://flags ),
     搜索栏搜索【Extensions on chrome:// URLs】网址下的扩展程序，然后选择Disabled。     
 </code></pre>
-<p><img src="http://localhost:4000/post-images/1681261731032.png" alt="" loading="lazy"><br>
+<p><img src="https://nancy-svy.github.io/post-images/1681261731032.png" alt="" loading="lazy"><br>
 disabled 关闭<br>
 enabled 启用</p>
 ]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[压缩包添加密码]]></title>
-        <id>http://localhost:4000/post/compressedPacketEncryption/</id>
-        <link href="http://localhost:4000/post/compressedPacketEncryption/">
+        <id>https://nancy-svy.github.io/post/compressedPacketEncryption/</id>
+        <link href="https://nancy-svy.github.io/post/compressedPacketEncryption/">
         </link>
         <updated>2023-04-12T00:44:30.000Z</updated>
         <content type="html"><![CDATA[<ol>
@@ -677,53 +677,53 @@ enabled 启用</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[百度网盘设置提取码]]></title>
-        <id>http://localhost:4000/post/networkDiskExtractionCode/</id>
-        <link href="http://localhost:4000/post/networkDiskExtractionCode/">
+        <id>https://nancy-svy.github.io/post/networkDiskExtractionCode/</id>
+        <link href="https://nancy-svy.github.io/post/networkDiskExtractionCode/">
         </link>
         <updated>2023-04-11T09:20:49.000Z</updated>
         <content type="html"><![CDATA[<ol>
 <li>打开百度网盘，上传想要分享的文件<br>
-<img src="http://localhost:4000/post-images/1681205379490.jpg" alt="" loading="lazy"></li>
+<img src="https://nancy-svy.github.io/post-images/1681205379490.jpg" alt="" loading="lazy"></li>
 <li>然后找到文件，选中文件，在上方会出现【分享】<br>
-<img src="http://localhost:4000/post-images/1681205384472.jpg" alt="" loading="lazy"><br>
+<img src="https://nancy-svy.github.io/post-images/1681205384472.jpg" alt="" loading="lazy"><br>
 或者右击要分享的文件，选择【分享】<br>
-<img src="http://localhost:4000/post-images/1681205391766.jpg" alt="" loading="lazy"></li>
+<img src="https://nancy-svy.github.io/post-images/1681205391766.jpg" alt="" loading="lazy"></li>
 <li>在打开的窗口中，分享形式下点击【加密】，然后点击【创建链接】<br>
-<img src="http://localhost:4000/post-images/1681205396627.jpg" alt="" loading="lazy"></li>
+<img src="https://nancy-svy.github.io/post-images/1681205396627.jpg" alt="" loading="lazy"></li>
 <li>就可以得到文件的分享的地址和提取码了，点击【复制链接及密码】<br>
-<img src="http://localhost:4000/post-images/1681205403056.jpg" alt="" loading="lazy"></li>
+<img src="https://nancy-svy.github.io/post-images/1681205403056.jpg" alt="" loading="lazy"></li>
 <li>系统提示复制成功，再将复制好的内容发送给你的好友，就可以了<br>
-<img src="http://localhost:4000/post-images/1681205492242.jpg" alt="" loading="lazy"></li>
+<img src="https://nancy-svy.github.io/post-images/1681205492242.jpg" alt="" loading="lazy"></li>
 </ol>
 ]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[利用GitHub发布个人网站]]></title>
-        <id>http://localhost:4000/post/publishPersonalWebsite/</id>
-        <link href="http://localhost:4000/post/publishPersonalWebsite/">
+        <id>https://nancy-svy.github.io/post/publishPersonalWebsite/</id>
+        <link href="https://nancy-svy.github.io/post/publishPersonalWebsite/">
         </link>
         <updated>2023-04-10T08:48:38.000Z</updated>
         <content type="html"><![CDATA[<ol>
 <li>进入github, 点击Create repository创建一个仓库<br>
-<img src="http://localhost:4000/post-images/1681117633780.png" alt="" loading="lazy"></li>
+<img src="https://nancy-svy.github.io/post-images/1681117633780.png" alt="" loading="lazy"></li>
 <li>建立自己的库<br>
-<img src="http://localhost:4000/post-images/1681117640648.png" alt="" loading="lazy"></li>
+<img src="https://nancy-svy.github.io/post-images/1681117640648.png" alt="" loading="lazy"></li>
 <li>点击uploading an existing file 上传一个已有的文件，或将文件拖动进入<br>
-<img src="http://localhost:4000/post-images/1681117646631.png" alt="" loading="lazy"></li>
+<img src="https://nancy-svy.github.io/post-images/1681117646631.png" alt="" loading="lazy"></li>
 <li>点击commit changes 上传<br>
-<img src="http://localhost:4000/post-images/1681117652676.png" alt="" loading="lazy"></li>
+<img src="https://nancy-svy.github.io/post-images/1681117652676.png" alt="" loading="lazy"></li>
 <li>点击 settings<br>
-<img src="http://localhost:4000/post-images/1681117663992.png" alt="" loading="lazy"></li>
+<img src="https://nancy-svy.github.io/post-images/1681117663992.png" alt="" loading="lazy"></li>
 <li>选择左侧pages菜单，source中选择分支选择main，点击save<br>
-<img src="http://localhost:4000/post-images/1681117670948.png" alt="" loading="lazy"></li>
+<img src="https://nancy-svy.github.io/post-images/1681117670948.png" alt="" loading="lazy"></li>
 <li>刷新一下将出现你的静态访问网址（需要等待几分钟）</li>
 </ol>
 ]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[添加萌国ICP备案号]]></title>
-        <id>http://localhost:4000/post/mengGuoICPPutOnRecord/</id>
-        <link href="http://localhost:4000/post/mengGuoICPPutOnRecord/">
+        <id>https://nancy-svy.github.io/post/mengGuoICPPutOnRecord/</id>
+        <link href="https://nancy-svy.github.io/post/mengGuoICPPutOnRecord/">
         </link>
         <updated>2023-04-07T07:28:53.000Z</updated>
         <content type="html"><![CDATA[<h1 id="前言">前言🍭</h1>
@@ -740,17 +740,17 @@ enabled 启用</p>
 <li>点击登录， 选择加入<br>
 <a href="https://icp.gov.moe/aboutus.php">萌国ICP主页</a></li>
 </ul>
-<figure data-type="image" tabindex="1"><img src="http://localhost:4000/post-images/1680853010730.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://nancy-svy.github.io/post-images/1680853010730.png" alt="" loading="lazy"></figure>
 <ul>
 <li>
 <p>点击橙色进入选择一个喜欢的号码<br>
-<img src="http://localhost:4000/post-images/1680853018966.png" alt="" loading="lazy"></p>
-<figure data-type="image" tabindex="2"><img src="http://localhost:4000/post-images/1680853027028.png" alt="" loading="lazy"></figure>
+<img src="https://nancy-svy.github.io/post-images/1680853018966.png" alt="" loading="lazy"></p>
+<figure data-type="image" tabindex="2"><img src="https://nancy-svy.github.io/post-images/1680853027028.png" alt="" loading="lazy"></figure>
 </li>
 <li>
 <p>选择好后填写常用邮箱，验证账号，并填写好网站名字和网站地址，大概5分钟时间完成验证<br>
-<img src="http://localhost:4000/post-images/1680853041573.png" alt="" loading="lazy"></p>
-<figure data-type="image" tabindex="3"><img src="http://localhost:4000/post-images/1680853062611.png" alt="" loading="lazy"></figure>
+<img src="https://nancy-svy.github.io/post-images/1680853041573.png" alt="" loading="lazy"></p>
+<figure data-type="image" tabindex="3"><img src="https://nancy-svy.github.io/post-images/1680853062611.png" alt="" loading="lazy"></figure>
 </li>
 <li>
 <p>将刚才页面的代码填入到网站页脚页面，⚠️每个人申请的都不同<br>
@@ -764,12 +764,12 @@ enabled 启用</p>
 </ul>
 <h1 id="效果">效果🔅</h1>
 <p>页脚效果<br>
-<img src="http://localhost:4000/post-images/1680853129791.png" alt="" loading="lazy"></p>
+<img src="https://nancy-svy.github.io/post-images/1680853129791.png" alt="" loading="lazy"></p>
 <p>点击效果<br>
-<img src="http://localhost:4000/post-images/1680853139680.png" alt="" loading="lazy"></p>
+<img src="https://nancy-svy.github.io/post-images/1680853139680.png" alt="" loading="lazy"></p>
 <h1 id="小结">小结🔖</h1>
 <p>以上就是添加萌国ICP备案信息的教程，如果后续需要更改网站信息，可以点击自己萌国ICP打开关于页面，找到下面的修改填写自己的萌国ID加绑定的邮箱即可完成修改。<br>
-<img src="http://localhost:4000/post-images/1680853150947.png" alt="" loading="lazy"></p>
+<img src="https://nancy-svy.github.io/post-images/1680853150947.png" alt="" loading="lazy"></p>
 <h1 id="致谢">致谢🎈</h1>
 <p><a href="https://icp.gov.moe/">萌ICP备案</a></p>
 ]]></content>
