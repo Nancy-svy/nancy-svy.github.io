@@ -8,7 +8,7 @@
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>html 四个角的颜色 | Gridea</title>
+<title>vue项目运行时遇到的问题 | Gridea</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1682249527177">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -41,8 +41,8 @@
 
 
 
-  <meta name="description" content="html 四个角的颜色" />
-  <meta name="keywords" content="html" />
+  <meta name="description" content="vue项目运行时遇到的问题" />
+  <meta name="keywords" content="vue3,vue" />
 </head>
 
 <body>
@@ -175,7 +175,8 @@
       <div class="sidebar-body gemini" id="sidebar_body">
         
           
-            
+            <div class="post-side-meta" id="post_side_meta">
+              
 <div class="sidebar-wrapper box-shadow-wrapper bg-color">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="/images/avatar.png"/>
@@ -207,6 +208,200 @@
 
 
 </div>
+            </div>
+            <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
+              <div class="toc-box right-motion">
+  <div class="toc-wrapper  auto"
+    id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E4%B8%80-module-build-failed-from-node_modulesless-loaderdistcjsjs-typeerror-thisgetoptions">一.  Module build failed (from ./node_modules/less-loader/dist/cjs.js): TypeError: this.getOptions</a></li>
+<li><a href="#%E4%BA%8C-vue-error-index-is-defined-but-never-used-vueno-unused-vars">二.  vue error ‘index‘ is defined but never used vue/no-unused-vars</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+
+<script>
+
+  let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1;
+  let active = 'active-show', activeClass = 'active-current';
+  let tocWrapper = document.querySelector('#toc_wrapper');
+  let tocContent = tocWrapper.children[0];
+  let autoNumber = tocWrapper && tocWrapper.classList.contains('auto-number');
+
+  function addTocNumber(elem, deep) {
+    if (!elem) {
+      return;
+    }
+    let prop = elem.__proto__;
+
+    if (prop === HTMLUListElement.prototype) {
+      for (let i = 0; i < elem.children.length; i++) {
+        addTocNumber(elem.children[i], deep + (i + 1) + '.');
+      }
+    } else if (prop === HTMLLIElement.prototype) {
+      // 保存li元素
+      if (elem.children[0] && elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
+        lList.push(elem);
+      }
+      for (let i = 0; i < elem.children.length; i++) {
+        let cur = elem.children[i];
+        if (cur.__proto__ === HTMLAnchorElement.prototype) {
+          if (autoNumber) {
+            cur.text = deep + ' ' + cur.text;
+          }
+        } else if (cur.__proto__ === HTMLUListElement.prototype) {
+          addTocNumber(cur, deep);
+        }
+      }
+    }
+  }
+
+  function removeParentActiveClass() {
+    let parents = tocContent.querySelectorAll('.' + active)
+    parents.forEach(function (elem) {
+      elem.classList.remove(active);
+    });
+  }
+
+  function addActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.add(activeClass);
+    }
+  }
+
+  function removeActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.remove(activeClass);
+    }
+  }
+
+  function addActiveLiElemment(elem, parent) {
+    if (!elem || elem === parent) {
+      return;
+    } else {
+      if (elem.__proto__ === HTMLLIElement.prototype) {
+        elem.classList.add(active);
+      }
+      addActiveLiElemment(elem.parentElement, parent);
+    }
+  }
+
+  function showToc() {
+    if (tocWrapper) {
+      postBody = document.querySelector('#post_body');
+      for (let i = 0; i < postBody.children.length; i++) {
+        if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+          hList.push(postBody.children[i]);
+        }
+      }
+      if (tocWrapper.classList.contains('compress')) {
+        tocContent.classList.add('closed');
+      } else if (tocWrapper.classList.contains('no_compress')) {
+        tocContent.classList.add('expanded');
+      } else {
+        if (hList.length > 10) {
+          active = 'active-hidden'
+          tocContent.classList.add('closed');
+        } else {
+          tocContent.classList.add('expanded');
+        }
+      }
+    }
+  }
+
+  (function () {
+    // 处理不是从#一级标题开始目录
+    if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
+      let con = tocContent.children[0].children[0];
+      tocContent.innerHTML = con.innerHTML;
+    }
+    let markdownItTOC = document.querySelector('.markdownIt-TOC');
+    let innerHeight = window.innerHeight;
+    markdownItTOC.style = `max-height: ${innerHeight - 80 > 0 ? innerHeight - 80 : innerHeight}px`
+    addTocNumber(tocContent, '');
+  })();
+
+  document.addEventListener('scroll', function (e) {
+    if (lList.length <= 0) {
+      return;
+    }
+    let scrollTop = document.scrollingElement.scrollTop + 10;
+    let dir;
+
+    if (lastTop - scrollTop > 0) {
+      dir = 'up';
+    } else {
+      dir = 'down';
+    }
+
+    lastTop = scrollTop;
+    if (scrollTop <= 0) {
+      if (lastIndex >= 0 && lastIndex < hList.length) {
+        lList[lastIndex].classList.remove(activeClass);
+      }
+      return;
+    }
+
+    let current = 0, hasFind = false;
+    for (let i = 0; i < hList.length; i++) {
+      if (hList[i].offsetTop > scrollTop) {
+        current = i;
+        hasFind = true;
+        break;
+      }
+    }
+    if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+      current = hList.length - 1;
+    } else {
+      current--;
+    }
+    if (dir === 'down') {
+      if (current > lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex)
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    } else {
+      if (current < lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex);
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    }
+  });
+
+
+  window.addEventListener('load', function () {
+    showToc();
+    document.querySelector('#sidebar').style = 'display: block;';
+    tocWrapper.classList.add('toc-active');
+    setTimeout(function () {
+      if ("createEvent" in document) {
+        let evt = document.createEvent("HTMLEvents");
+        evt.initEvent("scroll", false, true);
+        document.dispatchEvent(evt);
+      }
+      else {
+        document.fireEvent("scroll");
+      }
+    }, 500)
+  })
+
+</script>
+            </div>
           
         
       </div>
@@ -294,14 +489,14 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="http://localhost:4000/post/fourCornerColor/"> html 四个角的颜色 </a>
+    <a class="post-title-link" href="http://localhost:4000/post/projectOperationIssues/"> vue项目运行时遇到的问题 </a>
   </h1>
   <div class="post-meta">
     
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2021-08-12 09:44:00">2021-08-12</span>
+      <span class="publish-time" data-t="2023-04-20 10:29:30">2023-04-20</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
@@ -309,8 +504,9 @@
       <i class="fa fa-folder-o"></i>
       <span class="pc-show language" data-lan="category-in">标签:</span>
        
-      <a href="http://localhost:4000/tag/vIhWlwNb0/">
-        <span>html</span>
+      <a href="http://localhost:4000/tag/HxnO2cOd9/"> <span>vue3</span> </a>、   
+      <a href="http://localhost:4000/tag/DL0t25dCR/">
+        <span>vue</span>
       </a>
        
     </span>
@@ -328,7 +524,7 @@
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
       <span
-        >75<span class="pc-show language" data-lan="words"
+        >179<span class="pc-show language" data-lan="words"
           >字数</span
         ></span
       >
@@ -338,42 +534,21 @@
 </section>
 
             <div class="post-body next-md-body" id="post_body">
-              <p>html</p>
-<pre><code> &lt;div class=&quot;box&quot;&gt;&lt;/div&gt;
+              <h3 id="一-module-build-failed-from-node_modulesless-loaderdistcjsjs-typeerror-thisgetoptions">一.  Module build failed (from ./node_modules/less-loader/dist/cjs.js): TypeError: this.getOptions</h3>
+<p><strong>解决方法</strong><br>
+降低less-loader的版本为7.3.0<br>
+npm install less-loader@7.3.0 --save-dev</p>
+<h3 id="二-vue-error-index-is-defined-but-never-used-vueno-unused-vars">二.  vue error ‘index‘ is defined but never used vue/no-unused-vars</h3>
+<p>在运行vue项目时，界面写了个一个for循环，但是却报错。界面关键部分代码如下。因为index没有使用过，所以报错<br>
+<img src="http://localhost:4000/post-images/1681958282676.png" alt="" loading="lazy"></p>
+<p><strong>原因分析</strong><br>
+应该是eslint校验导致的，开始想改变eslint校验规则，但是那个没有起效。于是换了一种办法新建vue.config.js文件，然后加入以下代码。重新运行后即可。</p>
+<pre><code>module.exports = {
+     lintOnSave: false
+}
 </code></pre>
-<p>css</p>
-<pre><code>.box {
-        width: 100px;
-        height: 100px;
-        border: 1px solid deeppink;
-        position: absolute;
-    }  
-  .box::before {
-      content: '';
-      width: 80%;
-      height: 100%;
-      border-bottom: 1px solid #ddd;
-      border-top: 1px solid #ddd;
-      bottom: -1px;
-      position: absolute;
-      top: -1px;
-      left: 10%;
-  }
-  .box::after {
-      content: '';
-      width: 100%;
-      height: 80%;
-      border-left: 1px solid #eee;
-      border-right: 1px solid #eee;
-      position: absolute;
-      left: -1px;
-      right: -1px;
-      top: 10%;
-  }
-
-</code></pre>
-<p>效果：<br>
-<img src="http://localhost:4000/post-images/1681263922337.png" alt="" loading="lazy"></p>
+<p>关于lintOnsave的解释可点击查看详细配置哦~<a href="https://cli.vuejs.org/zh/config/#pages">配置参考</a><br>
+<img src="http://localhost:4000/post-images/1681958383332.png" alt="" loading="lazy"></p>
 
             </div>
             
@@ -386,7 +561,7 @@
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="http://localhost:4000/post/fourCornerColor/" title="html 四个角的颜色">http://localhost:4000/post/fourCornerColor/</a>
+      <a href="http://localhost:4000/post/projectOperationIssues/" title="vue项目运行时遇到的问题">http://localhost:4000/post/projectOperationIssues/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -395,21 +570,19 @@
   </ul>
   <div class="tags">
     
-      <a href="http://localhost:4000/tag/vIhWlwNb0/"># html</a>
+      <a href="http://localhost:4000/tag/HxnO2cOd9/"># vue3</a>
+    
+      <a href="http://localhost:4000/tag/DL0t25dCR/"># vue</a>
     
   </div>
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="vue 全屏" href="http://localhost:4000/post/fullScreen/">vue 全屏</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="vue 全屏" href="http://localhost:4000/post/fullScreen/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="html 网页标题栏和收藏夹显示网站logo" href="http://localhost:4000/post/logo/">html 网页标题栏和收藏夹显示网站logo</a>
-        <a class="nav-mobile-next" title="html 网页标题栏和收藏夹显示网站logo" href="http://localhost:4000/post/logo/">下一篇</a>
+        <a class="nav-pc-next" title="uniapp  实现组织管理效果" href="http://localhost:4000/post/organizationalManagement/">uniapp  实现组织管理效果</a>
+        <a class="nav-mobile-next" title="uniapp  实现组织管理效果" href="http://localhost:4000/post/organizationalManagement/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>
