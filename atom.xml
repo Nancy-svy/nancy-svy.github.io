@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://nancy-svy.github.io</id>
     <title>Gridea</title>
-    <updated>2023-04-23T11:35:16.700Z</updated>
+    <updated>2023-04-28T09:51:17.321Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://nancy-svy.github.io"/>
     <link rel="self" href="https://nancy-svy.github.io/atom.xml"/>
@@ -10,6 +10,68 @@
     <logo>https://nancy-svy.github.io/images/avatar.png</logo>
     <icon>https://nancy-svy.github.io/favicon.ico</icon>
     <rights>All rights reserved 2023, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[elementUI tree组件]]></title>
+        <id>https://nancy-svy.github.io/post/elementUITree/</id>
+        <link href="https://nancy-svy.github.io/post/elementUITree/">
+        </link>
+        <updated>2023-04-28T08:01:00.000Z</updated>
+        <content type="html"><![CDATA[<p><strong>1. 改变tree的背景色</strong></p>
+<pre><code>::v-deep .el-tree{
+  background-color: #f5f5f5;
+}
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://nancy-svy.github.io/post-images/1682669162227.png" alt="" loading="lazy"></figure>
+<p><strong>2. tree组件鼠标hover悬浮背景色</strong></p>
+<pre><code>::v-deep.el-tree-node__content{
+  &amp;:hover{
+    background-color: red;
+  }
+}
+</code></pre>
+<figure data-type="image" tabindex="2"><img src="https://nancy-svy.github.io/post-images/1682669133861.png" alt="" loading="lazy"></figure>
+<p><strong>3. tree组件选中背景色修改</strong></p>
+<pre><code>::v-deep.el-tree-node.is-current &gt; .el-tree-node__content {
+    background-color: black !important;
+  }
+</code></pre>
+<figure data-type="image" tabindex="3"><img src="https://nancy-svy.github.io/post-images/1682669104470.png" alt="" loading="lazy"></figure>
+<p><strong>4.tree组件设置图标</strong></p>
+<pre><code>    ::v-deep.tree{
+        .el-tree-node__expand-icon.expanded {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+        // 收起
+        .el-icon-caret-right:before {
+            content: '\e6d9';       
+            border: 1px solid #999999;			   
+        }
+        // 展开
+        .el-tree-node__expand-icon.expanded.el-icon-caret-right:before {
+            content: '\e6d8';
+            color: #165DFF;
+            border: 1px solid #165DFF;
+        }
+        .el-tree-node__expand-icon.is-leaf:before  {
+            content: '' !important;
+            border: none;
+        }
+    }
+</code></pre>
+<figure data-type="image" tabindex="4"><img src="https://nancy-svy.github.io/post-images/1682669221905.png" alt="" loading="lazy"></figure>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[vue-element-admin集成项目]]></title>
+        <id>https://nancy-svy.github.io/post/vueElementAdminProject/</id>
+        <link href="https://nancy-svy.github.io/post/vueElementAdminProject/">
+        </link>
+        <updated>2023-04-26T07:02:27.000Z</updated>
+        <content type="html"><![CDATA[<p>一. 在其它网站下载的svg的图片，有fill属性<br>
+()[https://blog.csdn.net/qq_45844443/article/details/115870393]</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[vue项目运行时遇到的问题]]></title>
         <id>https://nancy-svy.github.io/post/projectOperationIssues/</id>
@@ -695,83 +757,6 @@ enabled 启用</p>
 <li>系统提示复制成功，再将复制好的内容发送给你的好友，就可以了<br>
 <img src="https://nancy-svy.github.io/post-images/1681205492242.jpg" alt="" loading="lazy"></li>
 </ol>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[利用GitHub发布个人网站]]></title>
-        <id>https://nancy-svy.github.io/post/publishPersonalWebsite/</id>
-        <link href="https://nancy-svy.github.io/post/publishPersonalWebsite/">
-        </link>
-        <updated>2023-04-10T08:48:38.000Z</updated>
-        <content type="html"><![CDATA[<ol>
-<li>进入github, 点击Create repository创建一个仓库<br>
-<img src="https://nancy-svy.github.io/post-images/1681117633780.png" alt="" loading="lazy"></li>
-<li>建立自己的库<br>
-<img src="https://nancy-svy.github.io/post-images/1681117640648.png" alt="" loading="lazy"></li>
-<li>点击uploading an existing file 上传一个已有的文件，或将文件拖动进入<br>
-<img src="https://nancy-svy.github.io/post-images/1681117646631.png" alt="" loading="lazy"></li>
-<li>点击commit changes 上传<br>
-<img src="https://nancy-svy.github.io/post-images/1681117652676.png" alt="" loading="lazy"></li>
-<li>点击 settings<br>
-<img src="https://nancy-svy.github.io/post-images/1681117663992.png" alt="" loading="lazy"></li>
-<li>选择左侧pages菜单，source中选择分支选择main，点击save<br>
-<img src="https://nancy-svy.github.io/post-images/1681117670948.png" alt="" loading="lazy"></li>
-<li>刷新一下将出现你的静态访问网址（需要等待几分钟）</li>
-</ol>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[添加萌国ICP备案号]]></title>
-        <id>https://nancy-svy.github.io/post/mengGuoICPPutOnRecord/</id>
-        <link href="https://nancy-svy.github.io/post/mengGuoICPPutOnRecord/">
-        </link>
-        <updated>2023-04-07T07:28:53.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="前言">前言🍭</h1>
-<ul>
-<li>使用国外域名部署网站的站长</li>
-<li>已经在国内备案，想再添加一个备案信息的站长</li>
-</ul>
-<p>因为国内互联网监管要求，购买国内的域名需要进行ICP备案，本小站也是国内购买的域名，当时网站备案花费了9天时间，流程相对严谨，不同地区的备案时间各有差异，一般不超过30天即可完成备案。当网站备案通过后需要将备案号添加到页脚中，以便网站的规范化运作。</p>
-<p>而在国外域名网站购买的域名不需要经过备案就可以让国内用户访问网站，相对而言比较快速上手，但由于没有经过备案这一流程，网站没有备案号，本文就针对这种情况给出解决方法，通过第三方网站选择一个备案号码填入到页脚。</p>
-<h1 id="萌国萌站平台">萌国萌站平台🐣</h1>
-<p>萌国ICP备案是第三方的备案平台，站长在注册通过后选择一个备案号码，然后将生成的备案链接添加到网站的页脚标签页中。</p>
-<h1 id="添加教程">添加教程✅</h1>
-<ul>
-<li>点击登录， 选择加入<br>
-<a href="https://icp.gov.moe/aboutus.php">萌国ICP主页</a></li>
-</ul>
-<figure data-type="image" tabindex="1"><img src="https://nancy-svy.github.io/post-images/1680853010730.png" alt="" loading="lazy"></figure>
-<ul>
-<li>
-<p>点击橙色进入选择一个喜欢的号码<br>
-<img src="https://nancy-svy.github.io/post-images/1680853018966.png" alt="" loading="lazy"></p>
-<figure data-type="image" tabindex="2"><img src="https://nancy-svy.github.io/post-images/1680853027028.png" alt="" loading="lazy"></figure>
-</li>
-<li>
-<p>选择好后填写常用邮箱，验证账号，并填写好网站名字和网站地址，大概5分钟时间完成验证<br>
-<img src="https://nancy-svy.github.io/post-images/1680853041573.png" alt="" loading="lazy"></p>
-<figure data-type="image" tabindex="3"><img src="https://nancy-svy.github.io/post-images/1680853062611.png" alt="" loading="lazy"></figure>
-</li>
-<li>
-<p>将刚才页面的代码填入到网站页脚页面，⚠️每个人申请的都不同<br>
-<a href="https://icp.gov.moe/?keyword=20220176" target="_blank">萌ICP备20220176号</a><br>
-进入主题编辑中template/common/footer.ftl,在footer里任意位置添加上述获取到的代码：<br>
-示范代码</p>
-  <p>
-  <a href="https://icp.gov.moe/?keyword=20220176" target="_blank">萌ICP备20220176号</a>
-  </p>
-</li>
-</ul>
-<h1 id="效果">效果🔅</h1>
-<p>页脚效果<br>
-<img src="https://nancy-svy.github.io/post-images/1680853129791.png" alt="" loading="lazy"></p>
-<p>点击效果<br>
-<img src="https://nancy-svy.github.io/post-images/1680853139680.png" alt="" loading="lazy"></p>
-<h1 id="小结">小结🔖</h1>
-<p>以上就是添加萌国ICP备案信息的教程，如果后续需要更改网站信息，可以点击自己萌国ICP打开关于页面，找到下面的修改填写自己的萌国ID加绑定的邮箱即可完成修改。<br>
-<img src="https://nancy-svy.github.io/post-images/1680853150947.png" alt="" loading="lazy"></p>
-<h1 id="致谢">致谢🎈</h1>
-<p><a href="https://icp.gov.moe/">萌ICP备案</a></p>
 ]]></content>
     </entry>
 </feed>

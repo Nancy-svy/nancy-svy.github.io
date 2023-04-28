@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>uniapp 动态创建form并校验 | Gridea</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1682249527275">
+<link rel="shortcut icon" href="/favicon.ico?v=1682669496258">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -186,7 +186,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">50</span>
+        <span class="site-item-stat-count">53</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -1027,6 +1027,62 @@
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/elementUITree/"" data-c="
+          &lt;p&gt;&lt;strong&gt;1. 改变tree的背景色&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;::v-deep .el-tree{
+  background-color: #f5f5f5;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://nancy-svy.github.io/post-images/1682669162227.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;2. tree组件鼠标hover悬浮背景色&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;::v-deep.el-tree-node__content{
+  &amp;amp;:hover{
+    background-color: red;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;2&#34;&gt;&lt;img src=&#34;https://nancy-svy.github.io/post-images/1682669133861.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;3. tree组件选中背景色修改&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;::v-deep.el-tree-node.is-current &amp;gt; .el-tree-node__content {
+    background-color: black !important;
+  }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;3&#34;&gt;&lt;img src=&#34;https://nancy-svy.github.io/post-images/1682669104470.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;4.tree组件设置图标&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;    ::v-deep.tree{
+        .el-tree-node__expand-icon.expanded {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+        // 收起
+        .el-icon-caret-right:before {
+            content: &#39;\e6d9&#39;;       
+            border: 1px solid #999999;			   
+        }
+        // 展开
+        .el-tree-node__expand-icon.expanded.el-icon-caret-right:before {
+            content: &#39;\e6d8&#39;;
+            color: #165DFF;
+            border: 1px solid #165DFF;
+        }
+        .el-tree-node__expand-icon.is-leaf:before  {
+            content: &#39;&#39; !important;
+            border: none;
+        }
+    }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;4&#34;&gt;&lt;img src=&#34;https://nancy-svy.github.io/post-images/1682669221905.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+">elementUI tree组件</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/vueElementAdminProject/"" data-c="
+          &lt;p&gt;一. 在其它网站下载的svg的图片，有fill属性&lt;br&gt;
+()[https://blog.csdn.net/qq_45844443/article/details/115870393]&lt;/p&gt;
+">vue-element-admin集成项目</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/projectOperationIssues/"" data-c="
@@ -4730,7 +4786,77 @@ css
   display: none;
 }
 &lt;/code&gt;&lt;/pre&gt;
-">elementUI table</a>
+&lt;p&gt;&lt;strong&gt;8. 自定义表格展开和收起图标&lt;/strong&gt;&lt;br&gt;
+&lt;img src=&#34;https://nancy-svy.github.io/post-images/1682668765836.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// 修改展开按钮样式
+    ::v-deep.el-table__expand-icon{
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+        margin-right: 8px;
+        // 展开按钮未点击的样式是加号带边框
+        .el-icon-arrow-right::before{
+            content: &#39;\e6d9&#39;;
+            border: 1px solid #999999;
+            padding: 2px;
+        }
+    }
+    // 展开按钮点击后的样式是减号带边框
+    ::v-deep.el-table__expand-icon--expanded .el-icon-arrow-right::before{
+        content: &amp;quot;\e6d8&amp;quot;;
+        color: #165DFF;
+        border: 1px solid #165DFF;
+    }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;效果如下&lt;br&gt;
+&lt;img src=&#34;https://nancy-svy.github.io/post-images/1682668459704.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;9. table表头全部或单个表头颜色header-row-style&lt;/strong&gt;&lt;br&gt;
+设置全部表头颜色白色#ffffff，字体黑色#000000，&lt;br&gt;
+方式一，（推荐）&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;  &amp;lt;el-table 
+:data=&amp;quot;tableList&amp;quot; style=&amp;quot;width: 100%&amp;quot; 
+:header-cell-style=&amp;quot;{ 
+      background:&#39;#FFFFFF&#39;,color:&#39;#000000&#39;}&amp;quot;&amp;gt;
+ &amp;lt;/el-table&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;方式二  :header-cell-style=&amp;quot;tableHeaderColor&amp;quot;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; &amp;lt;el-table v-loading=&amp;quot;listLoading&amp;quot;
+    style=&amp;quot;width: 100%&amp;quot;
+    :data=&amp;quot;list&amp;quot;
+    @sort-change=&amp;quot;changeSort&amp;quot;
+    :header-cell-style=&amp;quot;tableHeaderColor&amp;quot;&amp;gt;
+&amp;lt;/el-table&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;methods: {
+    tableHeaderColor ({row, column, rowIndex, columnIndex}) {
+          return &#39;background-color: #ffffff;color:#000000;&#39;
+      },
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://nancy-svy.github.io/post-images/1682669494439.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;设置某一个表头颜色&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; &amp;lt;el-table v-loading=&amp;quot;listLoading&amp;quot;
+    style=&amp;quot;width: 100%&amp;quot;
+    :data=&amp;quot;list&amp;quot;
+    @sort-change=&amp;quot;changeSort&amp;quot;
+    :header-cell-style=&amp;quot;tableHeaderColor&amp;quot;&amp;gt;
+&amp;lt;/el-table&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;//设置表头的颜色
+ tableHeaderColor({ row, column, rowIndex, columnIndex }) {
+      console.log(row, column, rowIndex, columnIndex);
+      if (rowIndex === 0 &amp;amp;&amp;amp; columnIndex === 1) {
+        return &#39;background-color: #afccfd;color:#000000;&#39;; //蓝色
+      } else if (rowIndex === 0 &amp;amp;&amp;amp; columnIndex === 2) {
+        return &#39;background-color: #c0e33c;color:#000000;&#39;;//绿色
+      } else if (rowIndex === 0 &amp;amp;&amp;amp; columnIndex === 3) {
+        return &#39;background-color: #fbc57b;color:#000000;&#39;;//橙色
+      } else {
+        return &#39;color:#000000;background: #ffffff;&#39;;
+      }
+},
+&lt;/code&gt;&lt;/pre&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;2&#34;&gt;&lt;img src=&#34;https://nancy-svy.github.io/post-images/1682669472575.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+">elementUI table组件</a>
       </div>
       
       <div class="item">
@@ -7662,6 +7788,55 @@ getCodes.addEventListener(&#39;tap&#39;, function() {
 &lt;p&gt;效果：&lt;br&gt;
 &lt;img src=&#34;https://nancy-svy.github.io/post-images/1681263922337.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
 ">html 四个角的颜色</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/gitCommonCommands/"" data-c="
+          &lt;p&gt;&lt;strong&gt;提交暂存区到本地仓库中&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;git add .
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;提交暂存区到本地仓库中的备注信息&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;git commit -m &#39;描述&#39;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;从远程拉取代码并合并到本地&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;git pull origin 分支名
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;从本地提交到远程仓库&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;git push origin 分支名
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;切换分支&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;git checkout 分支名
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;创建并切换分支&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;git checkout -b 分支名
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;创建分支&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;git branch 分支名
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;删除分支&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;删除本地分支
+git branch -d 分支名  
+
+删除远程分支
+ git push origin --delete 分支名   
+
+强制删除分支
+ git branch -D 分支名称
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;合并某分支到当前分支&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;git merge 分支名
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;查看分支&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;查看远程分支
+git branch -r
+
+查看本地分支
+ git branch
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;查看状态&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;git status
+&lt;/code&gt;&lt;/pre&gt;
+">git 常用命令</a>
       </div>
       
       <div class="item">
