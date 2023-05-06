@@ -8,7 +8,7 @@
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>elementUI tree组件 | Gridea</title>
+<title>google 简书广告屏蔽 | Gridea</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1683365420142">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -41,8 +41,8 @@
 
 
 
-  <meta name="description" content="elementUI tree组件" />
-  <meta name="keywords" content="element ui" />
+  <meta name="description" content="google 简书广告屏蔽" />
+  <meta name="keywords" content="google" />
 </head>
 
 <body>
@@ -294,14 +294,14 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://nancy-svy.github.io/post/elementUITree/"> elementUI tree组件 </a>
+    <a class="post-title-link" href="https://nancy-svy.github.io/post/blockAdvertising/"> google 简书广告屏蔽 </a>
   </h1>
   <div class="post-meta">
     
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2023-04-28 16:01:00">2023-04-28</span>
+      <span class="publish-time" data-t="2023-05-06 13:36:40">2023-05-06</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
@@ -309,8 +309,8 @@
       <i class="fa fa-folder-o"></i>
       <span class="pc-show language" data-lan="category-in">标签:</span>
        
-      <a href="https://nancy-svy.github.io/tag/jy6EWQdy6/">
-        <span>element ui</span>
+      <a href="https://nancy-svy.github.io/tag/zZ6cKwRmI/">
+        <span>google</span>
       </a>
        
     </span>
@@ -328,7 +328,7 @@
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
       <span
-        >281<span class="pc-show language" data-lan="words"
+        >366<span class="pc-show language" data-lan="words"
           >字数</span
         ></span
       >
@@ -338,113 +338,18 @@
 </section>
 
             <div class="post-body next-md-body" id="post_body">
-              <p><strong>1. 改变tree的背景色</strong></p>
-<pre><code>::v-deep .el-tree{
-  background-color: #f5f5f5;
-}
-</code></pre>
-<figure data-type="image" tabindex="1"><img src="https://nancy-svy.github.io/post-images/1682669162227.png" alt="" loading="lazy"></figure>
-<p><strong>2. tree组件鼠标hover悬浮背景色</strong></p>
-<pre><code>::v-deep.el-tree-node__content{
-  &amp;:hover{
-    background-color: red;
-  }
-}
-</code></pre>
-<figure data-type="image" tabindex="2"><img src="https://nancy-svy.github.io/post-images/1682669133861.png" alt="" loading="lazy"></figure>
-<p><strong>3. tree组件选中背景色修改</strong></p>
-<pre><code>::v-deep.el-tree-node.is-current &gt; .el-tree-node__content {
-    background-color: black !important;
-  }
-</code></pre>
-<figure data-type="image" tabindex="3"><img src="https://nancy-svy.github.io/post-images/1682669104470.png" alt="" loading="lazy"></figure>
-<p><strong>4.tree组件设置图标</strong></p>
-<pre><code>    ::v-deep.tree{
-        .el-tree-node__expand-icon.expanded {
-            -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-        }
-        // 收起
-        .el-icon-caret-right:before {
-            content: '\e6d9';       
-            border: 1px solid #999999;			   
-        }
-        // 展开
-        .el-tree-node__expand-icon.expanded.el-icon-caret-right:before {
-            content: '\e6d8';
-            color: #165DFF;
-            border: 1px solid #165DFF;
-        }
-        .el-tree-node__expand-icon.is-leaf:before  {
-            content: '' !important;
-            border: none;
-        }
-    }
-</code></pre>
-<p>实现效果<br>
-<img src="https://nancy-svy.github.io/post-images/1682669221905.png" alt="" loading="lazy"></p>
-<p><strong>5. tree组件有指示线</strong><br>
-实现效果<br>
-<img src="https://nancy-svy.github.io/post-images/1683339530196.png" alt="" loading="lazy"></p>
-<pre><code>&lt;el-tree
-    class=&quot;tree-line&quot;
-    :data=&quot;data&quot;
-    show-checkbox
-    node-key=&quot;id&quot;
-    :props=&quot;defaultProps&quot;
-&gt;
-&lt;/el-tree&gt;
-</code></pre>
-<p>css样式</p>
-<pre><code>.tree-line{
-    .el-tree-node {
-        position: relative;
-        padding-left: 16px;
-    }
-    .el-tree-node__content {
-        margin-top: 10px;
-    }
-    .el-tree-node__children {
-        padding-left: 16px;
-    }
-    .el-tree-node::before {
-        content: '';
-        height: 100%;
-        width: 1px;
-        position: absolute;
-        left: -3px;
-        top: -26px;
-        border-width: 1px;
-        border-left: 1px dashed #707070;
-    }
-    
-    .el-tree-node:last-child::before {
-        height: 38px;
-    }
-    .el-tree-node::after {
-        content: '';
-        width: 24px;
-        height: 20px;
-        position: absolute;
-        left: -3px;
-        top: 12px;
-        border-width: 1px;
-        border-top: 1px dashed #707070;
-    }
-    &amp; &gt; .el-tree-node::after {
-        border-top: none;
-    }
-    &amp; &gt; .el-tree-node::before {
-        border-left: none;
-    }
-    .el-tree-node__expand-icon {
-        color: #000;
-        &amp;.is-leaf {
-        color: transparent;
-        }
-    }
-}
-</code></pre>
+              <p>最近简书感觉是穷疯了，随便打开一篇文章满屏的广告乱飞，对于有强迫症的患者非常难受，看到广告就想点 x x 关闭。似乎简书与我干上了，并不希望我关闭广告，点完关闭立马把我带到广告的详情页，于是忍无可忍从网上找了一些方法，彻底铲除这些辣眼睛的广告。<br>
+<img src="https://nancy-svy.github.io/post-images/1683351463792.png" alt="" loading="lazy"></p>
+<p><strong>一、 AdGuard 广告拦截器</strong><br>
+(AdGuard)[http://www.ddooo.com/softdown/128398.htm] 广告拦截器是一款可以对抗各式广告的拦截插件，该插件可以拦截包括视频广告、浮动广告以及插播广告在内的绝大部分常见的网站广告。<br>
+<img src="https://nancy-svy.github.io/post-images/1683351546969.png" alt="" loading="lazy"></p>
+<p><strong>二、 Adblock</strong><br>
+(AdBlock)[https://adblockplus.org/] 插件是 Chrome 最知名的广告拦截插件之一，不仅能够帮助用户对 Facebook 和 YouTube 等网站上的广告、弹窗和恼人的横幅广告进行拦截，同时也能够对第三方跟踪代码进行拦截，保护用户的隐私。<br>
+<img src="https://nancy-svy.github.io/post-images/1683351602470.png" alt="" loading="lazy"></p>
+<p><strong>三、Adblock plus</strong><br>
+(Adblock Plus)[https://www.adblockplus.org/] 插件作为一款功能强大且免费的广告拦截插件，支持包括 Chrome 、 Firefox 等在内的多种浏览器。<br>
+在浏览器中安装、启用该插件后，用户不需要操作，它就会对网页中的广告进行自动屏蔽，并且还会将空白的页面进行合并，完全看不出广告的痕迹。<br>
+<img src="https://nancy-svy.github.io/post-images/1683351815771.png" alt="" loading="lazy"></p>
 
             </div>
             
@@ -457,7 +362,7 @@
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://nancy-svy.github.io/post/elementUITree/" title="elementUI tree组件">https://nancy-svy.github.io/post/elementUITree/</a>
+      <a href="https://nancy-svy.github.io/post/blockAdvertising/" title="google 简书广告屏蔽">https://nancy-svy.github.io/post/blockAdvertising/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -466,21 +371,17 @@
   </ul>
   <div class="tags">
     
-      <a href="https://nancy-svy.github.io/tag/jy6EWQdy6/"># element ui</a>
+      <a href="https://nancy-svy.github.io/tag/zZ6cKwRmI/"># google</a>
     
   </div>
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="google 简书广告屏蔽" href="https://nancy-svy.github.io/post/blockAdvertising/">google 简书广告屏蔽</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="google 简书广告屏蔽" href="https://nancy-svy.github.io/post/blockAdvertising/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="vue-element-admin集成项目" href="https://nancy-svy.github.io/post/vueElementAdminProject/">vue-element-admin集成项目</a>
-        <a class="nav-mobile-next" title="vue-element-admin集成项目" href="https://nancy-svy.github.io/post/vueElementAdminProject/">下一篇</a>
+        <a class="nav-pc-next" title="elementUI tree组件" href="https://nancy-svy.github.io/post/elementUITree/">elementUI tree组件</a>
+        <a class="nav-mobile-next" title="elementUI tree组件" href="https://nancy-svy.github.io/post/elementUITree/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>

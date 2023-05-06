@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://nancy-svy.github.io</id>
     <title>Gridea</title>
-    <updated>2023-04-28T11:26:50.568Z</updated>
+    <updated>2023-05-06T09:32:59.138Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://nancy-svy.github.io"/>
     <link rel="self" href="https://nancy-svy.github.io/atom.xml"/>
@@ -10,6 +10,26 @@
     <logo>https://nancy-svy.github.io/images/avatar.png</logo>
     <icon>https://nancy-svy.github.io/favicon.ico</icon>
     <rights>All rights reserved 2023, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[google 简书广告屏蔽]]></title>
+        <id>https://nancy-svy.github.io/post/blockAdvertising/</id>
+        <link href="https://nancy-svy.github.io/post/blockAdvertising/">
+        </link>
+        <updated>2023-05-06T05:36:40.000Z</updated>
+        <content type="html"><![CDATA[<p>最近简书感觉是穷疯了，随便打开一篇文章满屏的广告乱飞，对于有强迫症的患者非常难受，看到广告就想点 x x 关闭。似乎简书与我干上了，并不希望我关闭广告，点完关闭立马把我带到广告的详情页，于是忍无可忍从网上找了一些方法，彻底铲除这些辣眼睛的广告。<br>
+<img src="https://nancy-svy.github.io/post-images/1683351463792.png" alt="" loading="lazy"></p>
+<p><strong>一、 AdGuard 广告拦截器</strong><br>
+(AdGuard)[http://www.ddooo.com/softdown/128398.htm] 广告拦截器是一款可以对抗各式广告的拦截插件，该插件可以拦截包括视频广告、浮动广告以及插播广告在内的绝大部分常见的网站广告。<br>
+<img src="https://nancy-svy.github.io/post-images/1683351546969.png" alt="" loading="lazy"></p>
+<p><strong>二、 Adblock</strong><br>
+(AdBlock)[https://adblockplus.org/] 插件是 Chrome 最知名的广告拦截插件之一，不仅能够帮助用户对 Facebook 和 YouTube 等网站上的广告、弹窗和恼人的横幅广告进行拦截，同时也能够对第三方跟踪代码进行拦截，保护用户的隐私。<br>
+<img src="https://nancy-svy.github.io/post-images/1683351602470.png" alt="" loading="lazy"></p>
+<p><strong>三、Adblock plus</strong><br>
+(Adblock Plus)[https://www.adblockplus.org/] 插件作为一款功能强大且免费的广告拦截插件，支持包括 Chrome 、 Firefox 等在内的多种浏览器。<br>
+在浏览器中安装、启用该插件后，用户不需要操作，它就会对网页中的广告进行自动屏蔽，并且还会将空白的页面进行合并，完全看不出广告的痕迹。<br>
+<img src="https://nancy-svy.github.io/post-images/1683351815771.png" alt="" loading="lazy"></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[elementUI tree组件]]></title>
         <id>https://nancy-svy.github.io/post/elementUITree/</id>
@@ -59,7 +79,70 @@
         }
     }
 </code></pre>
-<figure data-type="image" tabindex="4"><img src="https://nancy-svy.github.io/post-images/1682669221905.png" alt="" loading="lazy"></figure>
+<p>实现效果<br>
+<img src="https://nancy-svy.github.io/post-images/1682669221905.png" alt="" loading="lazy"></p>
+<p><strong>5. tree组件有指示线</strong><br>
+实现效果<br>
+<img src="https://nancy-svy.github.io/post-images/1683339530196.png" alt="" loading="lazy"></p>
+<pre><code>&lt;el-tree
+    class=&quot;tree-line&quot;
+    :data=&quot;data&quot;
+    show-checkbox
+    node-key=&quot;id&quot;
+    :props=&quot;defaultProps&quot;
+&gt;
+&lt;/el-tree&gt;
+</code></pre>
+<p>css样式</p>
+<pre><code>.tree-line{
+    .el-tree-node {
+        position: relative;
+        padding-left: 16px;
+    }
+    .el-tree-node__content {
+        margin-top: 10px;
+    }
+    .el-tree-node__children {
+        padding-left: 16px;
+    }
+    .el-tree-node::before {
+        content: '';
+        height: 100%;
+        width: 1px;
+        position: absolute;
+        left: -3px;
+        top: -26px;
+        border-width: 1px;
+        border-left: 1px dashed #707070;
+    }
+    
+    .el-tree-node:last-child::before {
+        height: 38px;
+    }
+    .el-tree-node::after {
+        content: '';
+        width: 24px;
+        height: 20px;
+        position: absolute;
+        left: -3px;
+        top: 12px;
+        border-width: 1px;
+        border-top: 1px dashed #707070;
+    }
+    &amp; &gt; .el-tree-node::after {
+        border-top: none;
+    }
+    &amp; &gt; .el-tree-node::before {
+        border-left: none;
+    }
+    .el-tree-node__expand-icon {
+        color: #000;
+        &amp;.is-leaf {
+        color: transparent;
+        }
+    }
+}
+</code></pre>
 ]]></content>
     </entry>
     <entry>
@@ -68,8 +151,18 @@
         <link href="https://nancy-svy.github.io/post/vueElementAdminProject/">
         </link>
         <updated>2023-04-26T07:02:27.000Z</updated>
-        <content type="html"><![CDATA[<p>一. 在其它网站下载的svg的图片，有fill属性<br>
-()[https://blog.csdn.net/qq_45844443/article/details/115870393]</p>
+        <content type="html"><![CDATA[<h5 id="一-在其它网站下载的svg的图片有fill属性">一. 在其它网站下载的svg的图片，有fill属性</h5>
+<p>设置不了svg的颜色，需要去掉fill属性</p>
+<h5 id="二-vue-element-admin-修改页面标题">二、vue-element-admin 修改页面标题</h5>
+<p><strong>1.找到permission.js页面</strong><br>
+其中document.title = getPageTitle(to.meta.title)就是设置title<br>
+然后找到getPageTitle方法,按住Ctrl键左键单击getPageTitle方法跳转到get-page-title.js文件界面<br>
+<img src="https://nancy-svy.github.io/post-images/1683339152913.png" alt="" loading="lazy"></p>
+<p><strong>2.找到get-page-title.js</strong><br>
+<img src="https://nancy-svy.github.io/post-images/1683339184366.png" alt="" loading="lazy"></p>
+<p><strong>3.再找到settings.js</strong><br>
+修改默认的title<br>
+<img src="https://nancy-svy.github.io/post-images/1683339196890.png" alt="" loading="lazy"></p>
 ]]></content>
     </entry>
     <entry>
@@ -700,7 +793,7 @@ doc/**/*.pdf
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[chrome问题]]></title>
+        <title type="html"><![CDATA[google  chrome问题]]></title>
         <id>https://nancy-svy.github.io/post/chromeQuestion/</id>
         <link href="https://nancy-svy.github.io/post/chromeQuestion/">
         </link>
@@ -734,28 +827,6 @@ enabled 启用</p>
 <li>压缩成功：我们可以看到压缩文件和原文件都在，说明压缩成功了。</li>
 <li>解压：右击压缩文件，点击解压到，开始解压</li>
 <li>需要密码：出现解压需要密码，说明密码设置成功。</li>
-</ol>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[百度网盘设置提取码]]></title>
-        <id>https://nancy-svy.github.io/post/networkDiskExtractionCode/</id>
-        <link href="https://nancy-svy.github.io/post/networkDiskExtractionCode/">
-        </link>
-        <updated>2023-04-11T09:20:49.000Z</updated>
-        <content type="html"><![CDATA[<ol>
-<li>打开百度网盘，上传想要分享的文件<br>
-<img src="https://nancy-svy.github.io/post-images/1681205379490.jpg" alt="" loading="lazy"></li>
-<li>然后找到文件，选中文件，在上方会出现【分享】<br>
-<img src="https://nancy-svy.github.io/post-images/1681205384472.jpg" alt="" loading="lazy"><br>
-或者右击要分享的文件，选择【分享】<br>
-<img src="https://nancy-svy.github.io/post-images/1681205391766.jpg" alt="" loading="lazy"></li>
-<li>在打开的窗口中，分享形式下点击【加密】，然后点击【创建链接】<br>
-<img src="https://nancy-svy.github.io/post-images/1681205396627.jpg" alt="" loading="lazy"></li>
-<li>就可以得到文件的分享的地址和提取码了，点击【复制链接及密码】<br>
-<img src="https://nancy-svy.github.io/post-images/1681205403056.jpg" alt="" loading="lazy"></li>
-<li>系统提示复制成功，再将复制好的内容发送给你的好友，就可以了<br>
-<img src="https://nancy-svy.github.io/post-images/1681205492242.jpg" alt="" loading="lazy"></li>
 </ol>
 ]]></content>
     </entry>
