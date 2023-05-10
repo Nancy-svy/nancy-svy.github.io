@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://nancy-svy.github.io</id>
     <title>Gridea</title>
-    <updated>2023-05-06T09:59:20.378Z</updated>
+    <updated>2023-05-10T05:58:59.432Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://nancy-svy.github.io"/>
     <link rel="self" href="https://nancy-svy.github.io/atom.xml"/>
@@ -10,6 +10,405 @@
     <logo>https://nancy-svy.github.io/images/avatar.png</logo>
     <icon>https://nancy-svy.github.io/favicon.ico</icon>
     <rights>All rights reserved 2023, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[vue 表格数据打印功能]]></title>
+        <id>https://nancy-svy.github.io/post/tableDataPrinting/</id>
+        <link href="https://nancy-svy.github.io/post/tableDataPrinting/">
+        </link>
+        <updated>2023-05-09T03:16:31.000Z</updated>
+        <content type="html"><![CDATA[<h4 id="一-单页打印">一、单页打印</h4>
+<p>只对当前页面可见数据进行打印，实现方法不唯一，此处介绍相对简单的vue-print-nb。他的缺点是只能打印可见区域，不能分页打印 。</p>
+<ol>
+<li>安装</li>
+</ol>
+<pre><code>  npm install vue-print-nb --save
+</code></pre>
+<ol start="2">
+<li>引入</li>
+</ol>
+<pre><code>// 安装好以后在main.js文件中引入
+import Print from 'vue-print-nb'
+Vue.use(Print);  //注册
+</code></pre>
+<ol start="3">
+<li>使用<br>
+(1). 直接使用id，不对最终打印的表格进行样式修改</li>
+</ol>
+<pre><code>// 通过ID直接打印
+  &lt;div id=&quot;print_demo&quot; &gt;
+    &lt;p&gt;打印内容&lt;/p&gt;
+  &lt;/div&gt;
+&lt;button v-print=&quot;'#print_demo'&quot;&gt;打印&lt;/button&gt;
+</code></pre>
+<p>(2). 使用printObj，可以对打印的表格进行样式调整</p>
+<pre><code>// 在组件的打印按钮标签上使用指令 v-print=&quot;printObj&quot;, print是配置对象
+  &lt;button v-print=&quot;printObj&quot;&gt;打印&lt;/button&gt;
+
+//  在组件的打印区域标签上加 id=&quot;print_demo&quot;
+&lt;div id=&quot;print_demo&quot;  style=&quot;background:red;&quot;&gt;
+  &lt;p&gt;打印内容&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+<p>(2-1). 在组件的data中定义print配置对象</p>
+<pre><code>export default {
+    data() {
+        return {
+            printObj: {
+              id: &quot;print_demo&quot;,
+              popTitle: '打印的标题', //  打印配置页上方标题
+              extraHead: '&lt;meta http-equiv=&quot;Content-Language&quot;content=&quot;zh-cn&quot;/&gt;',  // 最上方的头部文字，附加在head标签上的额外标签,使用逗号分隔
+               preview: '',  // 是否启动预览模式，默认是false（开启预览模式，可以先预览后打印）
+               previewTitle: '',  // 打印预览的标题（开启预览模式后出现）,
+               previewPrintBtnLabel: '',  // 打印预览的标题的下方按钮文本，点击可进入打印（开启预览模式后出现）
+               zIndex: '', // 预览的窗口的z-index，默认是 20002（此值要高一些，这涉及到预览模式是否显示在最上面）   
+               previewBeforeOpenCallback() {}, //预览窗口打开之前的callback（开启预览模式调用）
+               previewOpenCallback() {}, // 预览窗口打开之后的callback（开启预览模式调用）
+               beforeOpenCallback() {}, // 开启打印前的回调事件
+               openCallback() {}, // 调用打印之后的回调事件
+              closeCallback() {}, //关闭打印的回调事件（无法确定点击的是确认还是取消）
+              extraCss: 'https://www.google.com,https://www.google.com', 
+            }
+        };
+    }
+}
+</code></pre>
+<p>(2-2). 打印过滤（隐藏打印区域不需要打印的内容）<br>
+只需要在组件的打印区域里，给需要隐藏的内容的标签上添加</p>
+<pre><code>class=&quot;noprint&quot;
+</code></pre>
+<p>(2-3). 配置打印的样式<br>
+在全局样式中，新增<style media="print"></style>标签，里面是打印时才生效的样式</p>
+<pre><code>&lt;style media=&quot;print&quot;&gt;
+    @page {
+    size: auto;
+    margin: 3mm;
+    }
+
+    html {
+    background-color: #ffffff;
+    height: auto;
+    margin: 0px;
+    }
+&lt;/style&gt;
+</code></pre>
+<p>(2-4). 处理常见的打印bug<br>
+解决打印出现空白页的问题<br>
+解决el-table表格内容过多，打印不全问题<br>
+解决作用域污染问题导致el-table序号错位</p>
+<pre><code>&lt;style media=&quot;print&quot; lang=&quot;scss&quot;&gt;
+    @page {
+    size: auto;
+    margin: 3mm;
+    }
+    @media print {
+    html {
+        background-color: #ffffff;
+        height: auto;
+        margin: 0px;
+    }
+
+    body {
+        border: solid 1px #ffffff;
+        margin: 10mm 15mm 10mm 15mm;
+    }
+    table {
+        table-layout: auto !important;
+    }
+
+    .el-table__header-wrapper .el-table__header {
+        width: 100% !important;
+        border: solid 1px #f2f2f2;
+    }
+    .el-table__body-wrapper .el-table__body {
+        width: 100% !important;
+    }
+    #pagetable table {
+        table-layout: fixed !important;
+    }
+    }
+&lt;/style&gt;
+</code></pre>
+<p>(2-5). 局部打印，局限在当前组件里<br>
+在组件标签</p>
+<pre><code>&lt;style media=&quot;print&quot; lang=&quot;scss&quot;&gt;
+@page {
+  size: auto;
+  margin: 3mm;
+}
+@media print {
+  html {
+    background-color: #ffffff;
+    height: auto;
+    margin: 0px;
+  }
+
+  body {
+    border: solid 1px #ffffff;
+    margin: 10mm 15mm 10mm 15mm;
+  }
+  #printArea table {
+    table-layout: auto !important;
+  }
+
+  #printArea .el-table__header-wrapper .el-table__header {
+    width: 100% !important;
+    border: solid 1px #f2f2f2;
+  }
+  #printArea .el-table__body-wrapper .el-table__body {
+    width: 100% !important;
+  }
+  #printArea #pagetable table {
+    table-layout: fixed !important;
+  }
+}
+&lt;/style&gt;
+</code></pre>
+<p>(2-6). 注意<br>
+启动打印后可以通过调整设置的缩放来调整显示比例<br>
+可以通过设置背景图形来控制页面是否使用彩色背景</p>
+<h4 id="二-打印数据库内全部数据">二、打印数据库内全部数据</h4>
+<p><a href="https://printjs.crabbly.com/">Print.js 文档</a></p>
+<figure data-type="image" tabindex="1"><img src="https://nancy-svy.github.io/post-images/1683697863113.png" alt="" loading="lazy"></figure>
+<p>将数据库内的全部数据以表格的形式进行打印，需要调用后台接口直接从数据库内进行数据的查找，而不是直接在页面内获取数据。</p>
+<ol>
+<li>安装</li>
+</ol>
+<pre><code>npm install print-js --save
+</code></pre>
+<ol start="2">
+<li>引入</li>
+</ol>
+<pre><code>// 在当前vue文件内引用
+import printJS from 'print-js'
+</code></pre>
+<ol start="3">
+<li>使用</li>
+</ol>
+<pre><code>&lt;el-button  @click=&quot;printJson&quot;&gt;打印全部表格&lt;/el-button&gt;
+</code></pre>
+<pre><code>async printJson() {
+      //通过getdata调用后台接口获取数据封装到res
+      const res = await getdata();
+      this.list = res.data || [];
+      printJS({
+        printable: this.list ,
+        properties: [ // 表头数据
+          {
+            field: 'num', //  表头字段
+            displayName: '序号', // 页面显示的文字
+          },
+          { field: 'date', displayName: '日期 '},
+         { field: 'name', displayName: '费用名称' },
+         { field: 'subjectMatter', displayName: '事由' },
+         { field: 'money', displayName: '金额(元)' },
+         { field: 'notes', displayName: '备注' },
+        ],
+        type: 'json',
+         // tbody的样式
+        gridStyle: 'text-align: center;border: 1px solid #E5E6EB;' ,
+         // 标题
+		header: `&lt;h3 class=&quot;custom-h3&quot;&gt;标题&lt;/h3&gt;`,
+        // 标题样式
+		style: '.custom-h3{text-align: center; margin-bottom: 10px;}',
+      })
+    },
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[vue 条形码]]></title>
+        <id>https://nancy-svy.github.io/post/barCode/</id>
+        <link href="https://nancy-svy.github.io/post/barCode/">
+        </link>
+        <updated>2023-05-09T02:19:36.000Z</updated>
+        <content type="html"><![CDATA[<h5 id="一-jsbarcode">一、JsBarcode</h5>
+<p><a href="https://lindell.me/JsBarcode/">JsBarcode 文档</a></p>
+<ol>
+<li>安装：</li>
+</ol>
+<pre><code>npm install jsbarcode --save
+</code></pre>
+<ol start="2">
+<li>引入：在需要生成条形码的页面引入即可</li>
+</ol>
+<pre><code>import JsBarcode from 'jsbarcode'
+</code></pre>
+<ol start="3">
+<li>需要显示条形码的页面里</li>
+</ol>
+<pre><code>&lt;img id=&quot;barcode1&quot;&gt;
+</code></pre>
+<ol start="4">
+<li>调用构造函数生成条形码</li>
+</ol>
+<pre><code>let barCode1 = this.info.marIdCode;
+let barheight = this.imgHeight;
+JsBarcode(&quot;#barcode1&quot;,barCode1,{
+    format:&quot;CODE128&quot;, // 条形码的格式
+    width:1,  // 线宽
+    height:barheight,  // 条码高度
+    lineColor:&quot;#000&quot;,  // 线条颜色
+    displayValue:false,  // 是否显示文字
+    margin:2  // 设置条形码周围的空白区域
+})
+</code></pre>
+<h5 id="二-vue-barcode">二、vue-barcode</h5>
+<p>vue-barcode 是JsBarcode的简单包装</p>
+<ol>
+<li>版本一<br>
+<a href="https://github.com/lindell/vue-barcode">https://github.com/lindell/vue-barcode</a><br>
+安装</li>
+</ol>
+<pre><code>npm install vue-barcode
+</code></pre>
+<ol start="2">
+<li>版本二<br>
+<a href="https://github.com/xkeshi/vue-barcode">https://github.com/xkeshi/vue-barcode</a><br>
+安装</li>
+</ol>
+<pre><code>npm install @xkeshi/vue-barcode 
+</code></pre>
+<ol start="3">
+<li>两个版本区别</li>
+</ol>
+<p>版本一：只能单独绑定属性<br>
+引入：在需要生成条形码的页面引入即可</p>
+<pre><code> import  VueBarcode from 'vue-barcode'
+ new Vue({
+  components: {
+      'barcode': VueBarcode
+  }
+})
+</code></pre>
+<pre><code>&lt;barcode  :value=&quot;barcodeValue&quot;  :width=&quot;7&quot;  :height=&quot;200&quot;&gt;&lt;/barcode&gt;
+</code></pre>
+<p>版本二：可直接options绑定所有属性<br>
+引入：在需要生成条形码的页面引入即可</p>
+<pre><code> import VueBarcode from '@xkeshi/vue-barcode'
+ new Vue({
+  components: {
+      'barcode': VueBarcode
+  }
+})
+</code></pre>
+<pre><code>&lt;barcode  :value=&quot;barcodeValue&quot;  :options=&quot;{ width:100 , height:100}&quot;&gt;
+    条形码显示失败时的内容
+&lt;/barcode&gt;
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[js  文件大小换算为B、KB、MB、GB]]></title>
+        <id>https://nancy-svy.github.io/post/fileSizeConversion/</id>
+        <link href="https://nancy-svy.github.io/post/fileSizeConversion/">
+        </link>
+        <updated>2023-05-07T01:46:22.000Z</updated>
+        <content type="html"><![CDATA[<pre><code>// 文件大小换算
+			sizeTostr(size) {
+			    var data = &quot;&quot;;
+			    if (size &lt; 0.1 * 1024) { // 如果小于0.1KB转化成B  
+			        data = size.toFixed(2) + &quot;B&quot;;
+			    } else if (size &lt; 0.1 * 1024 * 1024) { // 如果小于0.1MB转化成KB  
+			        data = (size / 1024).toFixed(2) + &quot;KB&quot;;
+			    } else if (size &lt; 0.1 * 1024 * 1024 * 1024) { // 如果小于0.1GB转化成MB  
+			        data = (size / (1024 * 1024)).toFixed(2) + &quot;MB&quot;;
+			    } else { //其他转化成GB  
+			        data = (size / (1024 * 1024 * 1024)).toFixed(2) + &quot;GB&quot;;
+			    }
+			    var sizestr = data + &quot;&quot;;
+			    var len = sizestr.indexOf(&quot;\.&quot;);
+			    var dec = sizestr.substr(len + 1, 2);
+			    if (dec == &quot;00&quot;) { // 当小数点后为00时 去掉小数部分  
+			        return sizestr.substring(0, len) + sizestr.substr(len + 3, 2);
+			    }
+			    return sizestr;
+			},
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[uniapp用post上传图片流binary]]></title>
+        <id>https://nancy-svy.github.io/post/postUploadImageStreamBinary/</id>
+        <link href="https://nancy-svy.github.io/post/postUploadImageStreamBinary/">
+        </link>
+        <updated>2023-05-07T01:23:44.000Z</updated>
+        <content type="html"><![CDATA[<p>注意：<br>
+1.uniapp对request请求有封装，会对入参进行格式化，如果想post主体为图片流，不能直接用；<br>
+2.传binary需要将路径转为base64，再转为二进制流blob</p>
+<p>引入图片路径转base64</p>
+<pre><code>import {pathToBase64} from &quot;image-tools&quot;;
+</code></pre>
+<p>选择图片时转base64</p>
+<pre><code>        uni.chooseImage({
+          count: 1, //最多可以选择的图片张数				  count: 1, //默认100
+          extension:['.jpg','.png','.jpeg','.gif','.svg','.webp','.jfif','.bmp','.dpg'],
+          sizeType: ['compressed'], //original 原图，compressed 压缩图
+          sourceType: ['album', 'camera'], //album 从相册选图，camera 使用相机
+          //成功则返回图片的本地文件路径列表 tempFilePaths
+          success: (res) =&gt; {
+            this.imageList = this.imageList.concat(res.tempFilePaths);//成功后利用concat方法追加到imageList1中
+            //循环遍历res.tempFilePaths将每一个图像路径转换为base64
+            for (var i = 0; i &lt; res.tempFilePaths.length; i++) {
+              pathToBase64(res.tempFilePaths[i])
+                .then(path =&gt; {
+                  this.baseImageList = this.baseImageList.concat(path);//成功后利用concat方法追加到baseImageList中
+                })
+                .catch(error =&gt; {
+                  console.error(error)
+                })
+            }
+          }
+        })
+</code></pre>
+<p>base64转二进制流</p>
+<pre><code> 
+      /**
+       * Base64字符串转二进制流
+       * @param {String} dataurl Base64字符串(字符串包含Data URI scheme，例如：data:image/png;base64, )
+       */
+      dataURLtoBlob(dataurl) {
+        var arr = dataurl.split(&quot;,&quot;),
+            mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]),
+            n = bstr.length,
+            u8arr = new Uint8Array(n);
+        while (n--) {
+          u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new Blob([u8arr], {
+          type: mime,
+        });
+      },
+</code></pre>
+<p>请求接口</p>
+<pre><code> 
+      async upload(url, binary){
+        var xhr = new XMLHttpRequest();
+        xhr.open(&quot;POST&quot;, url, false);
+        xhr.overrideMimeType(&quot;application/octet-stream&quot;);
+        //直接发送二进制数据
+        if(xhr.sendAsBinary){
+          xhr.sendAsBinary(binary);
+        }else{
+          xhr.send(binary);
+        }
+        // 监听变化
+        if(xhr.status===200){
+          // 响应成功
+          return  xhr.response
+        } else {
+          this.$utils.showToast(xhr.responseText, &quot;none&quot;)
+          return;
+        },
+</code></pre>
+<p>上传至服务器</p>
+<pre><code>let url = '**************'
+let file = this.base64toFile(this.baseImageList[0], url);
+let fileid = '';
+let result = await this.upload(url, file);
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[google 简书广告屏蔽]]></title>
         <id>https://nancy-svy.github.io/post/blockAdvertising/</id>
@@ -19,13 +418,13 @@
         <content type="html"><![CDATA[<p>最近简书感觉是穷疯了，随便打开一篇文章满屏的广告乱飞，对于有强迫症的患者非常难受，看到广告就想点 x x 关闭。似乎简书与我干上了，并不希望我关闭广告，点完关闭立马把我带到广告的详情页，于是忍无可忍从网上找了一些方法，彻底铲除这些辣眼睛的广告。<br>
 <img src="https://nancy-svy.github.io/post-images/1683351463792.png" alt="" loading="lazy"></p>
 <p><strong>一、 AdGuard 广告拦截器</strong><br>
-(AdGuard)[http://www.ddooo.com/softdown/128398.htm] 广告拦截器是一款可以对抗各式广告的拦截插件，该插件可以拦截包括视频广告、浮动广告以及插播广告在内的绝大部分常见的网站广告。<br>
+<a href="http://www.ddooo.com/softdown/128398.htm">AdGuard</a> 广告拦截器是一款可以对抗各式广告的拦截插件，该插件可以拦截包括视频广告、浮动广告以及插播广告在内的绝大部分常见的网站广告。<br>
 <img src="https://nancy-svy.github.io/post-images/1683351546969.png" alt="" loading="lazy"></p>
 <p><strong>二、 Adblock</strong><br>
-(AdBlock)[https://adblockplus.org/] 插件是 Chrome 最知名的广告拦截插件之一，不仅能够帮助用户对 Facebook 和 YouTube 等网站上的广告、弹窗和恼人的横幅广告进行拦截，同时也能够对第三方跟踪代码进行拦截，保护用户的隐私。<br>
+<a href="https://adblockplus.org/">AdBlock</a> 插件是 Chrome 最知名的广告拦截插件之一，不仅能够帮助用户对 Facebook 和 YouTube 等网站上的广告、弹窗和恼人的横幅广告进行拦截，同时也能够对第三方跟踪代码进行拦截，保护用户的隐私。<br>
 <img src="https://nancy-svy.github.io/post-images/1683351602470.png" alt="" loading="lazy"></p>
 <p><strong>三、Adblock plus</strong><br>
-(Adblock Plus)[https://www.adblockplus.org/] 插件作为一款功能强大且免费的广告拦截插件，支持包括 Chrome 、 Firefox 等在内的多种浏览器。<br>
+<a href="https://www.adblockplus.org/">Adblock Plus</a> 插件作为一款功能强大且免费的广告拦截插件，支持包括 Chrome 、 Firefox 等在内的多种浏览器。<br>
 在浏览器中安装、启用该插件后，用户不需要操作，它就会对网页中的广告进行自动屏蔽，并且还会将空白的页面进行合并，完全看不出广告的痕迹。<br>
 <img src="https://nancy-svy.github.io/post-images/1683351815771.png" alt="" loading="lazy"></p>
 ]]></content>
@@ -544,290 +943,6 @@ doc/*.txt
 doc/**/*.pdf
 
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[uniapp 时间表]]></title>
-        <id>https://nancy-svy.github.io/post/timeTable/</id>
-        <link href="https://nancy-svy.github.io/post/timeTable/">
-        </link>
-        <updated>2023-04-17T03:37:44.000Z</updated>
-        <content type="html"><![CDATA[<p>效果图<br>
-<img src="https://nancy-svy.github.io/post-images/1681714897240.png" alt="" loading="lazy"></p>
-<p><strong>html</strong></p>
-<pre><code>&lt;template&gt;
-	&lt;view class=&quot;container&quot;&gt;
-		&lt;view class=&quot;timetable&quot;&gt;
-			&lt;view class=&quot;header&quot;&gt;
-				&lt;view class=&quot;day&quot; @click=&quot;handlePreviousDay&quot;&gt;
-					&lt;uni-icons type=&quot;left&quot; color=&quot;#333333&quot; size=&quot;12&quot;&gt;&lt;/uni-icons&gt;
-					前一天
-				&lt;/view&gt;
-				&lt;view class=&quot;date&quot;&gt;{{nowTime}}&lt;/view&gt;
-				&lt;view class=&quot;day&quot; @click=&quot;handleNextDay&quot;&gt;
-					后一天
-					&lt;uni-icons type=&quot;right&quot; color=&quot;#333333&quot; size=&quot;12&quot;&gt;&lt;/uni-icons&gt;
-				&lt;/view&gt;
-			&lt;/view&gt;
-			&lt;view class=&quot;time_list&quot;&gt;
-				&lt;!-- 时间表上时间显示的区域 --&gt;
-				&lt;view 
-				:class=&quot;['leave_box', item &amp;&amp; item.my ? 'yellowBg' : 'blueBg']&quot;
-				v-for=&quot;(item,index) in tableList&quot;
-				:key=&quot;index&quot;
-				:style=&quot;{height: `${item.height}rpx`, top: `${item.top}rpx`}&quot;
-				&gt;
-				&lt;text&gt;名称&lt;/text&gt;
-				&lt;/view&gt;
-				&lt;!-- 时间表表格 --&gt;
-				&lt;view class=&quot;time_item&quot; v-for=&quot;(item,index) in timeList&quot; :key=&quot;index&quot;&gt;
-					&lt;view class=&quot;time_item_text&quot;&gt;{{item}}:00&lt;/view&gt;
-					&lt;view class=&quot;time_item_leave&quot;&gt;&lt;/view&gt;
-				&lt;/view&gt;
-			&lt;/view&gt;
-		&lt;/view&gt;
-	&lt;/view&gt;
-	
-&lt;/template&gt;
-</code></pre>
-<p><strong>js</strong></p>
-<pre><code>&lt;script&gt;
-	import { createTime } from '@/utils/utils.js'
-	export default {
-		name:&quot;timetable&quot;,
-		data() {
-			return {
-				timeList: [
-					'00','01','02','03','04','05','06','07','08','09','10','11',
-					'12','13','14','15','16','17','18','19','20','21','22','23'
-				],
-				 // 当前日期
-				nowTime: '', // xx年xx月xx日
-				nowParams: '', // xx/xx/xx
-				 // 列表单行高度
-				li_H: 62,
-				// 时间表
-				renderSchedule: [
-					{ formetter: '2023/03/09', time: '01:00-04:00', my: false },
-					{ formetter: '2023/03/09', time: '08:00-10:10', my: false },
-					{ formetter: '2023/03/09', time: '05:36-06:50', my: true },
-					{ formetter: '2023/03/09', time: '17:30-19:30', my: true }
-				],
-				// 数据处理后渲染数据
-				tableList: [],
-			};
-		},
-		mounted(){
-			let now = new Date()
-			this.creationTime(now)
-			this.processData()
-		},
-		methods:{
-			// 获取当前日期
-			creationTime(date){
-				let timeParams = createTime(date)
-				this.nowTime = `${timeParams.year}年${timeParams.month}月${timeParams.day}日 ${timeParams.weekday}`
-				let timeP = createTime(date)
-				this.nowParams = `${timeP.year}/${timeP.month}/${timeP.day}`
-			},
-			// 前一天
-			handlePreviousDay(){
-				let beforeDate = new Date(this.nowParams)
-				beforeDate.setDate(beforeDate.getDate() - 1);
-				this.creationTime(beforeDate)
-			},
-			// 后一天
-			handleNextDay(){
-				let afterDate = new Date(this.nowParams);
-				afterDate.setDate(afterDate.getDate() + 1);
-				this.creationTime(afterDate)
-			},
-			// 处理渲染的时间表数据
-			processData(){
-				this.renderSchedule.forEach(item =&gt; {
-					let timedata = item.time.split('-');
-					// 小时
-					let startHour = timedata[0].slice(0, 2);
-					let endHour = timedata[1].slice(0, 2);
-					// 分钟
-					let startMinute = timedata[0].slice(-2);
-					let endMinute = timedata[1].slice(-2);
-					// 开始时间的与结束时间相差几小时
-					let myhour = Math.abs(endHour) - Math.abs(startHour);
-					// 开始时间与结束时间相差几分钟
-					let minute = Math.abs(endMinute) - Math.abs(startMinute);
-					// dom高度
-					let dom_height = dom_height = (myhour * this.li_H) + (minute * (this.li_H / 60));
-					// console.log('高度', dom_height);
-					item.height = parseInt(dom_height);
-					// dom顶部偏移量
-					let dom_top = (Math.abs(startHour) * this.li_H) + (Math.abs(startMinute) * (this.li_H / 60));
-					// console.log('dom_top', dom_top);
-					item.top = parseInt(dom_top);
-				})
-				this.tableList = this.renderSchedule;
-			},
-		},
-	}
-&lt;/script&gt;
-
-</code></pre>
-<p><strong>css</strong></p>
-<pre><code>&lt;style lang=&quot;less&quot; scoped&gt;
-.container{
-	padding: 20rpx 32rpx;
-}
-.timetable{
-	border-radius: 20rpx 20rpx 0rpx 0rpx;
-	border: 1px solid #DFE0EB;
-	.header{
-		height: 80rpx;
-		background: rgba(223,224,235,0.3);
-		padding:0 19rpx;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		border-bottom: 1px solid #DFE0EB;
-		.day{
-			font-size: 24rpx;
-			font-family: 'SourceHanSansCN-Regular';
-			font-weight: 400;
-			color: #333333;
-		}
-		.date{
-			font-size: 28rpx;
-			font-family: 'Source Han Sans CN-Medium';
-			font-weight: 500;
-			color: #333333;
-		}
-	}
-	.time_list{
-		position: relative;
-		.time_item{
-			height: 61rpx;
-			display: flex;
-			border-bottom: 1px solid #DFE0EB;
-			&amp;:last-child{
-				border-bottom: 0px solid #DFE0EB;
-				.time_item_text,
-				.time_item_leave{
-					border-bottom: 0px solid #DFE0EB;
-				}
-			}
-			.time_item_text{
-				width: 84rpx;
-				height: 61rpx;
-				background: #F7F9FB;
-				border-right: 1px solid #DFE0EB;
-				text-align: center;
-				line-height: 61rpx;
-				font-size: 20rpx;
-				font-family: 'SourceHanSansCN-Regular';
-				font-weight: 400;
-				color: #333333;
-			}
-			.time_item_leave{
-				flex: 1;
-				height: 61rpx;
-			}
-		}
-		.leave_box{
-			position: absolute;
-			right: 0;
-			width: calc(100% - 84rpx);
-			font-size: 24rpx;
-			font-family: 'SourceHanSansCN-Regular';
-			font-weight: 400;
-			color: #333333;
-			text{
-				line-height: 60rpx;
-				padding-left: 20rpx;
-			}
-		}
-		.yellowBg{
-			background: rgba(255, 204, 0, 0.5);
-		}
-		.blueBg{
-			background: rgba(0, 122, 255, 0.5);
-		}
-	}
-}
-		
-&lt;/style&gt;
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[uniapp 引入外部字体]]></title>
-        <id>https://nancy-svy.github.io/post/importFontFile/</id>
-        <link href="https://nancy-svy.github.io/post/importFontFile/">
-        </link>
-        <updated>2023-04-14T09:50:09.000Z</updated>
-        <content type="html"><![CDATA[<p>uni-app 支持使用字体图标，请仔细阅读官方文档：<a href="https://uniapp.dcloud.net.cn/tutorial/syntax-css.html#%E5%AD%97%E4%BD%93%E5%9B%BE%E6%A0%87">地址</a></p>
-<h3 id="一-当字体文件小于40kb时uni-app-会自动将其转化为-base64-格式直接引入即可">一、当字体文件小于40kb时，uni-app 会自动将其转化为 base64 格式，直接引入即可</h3>
-<pre><code>@font-face {
-     font-family: xxxxx;
-     src: url('~@/static/xxxx.ttf');
- }
-</code></pre>
-<h3 id="当字体文件大于40kb时需要自己转化成base64格式">当字体文件大于40kb时，需要自己转化成base64格式：</h3>
-<h6 id="1-将下载好的字体文件转换成base64格式转换地址">1、将下载好的字体文件转换成base64格式，<a href="https://transfonter.org/">转换地址</a></h6>
-<p><img src="https://nancy-svy.github.io/post-images/1681464749478.png" alt="" loading="lazy"><br>
-####### 步骤：<br>
-<img src="https://nancy-svy.github.io/post-images/1681465633635.webp" alt="" loading="lazy"></p>
-<ol>
-<li>点击【Add fonts】,选择文件</li>
-<li>打开【Base64 encode】</li>
-<li>点击【Covert】</li>
-<li>点击【Download】下载文件并解压，打开 stylesheet.css 文件，复制代码</li>
-</ol>
-<h6 id="2-转换完成后下载文件解压后将这三个文件放入项目中的static目录下">2、转换完成后，下载文件，解压后将这三个文件放入项目中的static目录下:</h6>
-<figure data-type="image" tabindex="1"><img src="https://nancy-svy.github.io/post-images/1681464757016.png" alt="" loading="lazy"></figure>
-<h6 id="3-在appvue中引入该文件">3、在App.vue中引入该文件</h6>
-<pre><code>@import url(&quot;./static/fonts/stylesheet.css&quot;);
-</code></pre>
-<h6 id="4-在代码中正常使用即可">4、在代码中正常使用即可：</h6>
-<pre><code>例如：font-family: YOUSHEhaoshenti;
-</code></pre>
-<h3 id="或者在阿里巴巴矢量图标图-地址-中查找需要下载的字体文件">或者在阿里巴巴矢量图标图 <a href="https://www.iconfont.cn/">地址</a> 中查找需要下载的字体文件</h3>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[google  chrome问题]]></title>
-        <id>https://nancy-svy.github.io/post/chromeQuestion/</id>
-        <link href="https://nancy-svy.github.io/post/chromeQuestion/">
-        </link>
-        <updated>2023-04-12T01:05:19.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="问题">问题：</h2>
-<pre><code>    打开谷歌浏览器提示：您使用的是不受支持的命令行标记:–extensions-on-chrome-urls。稳定性和安全性会有所下降。
-</code></pre>
-<h2 id="问题分析">问题分析：</h2>
-<pre><code>    出现该提示是因为在你非官方安装插件之后
-</code></pre>
-<h2 id="解决办法">解决办法：</h2>
-<pre><code>    在Chrome导航栏中输入[Experiments](chrome://flags ),
-    搜索栏搜索【Extensions on chrome:// URLs】网址下的扩展程序，然后选择Disabled。     
-</code></pre>
-<p><img src="https://nancy-svy.github.io/post-images/1681261731032.png" alt="" loading="lazy"><br>
-disabled 关闭<br>
-enabled 启用</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[压缩包添加密码]]></title>
-        <id>https://nancy-svy.github.io/post/compressedPacketEncryption/</id>
-        <link href="https://nancy-svy.github.io/post/compressedPacketEncryption/">
-        </link>
-        <updated>2023-04-12T00:44:30.000Z</updated>
-        <content type="html"><![CDATA[<ol>
-<li>压缩文件：找到需要压缩的文件/文件夹，右击文件，点击添加到压缩文件，开始压缩。</li>
-<li>添加密码：进入压缩界面，点击添加密码</li>
-<li>输入密码：进入添加密码界面后，输入密码</li>
-<li>开始压缩：密码设置完成后，点击立即压缩，开始压缩文件并加密</li>
-<li>压缩成功：我们可以看到压缩文件和原文件都在，说明压缩成功了。</li>
-<li>解压：右击压缩文件，点击解压到，开始解压</li>
-<li>需要密码：出现解压需要密码，说明密码设置成功。</li>
-</ol>
 ]]></content>
     </entry>
 </feed>

@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>百度网盘设置提取码 | Gridea</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1683367066338">
+<link rel="shortcut icon" href="/favicon.ico?v=1683698187618">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -186,7 +186,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">54</span>
+        <span class="site-item-stat-count">60</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -890,17 +890,404 @@
     <div class="result" id="result">
       
       <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/tableDataPrinting/"" data-c="
+          &lt;h4 id=&#34;一-单页打印&#34;&gt;一、单页打印&lt;/h4&gt;
+&lt;p&gt;只对当前页面可见数据进行打印，实现方法不唯一，此处介绍相对简单的vue-print-nb。他的缺点是只能打印可见区域，不能分页打印 。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;安装&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;  npm install vue-print-nb --save
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;引入&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;// 安装好以后在main.js文件中引入
+import Print from &#39;vue-print-nb&#39;
+Vue.use(Print);  //注册
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;使用&lt;br&gt;
+(1). 直接使用id，不对最终打印的表格进行样式修改&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;// 通过ID直接打印
+  &amp;lt;div id=&amp;quot;print_demo&amp;quot; &amp;gt;
+    &amp;lt;p&amp;gt;打印内容&amp;lt;/p&amp;gt;
+  &amp;lt;/div&amp;gt;
+&amp;lt;button v-print=&amp;quot;&#39;#print_demo&#39;&amp;quot;&amp;gt;打印&amp;lt;/button&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;(2). 使用printObj，可以对打印的表格进行样式调整&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// 在组件的打印按钮标签上使用指令 v-print=&amp;quot;printObj&amp;quot;, print是配置对象
+  &amp;lt;button v-print=&amp;quot;printObj&amp;quot;&amp;gt;打印&amp;lt;/button&amp;gt;
+
+//  在组件的打印区域标签上加 id=&amp;quot;print_demo&amp;quot;
+&amp;lt;div id=&amp;quot;print_demo&amp;quot;  style=&amp;quot;background:red;&amp;quot;&amp;gt;
+  &amp;lt;p&amp;gt;打印内容&amp;lt;/p&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;(2-1). 在组件的data中定义print配置对象&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;export default {
+    data() {
+        return {
+            printObj: {
+              id: &amp;quot;print_demo&amp;quot;,
+              popTitle: &#39;打印的标题&#39;, //  打印配置页上方标题
+              extraHead: &#39;&amp;lt;meta http-equiv=&amp;quot;Content-Language&amp;quot;content=&amp;quot;zh-cn&amp;quot;/&amp;gt;&#39;,  // 最上方的头部文字，附加在head标签上的额外标签,使用逗号分隔
+               preview: &#39;&#39;,  // 是否启动预览模式，默认是false（开启预览模式，可以先预览后打印）
+               previewTitle: &#39;&#39;,  // 打印预览的标题（开启预览模式后出现）,
+               previewPrintBtnLabel: &#39;&#39;,  // 打印预览的标题的下方按钮文本，点击可进入打印（开启预览模式后出现）
+               zIndex: &#39;&#39;, // 预览的窗口的z-index，默认是 20002（此值要高一些，这涉及到预览模式是否显示在最上面）   
+               previewBeforeOpenCallback() {}, //预览窗口打开之前的callback（开启预览模式调用）
+               previewOpenCallback() {}, // 预览窗口打开之后的callback（开启预览模式调用）
+               beforeOpenCallback() {}, // 开启打印前的回调事件
+               openCallback() {}, // 调用打印之后的回调事件
+              closeCallback() {}, //关闭打印的回调事件（无法确定点击的是确认还是取消）
+              extraCss: &#39;https://www.google.com,https://www.google.com&#39;, 
+            }
+        };
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;(2-2). 打印过滤（隐藏打印区域不需要打印的内容）&lt;br&gt;
+只需要在组件的打印区域里，给需要隐藏的内容的标签上添加&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class=&amp;quot;noprint&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;(2-3). 配置打印的样式&lt;br&gt;
+在全局样式中，新增&lt;style media=&#34;print&#34;&gt;&lt;/style&gt;标签，里面是打印时才生效的样式&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;style media=&amp;quot;print&amp;quot;&amp;gt;
+    @page {
+    size: auto;
+    margin: 3mm;
+    }
+
+    html {
+    background-color: #ffffff;
+    height: auto;
+    margin: 0px;
+    }
+&amp;lt;/style&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;(2-4). 处理常见的打印bug&lt;br&gt;
+解决打印出现空白页的问题&lt;br&gt;
+解决el-table表格内容过多，打印不全问题&lt;br&gt;
+解决作用域污染问题导致el-table序号错位&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;style media=&amp;quot;print&amp;quot; lang=&amp;quot;scss&amp;quot;&amp;gt;
+    @page {
+    size: auto;
+    margin: 3mm;
+    }
+    @media print {
+    html {
+        background-color: #ffffff;
+        height: auto;
+        margin: 0px;
+    }
+
+    body {
+        border: solid 1px #ffffff;
+        margin: 10mm 15mm 10mm 15mm;
+    }
+    table {
+        table-layout: auto !important;
+    }
+
+    .el-table__header-wrapper .el-table__header {
+        width: 100% !important;
+        border: solid 1px #f2f2f2;
+    }
+    .el-table__body-wrapper .el-table__body {
+        width: 100% !important;
+    }
+    #pagetable table {
+        table-layout: fixed !important;
+    }
+    }
+&amp;lt;/style&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;(2-5). 局部打印，局限在当前组件里&lt;br&gt;
+在组件标签&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;style media=&amp;quot;print&amp;quot; lang=&amp;quot;scss&amp;quot;&amp;gt;
+@page {
+  size: auto;
+  margin: 3mm;
+}
+@media print {
+  html {
+    background-color: #ffffff;
+    height: auto;
+    margin: 0px;
+  }
+
+  body {
+    border: solid 1px #ffffff;
+    margin: 10mm 15mm 10mm 15mm;
+  }
+  #printArea table {
+    table-layout: auto !important;
+  }
+
+  #printArea .el-table__header-wrapper .el-table__header {
+    width: 100% !important;
+    border: solid 1px #f2f2f2;
+  }
+  #printArea .el-table__body-wrapper .el-table__body {
+    width: 100% !important;
+  }
+  #printArea #pagetable table {
+    table-layout: fixed !important;
+  }
+}
+&amp;lt;/style&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;(2-6). 注意&lt;br&gt;
+启动打印后可以通过调整设置的缩放来调整显示比例&lt;br&gt;
+可以通过设置背景图形来控制页面是否使用彩色背景&lt;/p&gt;
+&lt;h4 id=&#34;二-打印数据库内全部数据&#34;&gt;二、打印数据库内全部数据&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;https://printjs.crabbly.com/&#34;&gt;Print.js 文档&lt;/a&gt;&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://nancy-svy.github.io/post-images/1683697863113.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;将数据库内的全部数据以表格的形式进行打印，需要调用后台接口直接从数据库内进行数据的查找，而不是直接在页面内获取数据。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;安装&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;npm install print-js --save
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;引入&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;// 在当前vue文件内引用
+import printJS from &#39;print-js&#39;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;使用&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;el-button  @click=&amp;quot;printJson&amp;quot;&amp;gt;打印全部表格&amp;lt;/el-button&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;async printJson() {
+      //通过getdata调用后台接口获取数据封装到res
+      const res = await getdata();
+      this.list = res.data || [];
+      printJS({
+        printable: this.list ,
+        properties: [ // 表头数据
+          {
+            field: &#39;num&#39;, //  表头字段
+            displayName: &#39;序号&#39;, // 页面显示的文字
+          },
+          { field: &#39;date&#39;, displayName: &#39;日期 &#39;},
+         { field: &#39;name&#39;, displayName: &#39;费用名称&#39; },
+         { field: &#39;subjectMatter&#39;, displayName: &#39;事由&#39; },
+         { field: &#39;money&#39;, displayName: &#39;金额(元)&#39; },
+         { field: &#39;notes&#39;, displayName: &#39;备注&#39; },
+        ],
+        type: &#39;json&#39;,
+         // tbody的样式
+        gridStyle: &#39;text-align: center;border: 1px solid #E5E6EB;&#39; ,
+         // 标题
+		header: `&amp;lt;h3 class=&amp;quot;custom-h3&amp;quot;&amp;gt;标题&amp;lt;/h3&amp;gt;`,
+        // 标题样式
+		style: &#39;.custom-h3{text-align: center; margin-bottom: 10px;}&#39;,
+      })
+    },
+&lt;/code&gt;&lt;/pre&gt;
+">vue 表格数据打印功能</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/barCode/"" data-c="
+          &lt;h5 id=&#34;一-jsbarcode&#34;&gt;一、JsBarcode&lt;/h5&gt;
+&lt;p&gt;&lt;a href=&#34;https://lindell.me/JsBarcode/&#34;&gt;JsBarcode 文档&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;安装：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;npm install jsbarcode --save
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;引入：在需要生成条形码的页面引入即可&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;import JsBarcode from &#39;jsbarcode&#39;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;需要显示条形码的页面里&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;img id=&amp;quot;barcode1&amp;quot;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;调用构造函数生成条形码&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;let barCode1 = this.info.marIdCode;
+let barheight = this.imgHeight;
+JsBarcode(&amp;quot;#barcode1&amp;quot;,barCode1,{
+    format:&amp;quot;CODE128&amp;quot;, // 条形码的格式
+    width:1,  // 线宽
+    height:barheight,  // 条码高度
+    lineColor:&amp;quot;#000&amp;quot;,  // 线条颜色
+    displayValue:false,  // 是否显示文字
+    margin:2  // 设置条形码周围的空白区域
+})
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h5 id=&#34;二-vue-barcode&#34;&gt;二、vue-barcode&lt;/h5&gt;
+&lt;p&gt;vue-barcode 是JsBarcode的简单包装&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;版本一&lt;br&gt;
+&lt;a href=&#34;https://github.com/lindell/vue-barcode&#34;&gt;https://github.com/lindell/vue-barcode&lt;/a&gt;&lt;br&gt;
+安装&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;npm install vue-barcode
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;版本二&lt;br&gt;
+&lt;a href=&#34;https://github.com/xkeshi/vue-barcode&#34;&gt;https://github.com/xkeshi/vue-barcode&lt;/a&gt;&lt;br&gt;
+安装&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;npm install @xkeshi/vue-barcode 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;两个版本区别&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;版本一：只能单独绑定属性&lt;br&gt;
+引入：在需要生成条形码的页面引入即可&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; import  VueBarcode from &#39;vue-barcode&#39;
+ new Vue({
+  components: {
+      &#39;barcode&#39;: VueBarcode
+  }
+})
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;barcode  :value=&amp;quot;barcodeValue&amp;quot;  :width=&amp;quot;7&amp;quot;  :height=&amp;quot;200&amp;quot;&amp;gt;&amp;lt;/barcode&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;版本二：可直接options绑定所有属性&lt;br&gt;
+引入：在需要生成条形码的页面引入即可&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; import VueBarcode from &#39;@xkeshi/vue-barcode&#39;
+ new Vue({
+  components: {
+      &#39;barcode&#39;: VueBarcode
+  }
+})
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;barcode  :value=&amp;quot;barcodeValue&amp;quot;  :options=&amp;quot;{ width:100 , height:100}&amp;quot;&amp;gt;
+    条形码显示失败时的内容
+&amp;lt;/barcode&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+">vue 条形码</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/fileSizeConversion/"" data-c="
+          &lt;pre&gt;&lt;code&gt;// 文件大小换算
+			sizeTostr(size) {
+			    var data = &amp;quot;&amp;quot;;
+			    if (size &amp;lt; 0.1 * 1024) { // 如果小于0.1KB转化成B  
+			        data = size.toFixed(2) + &amp;quot;B&amp;quot;;
+			    } else if (size &amp;lt; 0.1 * 1024 * 1024) { // 如果小于0.1MB转化成KB  
+			        data = (size / 1024).toFixed(2) + &amp;quot;KB&amp;quot;;
+			    } else if (size &amp;lt; 0.1 * 1024 * 1024 * 1024) { // 如果小于0.1GB转化成MB  
+			        data = (size / (1024 * 1024)).toFixed(2) + &amp;quot;MB&amp;quot;;
+			    } else { //其他转化成GB  
+			        data = (size / (1024 * 1024 * 1024)).toFixed(2) + &amp;quot;GB&amp;quot;;
+			    }
+			    var sizestr = data + &amp;quot;&amp;quot;;
+			    var len = sizestr.indexOf(&amp;quot;\.&amp;quot;);
+			    var dec = sizestr.substr(len + 1, 2);
+			    if (dec == &amp;quot;00&amp;quot;) { // 当小数点后为00时 去掉小数部分  
+			        return sizestr.substring(0, len) + sizestr.substr(len + 3, 2);
+			    }
+			    return sizestr;
+			},
+&lt;/code&gt;&lt;/pre&gt;
+">js  文件大小换算为B、KB、MB、GB</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/postUploadImageStreamBinary/"" data-c="
+          &lt;p&gt;注意：&lt;br&gt;
+1.uniapp对request请求有封装，会对入参进行格式化，如果想post主体为图片流，不能直接用；&lt;br&gt;
+2.传binary需要将路径转为base64，再转为二进制流blob&lt;/p&gt;
+&lt;p&gt;引入图片路径转base64&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;import {pathToBase64} from &amp;quot;image-tools&amp;quot;;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;选择图片时转base64&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;        uni.chooseImage({
+          count: 1, //最多可以选择的图片张数				  count: 1, //默认100
+          extension:[&#39;.jpg&#39;,&#39;.png&#39;,&#39;.jpeg&#39;,&#39;.gif&#39;,&#39;.svg&#39;,&#39;.webp&#39;,&#39;.jfif&#39;,&#39;.bmp&#39;,&#39;.dpg&#39;],
+          sizeType: [&#39;compressed&#39;], //original 原图，compressed 压缩图
+          sourceType: [&#39;album&#39;, &#39;camera&#39;], //album 从相册选图，camera 使用相机
+          //成功则返回图片的本地文件路径列表 tempFilePaths
+          success: (res) =&amp;gt; {
+            this.imageList = this.imageList.concat(res.tempFilePaths);//成功后利用concat方法追加到imageList1中
+            //循环遍历res.tempFilePaths将每一个图像路径转换为base64
+            for (var i = 0; i &amp;lt; res.tempFilePaths.length; i++) {
+              pathToBase64(res.tempFilePaths[i])
+                .then(path =&amp;gt; {
+                  this.baseImageList = this.baseImageList.concat(path);//成功后利用concat方法追加到baseImageList中
+                })
+                .catch(error =&amp;gt; {
+                  console.error(error)
+                })
+            }
+          }
+        })
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;base64转二进制流&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; 
+      /**
+       * Base64字符串转二进制流
+       * @param {String} dataurl Base64字符串(字符串包含Data URI scheme，例如：data:image/png;base64, )
+       */
+      dataURLtoBlob(dataurl) {
+        var arr = dataurl.split(&amp;quot;,&amp;quot;),
+            mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]),
+            n = bstr.length,
+            u8arr = new Uint8Array(n);
+        while (n--) {
+          u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new Blob([u8arr], {
+          type: mime,
+        });
+      },
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;请求接口&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; 
+      async upload(url, binary){
+        var xhr = new XMLHttpRequest();
+        xhr.open(&amp;quot;POST&amp;quot;, url, false);
+        xhr.overrideMimeType(&amp;quot;application/octet-stream&amp;quot;);
+        //直接发送二进制数据
+        if(xhr.sendAsBinary){
+          xhr.sendAsBinary(binary);
+        }else{
+          xhr.send(binary);
+        }
+        // 监听变化
+        if(xhr.status===200){
+          // 响应成功
+          return  xhr.response
+        } else {
+          this.$utils.showToast(xhr.responseText, &amp;quot;none&amp;quot;)
+          return;
+        },
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;上传至服务器&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;let url = &#39;**************&#39;
+let file = this.base64toFile(this.baseImageList[0], url);
+let fileid = &#39;&#39;;
+let result = await this.upload(url, file);
+&lt;/code&gt;&lt;/pre&gt;
+">uniapp用post上传图片流binary</a>
+      </div>
+      
+      <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/blockAdvertising/"" data-c="
           &lt;p&gt;最近简书感觉是穷疯了，随便打开一篇文章满屏的广告乱飞，对于有强迫症的患者非常难受，看到广告就想点 x x 关闭。似乎简书与我干上了，并不希望我关闭广告，点完关闭立马把我带到广告的详情页，于是忍无可忍从网上找了一些方法，彻底铲除这些辣眼睛的广告。&lt;br&gt;
 &lt;img src=&#34;https://nancy-svy.github.io/post-images/1683351463792.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;一、 AdGuard 广告拦截器&lt;/strong&gt;&lt;br&gt;
-(AdGuard)[http://www.ddooo.com/softdown/128398.htm] 广告拦截器是一款可以对抗各式广告的拦截插件，该插件可以拦截包括视频广告、浮动广告以及插播广告在内的绝大部分常见的网站广告。&lt;br&gt;
+&lt;a href=&#34;http://www.ddooo.com/softdown/128398.htm&#34;&gt;AdGuard&lt;/a&gt; 广告拦截器是一款可以对抗各式广告的拦截插件，该插件可以拦截包括视频广告、浮动广告以及插播广告在内的绝大部分常见的网站广告。&lt;br&gt;
 &lt;img src=&#34;https://nancy-svy.github.io/post-images/1683351546969.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;二、 Adblock&lt;/strong&gt;&lt;br&gt;
-(AdBlock)[https://adblockplus.org/] 插件是 Chrome 最知名的广告拦截插件之一，不仅能够帮助用户对 Facebook 和 YouTube 等网站上的广告、弹窗和恼人的横幅广告进行拦截，同时也能够对第三方跟踪代码进行拦截，保护用户的隐私。&lt;br&gt;
+&lt;a href=&#34;https://adblockplus.org/&#34;&gt;AdBlock&lt;/a&gt; 插件是 Chrome 最知名的广告拦截插件之一，不仅能够帮助用户对 Facebook 和 YouTube 等网站上的广告、弹窗和恼人的横幅广告进行拦截，同时也能够对第三方跟踪代码进行拦截，保护用户的隐私。&lt;br&gt;
 &lt;img src=&#34;https://nancy-svy.github.io/post-images/1683351602470.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;三、Adblock plus&lt;/strong&gt;&lt;br&gt;
-(Adblock Plus)[https://www.adblockplus.org/] 插件作为一款功能强大且免费的广告拦截插件，支持包括 Chrome 、 Firefox 等在内的多种浏览器。&lt;br&gt;
+&lt;a href=&#34;https://www.adblockplus.org/&#34;&gt;Adblock Plus&lt;/a&gt; 插件作为一款功能强大且免费的广告拦截插件，支持包括 Chrome 、 Firefox 等在内的多种浏览器。&lt;br&gt;
 在浏览器中安装、启用该插件后，用户不需要操作，它就会对网页中的广告进行自动屏蔽，并且还会将空白的页面进行合并，完全看不出广告的痕迹。&lt;br&gt;
 &lt;img src=&#34;https://nancy-svy.github.io/post-images/1683351815771.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
 ">google 简书广告屏蔽</a>
@@ -1732,7 +2119,7 @@ enabled 启用&lt;/p&gt;
 &lt;h1 id=&#34;添加教程&#34;&gt;添加教程✅&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;点击登录， 选择加入&lt;br&gt;
-&lt;a href=&#34;https://icp.gov.moe/aboutus.php&#34;&gt;萌国ICP主页&lt;/a&gt;&lt;/li&gt;
+&lt;a href=&#34;https://icp.gov.moe/aboutus.php&#34;&gt;萌国ICP主页   https://icp.gov.moe/aboutus.php&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://nancy-svy.github.io/post-images/1680853010730.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
 &lt;ul&gt;
@@ -1765,7 +2152,7 @@ enabled 启用&lt;/p&gt;
 &lt;p&gt;以上就是添加萌国ICP备案信息的教程，如果后续需要更改网站信息，可以点击自己萌国ICP打开关于页面，找到下面的修改填写自己的萌国ID加绑定的邮箱即可完成修改。&lt;br&gt;
 &lt;img src=&#34;https://nancy-svy.github.io/post-images/1680853150947.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
 &lt;h1 id=&#34;致谢&#34;&gt;致谢🎈&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&#34;https://icp.gov.moe/&#34;&gt;萌ICP备案&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://icp.gov.moe/&#34;&gt;萌ICP备案  https://icp.gov.moe/ &lt;/a&gt;&lt;/p&gt;
 ">添加萌国ICP备案号</a>
       </div>
       
@@ -1841,52 +2228,62 @@ enabled 启用&lt;/p&gt;
 📋 稍等一会儿后，在浏览器打开域名，会看到文章底下显示“未找到相关的issues进行评论xxx”，点击【使用GitHub登陆】，进行授权。&lt;/p&gt;
 &lt;h3 id=&#34;六-基本操作&#34;&gt;📝 六、基本操作&lt;/h3&gt;
 &lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;输入文章标题&lt;br&gt;
+&lt;li&gt;输入文章标题&lt;br&gt;
 (1.)使用 = 和 - 标记一级和二级标题&lt;br&gt;
 注意：由于分割线也是 “---”， 因此在使用分割线时，一定要空一行，不然会把上方的文字识别为第二级标题&lt;br&gt;
 (2.)使用#号标记&lt;br&gt;
 在行首插入 1 到 6 个 # 再加空格，对应到标题 1 到 6级&lt;br&gt;
-（注意：#号后面一定要有一个空格）&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;输入无序列表   - 无序列表，数字列表    1. 数字列表&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;输入代码虚假的代码,(虚假的代码左右各一个&amp;quot;`&amp;quot;)输入代码段虚假的代码段.(虚假的代码段,左右各有3个```)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;输入数学公式: &lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;数&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;学&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;公&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;式&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;数学公式&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;数&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;学&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;公&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;式&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;插入图片: 直接拖入以 【 &lt;img src=&#34;%E5%9B%BE%E7%89%87%E5%9C%B0%E5%9D%80&#34; alt=&#34;图片名称&#34; loading=&#34;lazy&#34;&gt; 】 的形式给出&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;插入链接: 以【&lt;a href=&#34;%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80&#34;&gt;链接名称&lt;/a&gt;】的形式给出&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;字体&lt;br&gt;
-（1）&lt;em&gt;斜体文本&lt;/em&gt;&lt;br&gt;
-（2）&lt;em&gt;斜体文本&lt;/em&gt;&lt;br&gt;
-（3）&lt;strong&gt;粗体文本&lt;/strong&gt;&lt;br&gt;
-（4）&lt;strong&gt;粗体文本&lt;/strong&gt;&lt;br&gt;
-（5）&lt;em&gt;&lt;strong&gt;粗斜体文本&lt;/strong&gt;&lt;/em&gt;&lt;br&gt;
-（6）&lt;em&gt;&lt;strong&gt;粗斜体文本&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;分割线&lt;br&gt;
-在一行中用三个以上的星号、减号、底线来建立一个分隔线，行内不能有其他东西。你也可以在星号或是减号中间插入空格。&lt;/p&gt;
-&lt;hr&gt;
-&lt;hr&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;删除线&lt;br&gt;
-&lt;s&gt;删除线&lt;/s&gt;&lt;br&gt;
-&lt;u&gt;下划线&lt;/u&gt;&lt;br&gt;
-脚注[^脚注]&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;列表&lt;br&gt;
+（注意：#号后面一定要有一个空格）&lt;/li&gt;
+&lt;li&gt;输入列表&lt;br&gt;
+无序列表&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt; - 无序列表，
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;数字列表&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1. 数字列表
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;输入代码虚假的代码,(虚假的代码左右各一个&amp;quot;`&amp;quot;)输入代码段虚假的代码段.(虚假的代码段,左右各有3个```)&lt;/li&gt;
+&lt;li&gt;输入数学公式:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;    $数学公式$.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;插入图片:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;    直接拖入以 【 ![图片名称](图片地址) 】 的形式给出
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;6&#34;&gt;
+&lt;li&gt;插入链接:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt; 以【[链接名称](链接地址)】的形式给出
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;7&#34;&gt;
+&lt;li&gt;字体&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;    （1）*斜体文本*
+    （2）_斜体文本_
+    （3）**粗体文本**
+    （4）__粗体文本__
+    （5）***粗斜体文本***
+    （6）___粗斜体文本___
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;8&#34;&gt;
+&lt;li&gt;分割线&lt;br&gt;
+在一行中用三个以上的星号、减号、底线来建立一个分隔线，行内不能有其他东西。你也可以在星号或是减号中间插入空格。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;   *********
+   -----------
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;9&#34;&gt;
+&lt;li&gt;删除线&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;  ~~删除线~~
+  &amp;lt;u&amp;gt;下划线&amp;lt;/u&amp;gt;
+  脚注[^脚注]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;10&#34;&gt;
+&lt;li&gt;列表&lt;br&gt;
 （1）无序列表使用星号(*)、加号(+)或是减号(-)作为列表标记，这些标记后面要添加一个空格，然后再填写内容&lt;br&gt;
 （2）列表嵌套&lt;br&gt;
 列表嵌套只需在子列表中的选项前面添加四个空格即可&lt;br&gt;
@@ -1894,8 +2291,7 @@ enabled 启用&lt;/p&gt;
 另外区块是可以嵌套的，一个 &amp;gt; 符号是最外层，两个 &amp;gt; 符号是第一层嵌套，以此类推&lt;br&gt;
 （4）区块中使用列表&lt;br&gt;
 列表中使用区块&lt;br&gt;
-如果要在列表项目内放进区块，那么就需要在 &amp;gt; 前添加四个空格的缩进&lt;/p&gt;
-&lt;/li&gt;
+如果要在列表项目内放进区块，那么就需要在 &amp;gt; 前添加四个空格的缩进&lt;/li&gt;
 &lt;/ol&gt;
 ">Gridea快速上手</a>
       </div>
@@ -2811,7 +3207,7 @@ export default {
 }
 &amp;lt;/style&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-">uniapp 仿美团选择预送达时间或指定时间组件</a>
+">uniapp 仿美团选择预送达时间或指定时间组件(2)(完整版)</a>
       </div>
       
       <div class="item">
@@ -3680,7 +4076,7 @@ export default {
 
  
 &lt;/code&gt;&lt;/pre&gt;
-">uniapp 仿美团选择预计送达时间组件(废弃)</a>
+">uniapp 仿美团选择预计送达时间组件(1)</a>
       </div>
       
       <div class="item">
@@ -3825,47 +4221,8 @@ export default {
       </div>
       
       <div class="item">
-        <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/uniappUtils/"" data-c="
-          &lt;h3 id=&#34;1-临时图片路径转为base64&#34;&gt;1. 临时图片路径转为base64&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;/**
- * 临时图片路径转base64
- * @param {Object} param 传一个对象，对象里包括
- * url: 临时图片存放路径，图片路径是相对路径
- * type: 图片类型，如：png
- */
-export function base64Image(url, type) {
-    return new Promise((resolve, reject) =&amp;gt; {
-        if (!!uni.getFileSystemManager()) {
-            uni.getFileSystemManager().readFile({
-                filePath: url, // 图片路径是相对路径
-                encoding: &amp;quot;base64&amp;quot;, // 编码格式
-                success: (res) =&amp;gt; {
-                    resolve(&amp;quot;data:image/&amp;quot; + type.toLocaleLowerCase() + &amp;quot;;base64,&amp;quot; + res.data);
-                },
-                fail: (error) =&amp;gt; {
-					reject(error.errMsg)
-				},
-            });
-        } else {
-            uni.request({
-                url: url,
-                method: &amp;quot;GET&amp;quot;,
-                responseType: &amp;quot;arraybuffer&amp;quot;,
-                success: (res) =&amp;gt; {
-                    let base64 = wx.arrayBufferToBase64(res.data); // 把arraybuffer转成base64
-                    base64 = &amp;quot;data:image/jpeg;base64,&amp;quot; + base64; // 不加上这串字符，在页面无法显示
-                    resolve(base64);
-                },
-                fail: (error) =&amp;gt; {
-					reject(error.errMsg)
-				},
-            });
-        }
-    });
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&#34;2-crypto加解密&#34;&gt;2. crypto加解密&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;/**
+        <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/cryptoEncryptionAndDecryption/"" data-c="
+          &lt;pre&gt;&lt;code&gt;/**
  * crypto加解密
  **/
 
@@ -3907,7 +4264,49 @@ export function decrypted(param) {
 }
  
 &lt;/code&gt;&lt;/pre&gt;
-">uniapp  utils.js文件</a>
+">uniapp crypto加解密</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/temporaryPathConvertedToBase64/"" data-c="
+          &lt;pre&gt;&lt;code&gt;/**
+ * 临时图片路径转base64
+ * @param {Object} param 传一个对象，对象里包括
+ * url: 临时图片存放路径，图片路径是相对路径
+ * type: 图片类型，如：png
+ */
+export function base64Image(url, type) {
+    return new Promise((resolve, reject) =&amp;gt; {
+        if (!!uni.getFileSystemManager()) {
+            uni.getFileSystemManager().readFile({
+                filePath: url, // 图片路径是相对路径
+                encoding: &amp;quot;base64&amp;quot;, // 编码格式
+                success: (res) =&amp;gt; {
+                    resolve(&amp;quot;data:image/&amp;quot; + type.toLocaleLowerCase() + &amp;quot;;base64,&amp;quot; + res.data);
+                },
+                fail: (error) =&amp;gt; {
+					reject(error.errMsg)
+				},
+            });
+        } else {
+            uni.request({
+                url: url,
+                method: &amp;quot;GET&amp;quot;,
+                responseType: &amp;quot;arraybuffer&amp;quot;,
+                success: (res) =&amp;gt; {
+                    let base64 = wx.arrayBufferToBase64(res.data); // 把arraybuffer转成base64
+                    base64 = &amp;quot;data:image/jpeg;base64,&amp;quot; + base64; // 不加上这串字符，在页面无法显示
+                    resolve(base64);
+                },
+                fail: (error) =&amp;gt; {
+					reject(error.errMsg)
+				},
+            });
+        }
+    });
+}
+&lt;/code&gt;&lt;/pre&gt;
+">uniapp 临时图片路径转为base64</a>
       </div>
       
       <div class="item">
@@ -7640,6 +8039,95 @@ getCodes.addEventListener(&#39;tap&#39;, function() {
       </div>
       
       <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/QR-code/"" data-c="
+          &lt;p&gt;vue有两种生成二维码的方式，qrcode、vue-qr（有icon）；&lt;/p&gt;
+&lt;h4 id=&#34;1-qrcode&#34;&gt;1.  qrcode&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;安装依赖：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;npm i qrcode —save
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;所需页面导入&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;import Vue from &amp;quot;vue&amp;quot;
+import QRCode from &amp;quot;qrcode&amp;quot;
+Vue.use(QRCode)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;使用&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;div class=&amp;quot;qrcode&amp;quot; ref=&amp;quot;qrCodeUrl&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+
+export default {
+  data() {
+    return {
+  },
+  methods: {
+    creatQrCode() {
+        var qrcode = new QRCode(this.$refs.qrCodeUrl, {
+            text: &#39;https://blog.csdn.net/weixin_42601136&#39;, // 需要转换为二维码的内容
+            width: 100,
+            height: 100,
+            colorDark: &#39;#000000&#39;,
+            colorLight: &#39;#ffffff&#39;,
+            correctLevel: QRCode.CorrectLevel.H
+        })
+    },
+},
+mounted() {
+    this.creatQrCode();
+},
+};
+
+&amp;lt;style scoped&amp;gt;
+.qrcode {
+  display: inline-block;
+  width: 132px;
+  height: 132px;
+  background-color: #fff;
+  padding: 6px;
+  box-sizing: border-box;
+}
+&amp;lt;/style&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;效果图&lt;br&gt;
+&lt;img src=&#34;https://nancy-svy.github.io/post-images/1683618734836.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;2-vue-qr&#34;&gt;2.  vue-qr&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.npmjs.com/package/vue-qr&#34;&gt;https://www.npmjs.com/package/vue-qr&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;安装依赖：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;npm install vue-qr --save
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;所需页面导入&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;import vueQr from &#39;vue-qr&#39;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;3, 使用&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;vue-qr :logoSrc=&amp;quot;imageUrl&amp;quot; text=&amp;quot;https://blog.csdn.net/weixin_42601136&amp;quot; :size=&amp;quot;200&amp;quot;&amp;gt;&amp;lt;/vue-qr&amp;gt;
+ 
+&amp;lt;script&amp;gt;
+    export default {
+        components: {
+            vueQr
+        },
+        data() {
+            return {
+                imageUrl: require(&amp;quot;../img/logo.png&amp;quot;), //icon路径
+            }
+        },
+    },
+}
+&amp;lt;/script&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+">vue 生成二维码（两种方式）</a>
+      </div>
+      
+      <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/fullScreen/"" data-c="
           &lt;p&gt;html&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;&amp;lt;img class=&amp;quot;full-screen&amp;quot; :src=&amp;quot;isFullscreen?fullScreenImg.quit:fullScreenImg.enter&amp;quot; @click=&amp;quot;fullScreen&amp;quot; alt=&amp;quot;&amp;quot;&amp;gt;
@@ -7830,10 +8318,10 @@ git branch -r
           &lt;blockquote&gt;
 &lt;p&gt;欢迎来到我的小站呀，很高兴遇见你！🤝&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id=&#34;关于本站&#34;&gt;🏠 关于本站&lt;/h2&gt;
-&lt;h2 id=&#34;博主是谁&#34;&gt;👨‍💻 博主是谁&lt;/h2&gt;
-&lt;h2 id=&#34;兴趣爱好&#34;&gt;⛹ 兴趣爱好&lt;/h2&gt;
-&lt;h2 id=&#34;联系我呀&#34;&gt;📬 联系我呀&lt;/h2&gt;
+&lt;h2 id=&#34;&#34;&gt;🏠&lt;/h2&gt;
+&lt;h2 id=&#34;-2&#34;&gt;👨‍💻&lt;/h2&gt;
+&lt;h2 id=&#34;-3&#34;&gt;⛹&lt;/h2&gt;
+&lt;h2 id=&#34;-4&#34;&gt;📬&lt;/h2&gt;
 ">关于</a>
       </div>
       
