@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://nancy-svy.github.io</id>
     <title>Gridea</title>
-    <updated>2023-05-12T08:27:42.508Z</updated>
+    <updated>2023-05-18T03:27:31.384Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://nancy-svy.github.io"/>
     <link rel="self" href="https://nancy-svy.github.io/atom.xml"/>
@@ -559,7 +559,7 @@ let result = await this.upload(url, file);
 </code></pre>
 <p>实现效果<br>
 <img src="https://nancy-svy.github.io/post-images/1682669221905.png" alt="" loading="lazy"></p>
-<p><strong>5. tree组件有指示线</strong><br>
+<p><strong>5. tree组件有指示线(1)</strong><br>
 实现效果<br>
 <img src="https://nancy-svy.github.io/post-images/1683339530196.png" alt="" loading="lazy"></p>
 <pre><code>&lt;el-tree
@@ -620,6 +620,205 @@ let result = await this.upload(url, file);
         }
     }
 }
+</code></pre>
+<p><strong>6. tree组件有指示线(2)</strong><br>
+<img src="https://nancy-svy.github.io/post-images/1684380282657.png" alt="" loading="lazy"></p>
+<p>加号图<br>
+<img src="https://nancy-svy.github.io/post-images/1684380373226.png" alt="" loading="lazy"></p>
+<p>减号图<br>
+<img src="https://nancy-svy.github.io/post-images/1684380379814.png" alt="" loading="lazy"></p>
+<pre><code>&lt;div class=&quot;treeFather&quot;&gt;
+    &lt;el-tree
+    class=&quot;departmentTree&quot;
+    :data=&quot;treeData&quot;
+    default-expand-all
+    node-key=&quot;id&quot;
+    ref=&quot;powerTree&quot;
+    show-checkbox
+    highlight-current
+    :props=&quot;defaultProps&quot;&gt;
+    &lt;span class=&quot;custom-tree-node&quot; slot-scope=&quot;scope&quot;&gt;
+        &lt;svg-icon icon-class=&quot;tree&quot; /&gt;
+        {{ scope.data.label }}
+    &lt;/span&gt;
+    &lt;/el-tree&gt;
+&lt;/div&gt;
+
+
+treeData: [{
+        id: 1,
+        label: 'xxx学院',
+        children: [{
+          id: 2,
+          label: '计算机学院',
+          children: [{
+            id: 5,
+            label: '某某专业',
+            children: [{
+              id: 8,
+              label: '某某方向'
+            },{
+              id: 9,
+              label: '某某方向二'
+            },{
+              id: 10,
+              label: '某某方向三'
+            }]
+          }, {
+            id: 6,
+            label: '某某专业二'
+          },{
+            id: 7,
+            label: '某某专业三'
+          }]
+        },{
+            id: 3,
+            label: '电控学院'
+        },{
+          id: 4,
+          label: '某某学院'
+        }]
+      }],
+      defaultProps: {
+        children: 'children',
+        label: 'label'
+      },
+
+
+
+&lt;style lang=&quot;less&gt;
+// el-tree样式开始
+  .treeFather {
+    max-height: 400px;
+    overflow: auto;
+    .custom-tree-node {
+      .svg-icon {
+        color:#02C2B0;
+      }
+    }
+  }
+  .departmentTree {
+    overflow: hidden;
+  }
+  .el-tree-node:before {
+    position: absolute;
+    content: &quot;&quot;;
+    left: -18px;
+    top: -24px;
+    height: 100%;
+    width: 0px;
+    border-width: 1px;
+    border-left: 1px dashed #D8D8D8;
+  }
+  .el-tree-node__label {
+    line-height: 16px;
+    font-size: 16px;
+  }
+  // 取消悬停和激活状态的背景色
+  .el-tree-node:focus &gt; .el-tree-node__content {
+    background-color: transparent;
+    
+  }
+  .el-tree--highlight-current .el-tree-node.is-current &gt; .el-tree-node__content,
+  .el-tree-node__content:hover {
+    background-color: transparent;
+  }
+
+  // 第一级树竖着的虚线
+  .el-tree {
+    &amp;&gt;.el-tree-node:nth-last-child(2) {
+      &amp;:before {
+        visibility: hidden;
+      }
+    }
+    &amp;&gt;.el-tree-node {
+      position: relative;
+      &amp;&gt;.el-tree-node__content {
+        .el-tree-node__expand-icon:before {
+          visibility: hidden;
+        }
+      }
+    }
+  }
+  // 使超出的虚线可显示
+  .el-tree-node&gt;.el-tree-node__children {
+    overflow: visible;
+  }
+  // 加减号、上虚线、左虚线
+  .el-tree-node__expand-icon {
+    width: 16px;
+    height: 16px;
+    padding: 0;
+    margin-right: 10px;
+    background: url(&quot;~@/assets/images/icon_plus.png&quot;) center no-repeat;
+    position: relative;
+    &amp;:after {
+      position: absolute;
+      content: &quot;&quot;;
+      left: -18px;
+      top: 8px;
+      width: 18px;
+      height: 0px;
+      border-width: 1px;
+      border-top: 1px dashed #D8D8D8;
+    }
+    &amp;:before {
+      position: absolute;
+      content: &quot;&quot;;
+      left: -18px;
+      top: -32px;
+      height: 40px;
+      width: 0px;
+      border-width: 1px;
+      border-left: 1px dashed #D8D8D8;
+    }
+  }
+  .el-tree-node__children {
+    &amp; &gt; .el-tree-node:first-child {
+      &amp; &gt; .el-tree-node__content {
+        &amp; &gt; .el-tree-node__expand-icon.is-leaf {
+          &amp;:before {
+            top: -32px;
+            height: 40px;
+          }
+        }
+      }
+    }
+  }
+  // 隐藏第一层的虚线
+  .el-tree &gt; .el-tree-node &gt; .el-tree-node__content &gt; .el-tree-node__expand-icon {
+    &amp;:before,
+    &amp;:after {
+      display: none;
+    }
+  }
+  // 将原来的箭头改为加减号图片
+  .el-tree-node__expand-icon.expanded {
+    transform: rotate(0deg);
+    background: url(&quot;~@/assets/images/icon_reduce.png&quot;) center no-repeat;
+  }
+  .el-tree-node__expand-icon.is-leaf {
+    width: 0;
+    padding: 0;
+    margin-right: 0;
+    &amp;:before {
+      top: -40px;
+      height: 48px;
+    }
+  }
+  
+  .el-tree-node__content {
+    padding-left: 0 !important;
+    height: 48px;
+  }
+  .el-tree-node__children {
+    .el-tree-node {
+      position: relative;
+      padding-left: 26px;
+    }
+  }
+  // el-tree样式结束
+&lt;/style&gt;
 </code></pre>
 ]]></content>
     </entry>

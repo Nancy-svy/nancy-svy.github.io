@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>vue 条形码 | Gridea</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1683880018893">
+<link rel="shortcut icon" href="/favicon.ico?v=1684380391870">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -1676,7 +1676,7 @@ let result = await this.upload(url, file);
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;实现效果&lt;br&gt;
 &lt;img src=&#34;https://nancy-svy.github.io/post-images/1682669221905.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;5. tree组件有指示线&lt;/strong&gt;&lt;br&gt;
+&lt;p&gt;&lt;strong&gt;5. tree组件有指示线(1)&lt;/strong&gt;&lt;br&gt;
 实现效果&lt;br&gt;
 &lt;img src=&#34;https://nancy-svy.github.io/post-images/1683339530196.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;&amp;lt;el-tree
@@ -1737,6 +1737,205 @@ let result = await this.upload(url, file);
         }
     }
 }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;6. tree组件有指示线(2)&lt;/strong&gt;&lt;br&gt;
+&lt;img src=&#34;https://nancy-svy.github.io/post-images/1684380282657.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;p&gt;加号图&lt;br&gt;
+&lt;img src=&#34;https://nancy-svy.github.io/post-images/1684380373226.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;p&gt;减号图&lt;br&gt;
+&lt;img src=&#34;https://nancy-svy.github.io/post-images/1684380379814.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;div class=&amp;quot;treeFather&amp;quot;&amp;gt;
+    &amp;lt;el-tree
+    class=&amp;quot;departmentTree&amp;quot;
+    :data=&amp;quot;treeData&amp;quot;
+    default-expand-all
+    node-key=&amp;quot;id&amp;quot;
+    ref=&amp;quot;powerTree&amp;quot;
+    show-checkbox
+    highlight-current
+    :props=&amp;quot;defaultProps&amp;quot;&amp;gt;
+    &amp;lt;span class=&amp;quot;custom-tree-node&amp;quot; slot-scope=&amp;quot;scope&amp;quot;&amp;gt;
+        &amp;lt;svg-icon icon-class=&amp;quot;tree&amp;quot; /&amp;gt;
+        {{ scope.data.label }}
+    &amp;lt;/span&amp;gt;
+    &amp;lt;/el-tree&amp;gt;
+&amp;lt;/div&amp;gt;
+
+
+treeData: [{
+        id: 1,
+        label: &#39;xxx学院&#39;,
+        children: [{
+          id: 2,
+          label: &#39;计算机学院&#39;,
+          children: [{
+            id: 5,
+            label: &#39;某某专业&#39;,
+            children: [{
+              id: 8,
+              label: &#39;某某方向&#39;
+            },{
+              id: 9,
+              label: &#39;某某方向二&#39;
+            },{
+              id: 10,
+              label: &#39;某某方向三&#39;
+            }]
+          }, {
+            id: 6,
+            label: &#39;某某专业二&#39;
+          },{
+            id: 7,
+            label: &#39;某某专业三&#39;
+          }]
+        },{
+            id: 3,
+            label: &#39;电控学院&#39;
+        },{
+          id: 4,
+          label: &#39;某某学院&#39;
+        }]
+      }],
+      defaultProps: {
+        children: &#39;children&#39;,
+        label: &#39;label&#39;
+      },
+
+
+
+&amp;lt;style lang=&amp;quot;less&amp;gt;
+// el-tree样式开始
+  .treeFather {
+    max-height: 400px;
+    overflow: auto;
+    .custom-tree-node {
+      .svg-icon {
+        color:#02C2B0;
+      }
+    }
+  }
+  .departmentTree {
+    overflow: hidden;
+  }
+  .el-tree-node:before {
+    position: absolute;
+    content: &amp;quot;&amp;quot;;
+    left: -18px;
+    top: -24px;
+    height: 100%;
+    width: 0px;
+    border-width: 1px;
+    border-left: 1px dashed #D8D8D8;
+  }
+  .el-tree-node__label {
+    line-height: 16px;
+    font-size: 16px;
+  }
+  // 取消悬停和激活状态的背景色
+  .el-tree-node:focus &amp;gt; .el-tree-node__content {
+    background-color: transparent;
+    
+  }
+  .el-tree--highlight-current .el-tree-node.is-current &amp;gt; .el-tree-node__content,
+  .el-tree-node__content:hover {
+    background-color: transparent;
+  }
+
+  // 第一级树竖着的虚线
+  .el-tree {
+    &amp;amp;&amp;gt;.el-tree-node:nth-last-child(2) {
+      &amp;amp;:before {
+        visibility: hidden;
+      }
+    }
+    &amp;amp;&amp;gt;.el-tree-node {
+      position: relative;
+      &amp;amp;&amp;gt;.el-tree-node__content {
+        .el-tree-node__expand-icon:before {
+          visibility: hidden;
+        }
+      }
+    }
+  }
+  // 使超出的虚线可显示
+  .el-tree-node&amp;gt;.el-tree-node__children {
+    overflow: visible;
+  }
+  // 加减号、上虚线、左虚线
+  .el-tree-node__expand-icon {
+    width: 16px;
+    height: 16px;
+    padding: 0;
+    margin-right: 10px;
+    background: url(&amp;quot;~@/assets/images/icon_plus.png&amp;quot;) center no-repeat;
+    position: relative;
+    &amp;amp;:after {
+      position: absolute;
+      content: &amp;quot;&amp;quot;;
+      left: -18px;
+      top: 8px;
+      width: 18px;
+      height: 0px;
+      border-width: 1px;
+      border-top: 1px dashed #D8D8D8;
+    }
+    &amp;amp;:before {
+      position: absolute;
+      content: &amp;quot;&amp;quot;;
+      left: -18px;
+      top: -32px;
+      height: 40px;
+      width: 0px;
+      border-width: 1px;
+      border-left: 1px dashed #D8D8D8;
+    }
+  }
+  .el-tree-node__children {
+    &amp;amp; &amp;gt; .el-tree-node:first-child {
+      &amp;amp; &amp;gt; .el-tree-node__content {
+        &amp;amp; &amp;gt; .el-tree-node__expand-icon.is-leaf {
+          &amp;amp;:before {
+            top: -32px;
+            height: 40px;
+          }
+        }
+      }
+    }
+  }
+  // 隐藏第一层的虚线
+  .el-tree &amp;gt; .el-tree-node &amp;gt; .el-tree-node__content &amp;gt; .el-tree-node__expand-icon {
+    &amp;amp;:before,
+    &amp;amp;:after {
+      display: none;
+    }
+  }
+  // 将原来的箭头改为加减号图片
+  .el-tree-node__expand-icon.expanded {
+    transform: rotate(0deg);
+    background: url(&amp;quot;~@/assets/images/icon_reduce.png&amp;quot;) center no-repeat;
+  }
+  .el-tree-node__expand-icon.is-leaf {
+    width: 0;
+    padding: 0;
+    margin-right: 0;
+    &amp;amp;:before {
+      top: -40px;
+      height: 48px;
+    }
+  }
+  
+  .el-tree-node__content {
+    padding-left: 0 !important;
+    height: 48px;
+  }
+  .el-tree-node__children {
+    .el-tree-node {
+      position: relative;
+      padding-left: 26px;
+    }
+  }
+  // el-tree样式结束
+&amp;lt;/style&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 ">elementUI tree组件</a>
       </div>
