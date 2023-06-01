@@ -1,19 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://nancy-svy.github.io</id>
-    <title>Gridea</title>
-    <updated>2023-05-25T08:49:50.879Z</updated>
+    <title>真实の幻梦</title>
+    <updated>2023-06-01T00:39:45.954Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://nancy-svy.github.io"/>
     <link rel="self" href="https://nancy-svy.github.io/atom.xml"/>
     <subtitle>温故而知新</subtitle>
     <logo>https://nancy-svy.github.io/images/avatar.png</logo>
     <icon>https://nancy-svy.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2023, Gridea</rights>
+    <rights>All rights reserved 2023, 真实の幻梦</rights>
+    <entry>
+        <title type="html"><![CDATA[postman报错Error: write EPROTO 67713288:error:100000f7:SSL routines:OPENSSL_internal:WRONG_VERSION_NUMBER]]></title>
+        <id>https://nancy-svy.github.io/testInterfaceError/</id>
+        <link href="https://nancy-svy.github.io/testInterfaceError/">
+        </link>
+        <updated>2023-05-29T09:40:25.000Z</updated>
+        <content type="html"><![CDATA[<p><strong>postman报错Error: write EPROTO 67713288:error:100000f7:SSL routines:OPENSSL_internal:WRONG_VERSION_NUMBER</strong></p>
+<p>使用postman时报错如下 : Error: write EPROTO 93988952:error:100000f7:SSL routines:OPENSSL_internal:WRONG_VERSION_NUMBER:…/…/third_party/boringssl/src/ssl/tls_record.cc:242:</p>
+<p><strong>debug</strong><br>
+把https改成http，去掉s就能正常检测接口啦</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[vue 日历组件]]></title>
-        <id>https://nancy-svy.github.io/post/calendar-component/</id>
-        <link href="https://nancy-svy.github.io/post/calendar-component/">
+        <id>https://nancy-svy.github.io/calendar-component/</id>
+        <link href="https://nancy-svy.github.io/calendar-component/">
         </link>
         <updated>2023-05-25T08:41:24.000Z</updated>
         <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://nancy-svy.github.io/post-images/1685004547966.png" alt="" loading="lazy"></figure>
@@ -401,8 +413,8 @@ export default {
     </entry>
     <entry>
         <title type="html"><![CDATA[elementUI 修改element日历样式]]></title>
-        <id>https://nancy-svy.github.io/post/calendar/</id>
-        <link href="https://nancy-svy.github.io/post/calendar/">
+        <id>https://nancy-svy.github.io/calendar/</id>
+        <link href="https://nancy-svy.github.io/calendar/">
         </link>
         <updated>2023-05-24T06:03:50.000Z</updated>
         <content type="html"><![CDATA[<h3 id="第一种-需要注意的是popper-classtimedate">第一种： 需要注意的是popper-class=“timeDate”</h3>
@@ -538,8 +550,8 @@ export default {
     </entry>
     <entry>
         <title type="html"><![CDATA[vue项目引入svg图标]]></title>
-        <id>https://nancy-svy.github.io/post/project-Introduction-SVG-icon/</id>
-        <link href="https://nancy-svy.github.io/post/project-Introduction-SVG-icon/">
+        <id>https://nancy-svy.github.io/project-Introduction-SVG-icon/</id>
+        <link href="https://nancy-svy.github.io/project-Introduction-SVG-icon/">
         </link>
         <updated>2023-05-23T09:51:09.000Z</updated>
         <content type="html"><![CDATA[<h3 id="1-安装svg依赖">1. 安装svg依赖</h3>
@@ -682,9 +694,9 @@ export function isExternal(path) {
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[watch监听中的属性]]></title>
-        <id>https://nancy-svy.github.io/post/watchListeningProperties/</id>
-        <link href="https://nancy-svy.github.io/post/watchListeningProperties/">
+        <title type="html"><![CDATA[vue watch监听中的属性]]></title>
+        <id>https://nancy-svy.github.io/watchListeningProperties/</id>
+        <link href="https://nancy-svy.github.io/watchListeningProperties/">
         </link>
         <updated>2023-05-11T07:19:01.000Z</updated>
         <content type="html"><![CDATA[<pre><code>watch: {
@@ -708,8 +720,8 @@ export function isExternal(path) {
     </entry>
     <entry>
         <title type="html"><![CDATA[vue 关于Vue使用watch监听属性报“TypeError: Cannot read properties of undefined (reading ‘xxx‘)“的问题]]></title>
-        <id>https://nancy-svy.github.io/post/watchAttributeError/</id>
-        <link href="https://nancy-svy.github.io/post/watchAttributeError/">
+        <id>https://nancy-svy.github.io/watchAttributeError/</id>
+        <link href="https://nancy-svy.github.io/watchAttributeError/">
         </link>
         <updated>2023-05-11T01:20:46.000Z</updated>
         <content type="html"><![CDATA[<h5 id="报错信息">报错信息</h5>
@@ -761,8 +773,8 @@ export function isExternal(path) {
     </entry>
     <entry>
         <title type="html"><![CDATA[vue 表格数据打印功能]]></title>
-        <id>https://nancy-svy.github.io/post/tableDataPrinting/</id>
-        <link href="https://nancy-svy.github.io/post/tableDataPrinting/">
+        <id>https://nancy-svy.github.io/tableDataPrinting/</id>
+        <link href="https://nancy-svy.github.io/tableDataPrinting/">
         </link>
         <updated>2023-05-09T03:16:31.000Z</updated>
         <content type="html"><![CDATA[<h4 id="一-单页打印">一、单页打印</h4>
@@ -967,8 +979,8 @@ import printJS from 'print-js'
     </entry>
     <entry>
         <title type="html"><![CDATA[vue 条形码]]></title>
-        <id>https://nancy-svy.github.io/post/barCode/</id>
-        <link href="https://nancy-svy.github.io/post/barCode/">
+        <id>https://nancy-svy.github.io/barCode/</id>
+        <link href="https://nancy-svy.github.io/barCode/">
         </link>
         <updated>2023-05-09T02:19:36.000Z</updated>
         <content type="html"><![CDATA[<h5 id="一-jsbarcode">一、JsBarcode</h5>
@@ -1049,8 +1061,8 @@ JsBarcode(&quot;#barcode1&quot;,barCode1,{
     </entry>
     <entry>
         <title type="html"><![CDATA[js  文件大小换算为B、KB、MB、GB]]></title>
-        <id>https://nancy-svy.github.io/post/fileSizeConversion/</id>
-        <link href="https://nancy-svy.github.io/post/fileSizeConversion/">
+        <id>https://nancy-svy.github.io/fileSizeConversion/</id>
+        <link href="https://nancy-svy.github.io/fileSizeConversion/">
         </link>
         <updated>2023-05-07T01:46:22.000Z</updated>
         <content type="html"><![CDATA[<pre><code>// 文件大小换算
@@ -1078,8 +1090,8 @@ JsBarcode(&quot;#barcode1&quot;,barCode1,{
     </entry>
     <entry>
         <title type="html"><![CDATA[uniapp用post上传图片流binary]]></title>
-        <id>https://nancy-svy.github.io/post/postUploadImageStreamBinary/</id>
-        <link href="https://nancy-svy.github.io/post/postUploadImageStreamBinary/">
+        <id>https://nancy-svy.github.io/postUploadImageStreamBinary/</id>
+        <link href="https://nancy-svy.github.io/postUploadImageStreamBinary/">
         </link>
         <updated>2023-05-07T01:23:44.000Z</updated>
         <content type="html"><![CDATA[<p>注意：<br>
@@ -1157,26 +1169,6 @@ let file = this.base64toFile(this.baseImageList[0], url);
 let fileid = '';
 let result = await this.upload(url, file);
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[google 简书广告屏蔽]]></title>
-        <id>https://nancy-svy.github.io/post/blockAdvertising/</id>
-        <link href="https://nancy-svy.github.io/post/blockAdvertising/">
-        </link>
-        <updated>2023-05-06T05:36:40.000Z</updated>
-        <content type="html"><![CDATA[<p>最近简书感觉是穷疯了，随便打开一篇文章满屏的广告乱飞，对于有强迫症的患者非常难受，看到广告就想点 x x 关闭。似乎简书与我干上了，并不希望我关闭广告，点完关闭立马把我带到广告的详情页，于是忍无可忍从网上找了一些方法，彻底铲除这些辣眼睛的广告。<br>
-<img src="https://nancy-svy.github.io/post-images/1683351463792.png" alt="" loading="lazy"></p>
-<p><strong>一、 AdGuard 广告拦截器</strong><br>
-<a href="http://www.ddooo.com/softdown/128398.htm">AdGuard</a> 广告拦截器是一款可以对抗各式广告的拦截插件，该插件可以拦截包括视频广告、浮动广告以及插播广告在内的绝大部分常见的网站广告。<br>
-<img src="https://nancy-svy.github.io/post-images/1683351546969.png" alt="" loading="lazy"></p>
-<p><strong>二、 Adblock</strong><br>
-<a href="https://adblockplus.org/">AdBlock</a> 插件是 Chrome 最知名的广告拦截插件之一，不仅能够帮助用户对 Facebook 和 YouTube 等网站上的广告、弹窗和恼人的横幅广告进行拦截，同时也能够对第三方跟踪代码进行拦截，保护用户的隐私。<br>
-<img src="https://nancy-svy.github.io/post-images/1683351602470.png" alt="" loading="lazy"></p>
-<p><strong>三、Adblock plus</strong><br>
-<a href="https://www.adblockplus.org/">Adblock Plus</a> 插件作为一款功能强大且免费的广告拦截插件，支持包括 Chrome 、 Firefox 等在内的多种浏览器。<br>
-在浏览器中安装、启用该插件后，用户不需要操作，它就会对网页中的广告进行自动屏蔽，并且还会将空白的页面进行合并，完全看不出广告的痕迹。<br>
-<img src="https://nancy-svy.github.io/post-images/1683351815771.png" alt="" loading="lazy"></p>
 ]]></content>
     </entry>
 </feed>
