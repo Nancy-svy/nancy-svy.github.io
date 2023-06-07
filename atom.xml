@@ -2,18 +2,106 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://nancy-svy.github.io</id>
     <title>真实の幻梦</title>
-    <updated>2023-06-01T00:45:03.563Z</updated>
+    <updated>2023-06-07T09:20:01.964Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://nancy-svy.github.io"/>
     <link rel="self" href="https://nancy-svy.github.io/atom.xml"/>
-    <subtitle>温故而知新</subtitle>
+    <subtitle>草在结它的种子 ，风在摇它的叶子 ，我们站着，不说话，就十分美好。</subtitle>
     <logo>https://nancy-svy.github.io/images/avatar.png</logo>
     <icon>https://nancy-svy.github.io/favicon.ico</icon>
     <rights>All rights reserved 2023, 真实の幻梦</rights>
     <entry>
+        <title type="html"><![CDATA[uniapp 小程序一个页面多个倒计时]]></title>
+        <id>https://nancy-svy.github.io/post/multipleCountdowns/</id>
+        <link href="https://nancy-svy.github.io/post/multipleCountdowns/">
+        </link>
+        <updated>2023-06-06T01:41:51.000Z</updated>
+        <content type="html"><![CDATA[<p>效果图<br>
+<img src="https://nancy-svy.github.io/post-images/1686015900357.png" alt="" loading="lazy"></p>
+<p>封装的方法</p>
+<pre><code>handleTime  (timestamp) {
+	let t = Math.abs(timestamp);
+	let d = Math.floor(t/100/60/60/24);
+	let h = Math.floor(t/1000/60/60%24);
+	let m = Math.floor(t/1000/60%60);
+	let s = Math.floor(t/1000%60);
+	return{
+		day: d,
+		hours: h,
+		minute: m,
+		second: s
+	}
+},
+getRemainTime (overTime) {
+	let now = new Date().getTime();
+	let over = new Date(overTime).getTime();
+	return this.handleTime(over - now);
+},
+</code></pre>
+<p>调用方法</p>
+<pre><code>&lt;template&gt;
+   &lt;view&gt;
+   	  &lt;view v-for=&quot;(item, index) in times&quot; :key=&quot;index&quot;&gt;{{ item.remainTimeNum }}&lt;/view&gt;
+   &lt;/view&gt;
+&lt;/template&gt;
+
+import { getRemainTime } from @/utils/utils.js';
+
+export default {
+   data() {
+   	return {
+   		times: [{
+            id: 1,
+            applyStart:  &quot;2023-06-03 08:00:42&quot;,
+            applyEnd:  &quot;2023-06-03 09:00:07&quot;,
+            name:  &quot;2&quot;
+            note:  &quot;1&quot;,
+            phone:  &quot;1&quot;,
+            placeName:  &quot;1&quot;,
+         }{
+            id: 2,
+            applyStart:  &quot;2023-06-03 10:00:30&quot;,
+            applyEnd:  &quot;2023-06-03 12:00:00&quot;,
+            name:  &quot;2&quot;
+            note:  &quot;1&quot;,
+            phone:  &quot;1&quot;,
+            placeName:  &quot;1&quot;,
+         }]
+   	};
+   },
+   onLoad() {
+   		this.timer(this.times);
+   },
+   methods: {
+   		timer(times) {
+   			let that = this;
+			let timeInterval = null 
+			clearInterval(timeInterval)
+			timeInterval = setInterval(() =&gt; {
+				times.forEach((item, index) =&gt; {
+					that.$set(item, 'remainTimeNum', getRemainTime(item.applyEnd))
+				})
+			},1000)
+   		}
+   }
+};
+&lt;/script&gt;
+</code></pre>
+<p>在页面渲染完成之后，对data里的某个数组或对象进行新增、删除属性是监听不到的，视图不会更新，需要使用this.$set()更新视图。</p>
+<pre><code>this.$set(target, key, value)
+target: 要更改的数据源(可以是一个对象或者数组)
+key: 要更改的属性(字段)
+value: 新增的值
+</code></pre>
+<p>删除属性可以使用</p>
+<pre><code>this.$delete(target,key)
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[postman报错Error: write EPROTO 67713288:error:100000f7:SSL routines:OPENSSL_internal:WRONG_VERSION_NUMBER]]></title>
-        <id>https://nancy-svy.github.io/testInterfaceError/</id>
-        <link href="https://nancy-svy.github.io/testInterfaceError/">
+        <id>https://nancy-svy.github.io/post/testInterfaceError/</id>
+        <link href="https://nancy-svy.github.io/post/testInterfaceError/">
         </link>
         <updated>2023-05-29T09:40:25.000Z</updated>
         <content type="html"><![CDATA[<p><strong>postman报错Error: write EPROTO 67713288:error:100000f7:SSL routines:OPENSSL_internal:WRONG_VERSION_NUMBER</strong></p>
@@ -24,8 +112,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[vue 日历组件]]></title>
-        <id>https://nancy-svy.github.io/calendar-component/</id>
-        <link href="https://nancy-svy.github.io/calendar-component/">
+        <id>https://nancy-svy.github.io/post/calendar-component/</id>
+        <link href="https://nancy-svy.github.io/post/calendar-component/">
         </link>
         <updated>2023-05-25T08:41:24.000Z</updated>
         <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://nancy-svy.github.io/post-images/1685004547966.png" alt="" loading="lazy"></figure>
@@ -413,8 +501,8 @@ export default {
     </entry>
     <entry>
         <title type="html"><![CDATA[elementUI 修改element日历样式]]></title>
-        <id>https://nancy-svy.github.io/calendar/</id>
-        <link href="https://nancy-svy.github.io/calendar/">
+        <id>https://nancy-svy.github.io/post/calendar/</id>
+        <link href="https://nancy-svy.github.io/post/calendar/">
         </link>
         <updated>2023-05-24T06:03:50.000Z</updated>
         <content type="html"><![CDATA[<h3 id="第一种-需要注意的是popper-classtimedate">第一种： 需要注意的是popper-class=“timeDate”</h3>
@@ -550,8 +638,8 @@ export default {
     </entry>
     <entry>
         <title type="html"><![CDATA[vue项目引入svg图标]]></title>
-        <id>https://nancy-svy.github.io/project-Introduction-SVG-icon/</id>
-        <link href="https://nancy-svy.github.io/project-Introduction-SVG-icon/">
+        <id>https://nancy-svy.github.io/post/project-Introduction-SVG-icon/</id>
+        <link href="https://nancy-svy.github.io/post/project-Introduction-SVG-icon/">
         </link>
         <updated>2023-05-23T09:51:09.000Z</updated>
         <content type="html"><![CDATA[<h3 id="1-安装svg依赖">1. 安装svg依赖</h3>
@@ -695,8 +783,8 @@ export function isExternal(path) {
     </entry>
     <entry>
         <title type="html"><![CDATA[vue watch监听中的属性]]></title>
-        <id>https://nancy-svy.github.io/watchListeningProperties/</id>
-        <link href="https://nancy-svy.github.io/watchListeningProperties/">
+        <id>https://nancy-svy.github.io/post/watchListeningProperties/</id>
+        <link href="https://nancy-svy.github.io/post/watchListeningProperties/">
         </link>
         <updated>2023-05-11T07:19:01.000Z</updated>
         <content type="html"><![CDATA[<pre><code>watch: {
@@ -720,8 +808,8 @@ export function isExternal(path) {
     </entry>
     <entry>
         <title type="html"><![CDATA[vue 关于Vue使用watch监听属性报“TypeError: Cannot read properties of undefined (reading ‘xxx‘)“的问题]]></title>
-        <id>https://nancy-svy.github.io/watchAttributeError/</id>
-        <link href="https://nancy-svy.github.io/watchAttributeError/">
+        <id>https://nancy-svy.github.io/post/watchAttributeError/</id>
+        <link href="https://nancy-svy.github.io/post/watchAttributeError/">
         </link>
         <updated>2023-05-11T01:20:46.000Z</updated>
         <content type="html"><![CDATA[<h5 id="报错信息">报错信息</h5>
@@ -773,8 +861,8 @@ export function isExternal(path) {
     </entry>
     <entry>
         <title type="html"><![CDATA[vue 表格数据打印功能]]></title>
-        <id>https://nancy-svy.github.io/tableDataPrinting/</id>
-        <link href="https://nancy-svy.github.io/tableDataPrinting/">
+        <id>https://nancy-svy.github.io/post/tableDataPrinting/</id>
+        <link href="https://nancy-svy.github.io/post/tableDataPrinting/">
         </link>
         <updated>2023-05-09T03:16:31.000Z</updated>
         <content type="html"><![CDATA[<h4 id="一-单页打印">一、单页打印</h4>
@@ -979,8 +1067,8 @@ import printJS from 'print-js'
     </entry>
     <entry>
         <title type="html"><![CDATA[vue 条形码]]></title>
-        <id>https://nancy-svy.github.io/barCode/</id>
-        <link href="https://nancy-svy.github.io/barCode/">
+        <id>https://nancy-svy.github.io/post/barCode/</id>
+        <link href="https://nancy-svy.github.io/post/barCode/">
         </link>
         <updated>2023-05-09T02:19:36.000Z</updated>
         <content type="html"><![CDATA[<h5 id="一-jsbarcode">一、JsBarcode</h5>
@@ -1061,8 +1149,8 @@ JsBarcode(&quot;#barcode1&quot;,barCode1,{
     </entry>
     <entry>
         <title type="html"><![CDATA[js  文件大小换算为B、KB、MB、GB]]></title>
-        <id>https://nancy-svy.github.io/fileSizeConversion/</id>
-        <link href="https://nancy-svy.github.io/fileSizeConversion/">
+        <id>https://nancy-svy.github.io/post/fileSizeConversion/</id>
+        <link href="https://nancy-svy.github.io/post/fileSizeConversion/">
         </link>
         <updated>2023-05-07T01:46:22.000Z</updated>
         <content type="html"><![CDATA[<pre><code>// 文件大小换算
@@ -1085,89 +1173,6 @@ JsBarcode(&quot;#barcode1&quot;,barCode1,{
 			    }
 			    return sizestr;
 			},
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[uniapp用post上传图片流binary]]></title>
-        <id>https://nancy-svy.github.io/postUploadImageStreamBinary/</id>
-        <link href="https://nancy-svy.github.io/postUploadImageStreamBinary/">
-        </link>
-        <updated>2023-05-07T01:23:44.000Z</updated>
-        <content type="html"><![CDATA[<p>注意：<br>
-1.uniapp对request请求有封装，会对入参进行格式化，如果想post主体为图片流，不能直接用；<br>
-2.传binary需要将路径转为base64，再转为二进制流blob</p>
-<p>引入图片路径转base64</p>
-<pre><code>import {pathToBase64} from &quot;image-tools&quot;;
-</code></pre>
-<p>选择图片时转base64</p>
-<pre><code>        uni.chooseImage({
-          count: 1, //最多可以选择的图片张数				  count: 1, //默认100
-          extension:['.jpg','.png','.jpeg','.gif','.svg','.webp','.jfif','.bmp','.dpg'],
-          sizeType: ['compressed'], //original 原图，compressed 压缩图
-          sourceType: ['album', 'camera'], //album 从相册选图，camera 使用相机
-          //成功则返回图片的本地文件路径列表 tempFilePaths
-          success: (res) =&gt; {
-            this.imageList = this.imageList.concat(res.tempFilePaths);//成功后利用concat方法追加到imageList1中
-            //循环遍历res.tempFilePaths将每一个图像路径转换为base64
-            for (var i = 0; i &lt; res.tempFilePaths.length; i++) {
-              pathToBase64(res.tempFilePaths[i])
-                .then(path =&gt; {
-                  this.baseImageList = this.baseImageList.concat(path);//成功后利用concat方法追加到baseImageList中
-                })
-                .catch(error =&gt; {
-                  console.error(error)
-                })
-            }
-          }
-        })
-</code></pre>
-<p>base64转二进制流</p>
-<pre><code> 
-      /**
-       * Base64字符串转二进制流
-       * @param {String} dataurl Base64字符串(字符串包含Data URI scheme，例如：data:image/png;base64, )
-       */
-      dataURLtoBlob(dataurl) {
-        var arr = dataurl.split(&quot;,&quot;),
-            mime = arr[0].match(/:(.*?);/)[1],
-            bstr = atob(arr[1]),
-            n = bstr.length,
-            u8arr = new Uint8Array(n);
-        while (n--) {
-          u8arr[n] = bstr.charCodeAt(n);
-        }
-        return new Blob([u8arr], {
-          type: mime,
-        });
-      },
-</code></pre>
-<p>请求接口</p>
-<pre><code> 
-      async upload(url, binary){
-        var xhr = new XMLHttpRequest();
-        xhr.open(&quot;POST&quot;, url, false);
-        xhr.overrideMimeType(&quot;application/octet-stream&quot;);
-        //直接发送二进制数据
-        if(xhr.sendAsBinary){
-          xhr.sendAsBinary(binary);
-        }else{
-          xhr.send(binary);
-        }
-        // 监听变化
-        if(xhr.status===200){
-          // 响应成功
-          return  xhr.response
-        } else {
-          this.$utils.showToast(xhr.responseText, &quot;none&quot;)
-          return;
-        },
-</code></pre>
-<p>上传至服务器</p>
-<pre><code>let url = '**************'
-let file = this.base64toFile(this.baseImageList[0], url);
-let fileid = '';
-let result = await this.upload(url, file);
 </code></pre>
 ]]></content>
     </entry>

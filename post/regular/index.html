@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="https://nancy-svy.github.io/favicon.ico" type="image/x-icon" /><meta name="viewport"content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="apple-mobile-web-app-capable"content="yes"/><meta name="apple-mobile-web-app-status-bar-style"content="black"/><meta name="format-detection"content="telephone=no"/><meta name="renderer"content="webkit"><meta name="description"content="草在结它的种子 ，风在摇它的叶子 ，我们站着，不说话，就十分美好。"><meta charset="UTF-8"><title>vue 正则 | 真实の幻梦</title>
+<link href="https://nancy-svy.github.io/styles/main.css" type="text/css" rel="stylesheet" /><link href="https://at.alicdn.com/t/font_1621793_zatzzgvf30g.css" type="text/css" rel="stylesheet" /><link rel="stylesheet" href="https://nancy-svy.github.io/media/css/katex.css"><script async src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.min.js"></script><script src="https://nancy-svy.github.io/media/js/magnify.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script type="text/javascript">function btn_toggle(){document.getElementById("hn").classList.contains("no-js")?document.getElementById("hn").classList.remove("no-js"):document.getElementById("hn").classList.add("no-js")}</script>
+
+<link rel="canonical" href="https://nancy-svy.github.io/post/regular/" />
+</head>
+<body>
+<div class="progress"></div><style>.progress{background:linear-gradient(to right,#87ceeb var(--scroll),transparent 0);background-repeat:no-repeat;position:fixed;width:100%;height:4px;z-index:1}</style><div class="darkmode-background"></div><div class="darkmode-layer"></div>
+<noscript><p class="warn" >本页面需要浏览器支持（启用）JavaScript</p></noscript><div class="header"><div class="logo_title"><div class="title animated fadeInDown"><a href="https://nancy-svy.github.io"><img alt="logo" style="display:inline-block;" src="https://nancy-svy.github.io/images/avatar.png"/></a><h1 title="真实の幻梦" class="weaklink"><a  href="/">真实の幻梦</a></h1>
+
+<div class="navbar weaklink">
+<div class="normal_nav">
+<div class="bitcron_nav_container"><div class="bitcron_nav"><div class="bitcron_nav"><div style="display:flex;justify-content:center;"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >关于</a></li></ul></nav>
+<div style="float:right;margin-top:1em"><form id="gridea-search-form" data-update="1578893743252" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="Search..."></form></div><div style="margin-left:0.5em;margin-top:1.2em"><input id="switch_default" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+<div class="clear clear_nav_inline_end"></div></div></div><div class="clear clear_nav_end"></div></div></div><div class="hamberger" href="javascript:void(0)" onclick="btn_toggle();"><i class="iconfont icon-category"></i></div></div></div></div>
+<div id="hn" class="no-js hidden_nav animated fadeInDown"><div class="bitcron_nav_container"><div class="bitcron_nav"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >关于</a></li></ul><div class="clear clear_nav_inline_end"></div></nav></div><div class="clear clear_nav_end"></div></div>
+<div style="display:flex;justify-content:center;inline-block;text-align:center;margin-top:7%"><div><form id="gridea-search-form" data-update="1686129594382" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q"  placeholder="Search..." /></form></div><div style="margin-left:0.5em"><input id="switch_default_h" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+</div></div>
+<script>function enableDarkmode(){document.body.classList.add("darkmode"),document.getElementById("switch_default").checked=1,document.getElementById("switch_default_h").checked=1}function removeDarkmode(){document.body.classList.remove("darkmode"),document.getElementById("switch_default").checked=0,document.getElementById("switch_default_h").checked=0}function getCookie(a){var b,c=new RegExp("(^| )"+a+"=([^;]*)(;|$)");return(b=document.cookie.match(c))?unescape(b[2]):null}cookie=getCookie("darkmode"),"enable"==cookie&&enableDarkmode(),window.matchMedia("(prefers-color-scheme: dark)").matches&&"disable"!==cookie&&(enableDarkmode(),document.cookie="darkmode=enable; path=/");var mobileBtn=function(){1==document.getElementById("switch_default").checked?(enableDarkmode(),document.cookie="darkmode=enable; path=/"):(removeDarkmode(),document.cookie="darkmode=disable; path=/")};</script>
+
+<div class="main"><div class="main-inner"><div class="content">
+<article class="post">
+<h2 class="post_title sm_margin"><a>vue 正则</a></h2>
+<script>function lan(){if(document.getElementById("lan").innerText=="繁"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_tw.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="简"}else{if(document.getElementById("lan").innerText=="簡"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_cn.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="繁"}}};</script>
+<section class="post_details"><i class="iconfont icon-calendar"></i><span style="margin-right:15px"> 2022-09-07</span><i class="iconfont icon-browse"></i><span style="margin-right:15px"> <span id="busuanzi_value_page_pv"></span> Views</span><i class="iconfont icon-category"></i><span class="weaklink" style="margin-right:15px">	<a href="https://nancy-svy.github.io/tag/DL0t25dCR/" class="tag">vue</a></span><i class="iconfont icon-caret-down"></i><span style="margin-right:15px">2116字</span><i class="iconfont icon-naozhong"></i><span style="margin-right:15px">10 min read</span><a id="lan" href="javascript:void(0);"onclick="lan();"title="调整简繁体" style="margin-right:15px;">繁</a>
+</section>
+
+<div style="display:flex">
+<div class="md_block" id="md_block">
+<div class="round-shape-one"></div>
+<h3 id="密码">密码</h3>
+<ol>
+<li>至少8位字母数字组合，不能为纯数字或纯字母</li>
+</ol>
+<pre><code>let reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,}$/
+</code></pre>
+<ol start="2">
+<li>不能包含纯数字、纯字母，8至16位</li>
+</ol>
+<pre><code>/^(?!^\d+$)(?!^[a-zA-Z]+$)(?!^\W+$)[a-zA-Z\d\W]{8,16}$/
+
+
+解释：
+(?!^\d+$)  不能为纯数字
+(?!^[a-zA-Z]+$)  不能为纯字母
+(?!^\W+$)  不能为纯特殊字符
+
+</code></pre>
+<ol start="3">
+<li>必须是8-20位字母、数字或字符，至少包含两种</li>
+</ol>
+<pre><code>/^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$).{8,20}$/
+
+</code></pre>
+<ol start="4">
+<li>密码为8～20个字符，可包含字母和数字</li>
+</ol>
+<pre><code>/^(?!^\d+$)(?!^[a-zA-Z]+$)(?!^\W+$)[a-zA-Z\d\W]{8,20}$/
+
+</code></pre>
+<h3 id="手机号">手机号</h3>
+<pre><code>/^1[3|4|5|8][0-9]\d{8}$/
+</code></pre>
+<h3 id="用户名">用户名</h3>
+<p>字母数字下划线 中文</p>
+<pre><code>/^[a-zA-Z\u4e00-\u9fa5]+$/
+</code></pre>
+<h3 id="企业名称">企业名称</h3>
+<p>字母数字中文</p>
+<pre><code>/^[\u4e00-\u9fa5_a-zA-Z0-9]+$/
+</code></pre>
+<h3 id="姓名">姓名</h3>
+<pre><code>/^[\u4E00-\u9FA5\uf900-\ufa2d·s]{2,20}$/
+</code></pre>
+<h3 id="邮箱">邮箱</h3>
+<pre><code>/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/
+</code></pre>
+<h3 id="身份证">身份证</h3>
+<pre><code> /^[1-9][0-9]{5}(19|20)[0-9]{2}((01|03|05|07|08|10|12)(0[1-9]|[1-2][0-9]|3[0-1])|(04|06|09|11)(0[1-9]|[1-2][0-9]|30)|02(0[1-9]|[1-2][0-9]))[0-9]{3}([0-9]|x|X)$/
+</code></pre>
+<h3 id="银行卡号">银行卡号</h3>
+<pre><code>/^([1-9]{1})(\d{15}|\d{18})$/
+</code></pre>
+<h3 id="汉字和英文-英文或者中文">汉字和英文 英文或者中文</h3>
+<pre><code>/[^\u4E00-\u9FA5a-zA-Z]/g 
+</code></pre>
+<h3 id="汉字">汉字</h3>
+<pre><code>/[^\u4E00-\u9FA5]/g
+</code></pre>
+<h3 id="税务号">税务号</h3>
+<pre><code>/^[A-Z0-9]{15}$|^[A-Z0-9]{18}$|^[A-Z0-9]{20}$/
+</code></pre>
+<h3 id="统一社会代码验证">统一社会代码验证</h3>
+<pre><code>static getTyshyxdm(value) {
+        function Tyshyxdm() {
+            this.firstarray = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+            this.firstkeys = [3, 7, 9, 10, 5, 8, 4, 2];
+            this.secondarray = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'T', 'U', 'W', 'X', 'Y'];
+            this.secondkeys = [1, 3, 9, 27, 19, 26, 16, 17, 20, 29, 25, 13, 8, 24, 10, 30, 28];
+            this.verify = function(str) {
+                var code = str.toUpperCase();
+
+                /*
+                统一社会信用代码由十八位的阿拉伯数字或大写英文字母（不使用I、O、Z、S、V）组成。
+                 第1位：登记管理部门代码（共一位字符）
+                 第2位：机构类别代码（共一位字符）
+                 第3位~第8位：登记管理机关行政区划码（共六位阿拉伯数字）
+                 第9位~第17位：主体标识码（组织机构代码）（共九位字符）
+                 第18位：校验码​（共一位字符）
+                */
+                if (code.length != 18) {
+                    return false;
+                }
+                var reg = /^\w\w\d{6}\w{9}\w$/;
+                if (!reg.test(code)) {
+                    return false;
+                }
+                /*
+                 登记管理部门代码：使用阿拉伯数字或大写英文字母表示。​
+                 机构编制：1​
+                 民政：5​
+                 工商：9​
+                 其他：Y
+                 */
+                reg = /^[1,5,9,Y]\w\d{6}\w{9}\w$/;
+                if (!reg.test(code)) {
+                    return false;
+                }
+                /*
+                 机构类别代码：使用阿拉伯数字或大写英文字母表示。​
+                 机构编制机关：11打头​​
+                 机构编制事业单位：12打头​
+                 机构编制中央编办直接管理机构编制的群众团体：13打头​​
+                 机构编制其他：19打头​
+                 民政社会团体：51打头​
+                 民政民办非企业单位：52打头​
+                 民政基金会：53打头​
+                 民政其他：59打头​
+                 工商企业：91打头​
+                 工商个体工商户：92打头​
+                 工商农民专业合作社：93打头​
+                 其他：Y1打头​
+                 */
+                reg = /^(11|12|13|19|51|52|53|59|91|92|93|Y1)\d{6}\w{9}\w$/;
+                if (!reg.test(code)) {
+                    return false;
+                }
+                /*
+                 登记管理机关行政区划码：只能使用阿拉伯数字表示。按照GB/T 2260编码。​
+                 例如：四川省成都市本级就是510100；四川省自贡市自流井区就是510302。​
+                */
+                reg = /^(11|12|13|19|51|52|53|59|91|92|93|Y1)\d{6}\w{9}\w$/;
+                if (!reg.test(code)) {
+                    return false;
+                }
+                /*
+                		 主体标识码（组织机构代码）：使用阿拉伯数字或英文大写字母表示。按照GB 11714编码。
+                		 在实行统一社会信用代码之前，以前的组织机构代码证上的组织机构代码由九位字符组成。格式为XXXXXXXX-Y。前面八位被称为“本体代码”；最后一位被称为“校验码”。校验码和本体代码由一个连字号（-）连接起来。以便让人很容易的看出校验码。但是三证合一后，组织机构的九位字符全部被纳入统一社会信用代码的第9位至第17位，其原有组织机构代码上的连字号不带入统一社会信用代码。
+                		 原有组织机构代码上的“校验码”的计算规则是：​
+                		 例如：某公司的组织机构代码是：59467239-9。那其最后一位的组织机构代码校验码9是如何计算出来的呢？
+                		 第一步：取组织机构代码的前八位本体代码为基数。5 9 4 6 7 2 3 9
+                		 提示：如果本体代码中含有英文大写字母。则A的基数是10，B的基数是11，C的基数是12，依此类推，直到Z的基数是35。
+                		 第二步：​​取加权因子数值。因为组织机构代码的本体代码一共是八位字符。则这八位的加权因子数值从左到右分别是：3、7、9、10、5、8、4、2。​
+                		 第三步：本体代码基数与对应位数的因子数值相乘。​
+                		 5×3＝15，9×7＝63，4×9＝36，6×10＝60，
+                		 7×5＝35，2×8＝16，3×4=12，9×2＝18​​
+                		 第四步：将乘积求和相加。​
+                		 15+63+36+60+35+16+12+18=255
+                		 第五步：​将和数除以11，求余数。​​
+                		 255÷11=33，余数是2。​​
+                	*/
+                var firstkey = this.calc(code.substr(8), this.firstarray, this.firstkeys, 11);
+                /*
+                 第六步：用阿拉伯数字11减去余数，得求校验码的数值。当校验码的数值为10时，校验码用英文大写字母X来表示；当校验码的数值为11时，校验码用0来表示；其余求出的校验码数值就用其本身的阿拉伯数字来表示。​
+                 11-2＝9，因此此公司完整的组织机构代码为 59467239-9。​​
+                */
+                var firstword;
+                if (firstkey &lt; 10) {
+                    firstword = firstkey;
+                }
+                if (firstkey == 10) {
+                    firstword = 'X';
+                } else if (firstkey == 11) {
+                    firstword = '0';
+                }
+                if (firstword != code.substr(16, 1)) {
+                    return false;
+                }
+
+                /*
+                		 校验码：使用阿拉伯数字或大写英文字母来表示。校验码的计算方法参照 GB/T 17710。
+                		 例如：某公司的统一社会信用代码为91512081MA62K0260E，那其最后一位的校验码E是如何计算出来的呢？
+                		 第一步：取统一社会信用代码的前十七位为基数。9 1 5 1 2 0 8 1 21 10 6 2 19 0 2 6 0提示：如果前十七位统一社会信用代码含有英文大写字母（不使用I、O、Z、S、V这五个英文字母）。则英文字母对应的基数分别为：A=10、B=11、C=12、D=13、E=14、F=15、G=16、H=17、J=18、K=19、L=20、M=21、N=22、P=23、Q=24、R=25、T=26、U=27、W=28、X=29、Y=30​
+                		 第二步：​​取加权因子数值。因为统一社会信用代码前面前面有十七位字符。则这十七位的加权因子数值从左到右分别是：1、3、9、27、19、26、16、17、20、29、25、13、8、24、10、30、2​8
+                		 第三步：基数与对应位数的因子数值相乘。​
+                		 9×1=9，1×3=3，5×9=45，1×27=27，2×19=38，0×26=0，8×16=128​
+                		 1×17=17，21×20=420，10×29=290，6×25=150，2×13=26，19×8=152​
+                		 0×23=0，2×10=20，6×30=180，0×28=0
+                		 第四步：将乘积求和相加。​9+3+45+27+38+0+128+17+420+290+150+26+152+0+20+180+0=1495
+                		 第五步：​将和数除以31，求余数。​​
+                		 1495÷31=48，余数是17。​​
+                */
+
+                var secondkey = this.calc(code, this.secondarray, this.secondkeys, 31);
+                /*
+                 第六步：用阿拉伯数字31减去余数，得求校验码的数值。当校验码的数值为0~9时，就直接用该校验码的数值作为最终的统一社会信用代码的校验码；如果校验码的数值是10~30，则校验码转换为对应的大写英文字母。对应关系为：A=10、B=11、C=12、D=13、E=14、F=15、G=16、H=17、J=18、K=19、L=20、M=21、N=22、P=23、Q=24、R=25、T=26、U=27、W=28、X=29、Y=30
+                 因为，31-17＝14，所以该公司完整的统一社会信用代码为 91512081MA62K0260E。​​
+                */
+                var secondword = this.secondarray[secondkey];
+                if (!secondword || secondword != code.substr(17, 1)) {
+                    return false;
+                }
+                var word = code.substr(0, 16) + firstword + secondword;
+                if (code != word) {
+                    return false;
+                }
+                return true;
+            }
+            this.calc = function(code, array1, array2, b) {
+                var count = 0;
+                for (var i = 0; i &lt; array2.length; i++) {
+                    var a = code[i];
+                    count += array2[i] * array1.indexOf(a);
+                }
+                var remainder = count % b;
+                return remainder === 0 ? 0 : b - remainder;
+            }
+        }
+        return new Tyshyxdm().verify(value);
+    }
+</code></pre>
+<pre><code>
+</code></pre>
+<pre><code>
+</code></pre>
+
+<span id="footnote"></span>
+<div id = "warn"></div>
+</div>
+<div class="toc-container"><ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E5%AF%86%E7%A0%81">密码</a></li>
+<li><a href="#%E6%89%8B%E6%9C%BA%E5%8F%B7">手机号</a></li>
+<li><a href="#%E7%94%A8%E6%88%B7%E5%90%8D">用户名</a></li>
+<li><a href="#%E4%BC%81%E4%B8%9A%E5%90%8D%E7%A7%B0">企业名称</a></li>
+<li><a href="#%E5%A7%93%E5%90%8D">姓名</a></li>
+<li><a href="#%E9%82%AE%E7%AE%B1">邮箱</a></li>
+<li><a href="#%E8%BA%AB%E4%BB%BD%E8%AF%81">身份证</a></li>
+<li><a href="#%E9%93%B6%E8%A1%8C%E5%8D%A1%E5%8F%B7">银行卡号</a></li>
+<li><a href="#%E6%B1%89%E5%AD%97%E5%92%8C%E8%8B%B1%E6%96%87-%E8%8B%B1%E6%96%87%E6%88%96%E8%80%85%E4%B8%AD%E6%96%87">汉字和英文 英文或者中文</a></li>
+<li><a href="#%E6%B1%89%E5%AD%97">汉字</a></li>
+<li><a href="#%E7%A8%8E%E5%8A%A1%E5%8F%B7">税务号</a></li>
+<li><a href="#%E7%BB%9F%E4%B8%80%E7%A4%BE%E4%BC%9A%E4%BB%A3%E7%A0%81%E9%AA%8C%E8%AF%81">统一社会代码验证</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="fullPage"><canvas id="canvas"></canvas></div>
+</article>
+<div id="eof"><span>EOF</span></div><div class="round-shape-one"></div>
+<section>
+<div class="doc_comments">
+
+</div></section>
+</div></div></div><script>
+"use strict";!function(){for(var n=document.getElementsByTagName("pre"),e=n.length,s=0;s<e;s++){n[s].innerHTML='<span class="line-number"></span>'+n[s].innerHTML+'<span class="cl"></span>';for(var a=n[s].innerHTML.split(/\n/).length,r=0;r<a-1;r++){n[s].getElementsByTagName("span")[0].innerHTML+="<span>"+(r+1)+"</span>"}}}();
+let mainNavLinks=document.querySelectorAll(".markdownIt-TOC a");window.addEventListener("scroll",event=>{let fromTop=window.scrollY;mainNavLinks.forEach((link,index)=>{let section=document.getElementById(decodeURI(link.hash).substring(1));let nextSection=null
+if(mainNavLinks[index+1]){nextSection=document.getElementById(decodeURI(mainNavLinks[index+1].hash).substring(1));}
+if(section.offsetTop<=fromTop){if(nextSection){if(nextSection.offsetTop>fromTop){link.classList.add("currentToc");}else{link.classList.remove("currentToc");}}else{link.classList.add("currentToc");}}else{link.classList.remove("currentToc");}});});
+var list=document.querySelectorAll(".katex");for(var i=0;i<list.length;i++){list[i].style.display="unset"};
+var h=document.documentElement,b=document.body,st="scrollTop",sh="scrollHeight",progress=document.querySelector(".progress"),scroll;document.addEventListener("scroll",function(){scroll=(h[st]||b[st])/((h[sh]||b[sh])-h.clientHeight)*100;progress.style.setProperty("--scroll",scroll+"%")});
+var wxScale=new WxScale({fullPage:document.querySelector("#fullPage"),canvas:document.querySelector("#canvas")});var imgBox=document.querySelectorAll("#md_block img");for(var i=0;i<imgBox.length;i++){imgBox[i].onclick=function(e){wxScale.start(this)}};
+content="本文最后更新于2022-09-07，已超过 1 年没有更新，涉及的内容可能已经失效！";var date1="2022-09-07 10:27:17";date1=date1.replace("-","/");var date2=new Date();var date3=date2.getTime()-new Date(date1).getTime();var days=Math.floor(date3/(24*3600*1000));if(days>=365){document.getElementById("warn").innerHTML=content};
+</script>
+<style>#magnifyImg{position:fixed;left:0;top:0;text-align:center;width:100%;display:none;z-index:9999}#magnifyImg img{object-fit:contain;background:#eaecef;padding:15px;border-radius:10px;height:auto;width:auto;vertical-align:middle}</style>
+<a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647; display: block;"></a><div class="footer animated fadeInDown"><div class="site_footer"><div class="mysocials"><div class="my_socials"></div></div><div class="copyright"id="copyright"><div style="display: flex;align-items: center;justify-content: center;"><div style="width:32px;height:32px;margin-right: 5px"><img style="width:100%;height:100%;" src="https://moe.blog/content/uploadfile/Links/icp.gov.moe.png" alt=""></div><a href="https://icp.gov.move" target="_blank"  style="display: flex;" data-pjax-state><span style="color: #ff0000;">萌</span><span style="color: #ca7900;">I</span><span style="color: #48ab18;">C</span><span style="color: #2720ac;">P</span><span style="color: #9b17ae;">备</span></a><a href="https://icp.gov.moe/?keyword=20230926" target="_blank" style="display: flex;" data-pjax-state><span style="color: #ff0000;">20</span><span style="color: #ca7900;">23</span><span style="color: #48ab18;">09</span><span style="color: #2720ac;">26</span><span style="color: #f40428;">号</span></a></div>Copyright © 2018-2020 <a href="https://nancy-svy.github.io" style="margin:0;">真实の幻梦</a>.</div>
+<span style="display: inline;margin-right:15px;">👁<strong><span id="busuanzi_value_site_uv"></span></strong></span><span id="busuanzi_container_page_pv" style="display: inline;"><span>📚<strong>72</strong> posts</span></div></div>
+<script>
+console.log("\n %c \u26a1Theme: Bitcron-pro Author's Blog:https://blog.blinkstar.cn  Writen By Serence  \n\n", "color: #ffffff; background: rgba(49, 49, 49, 0.85); padding:5px 0;border-radius:5px;", );
+</script>
+<script src="https://cdn.jsdelivr.net/npm/instant.page@3.0.0/instantpage.min.js" type="module" defer></script>
+<script type="text/javascript" async src="https://nancy-svy.github.io/media/js/prism.js"></script>
+</body>
+</html>

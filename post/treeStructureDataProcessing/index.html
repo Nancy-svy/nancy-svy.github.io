@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="https://nancy-svy.github.io/favicon.ico" type="image/x-icon" /><meta name="viewport"content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/><meta name="apple-mobile-web-app-capable"content="yes"/><meta name="apple-mobile-web-app-status-bar-style"content="black"/><meta name="format-detection"content="telephone=no"/><meta name="renderer"content="webkit"><meta name="description"content="草在结它的种子 ，风在摇它的叶子 ，我们站着，不说话，就十分美好。"><meta charset="UTF-8"><title>vue tree类型数据格式处理数据 | 真实の幻梦</title>
+<link href="https://nancy-svy.github.io/styles/main.css" type="text/css" rel="stylesheet" /><link href="https://at.alicdn.com/t/font_1621793_zatzzgvf30g.css" type="text/css" rel="stylesheet" /><link rel="stylesheet" href="https://nancy-svy.github.io/media/css/katex.css"><script async src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.min.js"></script><script src="https://nancy-svy.github.io/media/js/magnify.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script type="text/javascript">function btn_toggle(){document.getElementById("hn").classList.contains("no-js")?document.getElementById("hn").classList.remove("no-js"):document.getElementById("hn").classList.add("no-js")}</script>
+
+<link rel="canonical" href="https://nancy-svy.github.io/post/treeStructureDataProcessing/" />
+</head>
+<body>
+<div class="progress"></div><style>.progress{background:linear-gradient(to right,#87ceeb var(--scroll),transparent 0);background-repeat:no-repeat;position:fixed;width:100%;height:4px;z-index:1}</style><div class="darkmode-background"></div><div class="darkmode-layer"></div>
+<noscript><p class="warn" >本页面需要浏览器支持（启用）JavaScript</p></noscript><div class="header"><div class="logo_title"><div class="title animated fadeInDown"><a href="https://nancy-svy.github.io"><img alt="logo" style="display:inline-block;" src="https://nancy-svy.github.io/images/avatar.png"/></a><h1 title="真实の幻梦" class="weaklink"><a  href="/">真实の幻梦</a></h1>
+
+<div class="navbar weaklink">
+<div class="normal_nav">
+<div class="bitcron_nav_container"><div class="bitcron_nav"><div class="bitcron_nav"><div style="display:flex;justify-content:center;"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >关于</a></li></ul></nav>
+<div style="float:right;margin-top:1em"><form id="gridea-search-form" data-update="1578893743252" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="Search..."></form></div><div style="margin-left:0.5em;margin-top:1.2em"><input id="switch_default" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+<div class="clear clear_nav_inline_end"></div></div></div><div class="clear clear_nav_end"></div></div></div><div class="hamberger" href="javascript:void(0)" onclick="btn_toggle();"><i class="iconfont icon-category"></i></div></div></div></div>
+<div id="hn" class="no-js hidden_nav animated fadeInDown"><div class="bitcron_nav_container"><div class="bitcron_nav"><nav class="mixed_site_nav_wrap site_nav_wrap"><ul class="mixed_site_nav site_nav sm sm-base">	<li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/" class="selected active current nav__item" >首页</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/archives" class="selected active current nav__item" >归档</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/tags" class="selected active current nav__item" >标签</a></li><li><a id="d2ef19af68cc211e98f8a0242ac110003" href="/post/about" class="selected active current nav__item" >关于</a></li></ul><div class="clear clear_nav_inline_end"></div></nav></div><div class="clear clear_nav_end"></div></div>
+<div style="display:flex;justify-content:center;inline-block;text-align:center;margin-top:7%"><div><form id="gridea-search-form" data-update="1686129594382" action="/search/index.html"><input class="search-input" autocomplete="off" spellcheck="false" name="q"  placeholder="Search..." /></form></div><div style="margin-left:0.5em"><input id="switch_default_h" onclick="mobileBtn()" type="checkbox" class="switch_default"><label for="switch_default" class="toggleBtn"></label></div></div>
+</div></div>
+<script>function enableDarkmode(){document.body.classList.add("darkmode"),document.getElementById("switch_default").checked=1,document.getElementById("switch_default_h").checked=1}function removeDarkmode(){document.body.classList.remove("darkmode"),document.getElementById("switch_default").checked=0,document.getElementById("switch_default_h").checked=0}function getCookie(a){var b,c=new RegExp("(^| )"+a+"=([^;]*)(;|$)");return(b=document.cookie.match(c))?unescape(b[2]):null}cookie=getCookie("darkmode"),"enable"==cookie&&enableDarkmode(),window.matchMedia("(prefers-color-scheme: dark)").matches&&"disable"!==cookie&&(enableDarkmode(),document.cookie="darkmode=enable; path=/");var mobileBtn=function(){1==document.getElementById("switch_default").checked?(enableDarkmode(),document.cookie="darkmode=enable; path=/"):(removeDarkmode(),document.cookie="darkmode=disable; path=/")};</script>
+
+<div class="main"><div class="main-inner"><div class="content">
+<article class="post">
+<h2 class="post_title sm_margin"><a>vue tree类型数据格式处理数据</a></h2>
+<script>function lan(){if(document.getElementById("lan").innerText=="繁"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_tw.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="简"}else{if(document.getElementById("lan").innerText=="簡"){var s=document.getElementById("tongwenlet_cn");if(s!=null){document.body.removeChild(s)}var s=document.createElement("script");s.language="javascript";s.type="text/javascript";s.src="https://cdn.jsdelivr.net/gh/qyxtim/Static@1.1/bookmarklet_cn.js";s.id="tongwenlet_cn";document.body.appendChild(s);document.getElementById("lan").innerHTML="繁"}}};</script>
+<section class="post_details"><i class="iconfont icon-calendar"></i><span style="margin-right:15px"> 2022-12-27</span><i class="iconfont icon-browse"></i><span style="margin-right:15px"> <span id="busuanzi_value_page_pv"></span> Views</span><i class="iconfont icon-category"></i><span class="weaklink" style="margin-right:15px">	<a href="https://nancy-svy.github.io/tag/DL0t25dCR/" class="tag">vue</a> | 	<a href="https://nancy-svy.github.io/tag/5bqVfX7xB/" class="tag">js</a></span><i class="iconfont icon-caret-down"></i><span style="margin-right:15px">455字</span><i class="iconfont icon-naozhong"></i><span style="margin-right:15px">3 min read</span><a id="lan" href="javascript:void(0);"onclick="lan();"title="调整简繁体" style="margin-right:15px;">繁</a>
+</section>
+
+<div style="display:flex">
+<div class="md_block" id="md_block">
+<div class="round-shape-one"></div>
+<ol>
+<li>参考数据</li>
+</ol>
+<pre><code>let tree_data = [
+    {
+     id: 1,
+     label: '一级 1',
+     children: [
+      {
+       id: 4,
+       label: '二级 1-1',
+       children: [
+        {
+         id: 9,
+         label: '三级 1-1-1',
+        },
+        {
+         id: 10,
+         label: '三级 1-1-2',
+        },
+       ],
+      },
+     ],
+    },
+    {
+     id: 2,
+     label: '一级 2',
+     children: [
+      {
+       id: 5,
+       label: '二级 2-1',
+      },
+      {
+       id: 6,
+       label: '二级 2-2',
+      },
+     ],
+    },
+    {
+     id: 3,
+     label: '一级 3',
+     children: [
+      {
+       id: 7,
+       label: '二级 3-1',
+      },
+      {
+       id: 8,
+       label: '二级 3-2',
+       children: [
+        {
+         id: 11,
+         label: '三级 3-2-1',
+        },
+        {
+         id: 12,
+         label: '三级 3-2-2',
+        },
+        {
+         id: 13,
+         label: '三级 3-2-3',
+        },
+       ],
+      },
+     ],
+    },
+   ]
+
+let id = 6;
+</code></pre>
+<ol start="2">
+<li>递归查找 -- 当前的数据</li>
+</ol>
+<pre><code>// 递归查找 当前的数据
+ /**
+  * 说明：
+  *  data：传入的data需为数据且不能为空
+  *  target_id：目标数据的id或其他内容，但必须为该条数据的唯一标识
+  *  target_data：固定返回一个Object对象
+ **/
+    recursive(data, target_id) {
+        let target_data = {}
+        // 传入的数据格式需为数组且不能为空
+        if (!Array.isArray(data) || !data.length) {
+            return target_data
+        }
+        // 递归过程
+        let get_target_data = item =&gt; {
+            if (item.id == target_id) {
+                target_data = item
+            } else {
+                if (item.children &amp;&amp; item.children.length) {
+                    for (let i = 0; i &lt; item.children.length; i++) {
+                        if (Object.keys(target_data).length) break;
+                        get_target_data(item.children[i])
+                    }
+                }
+            }
+        }
+        // for循环传入的data数据并开始递归
+        for (let i = 0; i &lt; data.length; i++) {
+            if (Object.keys(target_data).length) break; // 同上
+            get_target_data(data[i])
+        }
+        return target_data
+    },
+
+
+
+    // 调用
+    this.recursive(this.tree_data, this.id)
+</code></pre>
+<ol start="3">
+<li>递归查找 -- 根据id查找所在父级数据</li>
+</ol>
+<pre><code>/**
+* 说明：
+* value：是比较值
+* treeData：完整的树表
+* key：value对应的属性名
+**/
+baseGetTreeDeepArr(value, treeData, key) {
+    let arr = [] // 在递归时操作的数组
+    let returnArr = [] // 存放结果的数组
+    let depth = 0 // 定义全局层级
+    // 定义递归函数
+    function childrenEach(childrenData, depthN) {
+        for (let j = 0; j &lt; childrenData.length; j++) {
+        depth = depthN // 将执行的层级赋值 到 全局层级
+        arr[depthN] = (childrenData[j][key])
+    
+        if (childrenData[j][key] == value) {
+            returnArr = arr.slice(0, depthN + 1) // 将目前匹配的数组，截断并保存到结果数组，
+            break;
+        } else {
+            if (childrenData[j].children) {
+                depth++;
+                childrenEach(childrenData[j].children, depth)
+            }
+        }
+    }
+        return returnArr;
+    }
+    return childrenEach(treeData, depth)
+},
+
+
+// 调用
+this.baseGetTreeDeepArr(this.id, this.tree_data, 'id')
+</code></pre>
+
+<span id="footnote"></span>
+<div id = "warn"></div>
+</div>
+<div class="toc-container"></div>
+</div>
+<div id="fullPage"><canvas id="canvas"></canvas></div>
+</article>
+<div id="eof"><span>EOF</span></div><div class="round-shape-one"></div>
+<section>
+<div class="doc_comments">
+
+</div></section>
+</div></div></div><script>
+"use strict";!function(){for(var n=document.getElementsByTagName("pre"),e=n.length,s=0;s<e;s++){n[s].innerHTML='<span class="line-number"></span>'+n[s].innerHTML+'<span class="cl"></span>';for(var a=n[s].innerHTML.split(/\n/).length,r=0;r<a-1;r++){n[s].getElementsByTagName("span")[0].innerHTML+="<span>"+(r+1)+"</span>"}}}();
+let mainNavLinks=document.querySelectorAll(".markdownIt-TOC a");window.addEventListener("scroll",event=>{let fromTop=window.scrollY;mainNavLinks.forEach((link,index)=>{let section=document.getElementById(decodeURI(link.hash).substring(1));let nextSection=null
+if(mainNavLinks[index+1]){nextSection=document.getElementById(decodeURI(mainNavLinks[index+1].hash).substring(1));}
+if(section.offsetTop<=fromTop){if(nextSection){if(nextSection.offsetTop>fromTop){link.classList.add("currentToc");}else{link.classList.remove("currentToc");}}else{link.classList.add("currentToc");}}else{link.classList.remove("currentToc");}});});
+var list=document.querySelectorAll(".katex");for(var i=0;i<list.length;i++){list[i].style.display="unset"};
+var h=document.documentElement,b=document.body,st="scrollTop",sh="scrollHeight",progress=document.querySelector(".progress"),scroll;document.addEventListener("scroll",function(){scroll=(h[st]||b[st])/((h[sh]||b[sh])-h.clientHeight)*100;progress.style.setProperty("--scroll",scroll+"%")});
+var wxScale=new WxScale({fullPage:document.querySelector("#fullPage"),canvas:document.querySelector("#canvas")});var imgBox=document.querySelectorAll("#md_block img");for(var i=0;i<imgBox.length;i++){imgBox[i].onclick=function(e){wxScale.start(this)}};
+content="本文最后更新于2022-12-27，已超过 1 年没有更新，涉及的内容可能已经失效！";var date1="2022-12-27 09:09:05";date1=date1.replace("-","/");var date2=new Date();var date3=date2.getTime()-new Date(date1).getTime();var days=Math.floor(date3/(24*3600*1000));if(days>=365){document.getElementById("warn").innerHTML=content};
+</script>
+<style>#magnifyImg{position:fixed;left:0;top:0;text-align:center;width:100%;display:none;z-index:9999}#magnifyImg img{object-fit:contain;background:#eaecef;padding:15px;border-radius:10px;height:auto;width:auto;vertical-align:middle}</style>
+<a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647; display: block;"></a><div class="footer animated fadeInDown"><div class="site_footer"><div class="mysocials"><div class="my_socials"></div></div><div class="copyright"id="copyright"><div style="display: flex;align-items: center;justify-content: center;"><div style="width:32px;height:32px;margin-right: 5px"><img style="width:100%;height:100%;" src="https://moe.blog/content/uploadfile/Links/icp.gov.moe.png" alt=""></div><a href="https://icp.gov.move" target="_blank"  style="display: flex;" data-pjax-state><span style="color: #ff0000;">萌</span><span style="color: #ca7900;">I</span><span style="color: #48ab18;">C</span><span style="color: #2720ac;">P</span><span style="color: #9b17ae;">备</span></a><a href="https://icp.gov.moe/?keyword=20230926" target="_blank" style="display: flex;" data-pjax-state><span style="color: #ff0000;">20</span><span style="color: #ca7900;">23</span><span style="color: #48ab18;">09</span><span style="color: #2720ac;">26</span><span style="color: #f40428;">号</span></a></div>Copyright © 2018-2020 <a href="https://nancy-svy.github.io" style="margin:0;">真实の幻梦</a>.</div>
+<span style="display: inline;margin-right:15px;">👁<strong><span id="busuanzi_value_site_uv"></span></strong></span><span id="busuanzi_container_page_pv" style="display: inline;"><span>📚<strong>72</strong> posts</span></div></div>
+<script>
+console.log("\n %c \u26a1Theme: Bitcron-pro Author's Blog:https://blog.blinkstar.cn  Writen By Serence  \n\n", "color: #ffffff; background: rgba(49, 49, 49, 0.85); padding:5px 0;border-radius:5px;", );
+</script>
+<script src="https://cdn.jsdelivr.net/npm/instant.page@3.0.0/instantpage.min.js" type="module" defer></script>
+<script type="text/javascript" async src="https://nancy-svy.github.io/media/js/prism.js"></script>
+</body>
+</html>
