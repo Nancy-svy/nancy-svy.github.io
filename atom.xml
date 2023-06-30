@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://nancy-svy.github.io</id>
     <title>真实の幻梦</title>
-    <updated>2023-06-21T09:09:33.392Z</updated>
+    <updated>2023-06-30T12:24:32.068Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://nancy-svy.github.io"/>
     <link rel="self" href="https://nancy-svy.github.io/atom.xml"/>
@@ -10,6 +10,145 @@
     <logo>https://nancy-svy.github.io/images/avatar.png</logo>
     <icon>https://nancy-svy.github.io/favicon.ico</icon>
     <rights>All rights reserved 2023, 真实の幻梦</rights>
+    <entry>
+        <title type="html"><![CDATA[vue  路由]]></title>
+        <id>https://nancy-svy.github.io/post/router/</id>
+        <link href="https://nancy-svy.github.io/post/router/">
+        </link>
+        <updated>2023-06-30T09:32:03.000Z</updated>
+        <content type="html"><![CDATA[<h5 id="有面包屑时三级路由怎么进行跳转页面">有面包屑时，三级路由怎么进行跳转页面</h5>
+<p>路由结构</p>
+<pre><code>{
+    path: '/nrgl',
+    component: Layout,
+    redirect: '/nrgl/index',
+    meta: {
+      title: '内容管理',
+      icon: 'el-icon-s-help'
+    },
+    children: [
+      {
+        path: 'index',
+        component: () =&gt; import('@/views/myview/nrgl/index'),
+        name: 'index',
+        meta: { title: '内容列表',  icon: 'dashboard' }
+      },
+      {
+        path: 'detail',
+        component: () =&gt; import('@/views/myview/nrgl/detail'),
+        name: 'detail',
+        meta: {
+          title:  '内容详情',
+          icon:  'dashboard', 
+          noCache:  true, 
+          activeMenu:  '/nrgl/index'
+       },
+        hidden: true
+      },
+    ]
+  },
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[elementUI  el-input限制输入的值为整数或小数]]></title>
+        <id>https://nancy-svy.github.io/post/elInputLimitation/</id>
+        <link href="https://nancy-svy.github.io/post/elInputLimitation/">
+        </link>
+        <updated>2023-06-29T03:29:47.000Z</updated>
+        <content type="html"><![CDATA[<pre><code>&lt;el-input
+    v-model=&quot;&quot;
+    oninput=&quot;value=value.replace(/[^0-9.]/g,'').replace(/^\./g, '').replace(/\.{2,}/g, '').replace('.', '$#$').replace(/\./g, '').replace('$#$', '.');&quot;
+    size=&quot;mini&quot;/&gt;
+</code></pre>
+<p>备注：<br>
+1：^不放在开头表示取否的意思，就是取相反<br>
+2：replace是对你输入的字符串一个字符一个字符的去查找替换，和常见正则可以多个字符查找略有不同</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[vue 接口返回的preview是张图片，前端如何渲染]]></title>
+        <id>https://nancy-svy.github.io/post/thePreviewModuleIsAPicture/</id>
+        <link href="https://nancy-svy.github.io/post/thePreviewModuleIsAPicture/">
+        </link>
+        <updated>2023-06-27T12:27:03.000Z</updated>
+        <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://nancy-svy.github.io/post-images/1687917326500.png" alt="" loading="lazy"></figure>
+<h5 id="第一种">第一种</h5>
+<p>也是最简单的一种，直接将接口地址赋值给img标签的src</p>
+<pre><code>&lt;img src=&quot;https://xxx.xxx.xxx.com/img&quot; alt=&quot;&quot; width=&quot;100%&quot; /&gt;
+</code></pre>
+<h5 id="第二种">第二种</h5>
+<ol>
+<li>blob<br>
+api.js中设置 responseType为blod</li>
+</ol>
+<pre><code>export const Tqimg = () =&gt; {
+  return request4({
+    url: &quot;/xxx/xx/xx&quot;,
+    method: &quot;get&quot;,
+    // 加上下面这个
+    responseType: &quot;blob&quot;,
+  });
+};
+</code></pre>
+<p>vue单文件的methods中</p>
+<pre><code>async Tqimg() {
+  await Tqimg().then((res) =&gt; {
+    console.log(res);
+    const myBlob = new window.Blob([res.data], { type: &quot;image/jpeg&quot; });
+    // Tianqimg是提前定义好的模型
+    this.Tianqimg = window.URL.createObjectURL(myBlob);
+  });
+},
+</code></pre>
+<p>vue单文件的template中</p>
+<pre><code>&lt;img :src=&quot;Tianqimg&quot; alt=&quot;&quot; width=&quot;100%&quot; /&gt;
+</code></pre>
+<ol start="2">
+<li>arraybuffer<br>
+api.js中设置 responseType为arraybuffer</li>
+</ol>
+<pre><code>export function verificationCode(data) {
+  return serviceCode({
+    url: '/code',
+    method: 'get',
+    data,
+    responseType: 'arraybuffer' //这里是声明期望返回的数据类型,为arraybuffer
+  })
+}
+</code></pre>
+<p>vue单文件的methods中</p>
+<pre><code>getCode(){
+      verificationCode().then(res =&gt; {
+        // console.log(res)
+        const bufferUrl = btoa(new Uint8Array(res.data).reduce((data, byte) =&gt; data + String.fromCharCode(byte), ''));
+        this.verificationCodePath = 'data:image/png;base64,' + bufferUrl
+      })
+    },
+</code></pre>
+<p>vue单文件的template中</p>
+<pre><code>&lt;img :src=&quot;verificationCodePath&quot; alt=&quot;&quot; width=&quot;100%&quot; /&gt;
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[vue 解决vue报You are using the runtime-only build of Vue where the template compiler is not available. Either pre-compile the templates into render functions, or use the compiler-included build.]]></title>
+        <id>https://nancy-svy.github.io/post/runtime-onlyBuildOfVue/</id>
+        <link href="https://nancy-svy.github.io/post/runtime-onlyBuildOfVue/">
+        </link>
+        <updated>2023-06-26T08:06:32.000Z</updated>
+        <content type="html"><![CDATA[<p>
+<code style="color: #c7254e;background-color: #f2f2f2;">
+You are using the runtime-only build of Vue where the template compiler is not available. Either pre-compile the templates into render functions, or use the compiler-included build.
+</code>
+意思就是说 ，您使用的是仅运行时版本的Vue，这种情况下，模板编译器是不可用的，可以将模板预编译为呈现函数，也可以使用编译器包含的内部版本。
+<p>
+<h5> 
+解决办法，将<code style="color: #c7254e;background-color: #f2f2f2;">vue.config.js</code>文件中增加<code style="color: #c7254e;background-color: #f2f2f2;">vue$: "vue/dist/vue.esm.js",</code>，然后重新运行项目即可。
+<h5>
+<figure data-type="image" tabindex="1"><img src="https://nancy-svy.github.io/post-images/1687767357725.png" alt="" loading="lazy"></figure>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[elementUI   el-popconfirm 的确认事件不起作用]]></title>
         <id>https://nancy-svy.github.io/post/elPopconfirmQuestion/</id>
@@ -691,435 +830,6 @@ export default {
         },
     }
 &lt;/script&gt;
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[vue项目引入svg图标]]></title>
-        <id>https://nancy-svy.github.io/post/project-Introduction-SVG-icon/</id>
-        <link href="https://nancy-svy.github.io/post/project-Introduction-SVG-icon/">
-        </link>
-        <updated>2023-05-23T09:51:09.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="1-安装svg依赖">1. 安装svg依赖</h3>
-<p>在vue中首先需要安装可以加载svg的依赖。<br>
-npm安装：npm install svg-sprite-loader --save-dev</p>
-<h3 id="2-创建svg文件夹存放svg图标">2. 创建svg文件夹存放svg图标</h3>
-<p>创建icons文件夹，在icons文件夹下创建svg文件夹存放本地svg图标。<br>
-<img src="https://nancy-svy.github.io/post-images/1684835702862.png" alt="" loading="lazy"></p>
-<h3 id="3-vueconfigjs-中配置svg图片">3. vue.config.js 中配置svg图片</h3>
-<figure data-type="image" tabindex="1"><img src="https://nancy-svy.github.io/post-images/1684890769870.png" alt="" loading="lazy"></figure>
-<p>vue.config.js代码：</p>
-<pre><code>const path = require('path')
-
-function resolve(dir) {
-  return path.join(__dirname, dir)
-}
-
-module.exports = {
-	chainWebpack(config){
-		/**
-		 * set svg-sprite-loader
-		 * svg图标加载 
-		 **/ 
-		config.module
-		  .rule('svg')
-		  .exclude.add(resolve('src/icons'))
-		  .end()
-		  
-		config.module
-		  .rule('icons') // 定义一个名叫 icons 的规则
-		  .test(/\.svg$/) // 设置 icons 的匹配正则
-		  .include.add(resolve('src/icons')) // 设置当前规则的作用目录，只在当前目录下才执行当前规则
-		  .end()
-		  .use('svg-sprite-loader') // 指定一个名叫 svg-sprite-loader 的 loader 配置
-		  .loader('svg-sprite-loader') // 该配置使用 svg-sprite-loader 作为处理 loader
-		  .options({ // 该 svg-sprite-loader 的配置
-		    symbolId: 'icon-[name]'
-		  })
-		  .end()
-	}
-}
-</code></pre>
-<h3 id="4-创建indexjs-导入所有svg图标">4. 创建index.js 导入所有svg图标</h3>
-<p>icons文件夹创建index.js 自动导入所有svg图标。<br>
-<img src="https://nancy-svy.github.io/post-images/1684890847707.png" alt="" loading="lazy"></p>
-<p>icons/index.js代码：</p>
-<pre><code>import Vue from 'vue'
-// svg component
-import SvgIcon from '@/components/SvgIcon'
-
-// 全局注册
-Vue.component('svg-icon', SvgIcon)
-
-const req = require.context('./svg', false, /\.svg$/)
-const requireAll = requireContext =&gt; requireContext.keys().map(requireContext)
-requireAll(req)
-</code></pre>
-<h3 id="5-mainjs中引入iconsindexjs">5. main.js中引入icons/index.js</h3>
-<figure data-type="image" tabindex="2"><img src="https://nancy-svy.github.io/post-images/1684891161639.png" alt="" loading="lazy"></figure>
-<h3 id="6-创建svgicon公用组件">6. 创建SvgIcon公用组件</h3>
-<figure data-type="image" tabindex="3"><img src="https://nancy-svy.github.io/post-images/1684891654421.png" alt="" loading="lazy"></figure>
-<p>SvgIcon/index.vue代码：</p>
-<pre><code>&lt;template&gt;
-  &lt;div v-if=&quot;isExternal&quot; :style=&quot;styleExternalIcon&quot; class=&quot;svg-external-icon svg-icon&quot; v-on=&quot;$listeners&quot; /&gt;
-  &lt;svg v-else :class=&quot;svgClass&quot; aria-hidden=&quot;true&quot; v-on=&quot;$listeners&quot;&gt;
-    &lt;use :xlink:href=&quot;iconName&quot; /&gt;
-  &lt;/svg&gt;
-&lt;/template&gt;
-
-&lt;script&gt;
-// doc: https://panjiachen.github.io/vue-element-admin-site/feature/component/svg-icon.html#usage
-import { isExternal } from '@/utils/validate'
-
-export default {
-  name: 'SvgIcon',
-  props: {
-    iconClass: {
-      type: String,
-      required: true
-    },
-    className: {
-      type: String,
-      default: ''
-    }
-  },
-  computed: {
-    isExternal() {
-      return isExternal(this.iconClass)
-    },
-    iconName() {
-      return `#icon-${this.iconClass}`
-    },
-    svgClass() {
-      if (this.className) {
-        return 'svg-icon ' + this.className
-      } else {
-        return 'svg-icon'
-      }
-    },
-    styleExternalIcon() {
-      return {
-        mask: `url(${this.iconClass}) no-repeat 50% 50%`,
-        '-webkit-mask': `url(${this.iconClass}) no-repeat 50% 50%`
-      }
-    }
-  }
-}
-&lt;/script&gt;
-
-&lt;style scoped&gt;
-.svg-icon {
-  width: 1em;
-  height: 1em;
-  vertical-align: -0.15em;
-  fill: currentColor;
-  overflow: hidden;
-}
-
-.svg-external-icon {
-  background-color: currentColor;
-  mask-size: cover!important;
-  display: inline-block;
-}
-&lt;/style&gt;
-
-</code></pre>
-<p>utils/validate.js代码：</p>
-<pre><code>/**
- * @param {string} path
- * @returns {Boolean}
- */
-export function isExternal(path) {
-  return /^(https?:|mailto:|tel:)/.test(path)
-}
-</code></pre>
-<p>全局注册SvgIcon组件：<br>
-<img src="https://nancy-svy.github.io/post-images/1684890847707.png" alt="" loading="lazy"></p>
-<p>使用SvgIcon组件：<br>
-<img src="https://nancy-svy.github.io/post-images/1684892106504.png" alt="" loading="lazy"></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[vue watch监听中的属性]]></title>
-        <id>https://nancy-svy.github.io/post/watchListeningProperties/</id>
-        <link href="https://nancy-svy.github.io/post/watchListeningProperties/">
-        </link>
-        <updated>2023-05-11T07:19:01.000Z</updated>
-        <content type="html"><![CDATA[<pre><code>watch: {
-        data: {
-            // 监听数据 获取到数据里的数组数据
-            handler(val) {
-                this.getInfo()
-            },
-            // 深度监听
-            deep: true, 
-            // 在watch中首次绑定的时候，是否执行handler，值为true则表示在watch中声明的时候，就立即执行handler方法，值为false，则和一般使用watch一样，在数据发生变化的时候才执行handler。所以当为true时 在created周期里就可以不用在写
-            immediate:true, 
-        },
-    },
-    created() {
-        // this.getInfo()     immediate: true包含了初始化时触发
-    }
-
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[vue 关于Vue使用watch监听属性报“TypeError: Cannot read properties of undefined (reading ‘xxx‘)“的问题]]></title>
-        <id>https://nancy-svy.github.io/post/watchAttributeError/</id>
-        <link href="https://nancy-svy.github.io/post/watchAttributeError/">
-        </link>
-        <updated>2023-05-11T01:20:46.000Z</updated>
-        <content type="html"><![CDATA[<h5 id="报错信息">报错信息</h5>
-<p><strong>Error in callback for immediate watcher “abc”: &quot;TypeError: Cannot read properties of undefined (reading ‘xxx’)&quot;</strong><br>
-<img src="https://nancy-svy.github.io/post-images/1683788865847.png" alt="" loading="lazy"></p>
-<p><strong>解决方法：</strong></p>
-<h5 id="1-watch当中的方法名写错">1、watch当中的方法名写错</h5>
-<p>错误写法：</p>
-<pre><code>watch: {
-    $route: {
-        immediate: true,
-        headler() {  //  这里写错啦！
-            console.log(111);
-        },
-    },
-}
-</code></pre>
-<p>正确写法：</p>
-<pre><code>watch: {
-    $route: {
-        immediate: true,
-        handler() {
-            console.log(111);
-        },
-    },
-}
-</code></pre>
-<figure data-type="image" tabindex="1"><img src="https://nancy-svy.github.io/post-images/1683789273221.png" alt="" loading="lazy"></figure>
-<h5 id="2-当使用this指向data时报错使用普通函数">2、当使用this指向data时报错（使用普通函数）</h5>
-<p>错误写法：</p>
-<pre><code>$route: {
-	immediate: true,
-	handler: (route) =&gt; {
-		console.log(this.route);
-	},
-},
-
-</code></pre>
-<p>正确写法：</p>
-<pre><code>$route: {
-   immediate: true,
-   handler: function (route) {
-       console.log(this.route);
-   },
-}
-
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[vue 表格数据打印功能]]></title>
-        <id>https://nancy-svy.github.io/post/tableDataPrinting/</id>
-        <link href="https://nancy-svy.github.io/post/tableDataPrinting/">
-        </link>
-        <updated>2023-05-09T03:16:31.000Z</updated>
-        <content type="html"><![CDATA[<h4 id="一-单页打印">一、单页打印</h4>
-<figure data-type="image" tabindex="1"><img src="https://nancy-svy.github.io/post-images/1683708395717.jpg" alt="" loading="lazy"></figure>
-<p>只对当前页面可见数据进行打印，实现方法不唯一，此处介绍相对简单的vue-print-nb。他的缺点是只能打印可见区域，不能分页打印 。</p>
-<ol>
-<li>安装</li>
-</ol>
-<pre><code>  npm install vue-print-nb --save
-</code></pre>
-<ol start="2">
-<li>引入</li>
-</ol>
-<pre><code>// 安装好以后在main.js文件中引入
-import Print from 'vue-print-nb'
-Vue.use(Print);  //注册
-</code></pre>
-<ol start="3">
-<li>使用<br>
-(1). 直接使用id，不对最终打印的表格进行样式修改</li>
-</ol>
-<pre><code>// 通过ID直接打印
-  &lt;div id=&quot;print_demo&quot; &gt;
-    &lt;p&gt;打印内容&lt;/p&gt;
-  &lt;/div&gt;
-&lt;button v-print=&quot;'#print_demo'&quot;&gt;打印&lt;/button&gt;
-</code></pre>
-<p>(2). 使用printObj，可以对打印的表格进行样式调整</p>
-<pre><code>// 在组件的打印按钮标签上使用指令 v-print=&quot;printObj&quot;, print是配置对象
-  &lt;button v-print=&quot;printObj&quot;&gt;打印&lt;/button&gt;
-
-//  在组件的打印区域标签上加 id=&quot;print_demo&quot;
-&lt;div id=&quot;print_demo&quot;  style=&quot;background:red;&quot;&gt;
-  &lt;p&gt;打印内容&lt;/p&gt;
-&lt;/div&gt;
-</code></pre>
-<p>(2-1). 在组件的data中定义print配置对象</p>
-<pre><code>export default {
-    data() {
-        return {
-            printObj: {
-              id: &quot;print_demo&quot;,
-              popTitle: '打印的标题', //  打印配置页上方标题
-              extraHead: '&lt;meta http-equiv=&quot;Content-Language&quot;content=&quot;zh-cn&quot;/&gt;',  // 最上方的头部文字，附加在head标签上的额外标签,使用逗号分隔
-               preview: '',  // 是否启动预览模式，默认是false（开启预览模式，可以先预览后打印）
-               previewTitle: '',  // 打印预览的标题（开启预览模式后出现）,
-               previewPrintBtnLabel: '',  // 打印预览的标题的下方按钮文本，点击可进入打印（开启预览模式后出现）
-               zIndex: '', // 预览的窗口的z-index，默认是 20002（此值要高一些，这涉及到预览模式是否显示在最上面）   
-               previewBeforeOpenCallback() {}, //预览窗口打开之前的callback（开启预览模式调用）
-               previewOpenCallback() {}, // 预览窗口打开之后的callback（开启预览模式调用）
-               beforeOpenCallback() {}, // 开启打印前的回调事件
-               openCallback() {}, // 调用打印之后的回调事件
-              closeCallback() {}, //关闭打印的回调事件（无法确定点击的是确认还是取消）
-              extraCss: 'https://www.google.com,https://www.google.com', 
-            }
-        };
-    }
-}
-</code></pre>
-<p>(2-2). 打印过滤（隐藏打印区域不需要打印的内容）<br>
-只需要在组件的打印区域里，给需要隐藏的内容的标签上添加</p>
-<pre><code>class=&quot;noprint&quot;
-</code></pre>
-<p>(2-3). 配置打印的样式<br>
-在全局样式中，新增<style media="print"></style>标签，里面是打印时才生效的样式</p>
-<pre><code>&lt;style media=&quot;print&quot;&gt;
-    @page {
-    size: auto;
-    margin: 3mm;
-    }
-
-    html {
-    background-color: #ffffff;
-    height: auto;
-    margin: 0px;
-    }
-&lt;/style&gt;
-</code></pre>
-<p>(2-4). 处理常见的打印bug<br>
-解决打印出现空白页的问题<br>
-解决el-table表格内容过多，打印不全问题<br>
-解决作用域污染问题导致el-table序号错位</p>
-<pre><code>&lt;style media=&quot;print&quot; lang=&quot;scss&quot;&gt;
-    @page {
-    size: auto;
-    margin: 3mm;
-    }
-    @media print {
-    html {
-        background-color: #ffffff;
-        height: auto;
-        margin: 0px;
-    }
-
-    body {
-        border: solid 1px #ffffff;
-        margin: 10mm 15mm 10mm 15mm;
-    }
-    table {
-        table-layout: auto !important;
-    }
-
-    .el-table__header-wrapper .el-table__header {
-        width: 100% !important;
-        border: solid 1px #f2f2f2;
-    }
-    .el-table__body-wrapper .el-table__body {
-        width: 100% !important;
-    }
-    #pagetable table {
-        table-layout: fixed !important;
-    }
-    }
-&lt;/style&gt;
-</code></pre>
-<p>(2-5). 局部打印，局限在当前组件里<br>
-在组件标签</p>
-<pre><code>&lt;style media=&quot;print&quot; lang=&quot;scss&quot;&gt;
-@page {
-  size: auto;
-  margin: 3mm;
-}
-@media print {
-  html {
-    background-color: #ffffff;
-    height: auto;
-    margin: 0px;
-  }
-
-  body {
-    border: solid 1px #ffffff;
-    margin: 10mm 15mm 10mm 15mm;
-  }
-  #printArea table {
-    table-layout: auto !important;
-  }
-
-  #printArea .el-table__header-wrapper .el-table__header {
-    width: 100% !important;
-    border: solid 1px #f2f2f2;
-  }
-  #printArea .el-table__body-wrapper .el-table__body {
-    width: 100% !important;
-  }
-  #printArea #pagetable table {
-    table-layout: fixed !important;
-  }
-}
-&lt;/style&gt;
-</code></pre>
-<p>(2-6). 注意<br>
-启动打印后可以通过调整设置的缩放来调整显示比例<br>
-可以通过设置背景图形来控制页面是否使用彩色背景</p>
-<h4 id="二-打印数据库内全部数据">二、打印数据库内全部数据</h4>
-<p><a href="https://printjs.crabbly.com/">Print.js 文档</a></p>
-<figure data-type="image" tabindex="2"><img src="https://nancy-svy.github.io/post-images/1683697863113.png" alt="" loading="lazy"></figure>
-<p>将数据库内的全部数据以表格的形式进行打印，需要调用后台接口直接从数据库内进行数据的查找，而不是直接在页面内获取数据。</p>
-<ol>
-<li>安装</li>
-</ol>
-<pre><code>npm install print-js --save
-</code></pre>
-<ol start="2">
-<li>引入</li>
-</ol>
-<pre><code>// 在当前vue文件内引用
-import printJS from 'print-js'
-</code></pre>
-<ol start="3">
-<li>使用</li>
-</ol>
-<pre><code>&lt;el-button  @click=&quot;printJson&quot;&gt;打印全部表格&lt;/el-button&gt;
-</code></pre>
-<pre><code>async printJson() {
-      //通过getdata调用后台接口获取数据封装到res
-      const res = await getdata();
-      this.list = res.data || [];
-      printJS({
-        printable: this.list ,
-        properties: [ // 表头数据
-          {
-            field: 'num', //  表头字段
-            displayName: '序号', // 页面显示的文字
-          },
-          { field: 'date', displayName: '日期 '},
-         { field: 'name', displayName: '费用名称' },
-         { field: 'subjectMatter', displayName: '事由' },
-         { field: 'money', displayName: '金额(元)' },
-         { field: 'notes', displayName: '备注' },
-        ],
-        type: 'json',
-         // tbody的样式
-        gridStyle: 'text-align: center;border: 1px solid #E5E6EB;' ,
-         // 标题
-		header: `&lt;h3 class=&quot;custom-h3&quot;&gt;标题&lt;/h3&gt;`,
-        // 标题样式
-		style: '.custom-h3{text-align: center; margin-bottom: 10px;}',
-      })
-    },
 </code></pre>
 ]]></content>
     </entry>
