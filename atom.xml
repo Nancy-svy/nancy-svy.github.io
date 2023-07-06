@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://nancy-svy.github.io</id>
     <title>真实の幻梦</title>
-    <updated>2023-06-30T12:24:32.068Z</updated>
+    <updated>2023-07-06T07:56:33.310Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://nancy-svy.github.io"/>
     <link rel="self" href="https://nancy-svy.github.io/atom.xml"/>
@@ -156,9 +156,9 @@ You are using the runtime-only build of Vue where the template compiler is not a
         </link>
         <updated>2023-06-21T08:26:00.000Z</updated>
         <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://nancy-svy.github.io/post-images/1687336036974.png" alt="" loading="lazy"></figure>
-<p>element中是**@confirm** 但是使用起来没有效果，<br>
-在网上查找的是**@onConfirm**, 使用起来有效果</p>
-<p>如果这个**@confirm** 或者**@onConfirm**使用没有效果<br>
+<p>element中是 <code style="color: #c7254e;background-color: #f2f2f2;">@confirm</code> 但是使用起来没有效果，<br>
+在网上查找的是 <code style="color: #c7254e;background-color: #f2f2f2;">@onConfirm</code>, 使用起来有效果</p>
+<p>如果这个 <code style="color: #c7254e;background-color: #f2f2f2;">@confirm</code> 或者 <code style="color: #c7254e;background-color: #f2f2f2;">@onConfirm</code> 使用没有效果<br>
 后来想到一个折中的方法：</p>
 <pre><code>&lt;el-popconfirm
     title=&quot;是否删除？&quot;
@@ -302,7 +302,7 @@ value: 新增的值
         </link>
         <updated>2023-05-29T09:40:25.000Z</updated>
         <content type="html"><![CDATA[<p><strong>postman报错Error: write EPROTO 67713288:error:100000f7:SSL routines:OPENSSL_internal:WRONG_VERSION_NUMBER</strong></p>
-<p>使用postman时报错如下 : Error: write EPROTO 93988952:error:100000f7:SSL routines:OPENSSL_internal:WRONG_VERSION_NUMBER:…/…/third_party/boringssl/src/ssl/tls_record.cc:242:</p>
+<p>使用postman时报错如下: <code style="color: #c7254e;background-color: #f2f2f2;"> Error: write EPROTO 93988952:error:100000f7:SSL routines:OPENSSL_internal:WRONG_VERSION_NUMBER:…/…/third_party/boringssl/src/ssl/tls_record.cc:242:</code></p>
 <p><strong>debug</strong><br>
 把https改成http，去掉s就能正常检测接口啦</p>
 ]]></content>

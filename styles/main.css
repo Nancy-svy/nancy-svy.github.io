@@ -2182,8 +2182,6 @@ body {
         filter: blur(0.5px)
       }.box-scale > #landlord {
       transform: scale([0,1]);
-    }.box-shadow-wrapper {
-      padding: 10px;
     }body {
       cursor: default;
     }a {
