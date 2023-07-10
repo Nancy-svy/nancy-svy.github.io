@@ -9,7 +9,7 @@
 <meta name="description" content="草在结它的种子 ，风在摇它的叶子 ，我们站着，不说话，就十分美好。">
 <meta name="theme-color" content="#000">
 <title>真实の幻梦</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1688625722955">
+<link rel="shortcut icon" href="/favicon.ico?v=1688992899446">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -75,8 +75,6 @@
           
             
             
-              
-            
             <li class="nav-item ">
               
               
@@ -87,8 +85,6 @@
             </li>
           
             
-            
-              
             
             <li class="nav-item nav-item-active">
               
@@ -101,8 +97,6 @@
           
             
             
-              
-            
             <li class="nav-item ">
               
               
@@ -114,8 +108,6 @@
           
             
             
-              
-            
             <li class="nav-item ">
               
               
@@ -125,16 +117,6 @@
               
             </li>
           
-          
-            
-              <li class="nav-item ">
-                <a href="/friends/" target="_self">
-                  
-                    <i class="fa fa-address-book"></i> 友链
-                  
-                </a>
-              </li>
-            
           
           
             <li id="fa_search" class="nav-item">
@@ -188,13 +170,13 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">76</span>
+        <span class="site-item-stat-count">77</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
     <div class="sidebar-item-box">
       <a href="/tags/">
-        <span class="site-item-stat-count">16</span>
+        <span class="site-item-stat-count">17</span>
         <span class="site-item-stat-name language" data-lan="tag">标签</span>
       </a>
     </div>
@@ -202,6 +184,8 @@
   
     
   
+  
+
   
 
 
@@ -230,7 +214,7 @@
   <div class="archive-timeline-box">
     <div class="archive-timeline-title">
       
-        <h2 class="language" data-lan="archives" data-count="76">非常好！目前共计76篇文章，继续努力！</h2>
+        <h2 class="language" data-lan="archives" data-count="77">非常好！目前共计77篇文章，继续努力！</h2>
       
     </div>
     
@@ -240,6 +224,19 @@
           <h2 class="tag-year">2023</h2>
         </div>    
         
+      
+      <a href="https://nancy-svy.github.io/post/iframeAddRequestHeader/">
+        <div class="motion-warpper tag-archive-node">
+          <div class="tag-node">
+            <h1>
+              07-10
+              <small>vue + iframe标签添加请求头</small>
+            </h1>
+          </div>  
+      </div>
+      </a>
+    
+      
       
       <a href="https://nancy-svy.github.io/post/router/">
         <div class="motion-warpper tag-archive-node">
@@ -876,19 +873,6 @@
             <h1>
               09-17
               <small>js根据银行卡号判断属于哪个银行</small>
-            </h1>
-          </div>  
-      </div>
-      </a>
-    
-      
-      
-      <a href="https://nancy-svy.github.io/post/regular/">
-        <div class="motion-warpper tag-archive-node">
-          <div class="tag-node">
-            <h1>
-              09-07
-              <small>正则</small>
             </h1>
           </div>  
       </div>
@@ -1775,6 +1759,37 @@
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/iframeAddRequestHeader/"" data-c="
+          &lt;pre&gt;&lt;code&gt;&amp;lt;iframe id=&amp;quot;iframe&amp;quot; src=&amp;quot;&amp;quot; /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;setTimeout(() =&amp;gt; {
+  var iframe = document.querySelector(&amp;quot;#iframe&amp;quot;);
+  this.populateIframe(iframe, [[&amp;quot;Authorization&amp;quot;, &amp;quot;Bearer &amp;quot; + getToken()]]);
+}, 0);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;  methods: {
+    populateIframe(iframe, headers) {
+      var xhr = new XMLHttpRequest();
+      xhr.open(&amp;quot;GET&amp;quot;, &#39;http：localhost:8080/xxx&#39;);
+      xhr.responseType = &amp;quot;blob&amp;quot;;
+      headers.forEach((header) =&amp;gt; {
+        xhr.setRequestHeader(header[0], header[1]);
+      });
+      xhr.onreadystatechange = () =&amp;gt; {
+        if (xhr.readyState === xhr.DONE) {
+          if (xhr.status === 200) {
+            iframe.src = URL.createObjectURL(xhr.response);
+          }
+        }
+      };
+      xhr.send();
+    },
+  }
+&lt;/code&gt;&lt;/pre&gt;
+">vue + iframe标签添加请求头</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/router/"" data-c="

@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://nancy-svy.github.io</id>
     <title>真实の幻梦</title>
-    <updated>2023-07-06T08:55:30.238Z</updated>
+    <updated>2023-07-10T12:42:43.424Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://nancy-svy.github.io"/>
     <link rel="self" href="https://nancy-svy.github.io/atom.xml"/>
@@ -10,6 +10,40 @@
     <logo>https://nancy-svy.github.io/images/avatar.png</logo>
     <icon>https://nancy-svy.github.io/favicon.ico</icon>
     <rights>All rights reserved 2023, 真实の幻梦</rights>
+    <entry>
+        <title type="html"><![CDATA[vue + iframe标签添加请求头]]></title>
+        <id>https://nancy-svy.github.io/post/iframeAddRequestHeader/</id>
+        <link href="https://nancy-svy.github.io/post/iframeAddRequestHeader/">
+        </link>
+        <updated>2023-07-10T12:33:21.000Z</updated>
+        <content type="html"><![CDATA[<pre><code>&lt;iframe id=&quot;iframe&quot; src=&quot;&quot; /&gt;
+</code></pre>
+<pre><code>setTimeout(() =&gt; {
+  var iframe = document.querySelector(&quot;#iframe&quot;);
+  this.populateIframe(iframe, [[&quot;Authorization&quot;, &quot;Bearer &quot; + getToken()]]);
+}, 0);
+</code></pre>
+<pre><code>  methods: {
+    populateIframe(iframe, headers) {
+      var xhr = new XMLHttpRequest();
+      xhr.open(&quot;GET&quot;, 'http：localhost:8080/xxx');
+      xhr.responseType = &quot;blob&quot;;
+      headers.forEach((header) =&gt; {
+        xhr.setRequestHeader(header[0], header[1]);
+      });
+      xhr.onreadystatechange = () =&gt; {
+        if (xhr.readyState === xhr.DONE) {
+          if (xhr.status === 200) {
+            iframe.src = URL.createObjectURL(xhr.response);
+          }
+        }
+      };
+      xhr.send();
+    },
+  }
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[vue  路由]]></title>
         <id>https://nancy-svy.github.io/post/router/</id>
@@ -693,143 +727,6 @@ export default {
 		height: 300px;
 	}
 &lt;/style&gt;
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[elementUI 修改element日历样式]]></title>
-        <id>https://nancy-svy.github.io/post/calendar/</id>
-        <link href="https://nancy-svy.github.io/post/calendar/">
-        </link>
-        <updated>2023-05-24T06:03:50.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="第一种-需要注意的是popper-classtimedate">第一种： 需要注意的是popper-class=“timeDate”</h3>
-<figure data-type="image" tabindex="1"><img src="https://nancy-svy.github.io/post-images/1684908380178.png" alt="" loading="lazy"></figure>
-<pre><code>&lt;template&gt;
-	&lt;div class=&quot;container&quot;&gt;
-		&lt;el-date-picker
-			ref=&quot;datePick&quot;
-			class=&quot;inputClass&quot;
-			placeholder=&quot;选择日期&quot;
-			v-model=&quot;dateValue&quot;
-			type=&quot;date&quot;
-			:clearable=&quot;false&quot;
-			popper-class=&quot;timeDate&quot;
-			:picker-options=&quot;pickerOptions&quot;
-			@change=&quot;chooseDate&quot;
-			@blur=&quot;chooseDate&quot;
-		  /&gt;
-	&lt;/div&gt;
-&lt;/template&gt;
-
-&lt;script&gt;
-	export default{
-		data(){
-			return{
-				dateValue: '',
-				pickerOptions: {
-                    // 设置禁用状态，参数为当前日期
-					disabledDate(time) {
-						return time.getTime() &gt; Date.now();
-					},
-				}
-			}
-		},
-		mounted() {
-			// 让日历组件默认触发焦点事件
-			this.$refs.datePick.focus(); 
-		},
-		methods: {
-			// 选择日期后依旧触发焦点
-			chooseDate(e){
-				this.$refs.datePick.focus(); 
-			},
-		}
-	}
-&lt;/script&gt;
-
-	
-&lt;style lang=&quot;scss&quot;&gt;
-	// 这个样式需要写在app才有效,这个组件他是跟app平级的，popper-class=&quot;timeDate&quot;，给他加一个指定的样式，方便修改项目中如果有多个不同的日期组件样式
-	.timeDate.el-picker-panel.el-date-picker.el-popper{
-	  top: 100px !important;
-	  // left: 0 !important;
-	  border: none !important;
-	  box-shadow: none !important;
-	}
-	.timeDate.el-date-picker{
-	  width: 573px;
-	}
-	.timeDate.el-date-picker .el-picker-panel__content{
-	  width: 95% !important;
-	}
-	
-	.timeDate.el-popper .popper__arrow, .el-popper .popper__arrow::after {
-	  display: none !important;
-	}
-	.el-date-table td.today span {
-	  color: #ff9000;
-	}
-	.el-date-table td.current:not(.disabled) span {
-	  color: #FFF;
-	  background-color: #ff9000;
-	}
-	.el-date-table td.available:hover {
-	  color: #ff9000;
-	}
-&lt;/style&gt;
-
-&lt;style lang=&quot;scss&quot; scoped&gt;
-	//隐藏日期文本框
-	.inputClass.el-date-editor.inputClass.el-input.el-input--prefix.el-input--suffix.el-date-editor--date{
-		opacity: 0 !important;
-	    cursor: default;
-	}
-&lt;/style&gt;
-</code></pre>
-<h3 id="第二种">第二种：</h3>
-<figure data-type="image" tabindex="2"><img src="https://nancy-svy.github.io/post-images/1684908650762.png" alt="" loading="lazy"></figure>
-<pre><code>&lt;template&gt;
-    &lt;div class=&quot;content-left&quot;&gt;
-        &lt;el-calendar 
-            ref=&quot;calendarBtn&quot; 
-            v-model=&quot;calendarTime&quot; 
-            :first-day-of-week=&quot;7&quot; 
-            class=&quot;calendarLit&quot;
-        &gt;
-		    &lt;template slot=&quot;dateCell&quot; slot-scope=&quot;{date, data}&quot;&gt;
-			    &lt;p :class=&quot;data.isSelected ? 'is-selected' : ''&quot;&gt;
-					{{ parseInt(data.day.split('-').slice(2).join('-')) }}
-			    &lt;/p&gt;
-		    &lt;/template&gt;
-	    &lt;/el-calendar&gt;
-	    &lt;div id=&quot;button&quot;&gt;
-		    &lt;el-button @click=&quot;clickPrevious&quot;&gt;
-		    &lt;i class=&quot;el-icon-arrow-left&quot; /&gt;
-		    &lt;/el-button&gt;
-		    &lt;el-button @click=&quot;clickNext&quot;&gt;
-			    &lt;i class=&quot;el-icon-arrow-right&quot; /&gt;
-		    &lt;/el-button&gt;
-	    &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/template&gt;
-
-&lt;script&gt;
-    export default{
-        data(){
-            return{
-                calendarTime: new Date(),
-            }
-        },
-        methods: {
-            clickPrevious() {
-			  this.$refs.calendarBtn.$children[0].$children[0].$el.click()
-			},
-			clickNext() {
-			  this.$refs.calendarBtn.selectDate('next-month')
-			}
-        },
-    }
-&lt;/script&gt;
 </code></pre>
 ]]></content>
     </entry>
