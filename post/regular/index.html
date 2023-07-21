@@ -9,7 +9,7 @@
 <meta name="description" content="草在结它的种子 ，风在摇它的叶子 ，我们站着，不说话，就十分美好。">
 <meta name="theme-color" content="#000">
 <title>正则 | 真实の幻梦</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1689406323113">
+<link rel="shortcut icon" href="/favicon.ico?v=1689907945846">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -207,6 +207,7 @@
 <li><a href="#%E6%B1%89%E5%AD%97">汉字</a></li>
 <li><a href="#%E7%A8%8E%E5%8A%A1%E5%8F%B7">税务号</a></li>
 <li><a href="#%E7%BB%9F%E4%B8%80%E7%A4%BE%E4%BC%9A%E4%BB%A3%E7%A0%81%E9%AA%8C%E8%AF%81">统一社会代码验证</a></li>
+<li><a href="#%E8%BD%A6%E7%89%8C%E5%8F%B7">车牌号</a></li>
 </ul>
 </li>
 </ul>
@@ -501,7 +502,7 @@
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
       <span
-        >11<span class="language" data-lan="minute"
+        >12<span class="language" data-lan="minute"
           >分钟</span
         ></span
       >
@@ -510,7 +511,7 @@
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
       <span
-        >2469<span class="pc-show language" data-lan="words"
+        >2726<span class="pc-show language" data-lan="words"
           >字数</span
         ></span
       >
@@ -748,7 +749,18 @@
         return new Tyshyxdm().verify(value);
     }
 </code></pre>
-<pre><code>
+<h3 id="车牌号">车牌号</h3>
+<pre><code>/*
+    组成：省份简称（1位汉字）+发牌机关代号（1位字母）+序号（6位），总计8个字符，序号不能出现字母I和字母O
+* 通用规则：不区分大小写，第一位：省份简称（1位汉字），第二位：发牌机关代号（1位字母）
+* 序号位：
+* 小型车，第一位：只能用字母D或字母F，第二位：字母或者数字，后四位：必须使用数字
+* ---([DF][A-HJ-NP-Z0-9][0-9]{4})
+* 大型车，前五位：必须使用数字，第六位：只能用字母D或字母F。
+* ----([0-9]{5}[DF])
+*/
+
+ /^([京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[a-zA-Z](([DF]((?![IO])[a-zA-Z0-9](?![IO]))[0-9]{4})|([0-9]{5}[DF]))|[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4}[A-Z0-9挂学警港澳]{1})$/
 </code></pre>
 <pre><code>
 </code></pre>
@@ -1870,6 +1882,79 @@
     <div class="result" id="result">
       
       <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/removeConsoleLog/"" data-c="
+          &lt;h3 id=&#34;第一种方法&#34;&gt;第一种方法&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;下载插件&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;npm install babel-plugin-transform-remove-console --save-dev
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;修改bable.config.js&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;module.exports = {
+  presets: [
+    &#39;@vue/cli-plugin-babel/preset&#39;
+  ],
+  &#39;env&#39;: {
+    &#39;development&#39;: {
+      &#39;plugins&#39;: [&#39;dynamic-import-node&#39;]
+    },
+    // 增加以下配置编译时可以去掉console.log等
+    &#39;production&#39;: {
+      &#39;plugins&#39;: [
+        [
+          &#39;transform-remove-console&#39;,
+          {
+            // 排除项
+            &#39;exclude&#39;: [&#39;error&#39;, &#39;warn&#39;]
+          }
+        ]
+      ]
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;第二种方法&#34;&gt;第二种方法&lt;/h3&gt;
+&lt;p&gt;vue-element-admin 打包后去除console&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;下载插件&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;npm install terser-webpack-plugin --save-dev
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;在vue.config.js中加入以下代码&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;module.exports = {
+  publicPath: &#39;/&#39;,         
+  outputDir: &#39;dist&#39;,
+  assetsDir: &#39;static&#39;,
+  // lintOnSave: process.env.NODE_ENV === &#39;development&#39;,
+  lintOnSave: false,
+  productionSourceMap: false,
+  configureWebpack: {
+    name: name,
+    resolve: {
+      alias: {
+        &#39;@&#39;: resolve(&#39;src&#39;)
+      }
+    }
+  },
+  // 移除console.log
+  configureWebpack: config =&amp;gt; {
+    if (process.env.NODE_ENV === &#39;production&#39;) {
+      config.optimization.minimizer[0].options.terserOptions.compress.warnings = false
+      config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true
+      config.optimization.minimizer[0].options.terserOptions.compress.drop_debugger = true
+      config.optimization.minimizer[0].options.terserOptions.compress.pure_funcs = [&#39;console.log&#39;]
+    }
+  },
+
+&lt;/code&gt;&lt;/pre&gt;
+">vue  在发布阶段移除所有的console.log()输出语句</a>
+      </div>
+      
+      <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/iframeAddRequestHeader/"" data-c="
           &lt;pre&gt;&lt;code&gt;&amp;lt;iframe id=&amp;quot;iframe&amp;quot; src=&amp;quot;&amp;quot; /&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
@@ -1889,7 +1974,10 @@
       xhr.onreadystatechange = () =&amp;gt; {
         if (xhr.readyState === xhr.DONE) {
           if (xhr.status === 200) {
-            iframe.src = URL.createObjectURL(xhr.response);
+              console.log(xhr)
+            // 这个样式显示有问题
+            // iframe.src = URL.createObjectURL(xhr.response);  
+            iframe.src = xhr.responseURL;
           }
         }
       };
@@ -9341,7 +9429,18 @@ module.exports = { bankCardAttribution }
         return new Tyshyxdm().verify(value);
     }
 &lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;
+&lt;h3 id=&#34;车牌号&#34;&gt;车牌号&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;/*
+    组成：省份简称（1位汉字）+发牌机关代号（1位字母）+序号（6位），总计8个字符，序号不能出现字母I和字母O
+* 通用规则：不区分大小写，第一位：省份简称（1位汉字），第二位：发牌机关代号（1位字母）
+* 序号位：
+* 小型车，第一位：只能用字母D或字母F，第二位：字母或者数字，后四位：必须使用数字
+* ---([DF][A-HJ-NP-Z0-9][0-9]{4})
+* 大型车，前五位：必须使用数字，第六位：只能用字母D或字母F。
+* ----([0-9]{5}[DF])
+*/
+
+ /^([京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[a-zA-Z](([DF]((?![IO])[a-zA-Z0-9](?![IO]))[0-9]{4})|([0-9]{5}[DF]))|[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4}[A-Z0-9挂学警港澳]{1})$/
 &lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;
 &lt;/code&gt;&lt;/pre&gt;

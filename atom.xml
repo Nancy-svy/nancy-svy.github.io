@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://nancy-svy.github.io</id>
     <title>真实の幻梦</title>
-    <updated>2023-07-15T07:32:50.912Z</updated>
+    <updated>2023-07-21T07:29:34.743Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://nancy-svy.github.io"/>
     <link rel="self" href="https://nancy-svy.github.io/atom.xml"/>
@@ -10,6 +10,82 @@
     <logo>https://nancy-svy.github.io/images/avatar.png</logo>
     <icon>https://nancy-svy.github.io/favicon.ico</icon>
     <rights>All rights reserved 2023, 真实の幻梦</rights>
+    <entry>
+        <title type="html"><![CDATA[vue  在发布阶段移除所有的console.log()输出语句]]></title>
+        <id>https://nancy-svy.github.io/post/removeConsoleLog/</id>
+        <link href="https://nancy-svy.github.io/post/removeConsoleLog/">
+        </link>
+        <updated>2023-07-21T02:44:23.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="第一种方法">第一种方法</h3>
+<ol>
+<li>下载插件</li>
+</ol>
+<pre><code>npm install babel-plugin-transform-remove-console --save-dev
+</code></pre>
+<ol start="2">
+<li>修改bable.config.js</li>
+</ol>
+<pre><code>module.exports = {
+  presets: [
+    '@vue/cli-plugin-babel/preset'
+  ],
+  'env': {
+    'development': {
+      'plugins': ['dynamic-import-node']
+    },
+    // 增加以下配置编译时可以去掉console.log等
+    'production': {
+      'plugins': [
+        [
+          'transform-remove-console',
+          {
+            // 排除项
+            'exclude': ['error', 'warn']
+          }
+        ]
+      ]
+    }
+  }
+}
+</code></pre>
+<h3 id="第二种方法">第二种方法</h3>
+<p>vue-element-admin 打包后去除console</p>
+<ol>
+<li>下载插件</li>
+</ol>
+<pre><code>npm install terser-webpack-plugin --save-dev
+</code></pre>
+<ol start="2">
+<li>在vue.config.js中加入以下代码</li>
+</ol>
+<pre><code>module.exports = {
+  publicPath: '/',         
+  outputDir: 'dist',
+  assetsDir: 'static',
+  // lintOnSave: process.env.NODE_ENV === 'development',
+  lintOnSave: false,
+  productionSourceMap: false,
+  configureWebpack: {
+    name: name,
+    resolve: {
+      alias: {
+        '@': resolve('src')
+      }
+    }
+  },
+  // 移除console.log
+  configureWebpack: config =&gt; {
+    if (process.env.NODE_ENV === 'production') {
+      config.optimization.minimizer[0].options.terserOptions.compress.warnings = false
+      config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true
+      config.optimization.minimizer[0].options.terserOptions.compress.drop_debugger = true
+      config.optimization.minimizer[0].options.terserOptions.compress.pure_funcs = ['console.log']
+    }
+  },
+
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[vue + iframe标签添加请求头]]></title>
         <id>https://nancy-svy.github.io/post/iframeAddRequestHeader/</id>
@@ -34,7 +110,10 @@
       xhr.onreadystatechange = () =&gt; {
         if (xhr.readyState === xhr.DONE) {
           if (xhr.status === 200) {
-            iframe.src = URL.createObjectURL(xhr.response);
+              console.log(xhr)
+            // 这个样式显示有问题
+            // iframe.src = URL.createObjectURL(xhr.response);  
+            iframe.src = xhr.responseURL;
           }
         }
       };
@@ -339,395 +418,6 @@ value: 新增的值
 <p>使用postman时报错如下: <code style="color: #c7254e;background-color: #f2f2f2;"> Error: write EPROTO 93988952:error:100000f7:SSL routines:OPENSSL_internal:WRONG_VERSION_NUMBER:…/…/third_party/boringssl/src/ssl/tls_record.cc:242:</code></p>
 <p><strong>debug</strong><br>
 把https改成http，去掉s就能正常检测接口啦</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[vue 日历组件]]></title>
-        <id>https://nancy-svy.github.io/post/calendar-component/</id>
-        <link href="https://nancy-svy.github.io/post/calendar-component/">
-        </link>
-        <updated>2023-05-25T08:41:24.000Z</updated>
-        <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://nancy-svy.github.io/post-images/1685004547966.png" alt="" loading="lazy"></figure>
-<h3 id="子组件">子组件</h3>
-<pre><code>&lt;template&gt;
-  &lt;div class=&quot;cal_con&quot;&gt;
-    &lt;div class=&quot;cal_header&quot;&gt;
-      &lt;div class=&quot;cal_h_left&quot;&gt;
-		&lt;!-- 上一年按钮 --&gt;
-        &lt;div class=&quot;cal_h_btn&quot; @click=&quot;preYear&quot;&gt;
-			&lt;svg-icon icon-class=&quot;el-icon-d-arrow-left&quot; class-name=&quot;cal_h_l_icon&quot;&gt;&lt;/svg-icon&gt;
-        &lt;/div&gt;
-		&lt;!-- 上个月按钮 --&gt;
-        &lt;div class=&quot;cal_h_btn&quot; @click=&quot;preMonth&quot;&gt;
-			&lt;svg-icon icon-class=&quot;el-icon-arrow-left&quot; class-name=&quot;cal_h_l_icon&quot;&gt;&lt;/svg-icon&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-
-      &lt;div&gt;
-        &lt;span class=&quot;cal_h_time&quot;&gt;&lt;span class=&quot;cal_h_time_text&quot;&gt;{{ year }}&lt;/span&gt; 年 &lt;/span&gt;
-        &lt;span class=&quot;cal_h_time&quot;&gt;&lt;span class=&quot;cal_h_time_text&quot;&gt;{{ month }}&lt;/span&gt; 月&lt;/span&gt;
-      &lt;/div&gt;
-
-      &lt;div class=&quot;cal_h_left&quot;&gt;
-		  &lt;!-- 下个月按钮 --&gt;
-        &lt;div class=&quot;cal_h_btn&quot; @click=&quot;nextMonth&quot;&gt;
-			&lt;svg-icon icon-class=&quot;el-icon-arrow-right&quot; class-name=&quot;cal_h_l_icon&quot;&gt;&lt;/svg-icon&gt;
-        &lt;/div&gt;
-		&lt;!-- 下一年按钮 --&gt;
-        &lt;div class=&quot;cal_h_btn&quot; @click=&quot;nextYear&quot;&gt;
-			&lt;svg-icon icon-class=&quot;el-icon-d-arrow-right&quot; class-name=&quot;cal_h_l_icon&quot;&gt;&lt;/svg-icon&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-
-    &lt;div class=&quot;cal_month&quot;&gt;
-	  &lt;!-- 星期 --&gt;
-      &lt;div class=&quot;cal_m_weeks&quot;&gt;
-        &lt;span class=&quot;cal_m_day_cell&quot; v-for=&quot;(wItem, wIndex) in weeks&quot; :key=&quot;wIndex&quot;&gt;{{ wItem }}&lt;/span&gt;
-      &lt;/div&gt;
-
-      &lt;div class=&quot;cal_m_days&quot;&gt;
-        &lt;div class=&quot;cal_m_day_line&quot; v-for=&quot;(ds, index) in monthData&quot; :key=&quot;index&quot;&gt;
-          &lt;div
-            v-for=&quot;d in ds&quot;
-            :key=&quot;d.day&quot;
-            :class=&quot;['cal_m_day_cell',{
-				'current_date': d.fullYear == currentYear &amp;&amp; d.month == currentMonth &amp;&amp; d.day == currentDay,
-				'active_cell': selectObj.fullYear == d.fullYear &amp;&amp; selectObj.month == d.month &amp;&amp; selectObj.day == d.day
-			}]&quot;
-            :style=&quot;getCellColor(d)&quot;
-            @mouseenter=&quot;mouseenter(d, $event)&quot;
-            @mouseleave=&quot;mouseleave(d, $event)&quot;
-		    @click=&quot;handleSelected(d)&quot;
-          &gt;
-            {{ d.day }}
-			&lt;!-- &lt;slot :name=&quot;d.fullYear + '-' + d.month + '-' + d.day&quot;&gt;&lt;/slot&gt; --&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-
-  &lt;/div&gt;
-&lt;/template&gt;
-
-</code></pre>
-<p><strong>js</strong></p>
-<pre><code>&lt;script&gt;
-export default {
-  name: 'Calendar',
-  props: {
-    date: {
-      type: Date,
-      default: () =&gt; new Date()
-    }
-  },
-  data () {
-    return {
-      now: this.date,
-      year: 0,
-      month: 0,
-      weeks: [&quot;日&quot;, &quot;一&quot;, &quot;二&quot;, &quot;三&quot;, &quot;四&quot;, &quot;五&quot;, &quot;六&quot;],
-      monthData: [],
-      currentYear: new Date().getFullYear(), // 当前年
-      currentMonth: new Date().getMonth() + 1, // 当前月
-      currentDay: new Date().getDate(), // 当前日
-	  // 选中的数据
-	  selectObj: {
-		fullYear: new Date().getFullYear(),
-		month: new Date().getMonth() + 1,
-		day: new Date().getDate()
-	  },
-    }
-  },
-  computed: {
-	  
-  },
-  mounted () {
-    this.setYearMonth(this.now)
-    this.generateMonth(this.now)
-  },
-  methods: {
-	// 设置年月
-    setYearMonth (now) {
-      this.year = now.getFullYear()
-      this.month = now.getMonth() + 1
-    },
-	// 上一年按钮
-    preYear () {
-      let n = this.now
-      let date = new Date(n.getFullYear() - 1, n.getMonth(), n.getDate(), n.getHours(), n.getMinutes(), n.getSeconds(), n.getMilliseconds());
-      this.setYearMonthInfos(date)
-    },
-	// 上个月按钮
-    preMonth () {
-      let n = this.now
-      let date = new Date(n.getFullYear(), n.getMonth() - 1, n.getDate(), n.getHours(), n.getMinutes(), n.getSeconds(), n.getMilliseconds());
-	  this.setYearMonthInfos(date)
-    },
-	// 下一年按钮
-    nextYear () {
-      let n = this.now
-      let date = new Date(n.getFullYear() + 1, n.getMonth(), n.getDate(), n.getHours(), n.getMinutes(), n.getSeconds(), n.getMilliseconds());
-      this.setYearMonthInfos(date)
-    },
-	// 下个月按钮
-    nextMonth () {
-      let n = this.now
-      let date = new Date(n.getFullYear(), n.getMonth() + 1, n.getDate(), n.getHours(), n.getMinutes(), n.getSeconds(), n.getMilliseconds());
-      this.setYearMonthInfos(date)
-    },
-	// 设置年月的详细信息
-    setYearMonthInfos (date) {
-      this.setYearMonth(date)
-      this.generateMonth(date)
-      this.now = date
-      this.dateChange()
-    },
-	// 生成月份
-    generateMonth (date) {
-      date.setDate(1)
-      // 星期 0 - 6， 星期天 - 星期6
-      let weekStart = date.getDay()
-
-      let endDate = new Date(date.getFullYear(), date.getMonth() + 1, 0)
-      let dayEnd = endDate.getDate()
-      // 星期 0 - 6， 星期天 - 星期6
-      let weeEnd = endDate.getDay()
-
-      let milsStart = date.getTime()
-      let dayMils = 24 * 60 * 60 * 1000
-      let milsEnd = endDate.getTime() + dayMils
-
-      let monthDatas = []
-      let current;
-      // 上个月的几天
-      for (let i = 0; i &lt; weekStart; i++) {
-        current = new Date(milsStart - (weekStart - i) * dayMils)
-        monthDatas.push({
-          type: -1,
-          date: current,
-          fullYear: current.getFullYear(),
-          month: current.getMonth() + 1,
-          day: current.getDate()
-        })
-      }
-      // 当前月
-      for (let i = 0; i &lt; dayEnd; i++) {
-        current = new Date(milsStart + i * dayMils)
-        monthDatas.push({
-          type: 0,
-          date: current,
-          fullYear: current.getFullYear(),
-          month: current.getMonth() + 1,
-          day: current.getDate()
-        })
-      }
-      // 下个月的几天
-      for (let i = 0; i &lt; (6 - weeEnd); i++) {
-        current = new Date(milsEnd + i * dayMils)
-        monthDatas.push({
-          type: 1,
-          date: current,
-          fullYear: current.getFullYear(),
-          month: current.getMonth() + 1,
-          day: current.getDate()
-        })
-      }
-
-      this.monthData = []
-      for (let i = 0; i &lt; monthDatas.length; i++) {
-        let mi = i % 7;
-        if (mi == 0) {
-          this.monthData.push([])
-        }
-        this.monthData[Math.floor(i / 7)].push(monthDatas[i])
-      }
-
-      // 少于6行，补足6行
-      if (this.monthData.length &lt;= 5) {
-        milsStart = current.getTime()
-        let lastLine = []
-        for (let i = 1; i &lt;= 7; i++) {
-          current = new Date(milsStart + i * dayMils)
-          lastLine.push({
-            type: 1,
-            date: current,
-            fullYear: current.getFullYear(),
-            month: current.getMonth() + 1,
-            day: current.getDate()
-          })
-        }
-        this.monthData.push(lastLine)
-      }
-    },
-	// 当前月份中不存在的日期
-    getCellColor (d) {
-      let color = d.type == -1 ? 'color: #c0c4cc;' : (d.type == 1 ? 'color: #c0c4cc;' : '')
-      return color;
-    },
-	// 鼠标移入事件
-    mouseenter (d, event) {
-      this.$emit(&quot;enter&quot;, event, d)
-    },
-	// 鼠标移出事件
-    mouseleave (d, event) {
-      this.$emit(&quot;leave&quot;, event, d)
-    },
-	// 选中的日期
-	handleSelected(d){
-		if(d.month &lt; this.selectObj.month){
-			this.preMonth()
-		}else if(d.month &gt; this.selectObj.month){
-			this.nextMonth()
-		}
-		this.selectObj = d
-		
-		this.$emit(&quot;selected&quot;, d)
-	},
-	// 数据改变
-    dateChange () {
-      let fullYear = this.now.getFullYear()
-      let month = this.now.getMonth()
-
-      let startDay = new Date(fullYear, month, 1)
-      let endDay = new Date(fullYear, month + 1, 0, 23, 59, 59)
-
-      this.$emit(&quot;changeMonth&quot;, startDay, endDay)
-    }
-  }
-}
-&lt;/script&gt;
-</code></pre>
-<p><strong>css</strong></p>
-<pre><code>&lt;style scoped lang=&quot;scss&quot;&gt;
-.cal_con {
-  width: 100%;
-  height: 100%;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  color: #606266;
-  // border: 1px solid #e4e7ed;
-  // box-shadow: 0 2px 12px 0 #0000006e;
-  background: #fff;
-  border-radius: 4px;
-  margin: auto;
-  .cal_header {
-	margin: 12px;
-	text-align: center;
-    font-size: 16px;
-    display: flex;
-    justify-content: space-between;
-    justify-items: center;
-    .cal_h_time {
-      cursor: pointer;
-	  .cal_h_time_text{
-		  color: #02C2B0;
-	  }
-    }
-    .cal_h_left {
-      height: 100%;
-      display: flex;
-      .cal_h_btn {
-        height: 100%;
-        width: 24px;
-        cursor: pointer;
-      }
-      .cal_h_l_icon {
-		/* height: 8px;
-        width: 12px;*/
-        height: 24px;
-        width: 24px;
-        margin: auto;
-		&amp;:hover{
-			color: #02C2B0;
-		}
-      }
-    }
-  }
-  .cal_month {
-    font-size: 12px;
-    text-align: center;
-    height: calc(100% - 34px);
-    .cal_m_day_cell {
-      width: 24px;
-      height: 24px;
-      line-height: 24px;
-      cursor: pointer;
-      position: relative;
-	  &amp;:hover {
-		color: #02C2B0;
-		border: 1px solid #409eff;
-	  }
-    }
-	.active_cell{
-		color: #02C2B0;
-		border: 1px solid #02C2B0;
-	}
-	.current_date{
-		color: #02C2B0;
-	}
-    .cal_m_weeks {
-      padding: 8px;
-      display: flex;
-      justify-content: space-around;
-      justify-items: center;
-      border-bottom: 1px solid #e4e7ed;
-    }
-    .cal_m_days {
-      height: calc(100% - 49px);
-      padding: 8px;
-      display: flex;
-      justify-content: space-around;
-      justify-items: center;
-      flex-wrap: wrap;
-      .cal_m_day_line {
-        width: 100%;
-        display: flex;
-        justify-content: space-around;
-        justify-items: center;
-      }
-    }
-  }
-}
-&lt;/style&gt;
-</code></pre>
-<h3 id="父组件">父组件</h3>
-<pre><code>&lt;template&gt;
-	&lt;div class=&quot;calendar-box&quot;&gt;
-		&lt;Calendar :date=&quot;new Date()&quot; @selected=&quot;selected&quot;/&gt;
-	&lt;/div&gt;
-&lt;/template&gt;
-</code></pre>
-<p><strong>js</strong></p>
-<pre><code>&lt;script&gt;
-	import Calendar from './components/calendar.vue'
-	export default{
-		components: {
-			Calendar
-		},
-		data(){
-			return{
-				
-			}
-		},
-		methods: {
-			selected(dateInfo){
-				console.log('选中的日期', dateInfo)
-			},
-		}
-	}
-&lt;/script&gt;
-</code></pre>
-<p><strong>css</strong></p>
-<pre><code>&lt;style lang=&quot;scss&quot; scoped&gt;
-	.calendar-box{
-		width: 300px;
-		height: 300px;
-	}
-&lt;/style&gt;
-</code></pre>
 ]]></content>
     </entry>
 </feed>

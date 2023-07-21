@@ -8,7 +8,7 @@
 <meta name="keywords" content="个人博客">
 <meta name="description" content="草在结它的种子 ，风在摇它的叶子 ，我们站着，不说话，就十分美好。">
 <meta name="theme-color" content="#000">
-<title>uniapp 动态创建form并校验 | 真实の幻梦</title>
+<title>vue  在发布阶段移除所有的console.log()输出语句 | 真实の幻梦</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1689907945846">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -41,8 +41,8 @@
 
 
 
-  <meta name="description" content="uniapp 动态创建form并校验" />
-  <meta name="keywords" content="uniapp" />
+  <meta name="description" content="vue  在发布阶段移除所有的console.log()输出语句" />
+  <meta name="keywords" content="vue" />
 </head>
 
 <body>
@@ -181,6 +181,209 @@
 
 <div class="sidebar">
   
+    <div class="sidebar-box box-shadow-wrapper bg-color right-motion" id="sidebar">
+      
+      <div class="sidebar-body gemini" id="sidebar_body">
+        
+          
+            <div style="opacity: 1;">
+              <div class="toc-box right-motion">
+  <div class="toc-wrapper auto-number auto"
+    id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E7%AC%AC%E4%B8%80%E7%A7%8D%E6%96%B9%E6%B3%95">第一种方法</a></li>
+<li><a href="#%E7%AC%AC%E4%BA%8C%E7%A7%8D%E6%96%B9%E6%B3%95">第二种方法</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+
+<script>
+
+  let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1;
+  let active = 'active-show', activeClass = 'active-current';
+  let tocWrapper = document.querySelector('#toc_wrapper');
+  let tocContent = tocWrapper.children[0];
+  let autoNumber = tocWrapper && tocWrapper.classList.contains('auto-number');
+
+  function addTocNumber(elem, deep) {
+    if (!elem) {
+      return;
+    }
+    let prop = elem.__proto__;
+
+    if (prop === HTMLUListElement.prototype) {
+      for (let i = 0; i < elem.children.length; i++) {
+        addTocNumber(elem.children[i], deep + (i + 1) + '.');
+      }
+    } else if (prop === HTMLLIElement.prototype) {
+      // 保存li元素
+      if (elem.children[0] && elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
+        lList.push(elem);
+      }
+      for (let i = 0; i < elem.children.length; i++) {
+        let cur = elem.children[i];
+        if (cur.__proto__ === HTMLAnchorElement.prototype) {
+          if (autoNumber) {
+            cur.text = deep + ' ' + cur.text;
+          }
+        } else if (cur.__proto__ === HTMLUListElement.prototype) {
+          addTocNumber(cur, deep);
+        }
+      }
+    }
+  }
+
+  function removeParentActiveClass() {
+    let parents = tocContent.querySelectorAll('.' + active)
+    parents.forEach(function (elem) {
+      elem.classList.remove(active);
+    });
+  }
+
+  function addActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.add(activeClass);
+    }
+  }
+
+  function removeActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.remove(activeClass);
+    }
+  }
+
+  function addActiveLiElemment(elem, parent) {
+    if (!elem || elem === parent) {
+      return;
+    } else {
+      if (elem.__proto__ === HTMLLIElement.prototype) {
+        elem.classList.add(active);
+      }
+      addActiveLiElemment(elem.parentElement, parent);
+    }
+  }
+
+  function showToc() {
+    if (tocWrapper) {
+      postBody = document.querySelector('#post_body');
+      for (let i = 0; i < postBody.children.length; i++) {
+        if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+          hList.push(postBody.children[i]);
+        }
+      }
+      if (tocWrapper.classList.contains('compress')) {
+        tocContent.classList.add('closed');
+      } else if (tocWrapper.classList.contains('no_compress')) {
+        tocContent.classList.add('expanded');
+      } else {
+        if (hList.length > 10) {
+          active = 'active-hidden'
+          tocContent.classList.add('closed');
+        } else {
+          tocContent.classList.add('expanded');
+        }
+      }
+    }
+  }
+
+  (function () {
+    // 处理不是从#一级标题开始目录
+    if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
+      let con = tocContent.children[0].children[0];
+      tocContent.innerHTML = con.innerHTML;
+    }
+    let markdownItTOC = document.querySelector('.markdownIt-TOC');
+    let innerHeight = window.innerHeight;
+    markdownItTOC.style = `max-height: ${innerHeight - 80 > 0 ? innerHeight - 80 : innerHeight}px`
+    addTocNumber(tocContent, '');
+  })();
+
+  document.addEventListener('scroll', function (e) {
+    if (lList.length <= 0) {
+      return;
+    }
+    let scrollTop = document.scrollingElement.scrollTop + 10;
+    let dir;
+
+    if (lastTop - scrollTop > 0) {
+      dir = 'up';
+    } else {
+      dir = 'down';
+    }
+
+    lastTop = scrollTop;
+    if (scrollTop <= 0) {
+      if (lastIndex >= 0 && lastIndex < hList.length) {
+        lList[lastIndex].classList.remove(activeClass);
+      }
+      return;
+    }
+
+    let current = 0, hasFind = false;
+    for (let i = 0; i < hList.length; i++) {
+      if (hList[i].offsetTop > scrollTop) {
+        current = i;
+        hasFind = true;
+        break;
+      }
+    }
+    if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+      current = hList.length - 1;
+    } else {
+      current--;
+    }
+    if (dir === 'down') {
+      if (current > lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex)
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    } else {
+      if (current < lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex);
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    }
+  });
+
+
+  window.addEventListener('load', function () {
+    showToc();
+    document.querySelector('#sidebar').style = 'display: block;';
+    tocWrapper.classList.add('toc-active');
+    setTimeout(function () {
+      if ("createEvent" in document) {
+        let evt = document.createEvent("HTMLEvents");
+        evt.initEvent("scroll", false, true);
+        document.dispatchEvent(evt);
+      }
+      else {
+        document.fireEvent("scroll");
+      }
+    }, 500)
+  })
+
+</script>
+            </div>
+          
+        
+      </div>
+    </div>
+  
 </div>
 <script>
   const SIDEBAR_TITLE_ACTIVE = 'sidebar-title-active';
@@ -263,14 +466,14 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://nancy-svy.github.io/post/dynamicallyCreateAForms/"> uniapp 动态创建form并校验 </a>
+    <a class="post-title-link" href="https://nancy-svy.github.io/post/removeConsoleLog/"> vue  在发布阶段移除所有的console.log()输出语句 </a>
   </h1>
   <div class="post-meta">
     
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2023-04-05 15:12:01">2023-04-05</span>
+      <span class="publish-time" data-t="2023-07-21 10:44:23">2023-07-21</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
@@ -278,8 +481,8 @@
       <i class="fa fa-folder-o"></i>
       <span class="pc-show language" data-lan="category-in">标签:</span>
        
-      <a href="https://nancy-svy.github.io/tag/XXkeG_S1Z/">
-        <span>uniapp</span>
+      <a href="https://nancy-svy.github.io/tag/DL0t25dCR/">
+        <span>vue</span>
       </a>
        
     </span>
@@ -288,7 +491,7 @@
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
       <span
-        >3<span class="language" data-lan="minute"
+        >1<span class="language" data-lan="minute"
           >分钟</span
         ></span
       >
@@ -297,7 +500,7 @@
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
       <span
-        >517<span class="pc-show language" data-lan="words"
+        >172<span class="pc-show language" data-lan="words"
           >字数</span
         ></span
       >
@@ -307,157 +510,72 @@
 </section>
 
             <div class="post-body next-md-body" id="post_body">
-              <p>效果图<br>
-<img src="https://nancy-svy.github.io/post-images/1681715723244.png" alt="" loading="lazy"><br>
-点击新增<br>
-<img src="https://nancy-svy.github.io/post-images/1681715739290.png" alt="" loading="lazy"><br>
-点击提交<br>
-<img src="https://nancy-svy.github.io/post-images/1681715751339.png" alt="" loading="lazy"></p>
-<p><strong>css</strong></p>
-<pre><code>&lt;template&gt;
-	&lt;view class=&quot;container&quot;&gt;
-		&lt;uni-section :title=&quot;'新增数据' + index&quot; 
-		type=&quot;line&quot; 
-		v-for=&quot;(item, index) in dynamicLists&quot; 
-		:key=&quot;index&quot;
-		&gt;
-		    &lt;uni-forms ref=&quot;baseForm&quot; :modelValue='dynamicLists[index]' :rules=&quot;rules&quot;&gt;
-		    	&lt;uni-forms-item label=&quot;姓名&quot; name=&quot;name&quot;&gt;
-		    		&lt;input v-model=&quot;item.name&quot; placeholder=&quot;请输入姓名&quot;/&gt;
-				&lt;/uni-forms-item&gt;
-				&lt;uni-forms-item label=&quot;手机号&quot; name=&quot;phone&quot;&gt;
-					&lt;input v-model=&quot;item.phone&quot; placeholder=&quot;请输入手机号&quot;/&gt;
-				&lt;/uni-forms-item&gt;
-		    &lt;/uni-forms&gt;
-		&lt;/uni-section&gt;
-		&lt;view class=&quot;button-group&quot;&gt;
-			&lt;button type=&quot;primary&quot; plain=&quot;true&quot; class=&quot;button&quot; size=&quot;mini&quot; @click=&quot;add&quot;&gt;新增&lt;/button&gt;
-			&lt;button type=&quot;warn&quot; plain=&quot;true&quot; class=&quot;button&quot; size=&quot;mini&quot; @click=&quot;submit&quot;&gt;提交&lt;/button&gt;
-		&lt;/view&gt;
-	&lt;/view&gt;
-&lt;/template&gt;
+              <h3 id="第一种方法">第一种方法</h3>
+<ol>
+<li>下载插件</li>
+</ol>
+<pre><code>npm install babel-plugin-transform-remove-console --save-dev
 </code></pre>
-<p><strong>js</strong></p>
-<pre><code>&lt;script&gt;
-	export default {
-		data() {
-			return {
-				dynamicLists: [
-					{    
-		                id: Date.now(),
-						name: '',
-						phone: '',
-					}
-				],
-				rules: {
-					name: {
-						rules: [{
-							required: true,
-							errorMessage: '姓名必填'
-						}]
-					},
-					phone: {
-						rules: [
-							{required: true, errorMessage: '手机号必填'},
-							{required: true, validateFunction: (rule,value,data,callback)=&gt;{
-									let reg = /^1(3\d|4[5-9]|5[0-35-9]|6[567]|7[0-8]|8\d|9[0-35-9])\d{8}$/;
-									if(reg.test(value) == false){
-										callback('请输入合法的手机号')
-									}
-									return true;
-								}
-							},
-						]
-					}
-				}
-			}
-		},
-		onReady(){
-			// 需要在onReady中设置规则
-			this.$nextTick(()=&gt;{
-				this.dynamicLists.map((item, index) =&gt; {
-					this.$refs.baseForm[index].setRules(this.rules)
-				})
-			})
-		},
-		methods: {
-			// 新增
-			add(){
-			    this.dynamicLists.push({
-				    id: Date.now(),
-					name: '',
-					phone: '',
-				})
-				this.$nextTick(() =&gt; {
-					this.dynamicLists.map((item,index) =&gt; {
-						this.$refs.baseForm[index].setRules(this.rules)
-					})
-				})
-			},
-			// validate方法是针对对象来说的，数组时不能使用该方法的
-			// 解决方法 
-			async handleValidte() {
-				const promises = this.dynamicLists.map((item, index) =&gt; {
-					return new Promise(resolve =&gt; {
-						this.$refs.baseForm[index].validate(err =&gt; {
-							resolve(err)
-						})
-					})
-				})
-				return await Promise.all(promises)
-			},
-			
-			// 提交
-			async submit() {
-				let validtateList = await this.handleValidte()
-			    // 扁平化
-				let flat = validtateList.flat(2)
-				const isTrue = flat.every(item =&gt; {
-					return item === null
-				})
-				if(isTrue) {
-					uni.showToast({
-						title: `提交成功`
-					})
-			        // 清数组
-					this.dynamicLists = [{
-						id: Date.now(),
-						name: '',
-						phone: '',
-					}]
-				}
-			},
-
-		}
-	}
-&lt;/script&gt;
-
-</code></pre>
-<p><strong>css</strong></p>
-<pre><code>&lt;style lang=&quot;less&quot; scoped&gt;
-.container{
-	padding: 20rpx 32rpx;
-	/deep/.uni-forms{
-		padding-left: 50rpx;
-		.uni-forms-item{
-			align-items: center;
-			.uni-forms-item__label{
-				font-size: 32rpx!important;
-				font-weight: 400;
-				color: #333333!important;
-			}
-			input{
-				font-size: 32rpx;
-			}
-		}
-	}
-	.button-group{
-		display: flex;
-		align-items: center;
-		justify-content: space-evenly;
-	}
+<ol start="2">
+<li>修改bable.config.js</li>
+</ol>
+<pre><code>module.exports = {
+  presets: [
+    '@vue/cli-plugin-babel/preset'
+  ],
+  'env': {
+    'development': {
+      'plugins': ['dynamic-import-node']
+    },
+    // 增加以下配置编译时可以去掉console.log等
+    'production': {
+      'plugins': [
+        [
+          'transform-remove-console',
+          {
+            // 排除项
+            'exclude': ['error', 'warn']
+          }
+        ]
+      ]
+    }
+  }
 }
-&lt;/style&gt;
+</code></pre>
+<h3 id="第二种方法">第二种方法</h3>
+<p>vue-element-admin 打包后去除console</p>
+<ol>
+<li>下载插件</li>
+</ol>
+<pre><code>npm install terser-webpack-plugin --save-dev
+</code></pre>
+<ol start="2">
+<li>在vue.config.js中加入以下代码</li>
+</ol>
+<pre><code>module.exports = {
+  publicPath: '/',         
+  outputDir: 'dist',
+  assetsDir: 'static',
+  // lintOnSave: process.env.NODE_ENV === 'development',
+  lintOnSave: false,
+  productionSourceMap: false,
+  configureWebpack: {
+    name: name,
+    resolve: {
+      alias: {
+        '@': resolve('src')
+      }
+    }
+  },
+  // 移除console.log
+  configureWebpack: config =&gt; {
+    if (process.env.NODE_ENV === 'production') {
+      config.optimization.minimizer[0].options.terserOptions.compress.warnings = false
+      config.optimization.minimizer[0].options.terserOptions.compress.drop_console = true
+      config.optimization.minimizer[0].options.terserOptions.compress.drop_debugger = true
+      config.optimization.minimizer[0].options.terserOptions.compress.pure_funcs = ['console.log']
+    }
+  },
 
 </code></pre>
 
@@ -476,7 +594,7 @@
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://nancy-svy.github.io/post/dynamicallyCreateAForms/" title="uniapp 动态创建form并校验">https://nancy-svy.github.io/post/dynamicallyCreateAForms/</a>
+      <a href="https://nancy-svy.github.io/post/removeConsoleLog/" title="vue  在发布阶段移除所有的console.log()输出语句">https://nancy-svy.github.io/post/removeConsoleLog/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -485,21 +603,17 @@
   </ul>
   <div class="tags">
     
-      <a href="https://nancy-svy.github.io/tag/XXkeG_S1Z/"># uniapp</a>
+      <a href="https://nancy-svy.github.io/tag/DL0t25dCR/"># vue</a>
     
   </div>
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="uniapp 简单的锚点定位" href="https://nancy-svy.github.io/post/anchorPointPositioning/">uniapp 简单的锚点定位</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="uniapp 简单的锚点定位" href="https://nancy-svy.github.io/post/anchorPointPositioning/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="uniapp 解决小程序自定义tabbar在ios手机上无法显示问题" href="https://nancy-svy.github.io/post/unableToDisplay/">uniapp 解决小程序自定义tabbar在ios手机上无法显示问题</a>
-        <a class="nav-mobile-next" title="uniapp 解决小程序自定义tabbar在ios手机上无法显示问题" href="https://nancy-svy.github.io/post/unableToDisplay/">下一篇</a>
+        <a class="nav-pc-next" title="vue + iframe标签添加请求头" href="https://nancy-svy.github.io/post/iframeAddRequestHeader/">vue + iframe标签添加请求头</a>
+        <a class="nav-mobile-next" title="vue + iframe标签添加请求头" href="https://nancy-svy.github.io/post/iframeAddRequestHeader/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>
