@@ -9,7 +9,7 @@
 <meta name="description" content="草在结它的种子 ，风在摇它的叶子 ，我们站着，不说话，就十分美好。">
 <meta name="theme-color" content="#000">
 <title>uniapp  自定义tabbar | 真实の幻梦</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1689926235542">
+<link rel="shortcut icon" href="/favicon.ico?v=1690245626566">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -76,8 +76,6 @@
           
             
             
-              
-            
             <li class="nav-item ">
               
               
@@ -88,8 +86,6 @@
             </li>
           
             
-            
-              
             
             <li class="nav-item ">
               
@@ -102,8 +98,6 @@
           
             
             
-              
-            
             <li class="nav-item ">
               
               
@@ -115,8 +109,6 @@
           
             
             
-              
-            
             <li class="nav-item ">
               
               
@@ -126,16 +118,6 @@
               
             </li>
           
-          
-            
-              <li class="nav-item ">
-                <a href="/friends/" target="_self">
-                  
-                    <i class="fa fa-address-book"></i> 友链
-                  
-                </a>
-              </li>
-            
           
           
             <li id="fa_search" class="nav-item">
@@ -753,10 +735,6 @@ Vue.mixin({
 </code></pre>
 
             </div>
-            
-              <div class="reward-btn">
-                <div class="reward-btn-text">赞赏</div>
-              </div>
             
             
               <div class="post-footer">
@@ -4084,6 +4062,19 @@ doc/*.txt
 doc/**/*.pdf
 
 &lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;问题已经在gittignore中忽略某个文件还是会进行提交&#34;&gt;问题：已经在.gittignore中忽略某个文件，还是会进行提交&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;原因&lt;br&gt;
+xxx文件在前面已经被git跟踪，在这之后在添加到 .gitgnore 中是无效的&lt;/li&gt;
+&lt;li&gt;解决方法&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;git rm -r --cached 文件/文件夹名字
+
+# 去掉已经托管的文件，然后重新提交
+git add .
+git commit -m &#39;提交说明&#39;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;注意：不要误解了.gitignore的用途，该文件只能作用于未被跟踪的文件，也就是那些从来没有被git记录过的文件（自添加以后，从未add及commit过的文件）。如果文件曾经被git记录过，那么.gitignore就对他们完全无效。&lt;/p&gt;
 ">git提交忽略文件</a>
       </div>
       
@@ -9273,7 +9264,7 @@ module.exports = { bankCardAttribution }
 &lt;h3 id=&#34;汉字和英文-英文或者中文&#34;&gt;汉字和英文 英文或者中文&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;/[^\u4E00-\u9FA5a-zA-Z]/g 
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&#34;汉字&#34;&gt;汉字&lt;/h3&gt;
+&lt;h3 id=&#34;汉字中文&#34;&gt;汉字中文&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;/[^\u4E00-\u9FA5]/g
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h3 id=&#34;税务号&#34;&gt;税务号&lt;/h3&gt;
@@ -9431,7 +9422,46 @@ module.exports = { bankCardAttribution }
 
  /^([京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[a-zA-Z](([DF]((?![IO])[a-zA-Z0-9](?![IO]))[0-9]{4})|([0-9]{5}[DF]))|[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4}[A-Z0-9挂学警港澳]{1})$/
 &lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;
+&lt;h3 id=&#34;url&#34;&gt;URL&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;/^((https?|ftp|file):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;ipv4地址&#34;&gt;IPv4地址&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;// ipv4地址正则
+ 
+var ipP = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+console.log(ipP.test(&amp;quot;115.28.47.26&amp;quot;));//输出 true
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;十六进制颜色&#34;&gt;十六进制颜色&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;// RGB Hex颜色正则
+ 
+var cPattern = /^#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/;
+console.log(cPattern.test(&amp;quot;#b8b8b8&amp;quot;)); //输出 true
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;日期&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;//日期正则，简单判定,未做月份及日期的判定
+ 
+var dP1 = /^\d{4}(\-)\d{1,2}\1\d{1,2}$/; 
+console.log(dP1.test(&amp;quot;2017-05-11&amp;quot;)); //输出 true 
+console.log(dP1.test(&amp;quot;2017-15-11&amp;quot;)); //输出 true 
+ 
+//日期正则，复杂判定
+var dP2 = /^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$/; 
+ 
+console.log(dP2.test(&amp;quot;2017-02-11&amp;quot;)); //输出 true 
+console.log(dP2.test(&amp;quot;2017-15-11&amp;quot;)); //输出 false 
+console.log(dP2.test(&amp;quot;2017-02-29&amp;quot;)); //输出 false 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;qq号码&#34;&gt;QQ号码&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;//QQ号正则，5至11位
+ 
+var qqPattern = /^[1-9][0-9]{4,10}$/;
+console.log(qqPattern.test(&amp;quot;65974040&amp;quot;)); //输出 true 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;微信号码&#34;&gt;微信号码&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;//微信号正则，6至20位，以字母开头，字母，数字，减号，下划线
+ 
+var wxPattern = /^[a-zA-Z]([-_a-zA-Z0-9]{5,19})+$/; 
+console.log(wxPattern.test(&amp;quot;RuilongMao&amp;quot;));//输出 true 
 &lt;/code&gt;&lt;/pre&gt;
 ">正则</a>
       </div>
