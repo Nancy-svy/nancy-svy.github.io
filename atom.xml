@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://nancy-svy.github.io</id>
     <title>真实の幻梦</title>
-    <updated>2023-07-25T00:46:14.651Z</updated>
+    <updated>2023-07-28T09:48:34.105Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://nancy-svy.github.io"/>
     <link rel="self" href="https://nancy-svy.github.io/atom.xml"/>
@@ -10,6 +10,42 @@
     <logo>https://nancy-svy.github.io/images/avatar.png</logo>
     <icon>https://nancy-svy.github.io/favicon.ico</icon>
     <rights>All rights reserved 2023, 真实の幻梦</rights>
+    <entry>
+        <title type="html"><![CDATA[截图工具 把图片钉在桌面上的截图工具]]></title>
+        <id>https://nancy-svy.github.io/post/screenshotTool/</id>
+        <link href="https://nancy-svy.github.io/post/screenshotTool/">
+        </link>
+        <updated>2023-07-27T09:32:29.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="实现效果好处">实现效果&amp;好处</h3>
+<p>方便切换到其他程序继续查看、抄写或者是与新内容进行比较</p>
+<h3 id="一-qq截图">一、QQ截图</h3>
+<figure data-type="image" tabindex="1"><img src="https://nancy-svy.github.io/post-images/1690450974153.png" alt="" loading="lazy"></figure>
+<h3 id="二-snipaste">二、Snipaste</h3>
+<p>官网<br>
+<a href="https://www.snipaste.com/download.html">https://www.snipaste.com/download.html</a></p>
+<figure data-type="image" tabindex="2"><img src="https://nancy-svy.github.io/post-images/1690450825713.png" alt="" loading="lazy"></figure>
+<h3 id="三-其他截图工具">三、其他截图工具</h3>
+<ol>
+<li>
+<p>FSCapture<br>
+<strong>介绍</strong><br>
+一款集图像捕捉、浏览编辑、视频录制等功能于一身的截图工具，具有体积小、功能强大、操作简便无<strong>需安装、不占内存</strong>等优点，其方便的浮动工具条和便捷的快捷键堪称完美结合。截图后的图片编辑与保存选项也特别丰富和方便，内置功能完善的图像编辑器，支持几乎所有主流图片格式，除提供缩放、旋转、剪切、格式转换、调整大小等基本功能外，还可向图像中加入标题、边框和水印、文本、线条、图形等内容，并可调整图像颜色，进行多种特效处理。</p>
+<p><strong>官网</strong><br>
+<a href="https://www.faststonecapture.cn/">https://www.faststonecapture.cn/</a></p>
+</li>
+<li>
+<p>verycapture<br>
+<strong>介绍</strong><br>
+一款综合性的截图工具，主要有多种形状截屏、贴图、GIF/视频录制、OCR、翻译等功能</p>
+</li>
+<li>
+<p>Pickpick<br>
+<strong>介绍</strong><br>
+picpick截图软件界面简洁，功能强大，支持全屏、活动窗口、矩形区域、任意形状等截取方式，简单实用。同时picpick截图软件中还有一些常用的图像处理功能，可对截取的图像进行编辑修改，是设计人员不可缺少的图像神器。</p>
+</li>
+</ol>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[vue  在发布阶段移除所有的console.log()输出语句]]></title>
         <id>https://nancy-svy.github.io/post/removeConsoleLog/</id>
@@ -406,18 +442,6 @@ value: 新增的值
 <p>删除属性可以使用</p>
 <pre><code>this.$delete(target,key)
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[postman报错Error: write EPROTO 67713288:error:100000f7:SSL routines:OPENSSL_internal:WRONG_VERSION_NUMBER]]></title>
-        <id>https://nancy-svy.github.io/post/testInterfaceError/</id>
-        <link href="https://nancy-svy.github.io/post/testInterfaceError/">
-        </link>
-        <updated>2023-05-29T09:40:25.000Z</updated>
-        <content type="html"><![CDATA[<p><strong>postman报错Error: write EPROTO 67713288:error:100000f7:SSL routines:OPENSSL_internal:WRONG_VERSION_NUMBER</strong></p>
-<p>使用postman时报错如下: <code style="color: #c7254e;background-color: #f2f2f2;"> Error: write EPROTO 93988952:error:100000f7:SSL routines:OPENSSL_internal:WRONG_VERSION_NUMBER:…/…/third_party/boringssl/src/ssl/tls_record.cc:242:</code></p>
-<p><strong>debug</strong><br>
-把https改成http，去掉s就能正常检测接口啦</p>
 ]]></content>
     </entry>
 </feed>
