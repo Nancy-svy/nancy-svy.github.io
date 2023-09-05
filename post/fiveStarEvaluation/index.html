@@ -9,7 +9,7 @@
 <meta name="description" content="草在结它的种子 ，风在摇它的叶子 ，我们站着，不说话，就十分美好。">
 <meta name="theme-color" content="#000">
 <title>微信小程序  五星评价功能 | 真实の幻梦</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1692688744135">
+<link rel="shortcut icon" href="/favicon.ico?v=1693893507532">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -1694,6 +1694,79 @@
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/vue-chang-yong-xiu-shi-fu/"" data-c="
+          &lt;ol&gt;
+&lt;li&gt;事件修饰符&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;.stop  阻止事件冒泡
+
+.prevent   提交事件不再重复加载页面，阻止表单提交的默认行为
+
+.capture   优先触发 用于捕获监听，冒泡是从内到外，捕获是从外到里
+
+.self   只有自己能触发，子元素无法触发
+
+.once   点击事件只触发一次
+
+.native  使用时将被当成原生HTML标签看待
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;按键修饰符&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;@keyup  键盘抬起
+
+@keydown  键盘按下
+
+space=&#39;&#39;      对键盘输入空格进行监听
+
+按键码的别名：
+      .enter 
+      .tab 
+      .delete 
+      .esc 
+      .space 
+      .up 
+      .down 
+      .left 
+      .right
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;表单修饰符&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;.lazy：在表单输入时不会马上显示在页面，而是等输入完成失去焦点时才会显示；
+
+.trim：过滤表单输入时两边的空格；
+
+.number：限制输入数字或将输入的数据转为数字
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;系统修饰符&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;@click.strl     点击+按住ctrl键，才能实现方法
+
+类似的还有：
+    .ctrl 
+    .alt 
+    .shift 
+    .meta
+
+.exact 修饰符    赋值其他修饰符进行精确匹配，@click.ctrl  必须只点击+按住ctrl键才会触发方法，另外还按住其他键不会触发
+ 用法  @click.ctrl.exact=&amp;quot;&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;鼠标按键修饰符&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;主要是鼠标的左右键、滚轮
+ @click.rigth 触发鼠标右击事件
+
+ @click.rigth.prevent 右键生效，prevent可以取消右击的默认事件，顺序不可以乱
+  
+.middle触发滚轮事件
+&lt;/code&gt;&lt;/pre&gt;
+">vue 常用修饰符</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/tree-move-up-and-down/"" data-c="
@@ -10735,6 +10808,27 @@ console.log(getMonthBetween(&#39;2018-09&#39;,&#39;2020-02&#39;));&lt;br&gt;
 &lt;p&gt;测试结果：&lt;br&gt;
 console.log(getYearBetween(&#39;2017&#39;,&#39;2020&#39;));&lt;br&gt;
 &lt;img src=&#34;https://nancy-svy.github.io/post-images/1689402171723.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;按月份对事件数组进行排序&#34;&gt;按月份对事件数组进行排序&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;const
+    MONTHS = [&#39;JAN&#39;, &#39;FEB&#39;, &#39;MAR&#39;, &#39;APR&#39;, &#39;MAY&#39;, &#39;JUN&#39;, &#39;JUL&#39;, &#39;AUG&#39;, &#39;SEP&#39;, &#39;OCT&#39;, &#39;NOV&#39;, &#39;DEC&#39;],
+    events = [{ event: &#39;prom&#39;, month: &#39;MAY&#39; }, { event: &#39;graduation&#39;, month: &#39;JUN&#39; }, { event: &#39;dance&#39;, month: &#39;JAN&#39; }];
+
+events.sort((a, b) =&amp;gt; MONTHS.indexOf(a.month) - MONTHS.indexOf(b.month));
+
+console.log(events);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如果有时没有month属性或值与给定月份不同，则可以添加一个默认值，将此项移动到顶部（0）或底部（{%13}或大于数组长度的值）。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;const
+    MONTHS = [&#39;JAN&#39;, &#39;FEB&#39;, &#39;MAR&#39;, &#39;APR&#39;, &#39;MAY&#39;, &#39;JUN&#39;, &#39;JUL&#39;, &#39;AUG&#39;, &#39;SEP&#39;, &#39;OCT&#39;, &#39;NOV&#39;, &#39;DEC&#39;],
+    events = [{ event: &#39;prom&#39;, month: &#39;MAY&#39; }, { event: &#39;party&#39;, month: &#39;&#39; }, { event: &#39;graduation&#39;, month: &#39;JUN&#39; }, { event: &#39;dance&#39;, month: &#39;JAN&#39; }];
+
+events.sort((a, b) =&amp;gt;
+    (MONTHS.indexOf(a.month) + 1 || Number.MAX_VALUE) -
+    (MONTHS.indexOf(b.month) + 1 || Number.MAX_VALUE)
+);
+
+console.log(events);
+&lt;/code&gt;&lt;/pre&gt;
 ">js  获取一段时间、两个日期间的所有日期(天数)、所有月份、所有年份</a>
       </div>
       
