@@ -9,7 +9,7 @@
 <meta name="description" content="草在结它的种子 ，风在摇它的叶子 ，我们站着，不说话，就十分美好。">
 <meta name="theme-color" content="#000">
 <title>正则 | 真实の幻梦</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1694744588578">
+<link rel="shortcut icon" href="/favicon.ico?v=1694744682153">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -2033,83 +2033,6 @@ element-variables.scss文件中的 @import &amp;quot;~element-ui/packages/theme-
 &lt;p&gt;6、 window + f 快速打开搜索窗口&lt;/p&gt;
 &lt;p&gt;7、 alt + tab 快速查看打开的应用与窗口&lt;/p&gt;
 ">VS Code 的常用快捷键</a>
-      </div>
-      
-      <div class="item">
-        <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/vue-you-jian-cai-dan-vue-context-menu/"" data-c="
-          &lt;ol&gt;
-&lt;li&gt;安装vue-context-menu&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre&gt;&lt;code&gt;npm install vue-contextmenu --save
-&lt;/code&gt;&lt;/pre&gt;
-&lt;ol start=&#34;2&#34;&gt;
-&lt;li&gt;在main.js中引用&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre&gt;&lt;code&gt;import Contextmenu from &amp;quot;vue-contextmenujs&amp;quot;
-Vue.use(Contextmenu);
-&lt;/code&gt;&lt;/pre&gt;
-&lt;ol start=&#34;3&#34;&gt;
-&lt;li&gt;给需要点击的元素绑定事件&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;el-table :data=&amp;quot;timetable&amp;quot; @row-contextmenu=&amp;quot;onContextmenu&amp;quot;&amp;gt;&amp;lt;/el-table&amp;gt;
-
-
-// 右键
- onContextmenu(event) {
-    event.preventDefault()
-    if(event.preventDefault){
-        event.preventDefault()
-    }else{
-        window.event.returnValue = false // 兼容IE6、7、8
-    }
-    this.$contextmenu({
-         items: [
-            {
-                label: &amp;quot;返回&amp;quot;,
-                onClick: () =&amp;gt; {
-                    console.log(&amp;quot;返回(B)&amp;quot;);
-                }
-            },
-            { label: &amp;quot;前进(F)&amp;quot;, disabled: true },
-            { label: &amp;quot;重新加载(R)&amp;quot;, divided: true, icon: &amp;quot;el-icon-refresh&amp;quot; },
-            { label: &amp;quot;另存为(A)...&amp;quot; },
-            { label: &amp;quot;打印(P)...&amp;quot;, icon: &amp;quot;el-icon-printer&amp;quot; },
-            { label: &amp;quot;投射(C)...&amp;quot;, divided: true },
-            {
-                label: &amp;quot;使用网页翻译(T)&amp;quot;,
-                divided: true,
-                minWidth: 0,
-                children: [
-                    { label: &amp;quot;翻译成简体中文&amp;quot; },
-                    { label: &amp;quot;翻译成繁体中文&amp;quot; }         
-                 ]
-            },
-            {
-                label: &amp;quot;截取网页(R)&amp;quot;,
-                minWidth: 0,
-                children: [{
-                        label: &amp;quot;截取可视化区域&amp;quot;,
-                        onClick: () =&amp;gt; {
-                            this.message = &amp;quot;截取可视化区域&amp;quot;;
-                        }
-                    },
-                    { label: &amp;quot;截取全屏&amp;quot; }
-                ]
-            },
-            { label: &amp;quot;查看网页源代码(V)&amp;quot;, icon: &amp;quot;el-icon-view&amp;quot; },
-            { label: &amp;quot;检查(N)&amp;quot; }
-        ],
-        event,
-        //x: event.clientX,
-        //y: event.clientY,
-        customClass: &amp;quot;custom-class&amp;quot;,
-        zIndex: 3,
-        minWidth: 230
-    });
-    return false;
-},
-&lt;/code&gt;&lt;/pre&gt;
-">vue 右键菜单(vue-context-menu)</a>
       </div>
       
       <div class="item">
