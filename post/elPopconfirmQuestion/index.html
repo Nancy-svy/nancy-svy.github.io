@@ -9,7 +9,7 @@
 <meta name="description" content="草在结它的种子 ，风在摇它的叶子 ，我们站着，不说话，就十分美好。">
 <meta name="theme-color" content="#000">
 <title>elementUI   el-popconfirm 的确认事件不起作用 | 真实の幻梦</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1693893507532">
+<link rel="shortcut icon" href="/favicon.ico?v=1694744588578">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -1416,6 +1416,288 @@
     <div class="result" id="result">
       
       <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/elementui-jie-jue-da-bao-shang-xian-hou-icon-tu-biao-ou-er-luan-ma-de-wen-ti/"" data-c="
+          &lt;h3 id=&#34;一-背景&#34;&gt;一、 背景&lt;/h3&gt;
+&lt;p&gt;本项目是以vue-element-admin作为基础，开发过程中，图标显示正常，知道打包到线上，页面偶尔性出现图标落马问题，再次刷新页面后，又显示正常&lt;/p&gt;
+&lt;h3 id=&#34;二-现象&#34;&gt;二、现象&lt;/h3&gt;
+&lt;p&gt;1、项目打包后，dist/css/app.xxx.css，发现所有的图标样式content的文本未正常显示了。例：el-icon-moon:before{content:“”}；&lt;br&gt;
+2、虽然页面图标可以正常显示，但是用F12，会发现字体依然是乱码；&lt;/p&gt;
+&lt;h3 id=&#34;原因&#34;&gt;原因&lt;/h3&gt;
+&lt;p&gt;本项目使用的依赖包是sass，elementui使用的是node-sass&lt;/p&gt;
+&lt;h3 id=&#34;解决方法&#34;&gt;解决方法&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;方法一： 替换element-ui的样式文件&lt;br&gt;
+element-variables.scss文件中的 @import &amp;quot;~element-ui/packages/theme-chalk/src/index&amp;quot;; 注释掉，然后在main.js把引入的element-variables.scss文件注释掉替换为 import &#39;element-ui/lib/theme-chalk/index.css&#39;&lt;br&gt;
+&lt;img src=&#34;https://nancy-svy.github.io/post-images/1694741665999.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://nancy-svy.github.io/post-images/1694741672048.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;方法二：把sass版本升到1.39.0&lt;br&gt;
+&lt;img src=&#34;https://nancy-svy.github.io/post-images/1694741933651.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+&lt;img src=&#34;https://nancy-svy.github.io/post-images/1694741940572.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;参考地址： &lt;a href=&#34;https://blog.csdn.net/qq_37831545/article/details/132427740&#34;&gt;https://blog.csdn.net/qq_37831545/article/details/132427740&lt;/a&gt;&lt;/p&gt;
+">elementUI 解决打包上线后icon图标偶尔乱码的问题</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/vs-code-de-chang-yong-kuai-jie-jian/"" data-c="
+          &lt;p&gt;VS Code 的常用快捷键和插件&lt;/p&gt;
+&lt;h5 id=&#34;一-vs-code-的常用快捷键&#34;&gt;一、vs code 的常用快捷键&lt;/h5&gt;
+&lt;p&gt;1、注释：&lt;/p&gt;
+&lt;p&gt;a) 单行注释：[ctrl+k,ctrl+c] 或 ctrl+/&lt;/p&gt;
+&lt;p&gt;b) 取消单行注释：[ctrl+k,ctrl+u] (按下ctrl不放，再按k + u)&lt;/p&gt;
+&lt;p&gt;c) 多行注释：[alt+shift+A]&lt;/p&gt;
+&lt;p&gt;d) 多行注释：/**&lt;/p&gt;
+&lt;p&gt;2、移动行：alt+up/down&lt;/p&gt;
+&lt;p&gt;3、显示/隐藏左侧目录栏 ctrl + b&lt;/p&gt;
+&lt;p&gt;4、复制当前行：shift + alt +up/down&lt;/p&gt;
+&lt;p&gt;5、删除当前行：shift + ctrl + k&lt;/p&gt;
+&lt;p&gt;6、控制台终端显示与隐藏：ctrl + ~&lt;/p&gt;
+&lt;p&gt;7、查找文件/安装vs code 插件地址：ctrl + p&lt;/p&gt;
+&lt;p&gt;8、代码格式化：shift + alt +f&lt;/p&gt;
+&lt;p&gt;9、新建一个窗口 : ctrl + shift + n&lt;/p&gt;
+&lt;p&gt;10、行增加缩进: ctrl + [&lt;/p&gt;
+&lt;p&gt;11、行减少缩进: ctrl + ]&lt;/p&gt;
+&lt;p&gt;12、裁剪尾随空格(去掉一行的末尾那些没用的空格) : ctrl + shift + x&lt;/p&gt;
+&lt;p&gt;13、字体放大/缩小: ctrl + ( + 或 - )&lt;/p&gt;
+&lt;p&gt;14、拆分编辑器 : ctrl + 1/2/3&lt;/p&gt;
+&lt;p&gt;15、切换窗口 : ctrl + shift + left/right&lt;/p&gt;
+&lt;p&gt;16、关闭编辑器窗口 : ctrl + w&lt;/p&gt;
+&lt;p&gt;17、关闭所有窗口 : ctrl + k + w&lt;/p&gt;
+&lt;p&gt;18、切换全屏 : F11&lt;/p&gt;
+&lt;p&gt;19、自动换行 : alt + z&lt;/p&gt;
+&lt;p&gt;20、显示git : ctrl + shift + g&lt;/p&gt;
+&lt;p&gt;21、全局查找文件：ctrl + shift + f&lt;/p&gt;
+&lt;p&gt;22、显示相关插件的命令(如：git log)：ctrl + shift + p&lt;/p&gt;
+&lt;p&gt;23、选中文字：shift + left / right / up / down&lt;/p&gt;
+&lt;p&gt;24、折叠代码： ctrl + k + 0-9 (0是完全折叠)&lt;/p&gt;
+&lt;p&gt;25、展开代码： ctrl + k + j (完全展开代码)&lt;/p&gt;
+&lt;p&gt;26、删除行 ： ctrl + shift + k&lt;/p&gt;
+&lt;p&gt;27、快速切换主题：ctrl + k / ctrl + t&lt;/p&gt;
+&lt;p&gt;28、快速回到顶部 ： ctrl + home&lt;/p&gt;
+&lt;p&gt;29、快速回到底部 : ctrl + end&lt;/p&gt;
+&lt;p&gt;30、格式化选定代码 ：ctrl + k / ctrl +f&lt;/p&gt;
+&lt;p&gt;31、选中代码 ： shift + 鼠标左键&lt;/p&gt;
+&lt;p&gt;32、多行同时添加内容（光标） ：ctrl + alt + up/down&lt;/p&gt;
+&lt;p&gt;33、全局替换：ctrl + shift + h&lt;/p&gt;
+&lt;p&gt;34、当前文件替换：ctrl + h&lt;/p&gt;
+&lt;p&gt;35、打开最近打开的文件：ctrl + r&lt;/p&gt;
+&lt;p&gt;36、打开新的命令窗：ctrl + shift + c&lt;/p&gt;
+&lt;h5 id=&#34;二-vs-code-的常用插件&#34;&gt;二、vs code 的常用插件&lt;/h5&gt;
+&lt;p&gt;1、Auto Rename Tag 修改html标签，自动帮你完成尾部闭合标签的同步修改，和webstorm一样。&lt;/p&gt;
+&lt;p&gt;2、Auto Close Tag 自动闭合HTML标签&lt;/p&gt;
+&lt;p&gt;4、Beautiful 格式化代码的工具&lt;/p&gt;
+&lt;p&gt;5、Dash Dash是MacOS的API文档浏览器和代码段管理器&lt;/p&gt;
+&lt;p&gt;6、Ejs Snippets ejs 代码提示&lt;/p&gt;
+&lt;p&gt;7、ESLint 检查javascript语法错误与提示&lt;/p&gt;
+&lt;p&gt;8、File Navigator 快速查找文件&lt;/p&gt;
+&lt;p&gt;9、Git History(git log) 查看git log&lt;/p&gt;
+&lt;p&gt;10、Gulp Snippets 写gulp时用到，gulp语法提示。&lt;/p&gt;
+&lt;p&gt;11、HTML CSS Support 在HTML标签上写class智能提示当前项目所支持的样式&lt;/p&gt;
+&lt;p&gt;12、HTML Snippets 超级好用且初级的H5代码片段以及提示&lt;/p&gt;
+&lt;p&gt;13、Debug for Chrome 让vs code映射chrome的debug功能，静态页面都可以用vscode来打断点调试、配饰稍微复杂一点&lt;/p&gt;
+&lt;p&gt;14、Document this Js的注释模板&lt;/p&gt;
+&lt;p&gt;15、jQuery Code Snippets jquery提示工具&lt;/p&gt;
+&lt;p&gt;16、Html2jade html模板转pug模板&lt;/p&gt;
+&lt;p&gt;17、JS-CSS-HTML Formatter 格式化&lt;/p&gt;
+&lt;p&gt;18、Npm intellisense require 时的包提示工具&lt;/p&gt;
+&lt;p&gt;19、Open in browser 打开默认浏览器&lt;/p&gt;
+&lt;p&gt;20、One Dark Theme 一个vs code的主题&lt;/p&gt;
+&lt;p&gt;21、Path Intellisense 自动路径补全、默认不带这个功能&lt;/p&gt;
+&lt;p&gt;22、Project Manager 多个项目之间快速切换的工具&lt;/p&gt;
+&lt;p&gt;23、Pug(Jade) snippets pug语法提示&lt;/p&gt;
+&lt;p&gt;24、React Components 根据文件名创建反应组件代码。&lt;/p&gt;
+&lt;p&gt;25、React Native Tools reactNative工具类为React Native项目提供了开发环境。&lt;/p&gt;
+&lt;p&gt;26、Stylelint css/sass代码审查&lt;/p&gt;
+&lt;p&gt;27、Typings auto installer 安装vscode 的代码提示依赖库，基于typtings的&lt;/p&gt;
+&lt;p&gt;28、View In Browser 　默认浏览器查看HTML文件（快捷键Ctrl+F1可以修改）&lt;/p&gt;
+&lt;p&gt;29、Vscode-icons 让vscode资源目录加上图标、必备&lt;/p&gt;
+&lt;p&gt;30、VueHelper Vue2代码段（包括Vue2 api、vue-router2、vuex2）&lt;/p&gt;
+&lt;p&gt;31、Vue 2 Snippets vue必备vue代码提示&lt;/p&gt;
+&lt;p&gt;32、Vue-color vue语法高亮主题&lt;/p&gt;
+&lt;p&gt;33、Auto-Open Markdown Preview markdown文件自动开启预览&lt;/p&gt;
+&lt;p&gt;34、EverMonkey 印象笔记&lt;/p&gt;
+&lt;p&gt;35、atom one dark atom的一个高亮主题(个人推荐)&lt;/p&gt;
+&lt;h5 id=&#34;三-常用的电脑快捷键&#34;&gt;三、常用的电脑快捷键&lt;/h5&gt;
+&lt;p&gt;1、ctrl + shift + delete 快速清除浏览器缓存&lt;/p&gt;
+&lt;p&gt;2、ctrl + alt + delete 快速进入任务管理器页面&lt;/p&gt;
+&lt;p&gt;3、window + L 快速锁定电脑&lt;/p&gt;
+&lt;p&gt;4、window + d 所有窗口最小化&lt;/p&gt;
+&lt;p&gt;5、 window + e 打开我的资源管理器(我的电脑)&lt;/p&gt;
+&lt;p&gt;6、 window + f 快速打开搜索窗口&lt;/p&gt;
+&lt;p&gt;7、 alt + tab 快速查看打开的应用与窗口&lt;/p&gt;
+">VS Code 的常用快捷键</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/vue-you-jian-cai-dan-vue-context-menu/"" data-c="
+          &lt;ol&gt;
+&lt;li&gt;安装vue-context-menu&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;npm install vue-contextmenu --save
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;在main.js中引用&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;import Contextmenu from &amp;quot;vue-contextmenujs&amp;quot;
+Vue.use(Contextmenu);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;给需要点击的元素绑定事件&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;el-table :data=&amp;quot;timetable&amp;quot; @row-contextmenu=&amp;quot;onContextmenu&amp;quot;&amp;gt;&amp;lt;/el-table&amp;gt;
+
+
+// 右键
+ onContextmenu(event) {
+    event.preventDefault()
+    if(event.preventDefault){
+        event.preventDefault()
+    }else{
+        window.event.returnValue = false // 兼容IE6、7、8
+    }
+    this.$contextmenu({
+         items: [
+            {
+                label: &amp;quot;返回&amp;quot;,
+                onClick: () =&amp;gt; {
+                    console.log(&amp;quot;返回(B)&amp;quot;);
+                }
+            },
+            { label: &amp;quot;前进(F)&amp;quot;, disabled: true },
+            { label: &amp;quot;重新加载(R)&amp;quot;, divided: true, icon: &amp;quot;el-icon-refresh&amp;quot; },
+            { label: &amp;quot;另存为(A)...&amp;quot; },
+            { label: &amp;quot;打印(P)...&amp;quot;, icon: &amp;quot;el-icon-printer&amp;quot; },
+            { label: &amp;quot;投射(C)...&amp;quot;, divided: true },
+            {
+                label: &amp;quot;使用网页翻译(T)&amp;quot;,
+                divided: true,
+                minWidth: 0,
+                children: [
+                    { label: &amp;quot;翻译成简体中文&amp;quot; },
+                    { label: &amp;quot;翻译成繁体中文&amp;quot; }         
+                 ]
+            },
+            {
+                label: &amp;quot;截取网页(R)&amp;quot;,
+                minWidth: 0,
+                children: [{
+                        label: &amp;quot;截取可视化区域&amp;quot;,
+                        onClick: () =&amp;gt; {
+                            this.message = &amp;quot;截取可视化区域&amp;quot;;
+                        }
+                    },
+                    { label: &amp;quot;截取全屏&amp;quot; }
+                ]
+            },
+            { label: &amp;quot;查看网页源代码(V)&amp;quot;, icon: &amp;quot;el-icon-view&amp;quot; },
+            { label: &amp;quot;检查(N)&amp;quot; }
+        ],
+        event,
+        //x: event.clientX,
+        //y: event.clientY,
+        customClass: &amp;quot;custom-class&amp;quot;,
+        zIndex: 3,
+        minWidth: 230
+    });
+    return false;
+},
+&lt;/code&gt;&lt;/pre&gt;
+">vue 右键菜单(vue-context-menu)</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/vue-you-jian-cai-dan-vue-contextmenujs/"" data-c="
+          &lt;ol&gt;
+&lt;li&gt;安装vue-context-menu&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;npm install vue-contextmenujs --save
+或
+yarn add vue-contextmenujs
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;在main.js中引用&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;import Contextmenu from &amp;quot;vue-contextmenujs&amp;quot;
+Vue.use(Contextmenu);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;给需要点击的元素绑定事件&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;// 在组件中调用显示菜单
+ this.$contextmenu(options:MenuOptions);
+// 鼠标点击或滚轮自动销毁, 也可手动销毁
+ this.$contextmenu.destroy();
+
+// 去除浏览器默认菜单
+ event.preventDefault();
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;template&amp;gt;
+  &amp;lt;div id=&amp;quot;app&amp;quot; @contextmenu.prevent=&amp;quot;onContextmenu&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+&amp;lt;/template&amp;gt;
+
+&amp;lt;script&amp;gt;
+    // 右键
+    onContextmenu(event) {
+        event.preventDefault()
+        if(event.preventDefault){
+            event.preventDefault()
+        }else{
+            window.event.returnValue = false // 兼容IE6、7、8
+        }
+        this.$contextmenu({
+            items: [
+                {
+                    label: &amp;quot;返回&amp;quot;,
+                    onClick: () =&amp;gt; {
+                        console.log(&amp;quot;返回(B)&amp;quot;);
+                    }
+                },
+                { label: &amp;quot;前进(F)&amp;quot;, disabled: true },
+                { label: &amp;quot;重新加载(R)&amp;quot;, divided: true, icon: &amp;quot;el-icon-refresh&amp;quot; },
+                { label: &amp;quot;另存为(A)...&amp;quot; },
+                { label: &amp;quot;打印(P)...&amp;quot;, icon: &amp;quot;el-icon-printer&amp;quot; },
+                { label: &amp;quot;投射(C)...&amp;quot;, divided: true },
+                {
+                    label: &amp;quot;使用网页翻译(T)&amp;quot;,
+                    divided: true,
+                    minWidth: 0,
+                    children: [
+                        { label: &amp;quot;翻译成简体中文&amp;quot; },
+                        { label: &amp;quot;翻译成繁体中文&amp;quot; }         
+                    ]
+                },
+                {
+                    label: &amp;quot;截取网页(R)&amp;quot;,
+                    minWidth: 0,
+                    children: [{
+                            label: &amp;quot;截取可视化区域&amp;quot;,
+                            onClick: () =&amp;gt; {
+                                this.message = &amp;quot;截取可视化区域&amp;quot;;
+                            }
+                        },
+                        { label: &amp;quot;截取全屏&amp;quot; }
+                    ]
+                },
+                { label: &amp;quot;查看网页源代码(V)&amp;quot;, icon: &amp;quot;el-icon-view&amp;quot; },
+                { label: &amp;quot;检查(N)&amp;quot; }
+            ],
+            event,
+            //x: event.clientX,
+            //y: event.clientY,
+            customClass: &amp;quot;custom-class&amp;quot;,
+            zIndex: 3,
+            minWidth: 230
+        });
+        return false;
+    },
+&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+">vue 右键菜单(vue-contextmenujs)</a>
+      </div>
+      
+      <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/vue-chang-yong-xiu-shi-fu/"" data-c="
           &lt;ol&gt;
 &lt;li&gt;事件修饰符&lt;/li&gt;
@@ -1825,39 +2107,6 @@ space=&#39;&#39;      对键盘输入空格进行监听
 &amp;lt;/style&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 ">el-tree树形实现点击按钮tree节点上下移动</a>
-      </div>
-      
-      <div class="item">
-        <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/screenshotTool/"" data-c="
-          &lt;h3 id=&#34;实现效果好处&#34;&gt;实现效果&amp;amp;好处&lt;/h3&gt;
-&lt;p&gt;方便切换到其他程序继续查看、抄写或者是与新内容进行比较&lt;/p&gt;
-&lt;h3 id=&#34;一-qq截图&#34;&gt;一、QQ截图&lt;/h3&gt;
-&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://nancy-svy.github.io/post-images/1690450974153.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
-&lt;h3 id=&#34;二-snipaste&#34;&gt;二、Snipaste&lt;/h3&gt;
-&lt;p&gt;官网&lt;br&gt;
-&lt;a href=&#34;https://www.snipaste.com/download.html&#34;&gt;https://www.snipaste.com/download.html&lt;/a&gt;&lt;/p&gt;
-&lt;figure data-type=&#34;image&#34; tabindex=&#34;2&#34;&gt;&lt;img src=&#34;https://nancy-svy.github.io/post-images/1690450825713.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
-&lt;h3 id=&#34;三-其他截图工具&#34;&gt;三、其他截图工具&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;FSCapture&lt;br&gt;
-&lt;strong&gt;介绍&lt;/strong&gt;&lt;br&gt;
-一款集图像捕捉、浏览编辑、视频录制等功能于一身的截图工具，具有体积小、功能强大、操作简便无&lt;strong&gt;需安装、不占内存&lt;/strong&gt;等优点，其方便的浮动工具条和便捷的快捷键堪称完美结合。截图后的图片编辑与保存选项也特别丰富和方便，内置功能完善的图像编辑器，支持几乎所有主流图片格式，除提供缩放、旋转、剪切、格式转换、调整大小等基本功能外，还可向图像中加入标题、边框和水印、文本、线条、图形等内容，并可调整图像颜色，进行多种特效处理。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;官网&lt;/strong&gt;&lt;br&gt;
-&lt;a href=&#34;https://www.faststonecapture.cn/&#34;&gt;https://www.faststonecapture.cn/&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;verycapture&lt;br&gt;
-&lt;strong&gt;介绍&lt;/strong&gt;&lt;br&gt;
-一款综合性的截图工具，主要有多种形状截屏、贴图、GIF/视频录制、OCR、翻译等功能&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Pickpick&lt;br&gt;
-&lt;strong&gt;介绍&lt;/strong&gt;&lt;br&gt;
-picpick截图软件界面简洁，功能强大，支持全屏、活动窗口、矩形区域、任意形状等截取方式，简单实用。同时picpick截图软件中还有一些常用的图像处理功能，可对截取的图像进行编辑修改，是设计人员不可缺少的图像神器。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-">截图工具 把图片钉在桌面上的截图工具</a>
       </div>
       
       <div class="item">
@@ -10411,6 +10660,11 @@ Page({
 
  
 &lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;使用蒙层或者自定义tabbarucharts层级过高&#34;&gt;使用蒙层或者自定义tabbar，ucharts层级过高&lt;/h3&gt;
+&lt;p&gt;因为canvas在微信小程序中是原生组件，如果使用弹窗，图表则会超出预期，此时需要给组件的canvas2d传值true来使用type=&#39;2d&#39;的功能，开启此模式后，一定要在组件上自定义canvasId,不能为数字，不能动态绑定，只能为字符串&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;qiun-data-charts :canvas2d=&#39;true&#39; canvasId=&#39;canvans7&#39; type=&amp;quot;scatter&amp;quot; :chartData=&amp;quot;chartData&amp;quot; /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;注意:canvas2d设置为true;canvasId必须唯一&lt;/p&gt;
 ">微信小程序使用echarts(秋云)</a>
       </div>
       

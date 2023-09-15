@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://nancy-svy.github.io</id>
     <title>真实の幻梦</title>
-    <updated>2023-09-05T08:02:33.784Z</updated>
+    <updated>2023-09-15T02:24:14.204Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://nancy-svy.github.io"/>
     <link rel="self" href="https://nancy-svy.github.io/atom.xml"/>
@@ -10,6 +10,300 @@
     <logo>https://nancy-svy.github.io/images/avatar.png</logo>
     <icon>https://nancy-svy.github.io/favicon.ico</icon>
     <rights>All rights reserved 2023, 真实の幻梦</rights>
+    <entry>
+        <title type="html"><![CDATA[elementUI 解决打包上线后icon图标偶尔乱码的问题]]></title>
+        <id>https://nancy-svy.github.io/post/elementui-jie-jue-da-bao-shang-xian-hou-icon-tu-biao-ou-er-luan-ma-de-wen-ti/</id>
+        <link href="https://nancy-svy.github.io/post/elementui-jie-jue-da-bao-shang-xian-hou-icon-tu-biao-ou-er-luan-ma-de-wen-ti/">
+        </link>
+        <updated>2023-09-15T01:17:57.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="一-背景">一、 背景</h3>
+<p>本项目是以vue-element-admin作为基础，开发过程中，图标显示正常，知道打包到线上，页面偶尔性出现图标落马问题，再次刷新页面后，又显示正常</p>
+<h3 id="二-现象">二、现象</h3>
+<p>1、项目打包后，dist/css/app.xxx.css，发现所有的图标样式content的文本未正常显示了。例：el-icon-moon:before{content:“”}；<br>
+2、虽然页面图标可以正常显示，但是用F12，会发现字体依然是乱码；</p>
+<h3 id="原因">原因</h3>
+<p>本项目使用的依赖包是sass，elementui使用的是node-sass</p>
+<h3 id="解决方法">解决方法</h3>
+<ol>
+<li>方法一： 替换element-ui的样式文件<br>
+element-variables.scss文件中的 @import &quot;~element-ui/packages/theme-chalk/src/index&quot;; 注释掉，然后在main.js把引入的element-variables.scss文件注释掉替换为 import 'element-ui/lib/theme-chalk/index.css'<br>
+<img src="https://nancy-svy.github.io/post-images/1694741665999.png" alt="" loading="lazy"></li>
+</ol>
+<figure data-type="image" tabindex="1"><img src="https://nancy-svy.github.io/post-images/1694741672048.png" alt="" loading="lazy"></figure>
+<ol start="2">
+<li>方法二：把sass版本升到1.39.0<br>
+<img src="https://nancy-svy.github.io/post-images/1694741933651.png" alt="" loading="lazy"><br>
+<img src="https://nancy-svy.github.io/post-images/1694741940572.png" alt="" loading="lazy"></li>
+</ol>
+<p>参考地址： <a href="https://blog.csdn.net/qq_37831545/article/details/132427740">https://blog.csdn.net/qq_37831545/article/details/132427740</a></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[VS Code 的常用快捷键]]></title>
+        <id>https://nancy-svy.github.io/post/vs-code-de-chang-yong-kuai-jie-jian/</id>
+        <link href="https://nancy-svy.github.io/post/vs-code-de-chang-yong-kuai-jie-jian/">
+        </link>
+        <updated>2023-09-07T02:58:56.000Z</updated>
+        <content type="html"><![CDATA[<p>VS Code 的常用快捷键和插件</p>
+<h5 id="一-vs-code-的常用快捷键">一、vs code 的常用快捷键</h5>
+<p>1、注释：</p>
+<p>a) 单行注释：[ctrl+k,ctrl+c] 或 ctrl+/</p>
+<p>b) 取消单行注释：[ctrl+k,ctrl+u] (按下ctrl不放，再按k + u)</p>
+<p>c) 多行注释：[alt+shift+A]</p>
+<p>d) 多行注释：/**</p>
+<p>2、移动行：alt+up/down</p>
+<p>3、显示/隐藏左侧目录栏 ctrl + b</p>
+<p>4、复制当前行：shift + alt +up/down</p>
+<p>5、删除当前行：shift + ctrl + k</p>
+<p>6、控制台终端显示与隐藏：ctrl + ~</p>
+<p>7、查找文件/安装vs code 插件地址：ctrl + p</p>
+<p>8、代码格式化：shift + alt +f</p>
+<p>9、新建一个窗口 : ctrl + shift + n</p>
+<p>10、行增加缩进: ctrl + [</p>
+<p>11、行减少缩进: ctrl + ]</p>
+<p>12、裁剪尾随空格(去掉一行的末尾那些没用的空格) : ctrl + shift + x</p>
+<p>13、字体放大/缩小: ctrl + ( + 或 - )</p>
+<p>14、拆分编辑器 : ctrl + 1/2/3</p>
+<p>15、切换窗口 : ctrl + shift + left/right</p>
+<p>16、关闭编辑器窗口 : ctrl + w</p>
+<p>17、关闭所有窗口 : ctrl + k + w</p>
+<p>18、切换全屏 : F11</p>
+<p>19、自动换行 : alt + z</p>
+<p>20、显示git : ctrl + shift + g</p>
+<p>21、全局查找文件：ctrl + shift + f</p>
+<p>22、显示相关插件的命令(如：git log)：ctrl + shift + p</p>
+<p>23、选中文字：shift + left / right / up / down</p>
+<p>24、折叠代码： ctrl + k + 0-9 (0是完全折叠)</p>
+<p>25、展开代码： ctrl + k + j (完全展开代码)</p>
+<p>26、删除行 ： ctrl + shift + k</p>
+<p>27、快速切换主题：ctrl + k / ctrl + t</p>
+<p>28、快速回到顶部 ： ctrl + home</p>
+<p>29、快速回到底部 : ctrl + end</p>
+<p>30、格式化选定代码 ：ctrl + k / ctrl +f</p>
+<p>31、选中代码 ： shift + 鼠标左键</p>
+<p>32、多行同时添加内容（光标） ：ctrl + alt + up/down</p>
+<p>33、全局替换：ctrl + shift + h</p>
+<p>34、当前文件替换：ctrl + h</p>
+<p>35、打开最近打开的文件：ctrl + r</p>
+<p>36、打开新的命令窗：ctrl + shift + c</p>
+<h5 id="二-vs-code-的常用插件">二、vs code 的常用插件</h5>
+<p>1、Auto Rename Tag 修改html标签，自动帮你完成尾部闭合标签的同步修改，和webstorm一样。</p>
+<p>2、Auto Close Tag 自动闭合HTML标签</p>
+<p>4、Beautiful 格式化代码的工具</p>
+<p>5、Dash Dash是MacOS的API文档浏览器和代码段管理器</p>
+<p>6、Ejs Snippets ejs 代码提示</p>
+<p>7、ESLint 检查javascript语法错误与提示</p>
+<p>8、File Navigator 快速查找文件</p>
+<p>9、Git History(git log) 查看git log</p>
+<p>10、Gulp Snippets 写gulp时用到，gulp语法提示。</p>
+<p>11、HTML CSS Support 在HTML标签上写class智能提示当前项目所支持的样式</p>
+<p>12、HTML Snippets 超级好用且初级的H5代码片段以及提示</p>
+<p>13、Debug for Chrome 让vs code映射chrome的debug功能，静态页面都可以用vscode来打断点调试、配饰稍微复杂一点</p>
+<p>14、Document this Js的注释模板</p>
+<p>15、jQuery Code Snippets jquery提示工具</p>
+<p>16、Html2jade html模板转pug模板</p>
+<p>17、JS-CSS-HTML Formatter 格式化</p>
+<p>18、Npm intellisense require 时的包提示工具</p>
+<p>19、Open in browser 打开默认浏览器</p>
+<p>20、One Dark Theme 一个vs code的主题</p>
+<p>21、Path Intellisense 自动路径补全、默认不带这个功能</p>
+<p>22、Project Manager 多个项目之间快速切换的工具</p>
+<p>23、Pug(Jade) snippets pug语法提示</p>
+<p>24、React Components 根据文件名创建反应组件代码。</p>
+<p>25、React Native Tools reactNative工具类为React Native项目提供了开发环境。</p>
+<p>26、Stylelint css/sass代码审查</p>
+<p>27、Typings auto installer 安装vscode 的代码提示依赖库，基于typtings的</p>
+<p>28、View In Browser 　默认浏览器查看HTML文件（快捷键Ctrl+F1可以修改）</p>
+<p>29、Vscode-icons 让vscode资源目录加上图标、必备</p>
+<p>30、VueHelper Vue2代码段（包括Vue2 api、vue-router2、vuex2）</p>
+<p>31、Vue 2 Snippets vue必备vue代码提示</p>
+<p>32、Vue-color vue语法高亮主题</p>
+<p>33、Auto-Open Markdown Preview markdown文件自动开启预览</p>
+<p>34、EverMonkey 印象笔记</p>
+<p>35、atom one dark atom的一个高亮主题(个人推荐)</p>
+<h5 id="三-常用的电脑快捷键">三、常用的电脑快捷键</h5>
+<p>1、ctrl + shift + delete 快速清除浏览器缓存</p>
+<p>2、ctrl + alt + delete 快速进入任务管理器页面</p>
+<p>3、window + L 快速锁定电脑</p>
+<p>4、window + d 所有窗口最小化</p>
+<p>5、 window + e 打开我的资源管理器(我的电脑)</p>
+<p>6、 window + f 快速打开搜索窗口</p>
+<p>7、 alt + tab 快速查看打开的应用与窗口</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[vue 右键菜单(vue-context-menu)]]></title>
+        <id>https://nancy-svy.github.io/post/vue-you-jian-cai-dan-vue-context-menu/</id>
+        <link href="https://nancy-svy.github.io/post/vue-you-jian-cai-dan-vue-context-menu/">
+        </link>
+        <updated>2023-09-05T02:01:32.000Z</updated>
+        <content type="html"><![CDATA[<ol>
+<li>安装vue-context-menu</li>
+</ol>
+<pre><code>npm install vue-contextmenu --save
+</code></pre>
+<ol start="2">
+<li>在main.js中引用</li>
+</ol>
+<pre><code>import Contextmenu from &quot;vue-contextmenujs&quot;
+Vue.use(Contextmenu);
+</code></pre>
+<ol start="3">
+<li>给需要点击的元素绑定事件</li>
+</ol>
+<pre><code>&lt;el-table :data=&quot;timetable&quot; @row-contextmenu=&quot;onContextmenu&quot;&gt;&lt;/el-table&gt;
+
+
+// 右键
+ onContextmenu(event) {
+    event.preventDefault()
+    if(event.preventDefault){
+        event.preventDefault()
+    }else{
+        window.event.returnValue = false // 兼容IE6、7、8
+    }
+    this.$contextmenu({
+         items: [
+            {
+                label: &quot;返回&quot;,
+                onClick: () =&gt; {
+                    console.log(&quot;返回(B)&quot;);
+                }
+            },
+            { label: &quot;前进(F)&quot;, disabled: true },
+            { label: &quot;重新加载(R)&quot;, divided: true, icon: &quot;el-icon-refresh&quot; },
+            { label: &quot;另存为(A)...&quot; },
+            { label: &quot;打印(P)...&quot;, icon: &quot;el-icon-printer&quot; },
+            { label: &quot;投射(C)...&quot;, divided: true },
+            {
+                label: &quot;使用网页翻译(T)&quot;,
+                divided: true,
+                minWidth: 0,
+                children: [
+                    { label: &quot;翻译成简体中文&quot; },
+                    { label: &quot;翻译成繁体中文&quot; }         
+                 ]
+            },
+            {
+                label: &quot;截取网页(R)&quot;,
+                minWidth: 0,
+                children: [{
+                        label: &quot;截取可视化区域&quot;,
+                        onClick: () =&gt; {
+                            this.message = &quot;截取可视化区域&quot;;
+                        }
+                    },
+                    { label: &quot;截取全屏&quot; }
+                ]
+            },
+            { label: &quot;查看网页源代码(V)&quot;, icon: &quot;el-icon-view&quot; },
+            { label: &quot;检查(N)&quot; }
+        ],
+        event,
+        //x: event.clientX,
+        //y: event.clientY,
+        customClass: &quot;custom-class&quot;,
+        zIndex: 3,
+        minWidth: 230
+    });
+    return false;
+},
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[vue 右键菜单(vue-contextmenujs)]]></title>
+        <id>https://nancy-svy.github.io/post/vue-you-jian-cai-dan-vue-contextmenujs/</id>
+        <link href="https://nancy-svy.github.io/post/vue-you-jian-cai-dan-vue-contextmenujs/">
+        </link>
+        <updated>2023-09-04T02:01:32.000Z</updated>
+        <content type="html"><![CDATA[<ol>
+<li>安装vue-context-menu</li>
+</ol>
+<pre><code>npm install vue-contextmenujs --save
+或
+yarn add vue-contextmenujs
+</code></pre>
+<ol start="2">
+<li>在main.js中引用</li>
+</ol>
+<pre><code>import Contextmenu from &quot;vue-contextmenujs&quot;
+Vue.use(Contextmenu);
+</code></pre>
+<ol start="3">
+<li>给需要点击的元素绑定事件</li>
+</ol>
+<pre><code>// 在组件中调用显示菜单
+ this.$contextmenu(options:MenuOptions);
+// 鼠标点击或滚轮自动销毁, 也可手动销毁
+ this.$contextmenu.destroy();
+
+// 去除浏览器默认菜单
+ event.preventDefault();
+</code></pre>
+<pre><code>&lt;template&gt;
+  &lt;div id=&quot;app&quot; @contextmenu.prevent=&quot;onContextmenu&quot;&gt;&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+    // 右键
+    onContextmenu(event) {
+        event.preventDefault()
+        if(event.preventDefault){
+            event.preventDefault()
+        }else{
+            window.event.returnValue = false // 兼容IE6、7、8
+        }
+        this.$contextmenu({
+            items: [
+                {
+                    label: &quot;返回&quot;,
+                    onClick: () =&gt; {
+                        console.log(&quot;返回(B)&quot;);
+                    }
+                },
+                { label: &quot;前进(F)&quot;, disabled: true },
+                { label: &quot;重新加载(R)&quot;, divided: true, icon: &quot;el-icon-refresh&quot; },
+                { label: &quot;另存为(A)...&quot; },
+                { label: &quot;打印(P)...&quot;, icon: &quot;el-icon-printer&quot; },
+                { label: &quot;投射(C)...&quot;, divided: true },
+                {
+                    label: &quot;使用网页翻译(T)&quot;,
+                    divided: true,
+                    minWidth: 0,
+                    children: [
+                        { label: &quot;翻译成简体中文&quot; },
+                        { label: &quot;翻译成繁体中文&quot; }         
+                    ]
+                },
+                {
+                    label: &quot;截取网页(R)&quot;,
+                    minWidth: 0,
+                    children: [{
+                            label: &quot;截取可视化区域&quot;,
+                            onClick: () =&gt; {
+                                this.message = &quot;截取可视化区域&quot;;
+                            }
+                        },
+                        { label: &quot;截取全屏&quot; }
+                    ]
+                },
+                { label: &quot;查看网页源代码(V)&quot;, icon: &quot;el-icon-view&quot; },
+                { label: &quot;检查(N)&quot; }
+            ],
+            event,
+            //x: event.clientX,
+            //y: event.clientY,
+            customClass: &quot;custom-class&quot;,
+            zIndex: 3,
+            minWidth: 230
+        });
+        return false;
+    },
+&lt;/script&gt;
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[vue 常用修饰符]]></title>
         <id>https://nancy-svy.github.io/post/vue-chang-yong-xiu-shi-fu/</id>
@@ -429,42 +723,6 @@ space=''      对键盘输入空格进行监听
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[截图工具 把图片钉在桌面上的截图工具]]></title>
-        <id>https://nancy-svy.github.io/post/screenshotTool/</id>
-        <link href="https://nancy-svy.github.io/post/screenshotTool/">
-        </link>
-        <updated>2023-07-27T09:32:29.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="实现效果好处">实现效果&amp;好处</h3>
-<p>方便切换到其他程序继续查看、抄写或者是与新内容进行比较</p>
-<h3 id="一-qq截图">一、QQ截图</h3>
-<figure data-type="image" tabindex="1"><img src="https://nancy-svy.github.io/post-images/1690450974153.png" alt="" loading="lazy"></figure>
-<h3 id="二-snipaste">二、Snipaste</h3>
-<p>官网<br>
-<a href="https://www.snipaste.com/download.html">https://www.snipaste.com/download.html</a></p>
-<figure data-type="image" tabindex="2"><img src="https://nancy-svy.github.io/post-images/1690450825713.png" alt="" loading="lazy"></figure>
-<h3 id="三-其他截图工具">三、其他截图工具</h3>
-<ol>
-<li>
-<p>FSCapture<br>
-<strong>介绍</strong><br>
-一款集图像捕捉、浏览编辑、视频录制等功能于一身的截图工具，具有体积小、功能强大、操作简便无<strong>需安装、不占内存</strong>等优点，其方便的浮动工具条和便捷的快捷键堪称完美结合。截图后的图片编辑与保存选项也特别丰富和方便，内置功能完善的图像编辑器，支持几乎所有主流图片格式，除提供缩放、旋转、剪切、格式转换、调整大小等基本功能外，还可向图像中加入标题、边框和水印、文本、线条、图形等内容，并可调整图像颜色，进行多种特效处理。</p>
-<p><strong>官网</strong><br>
-<a href="https://www.faststonecapture.cn/">https://www.faststonecapture.cn/</a></p>
-</li>
-<li>
-<p>verycapture<br>
-<strong>介绍</strong><br>
-一款综合性的截图工具，主要有多种形状截屏、贴图、GIF/视频录制、OCR、翻译等功能</p>
-</li>
-<li>
-<p>Pickpick<br>
-<strong>介绍</strong><br>
-picpick截图软件界面简洁，功能强大，支持全屏、活动窗口、矩形区域、任意形状等截取方式，简单实用。同时picpick截图软件中还有一些常用的图像处理功能，可对截取的图像进行编辑修改，是设计人员不可缺少的图像神器。</p>
-</li>
-</ol>
-]]></content>
-    </entry>
-    <entry>
         <title type="html"><![CDATA[vue  在发布阶段移除所有的console.log()输出语句]]></title>
         <id>https://nancy-svy.github.io/post/removeConsoleLog/</id>
         <link href="https://nancy-svy.github.io/post/removeConsoleLog/">
@@ -631,110 +889,6 @@ picpick截图软件界面简洁，功能强大，支持全屏、活动窗口、�
 <p>备注：<br>
 1：^不放在开头表示取否的意思，就是取相反<br>
 2：replace是对你输入的字符串一个字符一个字符的去查找替换，和常见正则可以多个字符查找略有不同</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[vue 接口返回的preview是张图片，前端如何渲染]]></title>
-        <id>https://nancy-svy.github.io/post/thePreviewModuleIsAPicture/</id>
-        <link href="https://nancy-svy.github.io/post/thePreviewModuleIsAPicture/">
-        </link>
-        <updated>2023-06-27T12:27:03.000Z</updated>
-        <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://nancy-svy.github.io/post-images/1687917326500.png" alt="" loading="lazy"></figure>
-<h5 id="第一种">第一种</h5>
-<p>也是最简单的一种，直接将接口地址赋值给img标签的src</p>
-<pre><code>&lt;img src=&quot;https://xxx.xxx.xxx.com/img&quot; alt=&quot;&quot; width=&quot;100%&quot; /&gt;
-</code></pre>
-<h5 id="第二种">第二种</h5>
-<ol>
-<li>blob<br>
-api.js中设置 responseType为blod</li>
-</ol>
-<pre><code>export const Tqimg = () =&gt; {
-  return request4({
-    url: &quot;/xxx/xx/xx&quot;,
-    method: &quot;get&quot;,
-    // 加上下面这个
-    responseType: &quot;blob&quot;,
-  });
-};
-</code></pre>
-<p>vue单文件的methods中</p>
-<pre><code>async Tqimg() {
-  await Tqimg().then((res) =&gt; {
-    console.log(res);
-    const myBlob = new window.Blob([res.data], { type: &quot;image/jpeg&quot; });
-    // Tianqimg是提前定义好的模型
-    this.Tianqimg = window.URL.createObjectURL(myBlob);
-  });
-},
-</code></pre>
-<p>vue单文件的template中</p>
-<pre><code>&lt;img :src=&quot;Tianqimg&quot; alt=&quot;&quot; width=&quot;100%&quot; /&gt;
-</code></pre>
-<ol start="2">
-<li>arraybuffer<br>
-api.js中设置 responseType为arraybuffer</li>
-</ol>
-<pre><code>export function verificationCode(data) {
-  return serviceCode({
-    url: '/code',
-    method: 'get',
-    data,
-    responseType: 'arraybuffer' //这里是声明期望返回的数据类型,为arraybuffer
-  })
-}
-</code></pre>
-<p>vue单文件的methods中</p>
-<pre><code>getCode(){
-      verificationCode().then(res =&gt; {
-        // console.log(res)
-        const bufferUrl = btoa(new Uint8Array(res.data).reduce((data, byte) =&gt; data + String.fromCharCode(byte), ''));
-        this.verificationCodePath = 'data:image/png;base64,' + bufferUrl
-      })
-    },
-</code></pre>
-<p>vue单文件的template中</p>
-<pre><code>&lt;img :src=&quot;verificationCodePath&quot; alt=&quot;&quot; width=&quot;100%&quot; /&gt;
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[vue 解决vue报You are using the runtime-only build of Vue where the template compiler is not available. Either pre-compile the templates into render functions, or use the compiler-included build.]]></title>
-        <id>https://nancy-svy.github.io/post/runtime-onlyBuildOfVue/</id>
-        <link href="https://nancy-svy.github.io/post/runtime-onlyBuildOfVue/">
-        </link>
-        <updated>2023-06-26T08:06:32.000Z</updated>
-        <content type="html"><![CDATA[<p>
-<code style="color: #c7254e;background-color: #f2f2f2;">
-You are using the runtime-only build of Vue where the template compiler is not available. Either pre-compile the templates into render functions, or use the compiler-included build.
-</code>
-意思就是说 ，您使用的是仅运行时版本的Vue，这种情况下，模板编译器是不可用的，可以将模板预编译为呈现函数，也可以使用编译器包含的内部版本。
-<p>
-<h5> 
-解决办法，将<code style="color: #c7254e;background-color: #f2f2f2;">vue.config.js</code>文件中增加<code style="color: #c7254e;background-color: #f2f2f2;">vue$: "vue/dist/vue.esm.js",</code>，然后重新运行项目即可。
-<h5>
-<figure data-type="image" tabindex="1"><img src="https://nancy-svy.github.io/post-images/1687767357725.png" alt="" loading="lazy"></figure>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[elementUI   el-popconfirm 的确认事件不起作用]]></title>
-        <id>https://nancy-svy.github.io/post/elPopconfirmQuestion/</id>
-        <link href="https://nancy-svy.github.io/post/elPopconfirmQuestion/">
-        </link>
-        <updated>2023-06-21T08:26:00.000Z</updated>
-        <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://nancy-svy.github.io/post-images/1687336036974.png" alt="" loading="lazy"></figure>
-<p>element中是 <code style="color: #c7254e;background-color: #f2f2f2;">@confirm</code> 但是使用起来没有效果，<br>
-在网上查找的是 <code style="color: #c7254e;background-color: #f2f2f2;">@onConfirm</code>, 使用起来有效果</p>
-<p>如果这个 <code style="color: #c7254e;background-color: #f2f2f2;">@confirm</code> 或者 <code style="color: #c7254e;background-color: #f2f2f2;">@onConfirm</code> 使用没有效果<br>
-后来想到一个折中的方法：</p>
-<pre><code>&lt;el-popconfirm
-    title=&quot;是否删除？&quot;
-    @confirm=&quot;del(scope.row)&quot;
-    @onConfirm=&quot;del(scope.row)&quot;
-&gt;
-&lt;/el-popconfirm&gt;
-</code></pre>
-<p>当当当， 都用上就有效果了。</p>
 ]]></content>
     </entry>
 </feed>
