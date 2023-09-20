@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://nancy-svy.github.io</id>
     <title>真实の幻梦</title>
-    <updated>2023-09-20T00:44:14.128Z</updated>
+    <updated>2023-09-20T06:35:56.911Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://nancy-svy.github.io"/>
     <link rel="self" href="https://nancy-svy.github.io/atom.xml"/>
@@ -756,6 +756,26 @@ space=''      对键盘输入空格进行监听
 ]]></content>
     </entry>
     <entry>
+        <title type="html"><![CDATA[微信小程序 扫描设备二维码携带参数跳转到微信小程序指定页面（微信小程序二维码配置规则）]]></title>
+        <id>https://nancy-svy.github.io/post/configure-regular-link-QR-code-rules/</id>
+        <link href="https://nancy-svy.github.io/post/configure-regular-link-QR-code-rules/">
+        </link>
+        <updated>2023-07-06T01:21:08.000Z</updated>
+        <content type="html"><![CDATA[<p><code style="color: #c7254e; background-color: #f9f2f4; border-radius: 2px;}">***1:打开微信公众平台： https://mp.weixin.qq.com 扫码登录***</code></p>
+<h2 id="2-点击左侧边栏开发-开发管理-开发设置-服务器域名">2. 点击左侧边栏开发 =&gt; 开发管理 =&gt; 开发设置 =&gt; 服务器域名</h2>
+<figure data-type="image" tabindex="1"><img src="https://nancy-svy.github.io/post-images/1695173240463.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://nancy-svy.github.io/post-images/1695173330770.png" alt="" loading="lazy"></figure>
+<h2 id="3-点击左侧边栏开发-开发管理-开发设置-扫普通连接二维码开发小程序">3. 点击左侧边栏开发 =&gt; 开发管理 =&gt; 开发设置 =&gt; 扫普通连接二维码开发小程序</h2>
+<figure data-type="image" tabindex="3"><img src="https://nancy-svy.github.io/post-images/1695173477966.png" alt="" loading="lazy"></figure>
+<p>点击添加按钮进入此界面<br>
+<img src="https://nancy-svy.github.io/post-images/1695174166728.png" alt="" loading="lazy"></p>
+<p>点击保存，保存后自动跳转到这里<br>
+<img src="https://nancy-svy.github.io/post-images/1695174244895.png" alt="" loading="lazy"></p>
+<p>以上二维码配置规则完毕</p>
+<p>打开 百度搜索草料 <a href="https://cli.im/">二维码生成器</a> https://cli.im/二维码生成工具，输入配置好的二维码规则即可生成二维码，</p>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[vue  路由]]></title>
         <id>https://nancy-svy.github.io/post/router/</id>
         <link href="https://nancy-svy.github.io/post/router/">
@@ -809,71 +829,6 @@ space=''      对键盘输入空格进行监听
 <p>备注：<br>
 1：^不放在开头表示取否的意思，就是取相反<br>
 2：replace是对你输入的字符串一个字符一个字符的去查找替换，和常见正则可以多个字符查找略有不同</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[vue 接口返回的preview是张图片，前端如何渲染]]></title>
-        <id>https://nancy-svy.github.io/post/thePreviewModuleIsAPicture/</id>
-        <link href="https://nancy-svy.github.io/post/thePreviewModuleIsAPicture/">
-        </link>
-        <updated>2023-06-27T12:27:03.000Z</updated>
-        <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://nancy-svy.github.io/post-images/1687917326500.png" alt="" loading="lazy"></figure>
-<h5 id="第一种">第一种</h5>
-<p>也是最简单的一种，直接将接口地址赋值给img标签的src</p>
-<pre><code>&lt;img src=&quot;https://xxx.xxx.xxx.com/img&quot; alt=&quot;&quot; width=&quot;100%&quot; /&gt;
-</code></pre>
-<h5 id="第二种">第二种</h5>
-<ol>
-<li>blob<br>
-api.js中设置 responseType为blod</li>
-</ol>
-<pre><code>export const Tqimg = () =&gt; {
-  return request4({
-    url: &quot;/xxx/xx/xx&quot;,
-    method: &quot;get&quot;,
-    // 加上下面这个
-    responseType: &quot;blob&quot;,
-  });
-};
-</code></pre>
-<p>vue单文件的methods中</p>
-<pre><code>async Tqimg() {
-  await Tqimg().then((res) =&gt; {
-    console.log(res);
-    const myBlob = new window.Blob([res.data], { type: &quot;image/jpeg&quot; });
-    // Tianqimg是提前定义好的模型
-    this.Tianqimg = window.URL.createObjectURL(myBlob);
-  });
-},
-</code></pre>
-<p>vue单文件的template中</p>
-<pre><code>&lt;img :src=&quot;Tianqimg&quot; alt=&quot;&quot; width=&quot;100%&quot; /&gt;
-</code></pre>
-<ol start="2">
-<li>arraybuffer<br>
-api.js中设置 responseType为arraybuffer</li>
-</ol>
-<pre><code>export function verificationCode(data) {
-  return serviceCode({
-    url: '/code',
-    method: 'get',
-    data,
-    responseType: 'arraybuffer' //这里是声明期望返回的数据类型,为arraybuffer
-  })
-}
-</code></pre>
-<p>vue单文件的methods中</p>
-<pre><code>getCode(){
-      verificationCode().then(res =&gt; {
-        // console.log(res)
-        const bufferUrl = btoa(new Uint8Array(res.data).reduce((data, byte) =&gt; data + String.fromCharCode(byte), ''));
-        this.verificationCodePath = 'data:image/png;base64,' + bufferUrl
-      })
-    },
-</code></pre>
-<p>vue单文件的template中</p>
-<pre><code>&lt;img :src=&quot;verificationCodePath&quot; alt=&quot;&quot; width=&quot;100%&quot; /&gt;
-</code></pre>
 ]]></content>
     </entry>
 </feed>

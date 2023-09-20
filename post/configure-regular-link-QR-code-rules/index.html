@@ -8,7 +8,7 @@
 <meta name="keywords" content="个人博客">
 <meta name="description" content="草在结它的种子 ，风在摇它的叶子 ，我们站着，不说话，就十分美好。">
 <meta name="theme-color" content="#000">
-<title>mui 绑定手机号 | 真实の幻梦</title>
+<title>微信小程序 扫描设备二维码携带参数跳转到微信小程序指定页面（微信小程序二维码配置规则） | 真实の幻梦</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1695191742740">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -41,8 +41,8 @@
 
 
 
-  <meta name="description" content="mui 绑定手机号" />
-  <meta name="keywords" content="mui" />
+  <meta name="description" content="微信小程序 扫描设备二维码携带参数跳转到微信小程序指定页面（微信小程序二维码配置规则）" />
+  <meta name="keywords" content="微信小程序,uniapp" />
 </head>
 
 <body>
@@ -163,6 +163,205 @@
 
 <div class="sidebar">
   
+    <div class="sidebar-box box-shadow-wrapper bg-color right-motion" id="sidebar">
+      
+      <div class="sidebar-body gemini" id="sidebar_body">
+        
+          
+            <div style="opacity: 1;">
+              <div class="toc-box right-motion">
+  <div class="toc-wrapper auto-number auto"
+    id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#2-%E7%82%B9%E5%87%BB%E5%B7%A6%E4%BE%A7%E8%BE%B9%E6%A0%8F%E5%BC%80%E5%8F%91-%E5%BC%80%E5%8F%91%E7%AE%A1%E7%90%86-%E5%BC%80%E5%8F%91%E8%AE%BE%E7%BD%AE-%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9F%9F%E5%90%8D">2. 点击左侧边栏开发 =&gt; 开发管理 =&gt; 开发设置 =&gt; 服务器域名</a></li>
+<li><a href="#3-%E7%82%B9%E5%87%BB%E5%B7%A6%E4%BE%A7%E8%BE%B9%E6%A0%8F%E5%BC%80%E5%8F%91-%E5%BC%80%E5%8F%91%E7%AE%A1%E7%90%86-%E5%BC%80%E5%8F%91%E8%AE%BE%E7%BD%AE-%E6%89%AB%E6%99%AE%E9%80%9A%E8%BF%9E%E6%8E%A5%E4%BA%8C%E7%BB%B4%E7%A0%81%E5%BC%80%E5%8F%91%E5%B0%8F%E7%A8%8B%E5%BA%8F">3. 点击左侧边栏开发 =&gt; 开发管理 =&gt; 开发设置 =&gt; 扫普通连接二维码开发小程序</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+
+<script>
+
+  let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1;
+  let active = 'active-show', activeClass = 'active-current';
+  let tocWrapper = document.querySelector('#toc_wrapper');
+  let tocContent = tocWrapper.children[0];
+  let autoNumber = tocWrapper && tocWrapper.classList.contains('auto-number');
+
+  function addTocNumber(elem, deep) {
+    if (!elem) {
+      return;
+    }
+    let prop = elem.__proto__;
+
+    if (prop === HTMLUListElement.prototype) {
+      for (let i = 0; i < elem.children.length; i++) {
+        addTocNumber(elem.children[i], deep + (i + 1) + '.');
+      }
+    } else if (prop === HTMLLIElement.prototype) {
+      // 保存li元素
+      if (elem.children[0] && elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
+        lList.push(elem);
+      }
+      for (let i = 0; i < elem.children.length; i++) {
+        let cur = elem.children[i];
+        if (cur.__proto__ === HTMLAnchorElement.prototype) {
+          if (autoNumber) {
+            cur.text = deep + ' ' + cur.text;
+          }
+        } else if (cur.__proto__ === HTMLUListElement.prototype) {
+          addTocNumber(cur, deep);
+        }
+      }
+    }
+  }
+
+  function removeParentActiveClass() {
+    let parents = tocContent.querySelectorAll('.' + active)
+    parents.forEach(function (elem) {
+      elem.classList.remove(active);
+    });
+  }
+
+  function addActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.add(activeClass);
+    }
+  }
+
+  function removeActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.remove(activeClass);
+    }
+  }
+
+  function addActiveLiElemment(elem, parent) {
+    if (!elem || elem === parent) {
+      return;
+    } else {
+      if (elem.__proto__ === HTMLLIElement.prototype) {
+        elem.classList.add(active);
+      }
+      addActiveLiElemment(elem.parentElement, parent);
+    }
+  }
+
+  function showToc() {
+    if (tocWrapper) {
+      postBody = document.querySelector('#post_body');
+      for (let i = 0; i < postBody.children.length; i++) {
+        if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+          hList.push(postBody.children[i]);
+        }
+      }
+      if (tocWrapper.classList.contains('compress')) {
+        tocContent.classList.add('closed');
+      } else if (tocWrapper.classList.contains('no_compress')) {
+        tocContent.classList.add('expanded');
+      } else {
+        if (hList.length > 10) {
+          active = 'active-hidden'
+          tocContent.classList.add('closed');
+        } else {
+          tocContent.classList.add('expanded');
+        }
+      }
+    }
+  }
+
+  (function () {
+    // 处理不是从#一级标题开始目录
+    if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
+      let con = tocContent.children[0].children[0];
+      tocContent.innerHTML = con.innerHTML;
+    }
+    let markdownItTOC = document.querySelector('.markdownIt-TOC');
+    let innerHeight = window.innerHeight;
+    markdownItTOC.style = `max-height: ${innerHeight - 80 > 0 ? innerHeight - 80 : innerHeight}px`
+    addTocNumber(tocContent, '');
+  })();
+
+  document.addEventListener('scroll', function (e) {
+    if (lList.length <= 0) {
+      return;
+    }
+    let scrollTop = document.scrollingElement.scrollTop + 10;
+    let dir;
+
+    if (lastTop - scrollTop > 0) {
+      dir = 'up';
+    } else {
+      dir = 'down';
+    }
+
+    lastTop = scrollTop;
+    if (scrollTop <= 0) {
+      if (lastIndex >= 0 && lastIndex < hList.length) {
+        lList[lastIndex].classList.remove(activeClass);
+      }
+      return;
+    }
+
+    let current = 0, hasFind = false;
+    for (let i = 0; i < hList.length; i++) {
+      if (hList[i].offsetTop > scrollTop) {
+        current = i;
+        hasFind = true;
+        break;
+      }
+    }
+    if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+      current = hList.length - 1;
+    } else {
+      current--;
+    }
+    if (dir === 'down') {
+      if (current > lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex)
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    } else {
+      if (current < lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex);
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    }
+  });
+
+
+  window.addEventListener('load', function () {
+    showToc();
+    document.querySelector('#sidebar').style = 'display: block;';
+    tocWrapper.classList.add('toc-active');
+    setTimeout(function () {
+      if ("createEvent" in document) {
+        let evt = document.createEvent("HTMLEvents");
+        evt.initEvent("scroll", false, true);
+        document.dispatchEvent(evt);
+      }
+      else {
+        document.fireEvent("scroll");
+      }
+    }, 500)
+  })
+
+</script>
+            </div>
+          
+        
+      </div>
+    </div>
+  
 </div>
 <script>
   const SIDEBAR_TITLE_ACTIVE = 'sidebar-title-active';
@@ -245,14 +444,14 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://nancy-svy.github.io/post/bindPhoneNumber/"> mui 绑定手机号 </a>
+    <a class="post-title-link" href="https://nancy-svy.github.io/post/configure-regular-link-QR-code-rules/"> 微信小程序 扫描设备二维码携带参数跳转到微信小程序指定页面（微信小程序二维码配置规则） </a>
   </h1>
   <div class="post-meta">
     
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2021-10-15 11:44:32">2021-10-15</span>
+      <span class="publish-time" data-t="2023-07-06 09:21:08">2023-07-06</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
@@ -260,8 +459,9 @@
       <i class="fa fa-folder-o"></i>
       <span class="pc-show language" data-lan="category-in">标签:</span>
        
-      <a href="https://nancy-svy.github.io/tag/1jpFF6joV/">
-        <span>mui</span>
+      <a href="https://nancy-svy.github.io/tag/qQrpGqyxl/"> <span>微信小程序</span> </a>、   
+      <a href="https://nancy-svy.github.io/tag/XXkeG_S1Z/">
+        <span>uniapp</span>
       </a>
        
     </span>
@@ -270,7 +470,7 @@
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
       <span
-        >5<span class="language" data-lan="minute"
+        >1<span class="language" data-lan="minute"
           >分钟</span
         ></span
       >
@@ -279,7 +479,7 @@
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
       <span
-        >821<span class="pc-show language" data-lan="words"
+        >154<span class="pc-show language" data-lan="words"
           >字数</span
         ></span
       >
@@ -289,256 +489,18 @@
 </section>
 
             <div class="post-body next-md-body" id="post_body">
-              <p><em><strong>html</strong></em></p>
-<pre><code>&lt;div id=&quot;app&quot;&gt;
-	&lt;header class=&quot;flex-row top&quot;&gt;
-		&lt;i class=&quot;mui-icon mui-icon-arrowleft&quot; id=&quot;back&quot; @click='back'&gt;&lt;/i&gt;
-		&lt;span id=&quot;title&quot; class=&quot;title&quot;&gt;绑定手机&lt;/span&gt;
-		&lt;i class=&quot;save&quot; id=&quot;save&quot; @click='save'&gt;保存&lt;/i&gt;
-	&lt;/header&gt;
-	&lt;div class=&quot;bindForm&quot;&gt;
-		&lt;p class=&quot;prompt&quot;&gt;绑定手机号后，下次登录可使用手机号登录，以及用于修改密码&lt;/p&gt;
-		&lt;div class=&quot;phone&quot;&gt;
-			&lt;label&gt;+86&lt;/label&gt;
-			&lt;input type=&quot;text&quot; id=&quot;phone&quot; placeholder=&quot;手机号&quot; v-model=&quot;bindForm.phone&quot; /&gt;
-		&lt;/div&gt;
-		&lt;div class=&quot;code&quot;&gt;
-			&lt;label&gt;&lt;/label&gt;
-			&lt;input type=&quot;text&quot; id=&quot;code&quot; placeholder=&quot;验证码&quot; v-model=&quot;bindForm.code&quot; /&gt;
-			&lt;button type=&quot;button&quot; id=&quot;getCode&quot; @click=&quot;getCode&quot;&gt;获取验证码&lt;/button&gt;
-		&lt;/div&gt;
-	&lt;/div&gt;
-&lt;/div&gt;
-</code></pre>
-<p><em><strong>css</strong></em></p>
-<pre><code>body {
-	overflow: auto;
-	font-family: PingFang SC;
-	font-weight: 400;
-}
-
-.top {
-	height: 0.9rem;
-	background: #000;
-	align-items: center;
-	padding: 0rem 0.32rem;
-	border: 0rem;
-	box-shadow: none;
-	margin-bottom: 0.6rem;
-}
-
-.top .mui-icon {
-	color: #fff;
-	font-size: 0.5rem;
-	font-weight: 500;
-}
-
-.top .save {
-	color: #00FFC2;
-	font-size: 0.32rem;
-}
-
-.top .title {
-	color: #fff;
-	min-width: 2.52rem;
-	height: 0.5rem;
-	line-height: 0.5rem;
-	display: block;
-	text-align: center;
-	font-size: 0.36rem;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	overflow: hidden;
-	word-break: break-all;
-}
-
-.bindForm {
-	width: 100%;
-	margin: 0 .32rem;
-}
-
-.bindForm .prompt {
-	font-size: .24rem;
-	font-family: PingFang SC;
-	font-weight: 400;
-	line-height: .33rem;
-	color: #FFFFFF;
-	opacity: 0.5;
-	margin-bottom: .45rem;
-}
-
-.bindForm .phone,
-.bindForm .code {
-	display: flex;
-	align-items: center;
-	margin-bottom: .6rem;
-}
-
-
-.bindForm label {
-	font-size: .32rem;
-	font-family: PingFang SC;
-	font-weight: 400;
-	line-height: .45rem;
-	color: #FFFFFF;
-	opacity: 0.8;
-	margin-right: .36rem;
-}
-
-#phone {
-	width: 5.47rem;
-}
-
-#code {
-	width: 3.81rem;
-	margin-left: .548rem;
-}
-
-#phone,
-#code {
-	background-color: transparent;
-	padding: .12rem;
-	margin-bottom: 0;
-	height: .6rem;
-	font-size: .32rem;
-	font-family: PingFang SC;
-	font-weight: 400;
-	line-height: .6rem;
-	color: #FFFFFF;
-	opacity: 0.5;
-}
-
-#phone::placeholder,
-#code::placeholder {
-	font-size: .32rem;
-	font-family: PingFang SC;
-	font-weight: 400;
-	line-height: .45rem;
-	color: #FFFFFF;
-	opacity: 0.5;
-}
-
-#getCode {
-	font-size: .28rem;
-	font-family: PingFang SC;
-	font-weight: 400;
-	/* line-height: .4rem; */
-	color: #00FFC2;
-	opacity: 1;
-	background-color: transparent;
-	border: none;
-}
-
-</code></pre>
-<p><em><strong>js</strong></em></p>
-<pre><code>// 绑定手机
-new Vue({
-	el: &quot;#app&quot;,
-	data: {
-		bindForm: {
-			phone: '',
-			code: '',
-		}
-	},
-	mounted() {
-	},
-	updated() {
-	},
-	methods: {
-
-		// 获取验证码按钮
-		getCode(){
-			let countdown = 60;
-			function settime(obj) {
-				if (countdown == 0) {
-					obj.removeAttribute(&quot;disabled&quot;); 
-					obj.style.color = &quot;#00FFC2&quot;
-					obj.innerText=&quot;获取验证码&quot;;
-					countdown = 60;
-					return;
-				} else {
-					obj.setAttribute(&quot;disabled&quot;, true);
-					obj.style.color = &quot;#acacac&quot;
-					obj.innerText=&quot;重新发送(&quot; + countdown + &quot;)&quot;;
-					countdown--;
-				}
-				setTimeout(function(){settime(obj)}, 1000)
-			}
-			if((/^([1]\d{10}|([\(（]?0[0-9]{2,3}[）\)]?[-]?)?([2-9][0-9]{6,7})+(\-[0-9]{1,4})?)$/).test(this.bindForm.phone)){
-				let obj = document.getElementById('getCode')
-				settime(obj)
-				post(
-					url = '/app/verification/create',
-					params = {
-						phone: this.bindForm.phone
-					}
-				).then(res=&gt;{
-					plus.nativeUI.toast('验证码已发送')
-					console.log(res)
-				}).catch(err=&gt;{
-					plus.nativeUI.toast('验证码获取失败')
-					console.log(err)
-				})
-			}else{
-				plus.nativeUI.toast('手机号码格式错误')
-			}
-			
-		},
-
-		// 保存按钮
-		save(){
-			if(this.bindForm.phone != '' &amp;&amp; this.bindForm.code != ''){
-				plus.nativeUI.showWaiting(&quot;验证中&quot;)
-				post(
-					url = '/app/verification/checkPhone',
-					params = {
-						phone: this.bindForm.phone,
-						VerificationCode: this.bindForm.code
-					}
-				).then(res=&gt;{
-					plus.nativeUI.closeWaiting()
-					console.log(res)
-					post(
-						url = '/app/patrolInformation/edit',
-						params = {
-							patrolPhone: this.bindForm.phone
-						}
-					).then(res=&gt;{
-						if(res.code == 200){
-							plus.nativeUI.toast('已修改电话')
-							//刷新
-							const index = plus.webview.getLaunchWebview();
-							mui.fire(index, 'refresh');
-						}else{
-							if(res.message != ''){
-								if(res.message != '该手机号已经存在')
-									plus.nativeUI.toast('手机号已经绑定')
-							}else{
-								plus.nativeUI.toast('验证码错误')
-							}
-						}
-					}).catch(err=&gt;{
-						plus.nativeUI.toast('修改失败')
-					})
-				}).catch(err=&gt;{
-					console.log(JSON.stringify(err))
-					plus.nativeUI.closeWaiting()
-					// if(err.code == 500){
-					plus.nativeUI.toast(err.message)
-					// }else{
-						// plus.nativeUI.toast('验证码错误')
-					// }
-				})
-			}else if(this.bindForm.phone == ''){
-				plus.nativeUI.toast('手机号不能为空')
-			}else if(this.bindForm.code == ''){
-				plus.nativeUI.toast('验证码不能为空')
-			}
-		}
-	},
-})
-
-</code></pre>
+              <p><code style="color: #c7254e; background-color: #f9f2f4; border-radius: 2px;}">***1:打开微信公众平台： https://mp.weixin.qq.com 扫码登录***</code></p>
+<h2 id="2-点击左侧边栏开发-开发管理-开发设置-服务器域名">2. 点击左侧边栏开发 =&gt; 开发管理 =&gt; 开发设置 =&gt; 服务器域名</h2>
+<figure data-type="image" tabindex="1"><img src="https://nancy-svy.github.io/post-images/1695173240463.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://nancy-svy.github.io/post-images/1695173330770.png" alt="" loading="lazy"></figure>
+<h2 id="3-点击左侧边栏开发-开发管理-开发设置-扫普通连接二维码开发小程序">3. 点击左侧边栏开发 =&gt; 开发管理 =&gt; 开发设置 =&gt; 扫普通连接二维码开发小程序</h2>
+<figure data-type="image" tabindex="3"><img src="https://nancy-svy.github.io/post-images/1695173477966.png" alt="" loading="lazy"></figure>
+<p>点击添加按钮进入此界面<br>
+<img src="https://nancy-svy.github.io/post-images/1695174166728.png" alt="" loading="lazy"></p>
+<p>点击保存，保存后自动跳转到这里<br>
+<img src="https://nancy-svy.github.io/post-images/1695174244895.png" alt="" loading="lazy"></p>
+<p>以上二维码配置规则完毕</p>
+<p>打开 百度搜索草料 <a href="https://cli.im/">二维码生成器</a> https://cli.im/二维码生成工具，输入配置好的二维码规则即可生成二维码，</p>
 
             </div>
             
@@ -551,7 +513,7 @@ new Vue({
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://nancy-svy.github.io/post/bindPhoneNumber/" title="mui 绑定手机号">https://nancy-svy.github.io/post/bindPhoneNumber/</a>
+      <a href="https://nancy-svy.github.io/post/configure-regular-link-QR-code-rules/" title="微信小程序 扫描设备二维码携带参数跳转到微信小程序指定页面（微信小程序二维码配置规则）">https://nancy-svy.github.io/post/configure-regular-link-QR-code-rules/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -560,21 +522,23 @@ new Vue({
   </ul>
   <div class="tags">
     
-      <a href="https://nancy-svy.github.io/tag/1jpFF6joV/"># mui</a>
+      <a href="https://nancy-svy.github.io/tag/qQrpGqyxl/"># 微信小程序</a>
+    
+      <a href="https://nancy-svy.github.io/tag/XXkeG_S1Z/"># uniapp</a>
     
   </div>
   <div class="nav">
     <div class="nav-prev">
       
         <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="uniapp  封装axios" href="https://nancy-svy.github.io/post/uniapp-package-axios/">uniapp  封装axios</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="uniapp  封装axios" href="https://nancy-svy.github.io/post/uniapp-package-axios/">上一篇</a>
+        <a class="nav-pc-next" title="vue + iframe标签添加请求头" href="https://nancy-svy.github.io/post/iframeAddRequestHeader/">vue + iframe标签添加请求头</a class="nav-pc-next">
+        <a class="nav-mobile-prev" title="vue + iframe标签添加请求头" href="https://nancy-svy.github.io/post/iframeAddRequestHeader/">上一篇</a>
       
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="mui 上传图片" href="https://nancy-svy.github.io/post/uploadImages/">mui 上传图片</a>
-        <a class="nav-mobile-next" title="mui 上传图片" href="https://nancy-svy.github.io/post/uploadImages/">下一篇</a>
+        <a class="nav-pc-next" title="vue  路由" href="https://nancy-svy.github.io/post/router/">vue  路由</a>
+        <a class="nav-mobile-next" title="vue  路由" href="https://nancy-svy.github.io/post/router/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>
