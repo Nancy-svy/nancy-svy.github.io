@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://nancy-svy.github.io</id>
     <title>真实の幻梦</title>
-    <updated>2023-09-20T06:46:29.390Z</updated>
+    <updated>2023-11-13T03:18:18.762Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://nancy-svy.github.io"/>
     <link rel="self" href="https://nancy-svy.github.io/atom.xml"/>
@@ -10,6 +10,55 @@
     <logo>https://nancy-svy.github.io/images/avatar.png</logo>
     <icon>https://nancy-svy.github.io/favicon.ico</icon>
     <rights>All rights reserved 2023, 真实の幻梦</rights>
+    <entry>
+        <title type="html"><![CDATA[JSON.stringify()和JSON.parse()不能转换RegExp正则的问题]]></title>
+        <id>https://nancy-svy.github.io/post/jsonstringifyhe-jsonparsebu-neng-zhuan-huan-regexp-zheng-ze-de-wen-ti/</id>
+        <link href="https://nancy-svy.github.io/post/jsonstringifyhe-jsonparsebu-neng-zhuan-huan-regexp-zheng-ze-de-wen-ti/">
+        </link>
+        <updated>2023-10-17T07:50:46.000Z</updated>
+        <content type="html"><![CDATA[<h5 id="前言">前言</h5>
+<p>有一个对象如<code>{ formData: { name: '', phone: '' },regList: { phone: [{ pattern: &quot;/^1(3|4|5|6|7|8|9)\d{9}$/&quot;, message: '手机号格式错误' }] }}</code>用<code>JSON.stringfit()</code>转json字符串的时候发现转成了<code>{ formData: { name: '', phone: '' },regList: { phone: [{ pattern: {}, message: '手机号格式错误' }] }}</code>把正则转成了空对象，以至于用<code>JSON.parse()</code>时，发现把正则数据丢失了</p>
+<h5 id="原因">原因</h5>
+<p><code>JSON.stringify</code>会处理的几种类型： <code>String, Number, Boolean, null, Array, Object</code><br>
+不会处理的几种类型：<code> Date, RegExp, undefined, Function</code></p>
+<h5 id="解决方法">解决方法</h5>
+<p>JSON.stringify()</p>
+<pre><code>/**
+ * json对象转json字符串
+ * @param { Object } json json对象
+ */
+export function stringifyJson(json){
+  return JSON.stringify(json, (k, v) =&gt; {
+    // 将正则对象转换为正则字符串
+    if(v instanceof RegExp){
+      return v.toString();
+    }
+    return v;
+  });
+}
+</code></pre>
+<p>JSON.parse()</p>
+<pre><code>/**
+ * json字符串转json对象
+ * @param { String } jsonStr json字符串
+ */
+export function parseJson(jsonStr){
+  return JSON.parse(jsonStr, (k, v) =&gt; {
+    try{
+      // 将正则字符串转成正则对象
+      if (eval(v) instanceof RegExp) {
+        return eval(v);
+      }
+    }catch(e){ // nothing
+
+    }
+    return v;
+  });
+}
+</code></pre>
+<p>转载于<a href="https://blog.csdn.net/weixin_46656983/article/details/107188175">https://blog.csdn.net/weixin_46656983/article/details/107188175</a></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[elementUI 解决打包上线后icon图标偶尔乱码的问题]]></title>
         <id>https://nancy-svy.github.io/post/elementui-jie-jue-da-bao-shang-xian-hou-icon-tu-biao-ou-er-luan-ma-de-wen-ti/</id>
@@ -121,7 +170,59 @@ element-variables.scss文件中的 @import &quot;~element-ui/packages/theme-chal
 <p>33、Auto-Open Markdown Preview markdown文件自动开启预览</p>
 <p>34、EverMonkey 印象笔记</p>
 <p>35、atom one dark atom的一个高亮主题(个人推荐)</p>
-<h5 id="三-常用的电脑快捷键">三、常用的电脑快捷键</h5>
+<h5 id="三-终端控制台常用指令">三、终端控制台常用指令</h5>
+<p>1.清除终端：</p>
+<pre><code>clear
+</code></pre>
+<p>2.列出当前目录中的文件和文件夹：</p>
+<pre><code>ls
+</code></pre>
+<p>3.切换到指定目录：：</p>
+<pre><code>cd &lt;目录路径&gt;
+</code></pre>
+<p>4.返回上一级目录：</p>
+<pre><code>cd ..
+</code></pre>
+<p>5.创建新文件夹：</p>
+<pre><code>mkdir &lt;文件夹名&gt;
+</code></pre>
+<p>6.创建新文件：</p>
+<pre><code>touch &lt;文件名&gt;
+</code></pre>
+<p>7.打开文件：</p>
+<pre><code>code &lt;文件名&gt;
+</code></pre>
+<p>8.删除文件：</p>
+<pre><code>rm &lt;文件名&gt;
+</code></pre>
+<p>9.删除文件夹：</p>
+<pre><code>rm -r &lt;文件夹名&gt;
+</code></pre>
+<p>10.复制文件或文件夹：</p>
+<pre><code>cp &lt;源文件/文件夹&gt; &lt;目标文件/文件夹&gt;
+</code></pre>
+<p>11.移动文件或文件夹：</p>
+<pre><code>mv &lt;源文件/文件夹&gt; &lt;目标文件/文件夹&gt;
+</code></pre>
+<p>12.查看文件内容：</p>
+<pre><code>cat &lt;文件名&gt;
+</code></pre>
+<p>13.查找文件：</p>
+<pre><code>find &lt;目录路径&gt; -name &lt;文件名&gt;
+</code></pre>
+<p>14.查找文件内容：</p>
+<pre><code>grep &lt;搜索内容&gt; &lt;文件名&gt;
+</code></pre>
+<p>15.压缩文件或文件夹：</p>
+<pre><code>tar -czvf &lt;压缩文件名.tar.gz&gt; &lt;文件/文件夹&gt;
+</code></pre>
+<p>16.解压缩文件：</p>
+<pre><code>tar -xzvf &lt;压缩文件名.tar.gz&gt;
+</code></pre>
+<p>17.退出或关闭当前正在运行的程序或进程：</p>
+<pre><code>:q
+</code></pre>
+<h5 id="四-常用的电脑快捷键">四、常用的电脑快捷键</h5>
 <p>1、ctrl + shift + delete 快速清除浏览器缓存</p>
 <p>2、ctrl + alt + delete 快速进入任务管理器页面</p>
 <p>3、window + L 快速锁定电脑</p>
@@ -301,7 +402,7 @@ space=''      对键盘输入空格进行监听
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[el-tree树形实现点击按钮tree节点上下移动]]></title>
+        <title type="html"><![CDATA[ElementUI el-tree树形实现点击按钮tree节点上下移动]]></title>
         <id>https://nancy-svy.github.io/post/tree-move-up-and-down/</id>
         <link href="https://nancy-svy.github.io/post/tree-move-up-and-down/">
         </link>
@@ -813,22 +914,6 @@ space=''      对键盘输入空格进行监听
     ]
   },
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[elementUI  el-input限制输入的值为整数或小数]]></title>
-        <id>https://nancy-svy.github.io/post/elInputLimitation/</id>
-        <link href="https://nancy-svy.github.io/post/elInputLimitation/">
-        </link>
-        <updated>2023-06-29T03:29:47.000Z</updated>
-        <content type="html"><![CDATA[<pre><code>&lt;el-input
-    v-model=&quot;&quot;
-    oninput=&quot;value=value.replace(/[^0-9.]/g,'').replace(/^\./g, '').replace(/\.{2,}/g, '').replace('.', '$#$').replace(/\./g, '').replace('$#$', '.');&quot;
-    size=&quot;mini&quot;/&gt;
-</code></pre>
-<p>备注：<br>
-1：^不放在开头表示取否的意思，就是取相反<br>
-2：replace是对你输入的字符串一个字符一个字符的去查找替换，和常见正则可以多个字符查找略有不同</p>
 ]]></content>
     </entry>
 </feed>

@@ -9,7 +9,7 @@
 <meta name="description" content="草在结它的种子 ，风在摇它的叶子 ，我们站着，不说话，就十分美好。">
 <meta name="theme-color" content="#000">
 <title>uniapp 仿美团选择预计送达时间组件(1) | 真实の幻梦</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1695191742740">
+<link rel="shortcut icon" href="/favicon.ico?v=1699844076831">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -2497,6 +2497,52 @@ export default {
     <div class="result" id="result">
       
       <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/jsonstringifyhe-jsonparsebu-neng-zhuan-huan-regexp-zheng-ze-de-wen-ti/"" data-c="
+          &lt;h5 id=&#34;前言&#34;&gt;前言&lt;/h5&gt;
+&lt;p&gt;有一个对象如&lt;code&gt;{ formData: { name: &#39;&#39;, phone: &#39;&#39; },regList: { phone: [{ pattern: &amp;quot;/^1(3|4|5|6|7|8|9)\d{9}$/&amp;quot;, message: &#39;手机号格式错误&#39; }] }}&lt;/code&gt;用&lt;code&gt;JSON.stringfit()&lt;/code&gt;转json字符串的时候发现转成了&lt;code&gt;{ formData: { name: &#39;&#39;, phone: &#39;&#39; },regList: { phone: [{ pattern: {}, message: &#39;手机号格式错误&#39; }] }}&lt;/code&gt;把正则转成了空对象，以至于用&lt;code&gt;JSON.parse()&lt;/code&gt;时，发现把正则数据丢失了&lt;/p&gt;
+&lt;h5 id=&#34;原因&#34;&gt;原因&lt;/h5&gt;
+&lt;p&gt;&lt;code&gt;JSON.stringify&lt;/code&gt;会处理的几种类型： &lt;code&gt;String, Number, Boolean, null, Array, Object&lt;/code&gt;&lt;br&gt;
+不会处理的几种类型：&lt;code&gt; Date, RegExp, undefined, Function&lt;/code&gt;&lt;/p&gt;
+&lt;h5 id=&#34;解决方法&#34;&gt;解决方法&lt;/h5&gt;
+&lt;p&gt;JSON.stringify()&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/**
+ * json对象转json字符串
+ * @param { Object } json json对象
+ */
+export function stringifyJson(json){
+  return JSON.stringify(json, (k, v) =&amp;gt; {
+    // 将正则对象转换为正则字符串
+    if(v instanceof RegExp){
+      return v.toString();
+    }
+    return v;
+  });
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;JSON.parse()&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/**
+ * json字符串转json对象
+ * @param { String } jsonStr json字符串
+ */
+export function parseJson(jsonStr){
+  return JSON.parse(jsonStr, (k, v) =&amp;gt; {
+    try{
+      // 将正则字符串转成正则对象
+      if (eval(v) instanceof RegExp) {
+        return eval(v);
+      }
+    }catch(e){ // nothing
+
+    }
+    return v;
+  });
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;转载于&lt;a href=&#34;https://blog.csdn.net/weixin_46656983/article/details/107188175&#34;&gt;https://blog.csdn.net/weixin_46656983/article/details/107188175&lt;/a&gt;&lt;/p&gt;
+">JSON.stringify()和JSON.parse()不能转换RegExp正则的问题</a>
+      </div>
+      
+      <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/elementui-jie-jue-da-bao-shang-xian-hou-icon-tu-biao-ou-er-luan-ma-de-wen-ti/"" data-c="
           &lt;h3 id=&#34;一-背景&#34;&gt;一、 背景&lt;/h3&gt;
 &lt;p&gt;本项目是以vue-element-admin作为基础，开发过程中，图标显示正常，知道打包到线上，页面偶尔性出现图标落马问题，再次刷新页面后，又显示正常&lt;/p&gt;
@@ -2600,7 +2646,59 @@ element-variables.scss文件中的 @import &amp;quot;~element-ui/packages/theme-
 &lt;p&gt;33、Auto-Open Markdown Preview markdown文件自动开启预览&lt;/p&gt;
 &lt;p&gt;34、EverMonkey 印象笔记&lt;/p&gt;
 &lt;p&gt;35、atom one dark atom的一个高亮主题(个人推荐)&lt;/p&gt;
-&lt;h5 id=&#34;三-常用的电脑快捷键&#34;&gt;三、常用的电脑快捷键&lt;/h5&gt;
+&lt;h5 id=&#34;三-终端控制台常用指令&#34;&gt;三、终端控制台常用指令&lt;/h5&gt;
+&lt;p&gt;1.清除终端：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;clear
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;2.列出当前目录中的文件和文件夹：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ls
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;3.切换到指定目录：：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cd &amp;lt;目录路径&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;4.返回上一级目录：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cd ..
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;5.创建新文件夹：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;mkdir &amp;lt;文件夹名&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;6.创建新文件：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;touch &amp;lt;文件名&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;7.打开文件：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;code &amp;lt;文件名&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;8.删除文件：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rm &amp;lt;文件名&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;9.删除文件夹：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;rm -r &amp;lt;文件夹名&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;10.复制文件或文件夹：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cp &amp;lt;源文件/文件夹&amp;gt; &amp;lt;目标文件/文件夹&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;11.移动文件或文件夹：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;mv &amp;lt;源文件/文件夹&amp;gt; &amp;lt;目标文件/文件夹&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;12.查看文件内容：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cat &amp;lt;文件名&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;13.查找文件：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;find &amp;lt;目录路径&amp;gt; -name &amp;lt;文件名&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;14.查找文件内容：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;grep &amp;lt;搜索内容&amp;gt; &amp;lt;文件名&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;15.压缩文件或文件夹：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;tar -czvf &amp;lt;压缩文件名.tar.gz&amp;gt; &amp;lt;文件/文件夹&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;16.解压缩文件：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;tar -xzvf &amp;lt;压缩文件名.tar.gz&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;17.退出或关闭当前正在运行的程序或进程：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;:q
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h5 id=&#34;四-常用的电脑快捷键&#34;&gt;四、常用的电脑快捷键&lt;/h5&gt;
 &lt;p&gt;1、ctrl + shift + delete 快速清除浏览器缓存&lt;/p&gt;
 &lt;p&gt;2、ctrl + alt + delete 快速进入任务管理器页面&lt;/p&gt;
 &lt;p&gt;3、window + L 快速锁定电脑&lt;/p&gt;
@@ -3110,7 +3208,7 @@ space=&#39;&#39;      对键盘输入空格进行监听
 
 &amp;lt;/style&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-">el-tree树形实现点击按钮tree节点上下移动</a>
+">ElementUI el-tree树形实现点击按钮tree节点上下移动</a>
       </div>
       
       <div class="item">
@@ -5014,7 +5112,7 @@ treeData: [{
   // el-tree样式结束
 &amp;lt;/style&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-">elementUI tree组件</a>
+">elementUI tree组件设置样式</a>
       </div>
       
       <div class="item">
@@ -9202,7 +9300,7 @@ css
     element-loading-spinner = &amp;quot;el-icon-loading&amp;quot;
 &amp;gt;&amp;lt;/el-table&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-">elementUI table组件</a>
+">elementUI table组件修改样式</a>
       </div>
       
       <div class="item">
@@ -11023,7 +11121,13 @@ console.log(qqPattern.test(&amp;quot;65974040&amp;quot;)); //输出 true
 var wxPattern = /^[a-zA-Z]([-_a-zA-Z0-9]{5,19})+$/; 
 console.log(wxPattern.test(&amp;quot;RuilongMao&amp;quot;));//输出 true 
 &lt;/code&gt;&lt;/pre&gt;
-">正则</a>
+&lt;h3 id=&#34;ip&#34;&gt;IP&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;/^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;mac地址&#34;&gt;MAC地址&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;/^[A-Fa-f\d]{2}:[A-Fa-f\d]{2}:[A-Fa-f\d]{2}:[A-Fa-f\d]{2}:[A-Fa-f\d]{2}:[A-Fa-f\d]{2}$/
+&lt;/code&gt;&lt;/pre&gt;
+">正则表达式(常用)</a>
       </div>
       
       <div class="item">
@@ -11997,6 +12101,30 @@ events.sort((a, b) =&amp;gt;
 );
 
 console.log(events);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;将带t的时间转换为北京时间格式&#34;&gt;将带T的时间转换为北京时间格式&lt;/h3&gt;
+&lt;p&gt;2023-09-25T01:45:05.000+00:00&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;export function utc2beijing(utc_datetime) {
+	// 转为正常的时间格式 年-月-日 时:分:秒
+	let T_pos = utc_datetime.indexOf(&#39;T&#39;);
+	let Z_pos = utc_datetime.indexOf(&#39;Z&#39;);
+	let year_month_day = utc_datetime.substr(0,T_pos);
+	let hour_minute_second = utc_datetime.substr(T_pos+1,Z_pos-T_pos-1);
+	let new_datetime = year_month_day+&amp;quot; &amp;quot;+hour_minute_second; // 2017-03-31 08:02:06
+
+	// 处理成为时间戳
+	timestamp = new Date(Date.parse(new_datetime));
+	timestamp = timestamp.getTime();
+	timestamp = timestamp/1000;
+
+	// 增加8个小时，北京时间比utc时间多八个时区
+	let timestamp = timestamp+8*60*60;
+
+	// 时间戳转为时间
+	let beijing_datetime = new Date(parseInt(timestamp) * 1000).toLocaleString().replace(/\//g,&amp;quot;-&amp;quot;).replace(/上午|中午|下午|晚上/g, &amp;quot; &amp;quot;);
+
+	return beijing_datetime;  // 2023-09-25 8:00:00
+}
 &lt;/code&gt;&lt;/pre&gt;
 ">js  获取一段时间、两个日期间的所有日期(天数)、所有月份、所有年份</a>
       </div>
