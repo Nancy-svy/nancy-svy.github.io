@@ -2,14 +2,207 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://nancy-svy.github.io</id>
     <title>真实の幻梦</title>
-    <updated>2023-11-13T03:18:18.762Z</updated>
+    <updated>2024-01-23T09:54:35.715Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://nancy-svy.github.io"/>
     <link rel="self" href="https://nancy-svy.github.io/atom.xml"/>
     <subtitle>草在结它的种子 ，风在摇它的叶子 ，我们站着，不说话，就十分美好。</subtitle>
     <logo>https://nancy-svy.github.io/images/avatar.png</logo>
     <icon>https://nancy-svy.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2023, 真实の幻梦</rights>
+    <rights>All rights reserved 2024, 真实の幻梦</rights>
+    <entry>
+        <title type="html"><![CDATA[vue 解决数据改变但视图没有刷新的几种情况以及解决方法]]></title>
+        <id>https://nancy-svy.github.io/post/vue-jie-jue-shu-ju-gai-bian-dan-shi-tu-mei-you-shua-xin-de-ji-chong-qing-kuang-yi-ji-jie-jue-fang-fa/</id>
+        <link href="https://nancy-svy.github.io/post/vue-jie-jue-shu-ju-gai-bian-dan-shi-tu-mei-you-shua-xin-de-ji-chong-qing-kuang-yi-ji-jie-jue-fang-fa/">
+        </link>
+        <updated>2024-01-23T07:36:42.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="情况一vue无法检测实例被创建是不存在于data中的变量">情况一：vue无法检测实例被创建是不存在于data中的变量</h3>
+<p>例如：</p>
+<pre><code>new Vue({
+  data:{},
+  template: '&lt;div&gt;{{message}}&lt;/div&gt;'
+})
+this.message = 'Hello world!' // `message` 不是响应式的页面不会发生变化
+</code></pre>
+<p>解决方法：</p>
+<pre><code>new Vue({
+  data: {
+    message: '',
+  },
+  template: '&lt;div&gt;{{ message }}&lt;/div&gt;'
+})
+this.message = 'Hello world!'
+</code></pre>
+<h3 id="情况二vue不能检测到data中对象的动态添加和删除">情况二：vue不能检测到data中对象的动态添加和删除</h3>
+<p>例如：</p>
+<pre><code>new Vue({
+  data:{
+    obj: {
+      id: 1
+    }
+  },
+  template: '&lt;div&gt;{{ obj.message }}&lt;/div&gt;'
+})
+this.obj.message = 'hello' // 不是响应式的
+delete this.obj.id       // 不是响应式的
+</code></pre>
+<p>解决方法：</p>
+<pre><code>// 动态添加 - Vue.set
+Vue.set(this.obj, 'id', 002)
+  
+// 动态添加 - this.$set
+this.$set(this.obj, 'id', 002)
+  
+// 动态添加多个
+// 代替 Object.assign(this.obj, { a: 1, b: 2 })
+this.obj = Object.assign({}, this.obj, { a: 1, b: 2 })
+  
+// 动态移除 - Vue.delete
+Vue.delete(this.obj, 'name')
+  
+// 动态移除 - this.$delete
+this.$delete(this.obj, 'name')
+</code></pre>
+<h3 id="情况三span-stylecolor-red变量为数组时sapn">情况三：<span style="color: red;">变量为数组时</sapn></h3>
+<p style="color: #FF5823;">不能通过索引值直接修改或赋值，也不能改变数组的长度</p>
+<p>例如：</p>
+<pre><code>new Vue({
+  data: {
+    items: ['a', 'b', 'c']
+  }
+})
+this.items[1] = 'x' // 不是响应性的
+this.items[3] = 'd' // 不是响应性的
+this.items.length = 2 // 不是响应性的
+</code></pre>
+<p>解决方法：</p>
+<pre><code>// Vue.set
+Vue.set(this.items, 4, 'd')
+  
+// this.$set
+this.$set(this.items, 4, 'd')
+  
+// Array.prototype.splice
+this.items.splice(indexOfItem, 4, 'd')
+//修改长度
+this.items.splice(3)
+</code></pre>
+<h3 id="情况四一步获取接口数据dom数据不发生变化">情况四：一步获取接口数据，DOM数据不发生变化</h3>
+<p>原因：Vue 在更新 DOM 时是异步执行的。只要侦听到数据变化，Vue 将开启一个队列，并缓冲在同一事件循环中发生的所有数据变更。如果同一个 watcher 被多次触发，只会被推入到队列中一次。这种在缓冲时去除重复数据对于避免不必要的计算和 DOM 操作是非常重要的。然后，在下一个的事件循环“tick”中，Vue 刷新队列并执行实际 (已去重的) 工作。Vue 在内部对异步队列尝试使用原生的 Promise.then、MutationObserver 和 setImmediate，如果执行环境不支持，则会采用 setTimeout(funcation, 0) 代替。<br>
+例如：</p>
+<pre><code>&lt;div id=&quot;example&quot;&gt;{{message}}&lt;/div&gt;
+var vm = new Vue({
+  el: '#example',
+  data: {
+    message: '123'
+  }
+})
+vm.message = 'new message' // 更改数据
+vm.$el.textContent === 'new message' // false
+vm.$el.style.color = 'red' // 页面没有变化
+</code></pre>
+<p>解决方法：</p>
+<pre><code>var vm = new Vue({
+  el: '#example',
+  data: {
+    message: '123'
+  }
+})
+vm.message = 'new message' // 更改数据
+//使用 Vue.nextTick(callback) callback 将在 DOM 更新完成后被调用
+Vue.nextTick(function () {
+  vm.$el.textContent === 'new message' // true
+  vm.$el.style.color = 'red' // 文字颜色变成红色
+})
+</code></pre>
+<h3 id="情况五循环嵌套层级太深视图不更新">情况五：循环嵌套层级太深，视图不更新</h3>
+<p>当嵌套太深时，页面也可能不更新，此时可以让页面强制刷新</p>
+<p>this.<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mi>o</mi><mi>r</mi><mi>c</mi><mi>e</mi><mi>U</mi><mi>p</mi><mi>d</mi><mi>a</mi><mi>t</mi><mi>e</mi><mo>(</mo><mo>)</mo><mi mathvariant="normal">迫</mi><mi mathvariant="normal">使</mi><mi>v</mi><mi>u</mi><mi>e</mi><mi mathvariant="normal">实</mi><mi mathvariant="normal">例</mi><mi mathvariant="normal">重</mi><mi mathvariant="normal">新</mi><mi mathvariant="normal">（</mi><mi>r</mi><mi>a</mi><mi>n</mi><mi>d</mi><mi>e</mi><mi>r</mi><mi mathvariant="normal">）</mi><mi mathvariant="normal">渲</mi><mi mathvariant="normal">染</mi><mi mathvariant="normal">虚</mi><mi mathvariant="normal">拟</mi><mi>D</mi><mi>O</mi><mi>M</mi><mi mathvariant="normal">，</mi><mi mathvariant="normal">注</mi><mi mathvariant="normal">意</mi><mi mathvariant="normal">并</mi><mi mathvariant="normal">不</mi><mi mathvariant="normal">是</mi><mi mathvariant="normal">重</mi><mi mathvariant="normal">新</mi><mi mathvariant="normal">加</mi><mi mathvariant="normal">载</mi><mi mathvariant="normal">组</mi><mi mathvariant="normal">件</mi><mi mathvariant="normal">。</mi><mi mathvariant="normal">结</mi><mi mathvariant="normal">合</mi><mi>v</mi><mi>u</mi><mi>e</mi><mi mathvariant="normal">的</mi><mi mathvariant="normal">生</mi><mi mathvariant="normal">命</mi><mi mathvariant="normal">周</mi><mi mathvariant="normal">期</mi><mi mathvariant="normal">，</mi><mi mathvariant="normal">调</mi><mi mathvariant="normal">用</mi></mrow><annotation encoding="application/x-tex">forceUpdate()迫使vue实例重新（rander）渲染虚拟DOM，注意并不是重新加载组件。
+结合vue的生命周期，调用</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">c</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="mord mathdefault">p</span><span class="mord mathdefault">d</span><span class="mord mathdefault">a</span><span class="mord mathdefault">t</span><span class="mord mathdefault">e</span><span class="mopen">(</span><span class="mclose">)</span><span class="mord cjk_fallback">迫</span><span class="mord cjk_fallback">使</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord mathdefault">u</span><span class="mord mathdefault">e</span><span class="mord cjk_fallback">实</span><span class="mord cjk_fallback">例</span><span class="mord cjk_fallback">重</span><span class="mord cjk_fallback">新</span><span class="mord cjk_fallback">（</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">a</span><span class="mord mathdefault">n</span><span class="mord mathdefault">d</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord cjk_fallback">）</span><span class="mord cjk_fallback">渲</span><span class="mord cjk_fallback">染</span><span class="mord cjk_fallback">虚</span><span class="mord cjk_fallback">拟</span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord cjk_fallback">，</span><span class="mord cjk_fallback">注</span><span class="mord cjk_fallback">意</span><span class="mord cjk_fallback">并</span><span class="mord cjk_fallback">不</span><span class="mord cjk_fallback">是</span><span class="mord cjk_fallback">重</span><span class="mord cjk_fallback">新</span><span class="mord cjk_fallback">加</span><span class="mord cjk_fallback">载</span><span class="mord cjk_fallback">组</span><span class="mord cjk_fallback">件</span><span class="mord cjk_fallback">。</span><span class="mord cjk_fallback">结</span><span class="mord cjk_fallback">合</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord mathdefault">u</span><span class="mord mathdefault">e</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">生</span><span class="mord cjk_fallback">命</span><span class="mord cjk_fallback">周</span><span class="mord cjk_fallback">期</span><span class="mord cjk_fallback">，</span><span class="mord cjk_fallback">调</span><span class="mord cjk_fallback">用</span></span></span></span>forceUpdate后只会触发beforeUpdate和updated这两个钩子函数，不会触发其他的钩子函数。<br>
+它仅仅影响实例本身和插入插槽内容的子组件，而不是所有子组件。</p>
+<pre><code>//官方说如果你现在的场景需要用forceUpdate方法 ,那么99%是你的操作有问题
+this.$forceUpdate();
+</code></pre>
+<h3 id="情况六路由参数变化页面不更新数据不更新">情况六：路由参数变化，页面不更新(数据不更新)</h3>
+<p>例如：</p>
+<pre><code>&lt;div id=&quot;app&quot;&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;router-link to=&quot;/home/foo&quot;&gt;To Foo&lt;/router-link&gt;&lt;/li&gt;    
+    &lt;li&gt;&lt;router-link to=&quot;/home/baz&quot;&gt;To Baz&lt;/router-link&gt;&lt;/li&gt;    
+    &lt;li&gt;&lt;router-link to=&quot;/home/bar&quot;&gt;To Bar&lt;/router-link&gt;&lt;/li&gt;    
+  &lt;/ul&gt;    
+  &lt;router-view&gt;&lt;/router-view&gt;
+&lt;/div&gt;
+
+const Home = {
+  template: `&lt;div&gt;{{message}}&lt;/div&gt;`,
+  data() {
+    return {
+      message: this.$route.params.name
+    }
+  }
+}
+  
+const router = new VueRouter({
+  mode:'history',
+    routes: [
+    {path: '/home', component: Home },
+    {path: '/home/:name', component: Home }
+  ]
+})
+  
+new Vue({
+  el: '#app',
+  router
+})
+</code></pre>
+<p>上段代码中，我们在路由构建选项 routes 中配置了一个动态路由 '/home/:name'，它们共用一个路由组件 Home，这代表他们复用 RouterView 。</p>
+<p>当进行路由切换时，页面只会渲染第一次路由匹配到的参数，之后再进行路由切换时，message 是没有变化的。</p>
+<p>解决方法：<br>
+1.通过 watch 监听 $route 的变化。</p>
+<pre><code>const Home = {
+  template: `&lt;div&gt;{{message}}&lt;/div&gt;`,
+  data() {
+    return {
+      message: this.$route.params.name
+    }
+  },
+  watch:{
+     '$route':function(){
+        this.message = this.$route.params.name
+     }
+  }
+}
+...
+new Vue({
+  el: '#app',
+  router
+})
+</code></pre>
+<p>2.给<router-view> 绑定key属性，这样 Vue 就会认为这是不同的 <router-view>。</p>
+<p>弊端：如果从 /home 跳转到 /user 等其他路由下，我们是不用担心组件更新问题的，所以这个时候 key 属性是多余的。</p>
+<pre><code>&lt;div id=&quot;app&quot;&gt;
+   &lt;router-view :key=&quot;key&quot;&gt;&lt;/router-view&gt;
+&lt;/div&gt;
+</code></pre>
+<h3 id="情况七变量通过赋值来定义的">情况七：变量通过赋值来定义的</h3>
+<p>在 Vue 中有两种类型的变量：响应式变量和非响应式变量。</p>
+<p>从后端获取的变量通常是响应式变量，也就是说它们会被 Vue 监测到变化并同步到页面上，如果你修改了这些响应式变量，页面会随之改变。</p>
+<p>而通过赋值来定义的变量通常是非响应式变量，如果你修改了这些非响应式变量，Vue 并不会监测到它们的变化，所以页面不会改变。</p>
+<p>如果你需要使一个非响应式变量变成响应式变量，可以使用 Vue.set 方法或者数组的变异方法（例如 push、splice 等）。</p>
+<p>例1：Vue.set(对象,添加的key,属性值”)</p>
+<pre><code>Vue.set
+//这个是直接用在Vue身上的。例如: Vue.set(对象,添加的key,属性值”)
+//常见于: xx.js文件中
+//注意: js文件中，需要引入vue，比如: import Vue from vue
+</code></pre>
+<p>例2：this.$set(对象,添加的key',属性值)</p>
+<pre><code>this.$set
+//这个是用在vm或者vc实例身上的，比如vue文件中，this.$set(对象,添加的key',属性值)
+//常见于: xx.vue文件中
+</code></pre>
+<p style="color: blue;">强制更新数据：this.$forceUpdate();</p>]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[JSON.stringify()和JSON.parse()不能转换RegExp正则的问题]]></title>
         <id>https://nancy-svy.github.io/post/jsonstringifyhe-jsonparsebu-neng-zhuan-huan-regexp-zheng-ze-de-wen-ti/</id>
@@ -874,46 +1067,6 @@ space=''      对键盘输入空格进行监听
 <img src="https://nancy-svy.github.io/post-images/1695174244895.png" alt="" loading="lazy"></p>
 <p>以上二维码配置规则完毕</p>
 <p>打开 百度搜索草料 <a href="https://cli.im/">二维码生成器</a> https://cli.im/二维码生成工具，输入配置好的二维码规则即可生成二维码，</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[vue  路由]]></title>
-        <id>https://nancy-svy.github.io/post/router/</id>
-        <link href="https://nancy-svy.github.io/post/router/">
-        </link>
-        <updated>2023-06-30T09:32:03.000Z</updated>
-        <content type="html"><![CDATA[<h5 id="有面包屑时三级路由怎么进行跳转页面">有面包屑时，三级路由怎么进行跳转页面</h5>
-<p>路由结构</p>
-<pre><code>{
-    path: '/nrgl',
-    component: Layout,
-    redirect: '/nrgl/index',
-    meta: {
-      title: '内容管理',
-      icon: 'el-icon-s-help'
-    },
-    children: [
-      {
-        path: 'index',
-        component: () =&gt; import('@/views/myview/nrgl/index'),
-        name: 'index',
-        meta: { title: '内容列表',  icon: 'dashboard' }
-      },
-      {
-        path: 'detail',
-        component: () =&gt; import('@/views/myview/nrgl/detail'),
-        name: 'detail',
-        meta: {
-          title:  '内容详情',
-          icon:  'dashboard', 
-          noCache:  true, 
-          activeMenu:  '/nrgl/index'
-       },
-        hidden: true
-      },
-    ]
-  },
-</code></pre>
 ]]></content>
     </entry>
 </feed>

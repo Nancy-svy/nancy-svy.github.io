@@ -9,7 +9,7 @@
 <meta name="description" content="草在结它的种子 ，风在摇它的叶子 ，我们站着，不说话，就十分美好。">
 <meta name="theme-color" content="#000">
 <title>vue 封装axios | 真实の幻梦</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1699844076831">
+<link rel="shortcut icon" href="/favicon.ico?v=1706003659717">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -1803,6 +1803,196 @@ export const login = (params) =&gt; get(&quot;/szhyq/screen/login&quot;, params)
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/vue-jie-jue-shu-ju-gai-bian-dan-shi-tu-mei-you-shua-xin-de-ji-chong-qing-kuang-yi-ji-jie-jue-fang-fa/"" data-c="
+          &lt;h3 id=&#34;情况一vue无法检测实例被创建是不存在于data中的变量&#34;&gt;情况一：vue无法检测实例被创建是不存在于data中的变量&lt;/h3&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;new Vue({
+  data:{},
+  template: &#39;&amp;lt;div&amp;gt;{{message}}&amp;lt;/div&amp;gt;&#39;
+})
+this.message = &#39;Hello world!&#39; // `message` 不是响应式的页面不会发生变化
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;解决方法：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;new Vue({
+  data: {
+    message: &#39;&#39;,
+  },
+  template: &#39;&amp;lt;div&amp;gt;{{ message }}&amp;lt;/div&amp;gt;&#39;
+})
+this.message = &#39;Hello world!&#39;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;情况二vue不能检测到data中对象的动态添加和删除&#34;&gt;情况二：vue不能检测到data中对象的动态添加和删除&lt;/h3&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;new Vue({
+  data:{
+    obj: {
+      id: 1
+    }
+  },
+  template: &#39;&amp;lt;div&amp;gt;{{ obj.message }}&amp;lt;/div&amp;gt;&#39;
+})
+this.obj.message = &#39;hello&#39; // 不是响应式的
+delete this.obj.id       // 不是响应式的
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;解决方法：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// 动态添加 - Vue.set
+Vue.set(this.obj, &#39;id&#39;, 002)
+  
+// 动态添加 - this.$set
+this.$set(this.obj, &#39;id&#39;, 002)
+  
+// 动态添加多个
+// 代替 Object.assign(this.obj, { a: 1, b: 2 })
+this.obj = Object.assign({}, this.obj, { a: 1, b: 2 })
+  
+// 动态移除 - Vue.delete
+Vue.delete(this.obj, &#39;name&#39;)
+  
+// 动态移除 - this.$delete
+this.$delete(this.obj, &#39;name&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;情况三span-stylecolor-red变量为数组时sapn&#34;&gt;情况三：&lt;span style=&#34;color: red;&#34;&gt;变量为数组时&lt;/sapn&gt;&lt;/h3&gt;
+&lt;p style=&#34;color: #FF5823;&#34;&gt;不能通过索引值直接修改或赋值，也不能改变数组的长度&lt;/p&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;new Vue({
+  data: {
+    items: [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]
+  }
+})
+this.items[1] = &#39;x&#39; // 不是响应性的
+this.items[3] = &#39;d&#39; // 不是响应性的
+this.items.length = 2 // 不是响应性的
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;解决方法：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// Vue.set
+Vue.set(this.items, 4, &#39;d&#39;)
+  
+// this.$set
+this.$set(this.items, 4, &#39;d&#39;)
+  
+// Array.prototype.splice
+this.items.splice(indexOfItem, 4, &#39;d&#39;)
+//修改长度
+this.items.splice(3)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;情况四一步获取接口数据dom数据不发生变化&#34;&gt;情况四：一步获取接口数据，DOM数据不发生变化&lt;/h3&gt;
+&lt;p&gt;原因：Vue 在更新 DOM 时是异步执行的。只要侦听到数据变化，Vue 将开启一个队列，并缓冲在同一事件循环中发生的所有数据变更。如果同一个 watcher 被多次触发，只会被推入到队列中一次。这种在缓冲时去除重复数据对于避免不必要的计算和 DOM 操作是非常重要的。然后，在下一个的事件循环“tick”中，Vue 刷新队列并执行实际 (已去重的) 工作。Vue 在内部对异步队列尝试使用原生的 Promise.then、MutationObserver 和 setImmediate，如果执行环境不支持，则会采用 setTimeout(funcation, 0) 代替。&lt;br&gt;
+例如：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;div id=&amp;quot;example&amp;quot;&amp;gt;{{message}}&amp;lt;/div&amp;gt;
+var vm = new Vue({
+  el: &#39;#example&#39;,
+  data: {
+    message: &#39;123&#39;
+  }
+})
+vm.message = &#39;new message&#39; // 更改数据
+vm.$el.textContent === &#39;new message&#39; // false
+vm.$el.style.color = &#39;red&#39; // 页面没有变化
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;解决方法：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var vm = new Vue({
+  el: &#39;#example&#39;,
+  data: {
+    message: &#39;123&#39;
+  }
+})
+vm.message = &#39;new message&#39; // 更改数据
+//使用 Vue.nextTick(callback) callback 将在 DOM 更新完成后被调用
+Vue.nextTick(function () {
+  vm.$el.textContent === &#39;new message&#39; // true
+  vm.$el.style.color = &#39;red&#39; // 文字颜色变成红色
+})
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;情况五循环嵌套层级太深视图不更新&#34;&gt;情况五：循环嵌套层级太深，视图不更新&lt;/h3&gt;
+&lt;p&gt;当嵌套太深时，页面也可能不更新，此时可以让页面强制刷新&lt;/p&gt;
+&lt;p&gt;this.&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;f&lt;/mi&gt;&lt;mi&gt;o&lt;/mi&gt;&lt;mi&gt;r&lt;/mi&gt;&lt;mi&gt;c&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi&gt;U&lt;/mi&gt;&lt;mi&gt;p&lt;/mi&gt;&lt;mi&gt;d&lt;/mi&gt;&lt;mi&gt;a&lt;/mi&gt;&lt;mi&gt;t&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mo&gt;(&lt;/mo&gt;&lt;mo&gt;)&lt;/mo&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;迫&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;使&lt;/mi&gt;&lt;mi&gt;v&lt;/mi&gt;&lt;mi&gt;u&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;实&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;例&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;重&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;新&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;（&lt;/mi&gt;&lt;mi&gt;r&lt;/mi&gt;&lt;mi&gt;a&lt;/mi&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mi&gt;d&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi&gt;r&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;）&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;渲&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;染&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;虚&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;拟&lt;/mi&gt;&lt;mi&gt;D&lt;/mi&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mi&gt;M&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;，&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;注&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;意&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;并&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;不&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;是&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;重&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;新&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;加&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;载&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;组&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;件&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;。&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;结&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;合&lt;/mi&gt;&lt;mi&gt;v&lt;/mi&gt;&lt;mi&gt;u&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;的&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;生&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;命&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;周&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;期&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;，&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;调&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;用&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;forceUpdate()迫使vue实例重新（rander）渲染虚拟DOM，注意并不是重新加载组件。
+结合vue的生命周期，调用&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1em;vertical-align:-0.25em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.10764em;&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;o&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.02778em;&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.10903em;&#34;&gt;U&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;d&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;t&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mopen&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mclose&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;迫&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;使&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.03588em;&#34;&gt;v&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;u&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;实&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;例&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;重&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;新&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;（&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.02778em;&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;d&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.02778em;&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;）&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;渲&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;染&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;虚&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;拟&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.02778em;&#34;&gt;D&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.02778em;&#34;&gt;O&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.10903em;&#34;&gt;M&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;，&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;注&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;意&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;并&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;不&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;是&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;重&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;新&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;加&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;载&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;组&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;件&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;。&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;结&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;合&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.03588em;&#34;&gt;v&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;u&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;的&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;生&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;命&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;周&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;期&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;，&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;调&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;用&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;forceUpdate后只会触发beforeUpdate和updated这两个钩子函数，不会触发其他的钩子函数。&lt;br&gt;
+它仅仅影响实例本身和插入插槽内容的子组件，而不是所有子组件。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;//官方说如果你现在的场景需要用forceUpdate方法 ,那么99%是你的操作有问题
+this.$forceUpdate();
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;情况六路由参数变化页面不更新数据不更新&#34;&gt;情况六：路由参数变化，页面不更新(数据不更新)&lt;/h3&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;div id=&amp;quot;app&amp;quot;&amp;gt;
+  &amp;lt;ul&amp;gt;
+    &amp;lt;li&amp;gt;&amp;lt;router-link to=&amp;quot;/home/foo&amp;quot;&amp;gt;To Foo&amp;lt;/router-link&amp;gt;&amp;lt;/li&amp;gt;    
+    &amp;lt;li&amp;gt;&amp;lt;router-link to=&amp;quot;/home/baz&amp;quot;&amp;gt;To Baz&amp;lt;/router-link&amp;gt;&amp;lt;/li&amp;gt;    
+    &amp;lt;li&amp;gt;&amp;lt;router-link to=&amp;quot;/home/bar&amp;quot;&amp;gt;To Bar&amp;lt;/router-link&amp;gt;&amp;lt;/li&amp;gt;    
+  &amp;lt;/ul&amp;gt;    
+  &amp;lt;router-view&amp;gt;&amp;lt;/router-view&amp;gt;
+&amp;lt;/div&amp;gt;
+
+const Home = {
+  template: `&amp;lt;div&amp;gt;{{message}}&amp;lt;/div&amp;gt;`,
+  data() {
+    return {
+      message: this.$route.params.name
+    }
+  }
+}
+  
+const router = new VueRouter({
+  mode:&#39;history&#39;,
+    routes: [
+    {path: &#39;/home&#39;, component: Home },
+    {path: &#39;/home/:name&#39;, component: Home }
+  ]
+})
+  
+new Vue({
+  el: &#39;#app&#39;,
+  router
+})
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;上段代码中，我们在路由构建选项 routes 中配置了一个动态路由 &#39;/home/:name&#39;，它们共用一个路由组件 Home，这代表他们复用 RouterView 。&lt;/p&gt;
+&lt;p&gt;当进行路由切换时，页面只会渲染第一次路由匹配到的参数，之后再进行路由切换时，message 是没有变化的。&lt;/p&gt;
+&lt;p&gt;解决方法：&lt;br&gt;
+1.通过 watch 监听 $route 的变化。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;const Home = {
+  template: `&amp;lt;div&amp;gt;{{message}}&amp;lt;/div&amp;gt;`,
+  data() {
+    return {
+      message: this.$route.params.name
+    }
+  },
+  watch:{
+     &#39;$route&#39;:function(){
+        this.message = this.$route.params.name
+     }
+  }
+}
+...
+new Vue({
+  el: &#39;#app&#39;,
+  router
+})
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;2.给&lt;router-view&gt; 绑定key属性，这样 Vue 就会认为这是不同的 &lt;router-view&gt;。&lt;/p&gt;
+&lt;p&gt;弊端：如果从 /home 跳转到 /user 等其他路由下，我们是不用担心组件更新问题的，所以这个时候 key 属性是多余的。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;div id=&amp;quot;app&amp;quot;&amp;gt;
+   &amp;lt;router-view :key=&amp;quot;key&amp;quot;&amp;gt;&amp;lt;/router-view&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;情况七变量通过赋值来定义的&#34;&gt;情况七：变量通过赋值来定义的&lt;/h3&gt;
+&lt;p&gt;在 Vue 中有两种类型的变量：响应式变量和非响应式变量。&lt;/p&gt;
+&lt;p&gt;从后端获取的变量通常是响应式变量，也就是说它们会被 Vue 监测到变化并同步到页面上，如果你修改了这些响应式变量，页面会随之改变。&lt;/p&gt;
+&lt;p&gt;而通过赋值来定义的变量通常是非响应式变量，如果你修改了这些非响应式变量，Vue 并不会监测到它们的变化，所以页面不会改变。&lt;/p&gt;
+&lt;p&gt;如果你需要使一个非响应式变量变成响应式变量，可以使用 Vue.set 方法或者数组的变异方法（例如 push、splice 等）。&lt;/p&gt;
+&lt;p&gt;例1：Vue.set(对象,添加的key,属性值”)&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Vue.set
+//这个是直接用在Vue身上的。例如: Vue.set(对象,添加的key,属性值”)
+//常见于: xx.js文件中
+//注意: js文件中，需要引入vue，比如: import Vue from vue
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;例2：this.$set(对象,添加的key&#39;,属性值)&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;this.$set
+//这个是用在vm或者vc实例身上的，比如vue文件中，this.$set(对象,添加的key&#39;,属性值)
+//常见于: xx.vue文件中
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p style=&#34;color: blue;&#34;&gt;强制更新数据：this.$forceUpdate();&lt;/p&gt;">vue 解决数据改变但视图没有刷新的几种情况以及解决方法</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/jsonstringifyhe-jsonparsebu-neng-zhuan-huan-regexp-zheng-ze-de-wen-ti/"" data-c="
