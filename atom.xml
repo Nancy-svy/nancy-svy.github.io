@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://nancy-svy.github.io</id>
     <title>真实の幻梦</title>
-    <updated>2024-01-23T09:56:06.096Z</updated>
+    <updated>2024-03-11T01:46:56.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://nancy-svy.github.io"/>
     <link rel="self" href="https://nancy-svy.github.io/atom.xml"/>
@@ -10,6 +10,475 @@
     <logo>https://nancy-svy.github.io/images/avatar.png</logo>
     <icon>https://nancy-svy.github.io/favicon.ico</icon>
     <rights>All rights reserved 2024, 真实の幻梦</rights>
+    <entry>
+        <title type="html"><![CDATA[ElementUI 上传图片/视频]]></title>
+        <id>https://nancy-svy.github.io/post/elementui-shang-chuan-tu-pian-huo-shi-pin/</id>
+        <link href="https://nancy-svy.github.io/post/elementui-shang-chuan-tu-pian-huo-shi-pin/">
+        </link>
+        <updated>2024-01-29T06:51:01.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="1-上传图片并裁剪">1. 上传图片并裁剪</h3>
+<ol>
+<li>上传图片</li>
+</ol>
+<pre><code>&lt;el-upload
+    class=&quot;image-uploader&quot;
+    action=&quot;&quot;
+    list-type=&quot;picture-card&quot;
+    :file-list=&quot;form.uploadList&quot;
+    :on-remove=&quot;handleRemove&quot;
+&gt;   
+    &lt;div @click.stop=&quot;handleOpenUploadDialog&quot;&gt;
+        &lt;i class=&quot;el-icon-plus&quot;&gt;&lt;/i&gt;
+    &lt;/div&gt;
+    &lt;div slot=&quot;tip&quot; class=&quot;el-upload__tip&quot; &gt;只能上传jpg/png/jpeg文件，且不超过5MB&lt;/div&gt;
+&lt;/el-upload&gt;
+
+&lt;!-- 裁剪图片弹窗 --&gt;
+&lt;el-dialog 
+    title=&quot;上传图片&quot;
+    :visible.sync=&quot;cropperVisible&quot;
+    width=&quot;760px&quot;
+    append-to-body
+    @opened=&quot;modalOpened&quot;
+    @close=&quot;closeDialog&quot;
+&gt;
+    &lt;el-row&gt;
+        &lt;el-col :xs=&quot;24&quot; :md=&quot;12&quot; :style=&quot;{height: '400px'}&quot;&gt;
+            &lt;vue-cropper
+                ref=&quot;cropper&quot;
+                :img=&quot;cropperImg&quot;
+                :info=&quot;true&quot;
+                :autoCrop=&quot;options.autoCrop&quot;
+                :autoCropWidth=&quot;options.autoCropWidth&quot;
+                :autoCropHeight=&quot;options.autoCropHeight&quot;
+                :fixedBox=&quot;options.fixedBox&quot;
+                :outputType=&quot;options.outputType&quot;
+                @realTime=&quot;realTime&quot;
+                v-if=&quot;visible&quot;
+            /&gt;
+        &lt;/el-col&gt;
+        &lt;el-col :xs=&quot;24&quot; :md=&quot;12&quot; :style=&quot;{height: '400px'}&quot;&gt;
+            &lt;div class=&quot;advert-img-box&quot;&gt;
+            &lt;img :src=&quot;previews.url&quot; :style=&quot;previews.img&quot; /&gt;
+            &lt;/div&gt;
+        &lt;/el-col&gt;
+    &lt;/el-row&gt;
+    &lt;br /&gt;
+    &lt;el-row&gt;
+        &lt;el-col :lg=&quot;2&quot; :sm=&quot;3&quot; :xs=&quot;3&quot;&gt;
+            &lt;el-upload 
+                action=&quot;&quot;
+                :http-request=&quot;handleUpload&quot;
+                :before-upload=&quot;beforeUploadImg&quot;
+                accept=&quot;image/png, image/jpeg, image/jpg&quot;
+                :show-file-list=&quot;false&quot;
+            &gt;
+            &lt;el-button size=&quot;small&quot;&gt;
+                选择
+                &lt;i class=&quot;el-icon-upload el-icon--right&quot;&gt;&lt;/i&gt;
+            &lt;/el-button&gt;
+            &lt;/el-upload&gt;
+        &lt;/el-col&gt;
+        &lt;el-col :lg=&quot;{span: 1, offset: 1}&quot; :sm=&quot;2&quot; :xs=&quot;2&quot;&gt;
+            &lt;el-button icon=&quot;el-icon-plus&quot; size=&quot;small&quot; @click=&quot;changeScale(1)&quot;&gt;&lt;/el-button&gt;
+        &lt;/el-col&gt;
+        &lt;el-col :lg=&quot;{span: 1, offset: 1}&quot; :sm=&quot;2&quot; :xs=&quot;2&quot;&gt;
+            &lt;el-button icon=&quot;el-icon-minus&quot; size=&quot;small&quot; @click=&quot;changeScale(-1)&quot;&gt;&lt;/el-button&gt;
+        &lt;/el-col&gt;
+        &lt;el-col :lg=&quot;{span: 1, offset: 1}&quot; :sm=&quot;2&quot; :xs=&quot;2&quot;&gt;
+            &lt;el-button icon=&quot;el-icon-refresh-left&quot; size=&quot;small&quot; @click=&quot;rotateLeft()&quot;&gt;&lt;/el-button&gt;
+        &lt;/el-col&gt;
+        &lt;el-col :lg=&quot;{span: 1, offset: 1}&quot; :sm=&quot;2&quot; :xs=&quot;2&quot;&gt;
+            &lt;el-button icon=&quot;el-icon-refresh-right&quot; size=&quot;small&quot; @click=&quot;rotateRight()&quot;&gt;&lt;/el-button&gt;
+        &lt;/el-col&gt;
+        &lt;el-col :lg=&quot;{span: 2, offset: 6}&quot; :sm=&quot;2&quot; :xs=&quot;2&quot;&gt;
+            &lt;el-button type=&quot;primary&quot; size=&quot;small&quot; @click=&quot;uploadImgSure&quot;&gt;确 认&lt;/el-button&gt;
+        &lt;/el-col&gt;
+    &lt;/el-row&gt;
+&lt;/el-dialog&gt;
+
+
+</code></pre>
+<p>安装 裁剪插件 npm i  vue-cropper</p>
+<pre><code>import { VueCropper } from 'vue-cropper'
+import { debounce, videoSize } from '@/utils'
+export default{
+    components: {
+        VueCropper
+    },
+    data(){
+        return{
+            form: {
+                uploadList: []
+            },
+            cropperImg: '', // 裁剪图片
+            cropperVisible: false, // 控制裁剪图片弹窗显示隐藏
+            visible: false, // 是否显示cropper
+            options: {
+                img: '', //裁剪图片的地址
+                autoCrop: true, // 是否默认生成截图框
+                autoCropWidth: 200, // 默认生成截图框宽度
+                autoCropHeight: 300, // 默认生成截图框高度
+                fixedBox: true, // 固定截图框大小 不允许改变
+                outputType:&quot;png&quot; // 默认生成截图为PNG格式
+            },
+            resizeHandler: null,
+            previews: {},
+            fileUpload: {},
+        }
+    },
+    methods: {
+        // 打开上传图片的弹窗
+        handleOpenUploadDialog(){
+            this.cropperImg = ''
+            this.cropperVisible = true
+        },
+        // 打开弹出层结束时
+        modalOpened(){
+            this.visible = true;
+            if (!this.resizeHandler) {
+                this.resizeHandler = debounce(() =&gt; {
+                    this.refresh()
+                }, 100)
+            }
+            window.addEventListener(&quot;resize&quot;, this.resizeHandler)
+        },
+        // 刷新组件
+        refresh() {
+            this.$refs.cropper.refresh();
+        },
+        // 关闭弹窗
+        closeDialog(){
+            this.visible = false;
+            window.removeEventListener(&quot;resize&quot;, this.resizeHandler)
+        },
+        // 实时预览
+        realTime(data) {
+            this.previews = data;
+        },
+        // 向左旋转
+        rotateLeft() {
+            this.$refs.cropper.rotateLeft();
+        },
+        // 向右旋转
+        rotateRight() {
+            this.$refs.cropper.rotateRight();
+        },
+        // 图片缩放
+        changeScale(num) {
+            num = num || 1;
+            this.$refs.cropper.changeScale(num);
+        },
+        // 上传图片前
+        beforeUploadImg(file){
+            const suffix = file.type === 'image/jpg' || file.type === 'image/png' || file.type === 'image/jpeg' 
+            const isLt1M = file.size / 1024 / 1024 &lt; 5
+            if (!suffix) {
+                this.$message.warning('上传的图片只能是JPG,PNG,JPEG 格式!')
+            }
+            if (!isLt1M) {
+                this.$message.warning('上传图片大小不能超过5MB!')
+            }
+        },
+        // 确认上传图片
+        uploadImgSure(){
+            if(this.cropperImg &amp;&amp; this.cropperImg != ''){
+                this.$refs.cropper.getCropBlob(data =&gt; {
+                    let formData = new FormData()
+                    // 判断的依据，是否是更新，更新是没有文件名的，更新要把缓存的数据转成file类型，目前是glob;
+　　                // 转换成file类型，可以根据后端接收类型自行转换成glob或者file格式
+                    let file = new File([data], typeof(this.fileUpload.name) == 'undefined' ? this.cropperImg : this.fileUpload.name, { type: data.type,lastModified: Date.now()})
+                    file.uid = Date.now()
+                    formData.append(&quot;file&quot;, file)
+                    // 调接口
+                    advertiseUpload(formData).then(res =&gt; {
+                        if(res.code == 200){
+                            this.cropperImg = process.env.VUE_APP_BASE_API + res.data
+                            this.form.uploadList.push({
+                                uid: Math.random().toString().slice(-6),
+                                url: process.env.VUE_APP_BASE_API + res.data
+                            })
+                            this.uploadImgList.push({
+                                uid: Math.random().toString().slice(-6),
+                                url: res.data
+                            })
+                            this.visible = false
+                            this.cropperVisible = false
+                        }
+                    })
+                });
+            }else{
+                this.$message.warning('请先上传图片')
+            }
+        },
+
+        // 移除图片
+        handleRemove(file, fileList){
+            this.form.uploadList.forEach((item, index) =&gt; {
+                if(item.uid == file.uid){
+                    this.form.uploadList.splice(index, 1)
+                }
+            })
+            this.uploadImgList.forEach((item, index) =&gt; {
+                if(item.uid == file.uid){
+                    this.uploadImgList.splice(index, 1)
+                }
+            })
+        },
+
+    }
+}
+</code></pre>
+<pre><code>.advert-img-box{
+    width: 300px;
+    height: 400px;
+    position: relative;
+	top: 50%;
+	left: 53%;
+	transform: translate(-50%, -53%);
+	box-shadow: 0 0 4px #ccc;
+	overflow: hidden;
+}
+</code></pre>
+<pre><code>/**
+ * @param {Function} func
+ * @param {number} wait
+ * @param {boolean} immediate
+ * @return {*}
+ */
+export function debounce(func, wait, immediate) {
+  let timeout, args, context, timestamp, result
+
+  const later = function() {
+    // 据上一次触发时间间隔
+    const last = +new Date() - timestamp
+
+    // 上次被包装函数被调用时间间隔 last 小于设定时间间隔 wait
+    if (last &lt; wait &amp;&amp; last &gt; 0) {
+      timeout = setTimeout(later, wait - last)
+    } else {
+      timeout = null
+      // 如果设定为immediate===true，因为开始边界已经调用过了此处无需调用
+      if (!immediate) {
+        result = func.apply(context, args)
+        if (!timeout) context = args = null
+      }
+    }
+  }
+
+  return function(...args) {
+    context = this
+    timestamp = +new Date()
+    const callNow = immediate &amp;&amp; !timeout
+    // 如果延时不存在，重新设定延时
+    if (!timeout) timeout = setTimeout(later, wait)
+    if (callNow) {
+      result = func.apply(context, args)
+      context = args = null
+    }
+
+    return result
+  }
+}
+</code></pre>
+<ol start="2">
+<li>限制上传图片的大小</li>
+</ol>
+<pre><code>/**
+ * 上传图片限制宽高
+ * 
+ * width： 限制的视频宽度
+ * height：限制的视频高度
+ */
+export const imgSize = (file, width, height, _this) =&gt; {
+  return new Promise((resolve, reject) =&gt; {
+    let url = window.URL || window.webkitURL
+    let img = new Image()
+    img.onload = function () {
+      // 图片比例校验
+      let valid = img.width === width &amp;&amp; img.height === height
+      valid ? resolve() : reject()
+    }
+    img.src = url.createObjectURL(file)
+  }).then(() =&gt; {
+      return file
+  },() =&gt; {
+      _this.$message.warning(`固定宽度为${width}px，高度为${height}px`)
+      return Promise.reject()
+    }
+  )
+}
+
+</code></pre>
+<p>// 使用</p>
+<pre><code>imgBeforeUploadimg (file) {
+    // 检查图片尺寸是否合格
+    let _this = this
+    var isSize = imgSize(file, 750, 420, _this)
+    return  isSize
+},
+</code></pre>
+<p>** URL.createObjectURL() 静态方法**</p>
+<pre><code>// URL.createObjectURL() 静态方法会创建一个 DOMString，其中包含一个表示参数中给出的对象的URL。
+// 这个 URL 的生命周期和创建它的窗口中的 document 绑定。这个新的URL 对象表示指定的 File 对象或 Blob 对象。
+// 语法
+objectURL = URL.createObjectURL(object);
+// 参数
+object
+用于创建 URL 的 File 对象、Blob 对象或者 MediaSource 对象。​
+// 返回值
+一个DOMString包含了一个对象URL，该URL可用于指定源 object的内容
+
+</code></pre>
+<h3 id="2-上传视频">2. 上传视频</h3>
+<ol>
+<li>上传视频</li>
+</ol>
+<pre><code>&lt;div&gt;
+    &lt;div class=&quot;video-wrapper&quot;&gt;
+        &lt;template v-if=&quot;uploadVideoList &amp;&amp; uploadVideoList.length != 0&quot; &gt;
+            &lt;div class=&quot;img-list-item&quot; v-for=&quot;(item, index) in uploadVideoList&quot; :key=&quot;index&quot;&gt;
+                &lt;video :src=&quot;item&quot; controls=&quot;controls&quot;&gt;&lt;/video&gt;
+                &lt;i class=&quot;el-icon-error&quot; @click=&quot;handleVideoRemove(item)&quot;&gt;&lt;/i&gt;
+            &lt;/div&gt;
+        &lt;/template&gt;
+        &lt;el-upload
+            class=&quot;video-uploader&quot;
+            action=&quot;&quot;
+            :show-file-list=&quot;false&quot;
+            :http-request=&quot;handleVideoUpload&quot;
+            :before-upload=&quot;beforeUploadVideo&quot;
+            accept=&quot;video/mp4, video/avi, video/mov&quot;
+            :limit=&quot;5&quot;
+        &gt;
+            &lt;i class=&quot;el-icon-plus avatar-uploader-icon&quot; v-loading=&quot;uploadVideoLoading&quot;&gt;&lt;/i&gt;
+        &lt;/el-upload&gt;
+    &lt;/div&gt;
+    &lt;div slot=&quot;tip&quot; class=&quot;el-upload__tip&quot;&gt;最多可以上传5个视频，建议大小50MB，推荐格式mp4，宽高为1920*1080&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<pre><code>import { videoSize } from '@/utils'
+export default{
+    data(){
+        return{
+            form: {
+                videoList: [],
+            },
+            uploadVideoList: [], 
+            uploadVideoLoading: false, // 加载中
+        }
+    },
+    methods: {
+         // 上传视频前
+         beforeUploadVideo(file){
+            const fileSize = file.size / 1024 / 1024 &lt; 50
+            const suffix = file.type == 'video/mp4' || file.type == 'video/avi' || file.type == 'video/mov'
+            if(!suffix){
+                this.$message.warning('上传的视频只能是mp4,avi,mov 格式!')
+            }
+            if(!fileSize){
+                this.$message.warning('视频大小不能超过50MB')
+            }
+        },
+
+        // 上传视频
+        handleVideoUpload(param){
+            const suffix = param.file.type == 'video/mp4' || aram.file.type == 'video/avi' || aram.file.type == 'video/mov'
+            const isLt1M = param.file.size / 1024 / 1024 &lt; 50
+            const isSize = videoSize(param.file, 1920, 1080, this)
+            if (suffix &amp;&amp; isLt1M) {
+                isSize.then(res =&gt;{
+                    this.uploadVideoLoading = true
+                    let obj = new FormData()
+                    obj.append('file', param.file)
+                    obj.append(&quot;storageLocation&quot;, this.form.storageLocation)
+                    advertiseUpload(obj).then(res =&gt; {
+                        if(res.code == 200){
+                            this.uploadVideoLoading = false
+                            this.form.videoList.push(res.data)
+                            this.uploadVideoList.push(`${process.env.VUE_APP_BASE_API}${res.data}`)
+                        }else{
+                            this.uploadVideoLoading = false
+                        }
+                    }).catch(err =&gt; {
+                        this.uploadVideoLoading = false
+                    })
+                })
+            }
+        },
+
+        // 移出视频
+        handleVideoRemove(val){
+            this.form.videoList.forEach((item, index) =&gt; {
+                if(item == val){
+                    this.form.videoList.splice(index, 1)
+                }
+            })
+            this.uploadVideoList.forEach((item, index) =&gt; {
+                if(item == val){
+                    this.uploadVideoList.splice(index, 1)
+                }
+            })
+        },
+
+    }
+}
+</code></pre>
+<pre><code>.video-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    .img-list-item {
+        position: relative;
+        margin: auto;
+        .el-icon-error{
+            position: absolute;
+            top: 0;
+            right: -1px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        video{
+            width: 100px;
+            height: 100px;
+        }
+    }
+    
+}
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://nancy-svy.github.io/post-images/1706516164057.png" alt="" loading="lazy"></figure>
+<ol>
+<li>限制视频的宽高、时长</li>
+</ol>
+<pre><code>/**
+ * 上传视频限制宽高
+ * 
+ * width： 限制的视频宽度
+ * height：限制的视频高度
+ * **/ 
+export const videoSize = (file, width, height, _this) =&gt; {
+  return new Promise(function(resolve, reject){
+    let _URL = window.URL || window.webkitURL
+    let videoElement = document.createElement('video')
+    videoElement.addEventListener('loadedmetadata', function(_event){
+      let vwidth = videoElement.videoWidth
+      let vheight = videoElement.videoHeight
+      let duration = videoElement.duration; // 视频时长
+      if(Math.floor(duration) &gt;= 30) return _this.$message.warning('上传视频时长不能超过 30S！')
+      let valid = vwidth === width &amp;&amp; vheight === height
+      valid ? resolve() : reject()
+    })
+    videoElement.src = _URL.createObjectURL(file)
+  }).then(() =&gt; {
+    return file
+  }, (err) =&gt; {
+    _this.$message.warning(`固定宽度为${width}px，高度为${height}px`)
+    // console.log(err)
+    return Promise.reject()
+  })
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[vue 解决数据改变但视图没有刷新的几种情况以及解决方法]]></title>
         <id>https://nancy-svy.github.io/post/vue-jie-jue-shu-ju-gai-bian-dan-shi-tu-mei-you-shua-xin-de-ji-chong-qing-kuang-yi-ji-jie-jue-fang-fa/</id>
@@ -1047,26 +1516,6 @@ space=''      对键盘输入空格进行监听
     },
   }
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[微信小程序 扫描设备二维码携带参数跳转到微信小程序指定页面（微信小程序二维码配置规则）]]></title>
-        <id>https://nancy-svy.github.io/post/configure-regular-link-QR-code-rules/</id>
-        <link href="https://nancy-svy.github.io/post/configure-regular-link-QR-code-rules/">
-        </link>
-        <updated>2023-07-06T01:21:08.000Z</updated>
-        <content type="html"><![CDATA[<p><code style="color: #c7254e; background-color: #f9f2f4; border-radius: 2px;}">***1:打开微信公众平台： https://mp.weixin.qq.com 扫码登录***</code></p>
-<h2 id="2-点击左侧边栏开发-开发管理-开发设置-服务器域名">2. 点击左侧边栏开发 =&gt; 开发管理 =&gt; 开发设置 =&gt; 服务器域名</h2>
-<figure data-type="image" tabindex="1"><img src="https://nancy-svy.github.io/post-images/1695173240463.png" alt="" loading="lazy"></figure>
-<figure data-type="image" tabindex="2"><img src="https://nancy-svy.github.io/post-images/1695173330770.png" alt="" loading="lazy"></figure>
-<h2 id="3-点击左侧边栏开发-开发管理-开发设置-扫普通连接二维码开发小程序">3. 点击左侧边栏开发 =&gt; 开发管理 =&gt; 开发设置 =&gt; 扫普通连接二维码开发小程序</h2>
-<figure data-type="image" tabindex="3"><img src="https://nancy-svy.github.io/post-images/1695173477966.png" alt="" loading="lazy"></figure>
-<p>点击添加按钮进入此界面<br>
-<img src="https://nancy-svy.github.io/post-images/1695174166728.png" alt="" loading="lazy"></p>
-<p>点击保存，保存后自动跳转到这里<br>
-<img src="https://nancy-svy.github.io/post-images/1695174244895.png" alt="" loading="lazy"></p>
-<p>以上二维码配置规则完毕</p>
-<p>打开 百度搜索草料 <a href="https://cli.im/">二维码生成器</a> https://cli.im/二维码生成工具，输入配置好的二维码规则即可生成二维码，</p>
 ]]></content>
     </entry>
 </feed>

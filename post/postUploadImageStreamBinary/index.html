@@ -9,7 +9,7 @@
 <meta name="description" content="草在结它的种子 ，风在摇它的叶子 ，我们站着，不说话，就十分美好。">
 <meta name="theme-color" content="#000">
 <title>uniapp用post上传图片流binary | 真实の幻梦</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1706003659717">
+<link rel="shortcut icon" href="/favicon.ico?v=1710121598374">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -1476,6 +1476,472 @@ let result = await this.upload(url, file);
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/elementui-shang-chuan-tu-pian-huo-shi-pin/"" data-c="
+          &lt;h3 id=&#34;1-上传图片并裁剪&#34;&gt;1. 上传图片并裁剪&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;上传图片&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;el-upload
+    class=&amp;quot;image-uploader&amp;quot;
+    action=&amp;quot;&amp;quot;
+    list-type=&amp;quot;picture-card&amp;quot;
+    :file-list=&amp;quot;form.uploadList&amp;quot;
+    :on-remove=&amp;quot;handleRemove&amp;quot;
+&amp;gt;   
+    &amp;lt;div @click.stop=&amp;quot;handleOpenUploadDialog&amp;quot;&amp;gt;
+        &amp;lt;i class=&amp;quot;el-icon-plus&amp;quot;&amp;gt;&amp;lt;/i&amp;gt;
+    &amp;lt;/div&amp;gt;
+    &amp;lt;div slot=&amp;quot;tip&amp;quot; class=&amp;quot;el-upload__tip&amp;quot; &amp;gt;只能上传jpg/png/jpeg文件，且不超过5MB&amp;lt;/div&amp;gt;
+&amp;lt;/el-upload&amp;gt;
+
+&amp;lt;!-- 裁剪图片弹窗 --&amp;gt;
+&amp;lt;el-dialog 
+    title=&amp;quot;上传图片&amp;quot;
+    :visible.sync=&amp;quot;cropperVisible&amp;quot;
+    width=&amp;quot;760px&amp;quot;
+    append-to-body
+    @opened=&amp;quot;modalOpened&amp;quot;
+    @close=&amp;quot;closeDialog&amp;quot;
+&amp;gt;
+    &amp;lt;el-row&amp;gt;
+        &amp;lt;el-col :xs=&amp;quot;24&amp;quot; :md=&amp;quot;12&amp;quot; :style=&amp;quot;{height: &#39;400px&#39;}&amp;quot;&amp;gt;
+            &amp;lt;vue-cropper
+                ref=&amp;quot;cropper&amp;quot;
+                :img=&amp;quot;cropperImg&amp;quot;
+                :info=&amp;quot;true&amp;quot;
+                :autoCrop=&amp;quot;options.autoCrop&amp;quot;
+                :autoCropWidth=&amp;quot;options.autoCropWidth&amp;quot;
+                :autoCropHeight=&amp;quot;options.autoCropHeight&amp;quot;
+                :fixedBox=&amp;quot;options.fixedBox&amp;quot;
+                :outputType=&amp;quot;options.outputType&amp;quot;
+                @realTime=&amp;quot;realTime&amp;quot;
+                v-if=&amp;quot;visible&amp;quot;
+            /&amp;gt;
+        &amp;lt;/el-col&amp;gt;
+        &amp;lt;el-col :xs=&amp;quot;24&amp;quot; :md=&amp;quot;12&amp;quot; :style=&amp;quot;{height: &#39;400px&#39;}&amp;quot;&amp;gt;
+            &amp;lt;div class=&amp;quot;advert-img-box&amp;quot;&amp;gt;
+            &amp;lt;img :src=&amp;quot;previews.url&amp;quot; :style=&amp;quot;previews.img&amp;quot; /&amp;gt;
+            &amp;lt;/div&amp;gt;
+        &amp;lt;/el-col&amp;gt;
+    &amp;lt;/el-row&amp;gt;
+    &amp;lt;br /&amp;gt;
+    &amp;lt;el-row&amp;gt;
+        &amp;lt;el-col :lg=&amp;quot;2&amp;quot; :sm=&amp;quot;3&amp;quot; :xs=&amp;quot;3&amp;quot;&amp;gt;
+            &amp;lt;el-upload 
+                action=&amp;quot;&amp;quot;
+                :http-request=&amp;quot;handleUpload&amp;quot;
+                :before-upload=&amp;quot;beforeUploadImg&amp;quot;
+                accept=&amp;quot;image/png, image/jpeg, image/jpg&amp;quot;
+                :show-file-list=&amp;quot;false&amp;quot;
+            &amp;gt;
+            &amp;lt;el-button size=&amp;quot;small&amp;quot;&amp;gt;
+                选择
+                &amp;lt;i class=&amp;quot;el-icon-upload el-icon--right&amp;quot;&amp;gt;&amp;lt;/i&amp;gt;
+            &amp;lt;/el-button&amp;gt;
+            &amp;lt;/el-upload&amp;gt;
+        &amp;lt;/el-col&amp;gt;
+        &amp;lt;el-col :lg=&amp;quot;{span: 1, offset: 1}&amp;quot; :sm=&amp;quot;2&amp;quot; :xs=&amp;quot;2&amp;quot;&amp;gt;
+            &amp;lt;el-button icon=&amp;quot;el-icon-plus&amp;quot; size=&amp;quot;small&amp;quot; @click=&amp;quot;changeScale(1)&amp;quot;&amp;gt;&amp;lt;/el-button&amp;gt;
+        &amp;lt;/el-col&amp;gt;
+        &amp;lt;el-col :lg=&amp;quot;{span: 1, offset: 1}&amp;quot; :sm=&amp;quot;2&amp;quot; :xs=&amp;quot;2&amp;quot;&amp;gt;
+            &amp;lt;el-button icon=&amp;quot;el-icon-minus&amp;quot; size=&amp;quot;small&amp;quot; @click=&amp;quot;changeScale(-1)&amp;quot;&amp;gt;&amp;lt;/el-button&amp;gt;
+        &amp;lt;/el-col&amp;gt;
+        &amp;lt;el-col :lg=&amp;quot;{span: 1, offset: 1}&amp;quot; :sm=&amp;quot;2&amp;quot; :xs=&amp;quot;2&amp;quot;&amp;gt;
+            &amp;lt;el-button icon=&amp;quot;el-icon-refresh-left&amp;quot; size=&amp;quot;small&amp;quot; @click=&amp;quot;rotateLeft()&amp;quot;&amp;gt;&amp;lt;/el-button&amp;gt;
+        &amp;lt;/el-col&amp;gt;
+        &amp;lt;el-col :lg=&amp;quot;{span: 1, offset: 1}&amp;quot; :sm=&amp;quot;2&amp;quot; :xs=&amp;quot;2&amp;quot;&amp;gt;
+            &amp;lt;el-button icon=&amp;quot;el-icon-refresh-right&amp;quot; size=&amp;quot;small&amp;quot; @click=&amp;quot;rotateRight()&amp;quot;&amp;gt;&amp;lt;/el-button&amp;gt;
+        &amp;lt;/el-col&amp;gt;
+        &amp;lt;el-col :lg=&amp;quot;{span: 2, offset: 6}&amp;quot; :sm=&amp;quot;2&amp;quot; :xs=&amp;quot;2&amp;quot;&amp;gt;
+            &amp;lt;el-button type=&amp;quot;primary&amp;quot; size=&amp;quot;small&amp;quot; @click=&amp;quot;uploadImgSure&amp;quot;&amp;gt;确 认&amp;lt;/el-button&amp;gt;
+        &amp;lt;/el-col&amp;gt;
+    &amp;lt;/el-row&amp;gt;
+&amp;lt;/el-dialog&amp;gt;
+
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;安装 裁剪插件 npm i  vue-cropper&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;import { VueCropper } from &#39;vue-cropper&#39;
+import { debounce, videoSize } from &#39;@/utils&#39;
+export default{
+    components: {
+        VueCropper
+    },
+    data(){
+        return{
+            form: {
+                uploadList: []
+            },
+            cropperImg: &#39;&#39;, // 裁剪图片
+            cropperVisible: false, // 控制裁剪图片弹窗显示隐藏
+            visible: false, // 是否显示cropper
+            options: {
+                img: &#39;&#39;, //裁剪图片的地址
+                autoCrop: true, // 是否默认生成截图框
+                autoCropWidth: 200, // 默认生成截图框宽度
+                autoCropHeight: 300, // 默认生成截图框高度
+                fixedBox: true, // 固定截图框大小 不允许改变
+                outputType:&amp;quot;png&amp;quot; // 默认生成截图为PNG格式
+            },
+            resizeHandler: null,
+            previews: {},
+            fileUpload: {},
+        }
+    },
+    methods: {
+        // 打开上传图片的弹窗
+        handleOpenUploadDialog(){
+            this.cropperImg = &#39;&#39;
+            this.cropperVisible = true
+        },
+        // 打开弹出层结束时
+        modalOpened(){
+            this.visible = true;
+            if (!this.resizeHandler) {
+                this.resizeHandler = debounce(() =&amp;gt; {
+                    this.refresh()
+                }, 100)
+            }
+            window.addEventListener(&amp;quot;resize&amp;quot;, this.resizeHandler)
+        },
+        // 刷新组件
+        refresh() {
+            this.$refs.cropper.refresh();
+        },
+        // 关闭弹窗
+        closeDialog(){
+            this.visible = false;
+            window.removeEventListener(&amp;quot;resize&amp;quot;, this.resizeHandler)
+        },
+        // 实时预览
+        realTime(data) {
+            this.previews = data;
+        },
+        // 向左旋转
+        rotateLeft() {
+            this.$refs.cropper.rotateLeft();
+        },
+        // 向右旋转
+        rotateRight() {
+            this.$refs.cropper.rotateRight();
+        },
+        // 图片缩放
+        changeScale(num) {
+            num = num || 1;
+            this.$refs.cropper.changeScale(num);
+        },
+        // 上传图片前
+        beforeUploadImg(file){
+            const suffix = file.type === &#39;image/jpg&#39; || file.type === &#39;image/png&#39; || file.type === &#39;image/jpeg&#39; 
+            const isLt1M = file.size / 1024 / 1024 &amp;lt; 5
+            if (!suffix) {
+                this.$message.warning(&#39;上传的图片只能是JPG,PNG,JPEG 格式!&#39;)
+            }
+            if (!isLt1M) {
+                this.$message.warning(&#39;上传图片大小不能超过5MB!&#39;)
+            }
+        },
+        // 确认上传图片
+        uploadImgSure(){
+            if(this.cropperImg &amp;amp;&amp;amp; this.cropperImg != &#39;&#39;){
+                this.$refs.cropper.getCropBlob(data =&amp;gt; {
+                    let formData = new FormData()
+                    // 判断的依据，是否是更新，更新是没有文件名的，更新要把缓存的数据转成file类型，目前是glob;
+　　                // 转换成file类型，可以根据后端接收类型自行转换成glob或者file格式
+                    let file = new File([data], typeof(this.fileUpload.name) == &#39;undefined&#39; ? this.cropperImg : this.fileUpload.name, { type: data.type,lastModified: Date.now()})
+                    file.uid = Date.now()
+                    formData.append(&amp;quot;file&amp;quot;, file)
+                    // 调接口
+                    advertiseUpload(formData).then(res =&amp;gt; {
+                        if(res.code == 200){
+                            this.cropperImg = process.env.VUE_APP_BASE_API + res.data
+                            this.form.uploadList.push({
+                                uid: Math.random().toString().slice(-6),
+                                url: process.env.VUE_APP_BASE_API + res.data
+                            })
+                            this.uploadImgList.push({
+                                uid: Math.random().toString().slice(-6),
+                                url: res.data
+                            })
+                            this.visible = false
+                            this.cropperVisible = false
+                        }
+                    })
+                });
+            }else{
+                this.$message.warning(&#39;请先上传图片&#39;)
+            }
+        },
+
+        // 移除图片
+        handleRemove(file, fileList){
+            this.form.uploadList.forEach((item, index) =&amp;gt; {
+                if(item.uid == file.uid){
+                    this.form.uploadList.splice(index, 1)
+                }
+            })
+            this.uploadImgList.forEach((item, index) =&amp;gt; {
+                if(item.uid == file.uid){
+                    this.uploadImgList.splice(index, 1)
+                }
+            })
+        },
+
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;.advert-img-box{
+    width: 300px;
+    height: 400px;
+    position: relative;
+	top: 50%;
+	left: 53%;
+	transform: translate(-50%, -53%);
+	box-shadow: 0 0 4px #ccc;
+	overflow: hidden;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;/**
+ * @param {Function} func
+ * @param {number} wait
+ * @param {boolean} immediate
+ * @return {*}
+ */
+export function debounce(func, wait, immediate) {
+  let timeout, args, context, timestamp, result
+
+  const later = function() {
+    // 据上一次触发时间间隔
+    const last = +new Date() - timestamp
+
+    // 上次被包装函数被调用时间间隔 last 小于设定时间间隔 wait
+    if (last &amp;lt; wait &amp;amp;&amp;amp; last &amp;gt; 0) {
+      timeout = setTimeout(later, wait - last)
+    } else {
+      timeout = null
+      // 如果设定为immediate===true，因为开始边界已经调用过了此处无需调用
+      if (!immediate) {
+        result = func.apply(context, args)
+        if (!timeout) context = args = null
+      }
+    }
+  }
+
+  return function(...args) {
+    context = this
+    timestamp = +new Date()
+    const callNow = immediate &amp;amp;&amp;amp; !timeout
+    // 如果延时不存在，重新设定延时
+    if (!timeout) timeout = setTimeout(later, wait)
+    if (callNow) {
+      result = func.apply(context, args)
+      context = args = null
+    }
+
+    return result
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;限制上传图片的大小&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;/**
+ * 上传图片限制宽高
+ * 
+ * width： 限制的视频宽度
+ * height：限制的视频高度
+ */
+export const imgSize = (file, width, height, _this) =&amp;gt; {
+  return new Promise((resolve, reject) =&amp;gt; {
+    let url = window.URL || window.webkitURL
+    let img = new Image()
+    img.onload = function () {
+      // 图片比例校验
+      let valid = img.width === width &amp;amp;&amp;amp; img.height === height
+      valid ? resolve() : reject()
+    }
+    img.src = url.createObjectURL(file)
+  }).then(() =&amp;gt; {
+      return file
+  },() =&amp;gt; {
+      _this.$message.warning(`固定宽度为${width}px，高度为${height}px`)
+      return Promise.reject()
+    }
+  )
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;// 使用&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;imgBeforeUploadimg (file) {
+    // 检查图片尺寸是否合格
+    let _this = this
+    var isSize = imgSize(file, 750, 420, _this)
+    return  isSize
+},
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;** URL.createObjectURL() 静态方法**&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// URL.createObjectURL() 静态方法会创建一个 DOMString，其中包含一个表示参数中给出的对象的URL。
+// 这个 URL 的生命周期和创建它的窗口中的 document 绑定。这个新的URL 对象表示指定的 File 对象或 Blob 对象。
+// 语法
+objectURL = URL.createObjectURL(object);
+// 参数
+object
+用于创建 URL 的 File 对象、Blob 对象或者 MediaSource 对象。​
+// 返回值
+一个DOMString包含了一个对象URL，该URL可用于指定源 object的内容
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;2-上传视频&#34;&gt;2. 上传视频&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;上传视频&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;div&amp;gt;
+    &amp;lt;div class=&amp;quot;video-wrapper&amp;quot;&amp;gt;
+        &amp;lt;template v-if=&amp;quot;uploadVideoList &amp;amp;&amp;amp; uploadVideoList.length != 0&amp;quot; &amp;gt;
+            &amp;lt;div class=&amp;quot;img-list-item&amp;quot; v-for=&amp;quot;(item, index) in uploadVideoList&amp;quot; :key=&amp;quot;index&amp;quot;&amp;gt;
+                &amp;lt;video :src=&amp;quot;item&amp;quot; controls=&amp;quot;controls&amp;quot;&amp;gt;&amp;lt;/video&amp;gt;
+                &amp;lt;i class=&amp;quot;el-icon-error&amp;quot; @click=&amp;quot;handleVideoRemove(item)&amp;quot;&amp;gt;&amp;lt;/i&amp;gt;
+            &amp;lt;/div&amp;gt;
+        &amp;lt;/template&amp;gt;
+        &amp;lt;el-upload
+            class=&amp;quot;video-uploader&amp;quot;
+            action=&amp;quot;&amp;quot;
+            :show-file-list=&amp;quot;false&amp;quot;
+            :http-request=&amp;quot;handleVideoUpload&amp;quot;
+            :before-upload=&amp;quot;beforeUploadVideo&amp;quot;
+            accept=&amp;quot;video/mp4, video/avi, video/mov&amp;quot;
+            :limit=&amp;quot;5&amp;quot;
+        &amp;gt;
+            &amp;lt;i class=&amp;quot;el-icon-plus avatar-uploader-icon&amp;quot; v-loading=&amp;quot;uploadVideoLoading&amp;quot;&amp;gt;&amp;lt;/i&amp;gt;
+        &amp;lt;/el-upload&amp;gt;
+    &amp;lt;/div&amp;gt;
+    &amp;lt;div slot=&amp;quot;tip&amp;quot; class=&amp;quot;el-upload__tip&amp;quot;&amp;gt;最多可以上传5个视频，建议大小50MB，推荐格式mp4，宽高为1920*1080&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;import { videoSize } from &#39;@/utils&#39;
+export default{
+    data(){
+        return{
+            form: {
+                videoList: [],
+            },
+            uploadVideoList: [], 
+            uploadVideoLoading: false, // 加载中
+        }
+    },
+    methods: {
+         // 上传视频前
+         beforeUploadVideo(file){
+            const fileSize = file.size / 1024 / 1024 &amp;lt; 50
+            const suffix = file.type == &#39;video/mp4&#39; || file.type == &#39;video/avi&#39; || file.type == &#39;video/mov&#39;
+            if(!suffix){
+                this.$message.warning(&#39;上传的视频只能是mp4,avi,mov 格式!&#39;)
+            }
+            if(!fileSize){
+                this.$message.warning(&#39;视频大小不能超过50MB&#39;)
+            }
+        },
+
+        // 上传视频
+        handleVideoUpload(param){
+            const suffix = param.file.type == &#39;video/mp4&#39; || aram.file.type == &#39;video/avi&#39; || aram.file.type == &#39;video/mov&#39;
+            const isLt1M = param.file.size / 1024 / 1024 &amp;lt; 50
+            const isSize = videoSize(param.file, 1920, 1080, this)
+            if (suffix &amp;amp;&amp;amp; isLt1M) {
+                isSize.then(res =&amp;gt;{
+                    this.uploadVideoLoading = true
+                    let obj = new FormData()
+                    obj.append(&#39;file&#39;, param.file)
+                    obj.append(&amp;quot;storageLocation&amp;quot;, this.form.storageLocation)
+                    advertiseUpload(obj).then(res =&amp;gt; {
+                        if(res.code == 200){
+                            this.uploadVideoLoading = false
+                            this.form.videoList.push(res.data)
+                            this.uploadVideoList.push(`${process.env.VUE_APP_BASE_API}${res.data}`)
+                        }else{
+                            this.uploadVideoLoading = false
+                        }
+                    }).catch(err =&amp;gt; {
+                        this.uploadVideoLoading = false
+                    })
+                })
+            }
+        },
+
+        // 移出视频
+        handleVideoRemove(val){
+            this.form.videoList.forEach((item, index) =&amp;gt; {
+                if(item == val){
+                    this.form.videoList.splice(index, 1)
+                }
+            })
+            this.uploadVideoList.forEach((item, index) =&amp;gt; {
+                if(item == val){
+                    this.uploadVideoList.splice(index, 1)
+                }
+            })
+        },
+
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;.video-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    .img-list-item {
+        position: relative;
+        margin: auto;
+        .el-icon-error{
+            position: absolute;
+            top: 0;
+            right: -1px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        video{
+            width: 100px;
+            height: 100px;
+        }
+    }
+    
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://nancy-svy.github.io/post-images/1706516164057.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;ol&gt;
+&lt;li&gt;限制视频的宽高、时长&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;/**
+ * 上传视频限制宽高
+ * 
+ * width： 限制的视频宽度
+ * height：限制的视频高度
+ * **/ 
+export const videoSize = (file, width, height, _this) =&amp;gt; {
+  return new Promise(function(resolve, reject){
+    let _URL = window.URL || window.webkitURL
+    let videoElement = document.createElement(&#39;video&#39;)
+    videoElement.addEventListener(&#39;loadedmetadata&#39;, function(_event){
+      let vwidth = videoElement.videoWidth
+      let vheight = videoElement.videoHeight
+      let duration = videoElement.duration; // 视频时长
+      if(Math.floor(duration) &amp;gt;= 30) return _this.$message.warning(&#39;上传视频时长不能超过 30S！&#39;)
+      let valid = vwidth === width &amp;amp;&amp;amp; vheight === height
+      valid ? resolve() : reject()
+    })
+    videoElement.src = _URL.createObjectURL(file)
+  }).then(() =&amp;gt; {
+    return file
+  }, (err) =&amp;gt; {
+    _this.$message.warning(`固定宽度为${width}px，高度为${height}px`)
+    // console.log(err)
+    return Promise.reject()
+  })
+}
+&lt;/code&gt;&lt;/pre&gt;
+">ElementUI 上传图片/视频</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://nancy-svy.github.io/post/vue-jie-jue-shu-ju-gai-bian-dan-shi-tu-mei-you-shua-xin-de-ji-chong-qing-kuang-yi-ji-jie-jue-fang-fa/"" data-c="
@@ -8470,6 +8936,13 @@ css
     element-loading-background = &amp;quot;rgba(255, 255, 255, .5)&amp;quot;
     element-loading-spinner = &amp;quot;el-icon-loading&amp;quot;
 &amp;gt;&amp;lt;/el-table&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;11. 表格文字超出隐藏文字显示...，鼠标移入显示全部文字内容并设置弹出内容的宽度。&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;style&amp;gt;
+    .el-tooltip__popper{
+        max-width:20%
+    }
+&amp;lt;/style&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 ">elementUI table组件修改样式</a>
       </div>

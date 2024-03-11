@@ -8,7 +8,7 @@
 <meta name="keywords" content="个人博客">
 <meta name="description" content="草在结它的种子 ，风在摇它的叶子 ，我们站着，不说话，就十分美好。">
 <meta name="theme-color" content="#000">
-<title>uniapp 使用echarts并解决echarts文件过大的问题 | 真实の幻梦</title>
+<title>ElementUI 上传图片/视频 | 真实の幻梦</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1710121598374">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -41,8 +41,8 @@
 
 
 
-  <meta name="description" content="uniapp 使用echarts并解决echarts文件过大的问题" />
-  <meta name="keywords" content="uniapp" />
+  <meta name="description" content="ElementUI 上传图片/视频" />
+  <meta name="keywords" content="" />
 </head>
 
 <body>
@@ -177,26 +177,8 @@
 <ul>
 <li>
 <ul>
-<li><a href="#%E6%96%B9%E6%B3%95%E4%B8%80">方法一</a><br>
-*
-<ul>
-<li><a href="#%E4%B8%80-uni-app%E5%BC%95%E7%94%A8echarts">一、uni-app引用echarts</a></li>
-<li><a href="#%E4%BA%8C-%E8%A7%A3%E5%86%B3ecahrtsjs%E6%96%87%E4%BB%B6%E8%BF%87%E5%A4%A7%E7%9A%84%E9%97%AE%E9%A2%98">二、解决ecahrts.js文件过大的问题</a></li>
-</ul>
-</li>
-<li><a href="#%E6%96%B9%E6%B3%95%E4%BA%8C">方法二</a><br>
-*
-<ul>
-<li><a href="#%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F-ecahrts">微信小程序 ecahrts</a>
-<ul>
-<li><a href="#%E6%AD%A3%E6%96%87">正文</a></li>
-<li><a href="#%E4%B8%80-uni-app%E5%BC%95%E7%94%A8echarts-2">一、uni-app引用echarts</a></li>
-</ul>
-</li>
-<li><a href="#%E4%BA%8C-%E8%A7%A3%E5%86%B3ecahrtsjs%E6%96%87%E4%BB%B6%E8%BF%87%E5%A4%A7%E7%9A%84%E9%97%AE%E9%A2%98-2">二、解决ecahrts.js文件过大的问题</a></li>
-</ul>
-</li>
-<li><a href="#%E9%A1%B5%E9%9D%A2%E6%BB%9A%E5%8A%A8%E6%97%B6%E5%9B%BE%E8%A1%A8%E6%8A%96%E5%8A%A8-%E5%8A%A0-force-use-old-canvastrue-%E8%BF%99%E4%B8%AA%E5%B1%9E%E6%80%A7">页面滚动时，图表抖动 加 force-use-old-canvas=&quot;true&quot; 这个属性</a></li>
+<li><a href="#1-%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E5%B9%B6%E8%A3%81%E5%89%AA">1. 上传图片并裁剪</a></li>
+<li><a href="#2-%E4%B8%8A%E4%BC%A0%E8%A7%86%E9%A2%91">2. 上传视频</a></li>
 </ul>
 </li>
 </ul>
@@ -466,32 +448,21 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://nancy-svy.github.io/post/echartsFileSizeIssue/"> uniapp 使用echarts并解决echarts文件过大的问题 </a>
+    <a class="post-title-link" href="https://nancy-svy.github.io/post/elementui-shang-chuan-tu-pian-huo-shi-pin/"> ElementUI 上传图片/视频 </a>
   </h1>
   <div class="post-meta">
     
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2023-01-09 14:44:35">2023-01-09</span>
+      <span class="publish-time" data-t="2024-01-29 14:51:01">2024-01-29</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
     <span class="meta-item">
-      <i class="fa fa-folder-o"></i>
-      <span class="pc-show language" data-lan="category-in">标签:</span>
-       
-      <a href="https://nancy-svy.github.io/tag/XXkeG_S1Z/">
-        <span>uniapp</span>
-      </a>
-       
-    </span>
-    <span class="post-meta-divider">|</span>
-    
-    <span class="meta-item">
       <i class="fa fa-clock-o"></i>
       <span
-        >6<span class="language" data-lan="minute"
+        >12<span class="language" data-lan="minute"
           >分钟</span
         ></span
       >
@@ -500,7 +471,7 @@
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
       <span
-        >1062<span class="pc-show language" data-lan="words"
+        >2157<span class="pc-show language" data-lan="words"
           >字数</span
         ></span
       >
@@ -510,313 +481,467 @@
 </section>
 
             <div class="post-body next-md-body" id="post_body">
-              <h3 id="方法一">方法一</h3>
-<h5 id="一-uni-app引用echarts">一、uni-app引用echarts</h5>
-<p>####### 首先，要去下载插件（用hbuilder编辑器下载特别方便）<br>
-l-echarts   DCloud插件市场 <a href="https://ext.dcloud.net.cn/plugin?id=4899"></a><br>
-<strong>##</strong> 使用</p>
-<pre><code>&lt;template&gt;
-	&lt;view&gt;&lt;l-echart ref=&quot;chart&quot; @finished=&quot;init&quot;&gt;&lt;/l-echart&gt;&lt;/view&gt;
-&lt;/template&gt;
+              <h3 id="1-上传图片并裁剪">1. 上传图片并裁剪</h3>
+<ol>
+<li>上传图片</li>
+</ol>
+<pre><code>&lt;el-upload
+    class=&quot;image-uploader&quot;
+    action=&quot;&quot;
+    list-type=&quot;picture-card&quot;
+    :file-list=&quot;form.uploadList&quot;
+    :on-remove=&quot;handleRemove&quot;
+&gt;   
+    &lt;div @click.stop=&quot;handleOpenUploadDialog&quot;&gt;
+        &lt;i class=&quot;el-icon-plus&quot;&gt;&lt;/i&gt;
+    &lt;/div&gt;
+    &lt;div slot=&quot;tip&quot; class=&quot;el-upload__tip&quot; &gt;只能上传jpg/png/jpeg文件，且不超过5MB&lt;/div&gt;
+&lt;/el-upload&gt;
 
-&lt;script&gt;
-	import LEchart from '@/uni_modules/lime-echart/components/l-echart/l-echart.vue';
-	export default {
-		components: {
-			LEchart
-		}
-,
-		data(){
-			return{
-				option: {
-	                tooltip: {
-	                    trigger: 'axis',
-	                    axisPointer: {
-	                        type: 'shadow' 
-	                    },
-	                    confine: true
-	                },
-	                legend: {
-	                    data: ['热度', '正面', '负面']
-	                },
-	                grid: {
-	                    left: 20,
-	                    right: 20,
-	                    bottom: 15,
-	                    top: 40,
-	                    containLabel: true
-	                },
-	                xAxis: [
-	                    {
-	                        type: 'value',
-	                        axisLine: {
-	                            lineStyle: {
-	                                color: '#999999'
-	                            }
-	                        },
-	                        axisLabel: {
-	                            color: '#666666'
-	                        }
-	                    }
-	                ],
-	                yAxis: [
-	                    {
-	                        type: 'category',
-	                        axisTick: { show: false },
-	                        data: ['汽车之家', '今日头条', '百度贴吧', '一点资讯', '微信', '微博', '知乎'],
-	                        axisLine: {
-	                            lineStyle: {
-	                                color: '#999999'
-	                            }
-	                        },
-	                        axisLabel: {
-	                            color: '#666666'
-	                        }
-	                    }
-	                ],
-	                series: [
-	                    {
-	                        name: '热度',
-	                        type: 'bar',
-	                        label: {
-	                            normal: {
-	                                show: true,
-	                                position: 'inside'
-	                            }
-	                        },
-	                        data: [300, 270, 340, 344, 300, 320, 310],
-	                    },
-	                    {
-	                        name: '正面',
-	                        type: 'bar',
-	                        stack: '总量',
-	                        label: {
-	                            normal: {
-	                                show: true
-	                            }
-	                        },
-	                        data: [120, 102, 141, 174, 190, 250, 220]
-	                    },
-	                    {
-	                        name: '负面',
-	                        type: 'bar',
-	                        stack: '总量',
-	                        label: {
-	                            normal: {
-	                                show: true,
-	                                position: 'left'
-	                            }
-	                        },
-	                        data: [-20, -32, -21, -34, -90, -130, -110]
-	                    }
-	                ]
-	            },
-			}
-		},
+&lt;!-- 裁剪图片弹窗 --&gt;
+&lt;el-dialog 
+    title=&quot;上传图片&quot;
+    :visible.sync=&quot;cropperVisible&quot;
+    width=&quot;760px&quot;
+    append-to-body
+    @opened=&quot;modalOpened&quot;
+    @close=&quot;closeDialog&quot;
+&gt;
+    &lt;el-row&gt;
+        &lt;el-col :xs=&quot;24&quot; :md=&quot;12&quot; :style=&quot;{height: '400px'}&quot;&gt;
+            &lt;vue-cropper
+                ref=&quot;cropper&quot;
+                :img=&quot;cropperImg&quot;
+                :info=&quot;true&quot;
+                :autoCrop=&quot;options.autoCrop&quot;
+                :autoCropWidth=&quot;options.autoCropWidth&quot;
+                :autoCropHeight=&quot;options.autoCropHeight&quot;
+                :fixedBox=&quot;options.fixedBox&quot;
+                :outputType=&quot;options.outputType&quot;
+                @realTime=&quot;realTime&quot;
+                v-if=&quot;visible&quot;
+            /&gt;
+        &lt;/el-col&gt;
+        &lt;el-col :xs=&quot;24&quot; :md=&quot;12&quot; :style=&quot;{height: '400px'}&quot;&gt;
+            &lt;div class=&quot;advert-img-box&quot;&gt;
+            &lt;img :src=&quot;previews.url&quot; :style=&quot;previews.img&quot; /&gt;
+            &lt;/div&gt;
+        &lt;/el-col&gt;
+    &lt;/el-row&gt;
+    &lt;br /&gt;
+    &lt;el-row&gt;
+        &lt;el-col :lg=&quot;2&quot; :sm=&quot;3&quot; :xs=&quot;3&quot;&gt;
+            &lt;el-upload 
+                action=&quot;&quot;
+                :http-request=&quot;handleUpload&quot;
+                :before-upload=&quot;beforeUploadImg&quot;
+                accept=&quot;image/png, image/jpeg, image/jpg&quot;
+                :show-file-list=&quot;false&quot;
+            &gt;
+            &lt;el-button size=&quot;small&quot;&gt;
+                选择
+                &lt;i class=&quot;el-icon-upload el-icon--right&quot;&gt;&lt;/i&gt;
+            &lt;/el-button&gt;
+            &lt;/el-upload&gt;
+        &lt;/el-col&gt;
+        &lt;el-col :lg=&quot;{span: 1, offset: 1}&quot; :sm=&quot;2&quot; :xs=&quot;2&quot;&gt;
+            &lt;el-button icon=&quot;el-icon-plus&quot; size=&quot;small&quot; @click=&quot;changeScale(1)&quot;&gt;&lt;/el-button&gt;
+        &lt;/el-col&gt;
+        &lt;el-col :lg=&quot;{span: 1, offset: 1}&quot; :sm=&quot;2&quot; :xs=&quot;2&quot;&gt;
+            &lt;el-button icon=&quot;el-icon-minus&quot; size=&quot;small&quot; @click=&quot;changeScale(-1)&quot;&gt;&lt;/el-button&gt;
+        &lt;/el-col&gt;
+        &lt;el-col :lg=&quot;{span: 1, offset: 1}&quot; :sm=&quot;2&quot; :xs=&quot;2&quot;&gt;
+            &lt;el-button icon=&quot;el-icon-refresh-left&quot; size=&quot;small&quot; @click=&quot;rotateLeft()&quot;&gt;&lt;/el-button&gt;
+        &lt;/el-col&gt;
+        &lt;el-col :lg=&quot;{span: 1, offset: 1}&quot; :sm=&quot;2&quot; :xs=&quot;2&quot;&gt;
+            &lt;el-button icon=&quot;el-icon-refresh-right&quot; size=&quot;small&quot; @click=&quot;rotateRight()&quot;&gt;&lt;/el-button&gt;
+        &lt;/el-col&gt;
+        &lt;el-col :lg=&quot;{span: 2, offset: 6}&quot; :sm=&quot;2&quot; :xs=&quot;2&quot;&gt;
+            &lt;el-button type=&quot;primary&quot; size=&quot;small&quot; @click=&quot;uploadImgSure&quot;&gt;确 认&lt;/el-button&gt;
+        &lt;/el-col&gt;
+    &lt;/el-row&gt;
+&lt;/el-dialog&gt;
 
-		// 组件能被调用必须是组件的节点已经被渲染到页面上
-	    // 1、在页面mounted里调用，有时候mounted 组件也未必渲染完成
-	    mounted() {
-	        // init(echarts, theme?:string, opts?:{}, chart =&gt; {})
-	        // echarts 必填， 非nvue必填，nvue不用填
-	        // theme 可选，应用的主题，目前只支持名称，如：'dark'
-	        // opts = { // 可选
-	        //  locale?: string  // 从 `5.0.0` 开始支持
-	        // }
-	        // chart =&gt; {} ， callback 必填，返回图表实例
-	        this.$refs.chart.init(echarts, chart =&gt; {
-	            chart.setOption(this.option);
-	        });
-	    },
-
-		// 2、或者使用组件的finished事件里调用
-	    methods: {
-	        init() {
-	            this.$refs.chart.init(echarts, chart =&gt; {
-	                chart.setOption(this.option);
-	            });
-	        }
-	    }
-
-	}
-&lt;/script&gt;
 
 </code></pre>
-<h5 id="二-解决ecahrtsjs文件过大的问题">二、解决ecahrts.js文件过大的问题</h5>
-<p>####### 首先，要去echarts官网自定义构建并下载文件<br>
-ECharts 在线构建 (apache.org) <a href="https://echarts.apache.org/zh/builder.html"></a><br>
-下载的是echarts.min.js文件<br>
-其次就是替换文件了<br>
-将项目中的echarts.js替换成echarts.min.js文件<br>
-<img src="https://nancy-svy.github.io/post-images/1681376499522.png" alt="" loading="lazy"></p>
-<h3 id="方法二">方法二</h3>
-<h5 id="微信小程序-ecahrts">微信小程序 ecahrts</h5>
-<h6 id="正文">正文</h6>
-<h6 id="一-uni-app引用echarts-2">一、uni-app引用echarts</h6>
-<p>######## 首先，要去下载插件（用hbuilder编辑器下载特别方便）<br>
-echarts-for-wx   DCloud插件市场 <a href="https://ext.dcloud.net.cn/plugin?id=1538"></a></p>
-<p>使用HBuilder导入之后，会生成一个js_sdk目录<br>
-######## 其次，只需要将js_sdk下的uni-ec-canvas目录复制到components目录下面就成功引入了<br>
-######## 之后，在pages中建立页面并复制如下代码就可以展示图表了<br>
-<strong>##</strong> 折线图</p>
-<pre><code>&lt;template&gt;
-  &lt;view&gt;
-    &lt;uni-ec-canvas class=&quot;uni-ec-canvas&quot; id=&quot;uni-ec-canvas&quot; ref=&quot;canvas&quot; canvas-id=&quot;uni-ec-canvas&quot; :ec=&quot;ec&quot;&gt;
-    &lt;/uni-ec-canvas&gt;
-  &lt;/view&gt;
-&lt;/template&gt;
-
-&lt;script&gt;
-  import uniEcCanvas from '@/components/uni-ec-canvas/uni-ec-canvas.vue'
-  import * as echarts from '@/components/uni-ec-canvas/echarts'
-  let chart = null
-  export default {
+<p>安装 裁剪插件 npm i  vue-cropper</p>
+<pre><code>import { VueCropper } from 'vue-cropper'
+import { debounce, videoSize } from '@/utils'
+export default{
     components: {
-      uniEcCanvas
+        VueCropper
     },
-    data() {
-      return {
-        ec: {
-          lazyLoad: true
-        },
-        option: {
-          tooltip: {
-            trigger: 'axis',
-            axisPointer: { // 坐标轴指示器，坐标轴触发有效
-              type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-            }
-          },
-          grid: {
-            left: '40',
-            right: '40',
-            bottom: '3%',
-            containLabel: true
-          },
-          xAxis: {
-            type: 'category',
-            axisTick: {
-              show: false,
+    data(){
+        return{
+            form: {
+                uploadList: []
             },
-            nameTextStyle: {
-              color: '#666666'
+            cropperImg: '', // 裁剪图片
+            cropperVisible: false, // 控制裁剪图片弹窗显示隐藏
+            visible: false, // 是否显示cropper
+            options: {
+                img: '', //裁剪图片的地址
+                autoCrop: true, // 是否默认生成截图框
+                autoCropWidth: 200, // 默认生成截图框宽度
+                autoCropHeight: 300, // 默认生成截图框高度
+                fixedBox: true, // 固定截图框大小 不允许改变
+                outputType:&quot;png&quot; // 默认生成截图为PNG格式
             },
-            axisLabel: {
-              show: true,
-              textStyle: {
-                color: '#666',
-                fontSize: '12',
-                fontWeight:'bold'
-              }
-            },
-            axisLine: {
-              lineStyle: {
-                color: '#666',
-                width: 1
-              }
-            },
-            data: [&quot;寿险&quot;, &quot;重疾&quot;, &quot;意外&quot;, &quot;医疗&quot;, &quot;年金&quot;],
-          },
-          yAxis: {
-            type: 'value',
-            axisLine: {
-              show: false, //y轴线消失
- 
-            },
-            axisLabel: {
-              show: true,
-              textStyle: {
-                color: '#666',
-                fontSize: '11'
-              }
-            },
- 
-            axisTick: {
-              show: false,
-            },
-          },
-          series: [{
-            barWidth: 20,
-            type: 'bar',
-            data: [20, 50, 40, 10, 20],
-            itemStyle: {
-              normal: {
-                //每根柱子颜色设置
-                color: function(params) {
-                  const colorList = [&quot;#FFC600&quot;, &quot;#21A5FF&quot;, &quot;#FF6000&quot;, &quot;#00D69C&quot;,
-                    &quot;#998BFF&quot;
-                  ];
-                  return colorList[params.dataIndex];
-                }
-              }
-            },
-            label: {
-              show: true,
-              position: 'top',
-              formatter: '{c}万',
-              color: '#666666',
-              fontStyle: 'PingFang SC',
-              fontWeight: 'bold',
-              fontSize:'8'
-            }
-          }]
-        },
-      }
+            resizeHandler: null,
+            previews: {},
+            fileUpload: {},
+        }
     },
     methods: {
-      initChart(canvas, width, height, canvasDpr) {
-        console.log(canvas, width, height, canvasDpr)
-        chart = echarts.init(canvas, null, {
-          width: width,
-          height: height,
-          devicePixelRatio: canvasDpr
-        })
-        canvas.setChart(chart)
-        chart.setOption(this.option)
-        return chart
-      },
-    },
-    onLoad() {
-      setTimeout(() =&gt; {
-        console.log(this.$refs)
-      }, 2000)
-      this.$refs.canvas.init(this.initChart)
-    },
-  }
-&lt;/script&gt;
- 
+        // 打开上传图片的弹窗
+        handleOpenUploadDialog(){
+            this.cropperImg = ''
+            this.cropperVisible = true
+        },
+        // 打开弹出层结束时
+        modalOpened(){
+            this.visible = true;
+            if (!this.resizeHandler) {
+                this.resizeHandler = debounce(() =&gt; {
+                    this.refresh()
+                }, 100)
+            }
+            window.addEventListener(&quot;resize&quot;, this.resizeHandler)
+        },
+        // 刷新组件
+        refresh() {
+            this.$refs.cropper.refresh();
+        },
+        // 关闭弹窗
+        closeDialog(){
+            this.visible = false;
+            window.removeEventListener(&quot;resize&quot;, this.resizeHandler)
+        },
+        // 实时预览
+        realTime(data) {
+            this.previews = data;
+        },
+        // 向左旋转
+        rotateLeft() {
+            this.$refs.cropper.rotateLeft();
+        },
+        // 向右旋转
+        rotateRight() {
+            this.$refs.cropper.rotateRight();
+        },
+        // 图片缩放
+        changeScale(num) {
+            num = num || 1;
+            this.$refs.cropper.changeScale(num);
+        },
+        // 上传图片前
+        beforeUploadImg(file){
+            const suffix = file.type === 'image/jpg' || file.type === 'image/png' || file.type === 'image/jpeg' 
+            const isLt1M = file.size / 1024 / 1024 &lt; 5
+            if (!suffix) {
+                this.$message.warning('上传的图片只能是JPG,PNG,JPEG 格式!')
+            }
+            if (!isLt1M) {
+                this.$message.warning('上传图片大小不能超过5MB!')
+            }
+        },
+        // 确认上传图片
+        uploadImgSure(){
+            if(this.cropperImg &amp;&amp; this.cropperImg != ''){
+                this.$refs.cropper.getCropBlob(data =&gt; {
+                    let formData = new FormData()
+                    // 判断的依据，是否是更新，更新是没有文件名的，更新要把缓存的数据转成file类型，目前是glob;
+　　                // 转换成file类型，可以根据后端接收类型自行转换成glob或者file格式
+                    let file = new File([data], typeof(this.fileUpload.name) == 'undefined' ? this.cropperImg : this.fileUpload.name, { type: data.type,lastModified: Date.now()})
+                    file.uid = Date.now()
+                    formData.append(&quot;file&quot;, file)
+                    // 调接口
+                    advertiseUpload(formData).then(res =&gt; {
+                        if(res.code == 200){
+                            this.cropperImg = process.env.VUE_APP_BASE_API + res.data
+                            this.form.uploadList.push({
+                                uid: Math.random().toString().slice(-6),
+                                url: process.env.VUE_APP_BASE_API + res.data
+                            })
+                            this.uploadImgList.push({
+                                uid: Math.random().toString().slice(-6),
+                                url: res.data
+                            })
+                            this.visible = false
+                            this.cropperVisible = false
+                        }
+                    })
+                });
+            }else{
+                this.$message.warning('请先上传图片')
+            }
+        },
+
+        // 移除图片
+        handleRemove(file, fileList){
+            this.form.uploadList.forEach((item, index) =&gt; {
+                if(item.uid == file.uid){
+                    this.form.uploadList.splice(index, 1)
+                }
+            })
+            this.uploadImgList.forEach((item, index) =&gt; {
+                if(item.uid == file.uid){
+                    this.uploadImgList.splice(index, 1)
+                }
+            })
+        },
+
+    }
+}
 </code></pre>
-<p>// 这里一定要注意 设置该组件宽高 以及display:block来确保canvas初始化的时候是有宽高的</p>
-<pre><code>&lt;style&gt;
-  .uni-ec-canvas {
-    width: 100%;
-    height: 500rpx;
-    display: block;
-    margin-top: 30rpx;
-  }
-&lt;/style&gt;
- 
+<pre><code>.advert-img-box{
+    width: 300px;
+    height: 400px;
+    position: relative;
+	top: 50%;
+	left: 53%;
+	transform: translate(-50%, -53%);
+	box-shadow: 0 0 4px #ccc;
+	overflow: hidden;
+}
 </code></pre>
-<h5 id="二-解决ecahrtsjs文件过大的问题-2">二、解决ecahrts.js文件过大的问题</h5>
-<p>####### 首先，要去echarts官网自定义构建并下载文件<br>
-ECharts 在线构建 (apache.org) <a href="https://echarts.apache.org/zh/builder.html"></a><br>
-下载的是echarts.min.js文件<br>
-<img src="https://nancy-svy.github.io/post-images/1689926216992.png" alt="" loading="lazy"></p>
-<p>####### 其次就是替换文件了<br>
-将项目中的echarts.js替换成echarts.min.js文件</p>
-<blockquote>
-<p>并修改导入的文件<br>
-有两个文件要修改:  一是uni-ec-canvas.vue，二是我们建立的test.vue<br>
-将echarts.js修改成echarts.min.js<br>
-修改完之后会报错了，解决方法：<br>
-打开echarts.min.js    搜索字符串  t.addEventListener<br>
-<img src="https://nancy-svy.github.io/post-images/1689926065464.png" alt="" loading="lazy"></p>
-</blockquote>
-<figure data-type="image" tabindex="1"><img src="https://nancy-svy.github.io/post-images/1689926097743.png" alt="" loading="lazy"></figure>
-<blockquote>
-<p>搜索到之后，在 t.addEventListener 后面添加   ?.<br>
-<img src="https://nancy-svy.github.io/post-images/1689926126613.png" alt="" loading="lazy"></p>
-</blockquote>
-<h3 id="页面滚动时图表抖动-加-force-use-old-canvastrue-这个属性">页面滚动时，图表抖动 加 force-use-old-canvas=&quot;true&quot; 这个属性</h3>
+<pre><code>/**
+ * @param {Function} func
+ * @param {number} wait
+ * @param {boolean} immediate
+ * @return {*}
+ */
+export function debounce(func, wait, immediate) {
+  let timeout, args, context, timestamp, result
+
+  const later = function() {
+    // 据上一次触发时间间隔
+    const last = +new Date() - timestamp
+
+    // 上次被包装函数被调用时间间隔 last 小于设定时间间隔 wait
+    if (last &lt; wait &amp;&amp; last &gt; 0) {
+      timeout = setTimeout(later, wait - last)
+    } else {
+      timeout = null
+      // 如果设定为immediate===true，因为开始边界已经调用过了此处无需调用
+      if (!immediate) {
+        result = func.apply(context, args)
+        if (!timeout) context = args = null
+      }
+    }
+  }
+
+  return function(...args) {
+    context = this
+    timestamp = +new Date()
+    const callNow = immediate &amp;&amp; !timeout
+    // 如果延时不存在，重新设定延时
+    if (!timeout) timeout = setTimeout(later, wait)
+    if (callNow) {
+      result = func.apply(context, args)
+      context = args = null
+    }
+
+    return result
+  }
+}
+</code></pre>
+<ol start="2">
+<li>限制上传图片的大小</li>
+</ol>
+<pre><code>/**
+ * 上传图片限制宽高
+ * 
+ * width： 限制的视频宽度
+ * height：限制的视频高度
+ */
+export const imgSize = (file, width, height, _this) =&gt; {
+  return new Promise((resolve, reject) =&gt; {
+    let url = window.URL || window.webkitURL
+    let img = new Image()
+    img.onload = function () {
+      // 图片比例校验
+      let valid = img.width === width &amp;&amp; img.height === height
+      valid ? resolve() : reject()
+    }
+    img.src = url.createObjectURL(file)
+  }).then(() =&gt; {
+      return file
+  },() =&gt; {
+      _this.$message.warning(`固定宽度为${width}px，高度为${height}px`)
+      return Promise.reject()
+    }
+  )
+}
+
+</code></pre>
+<p>// 使用</p>
+<pre><code>imgBeforeUploadimg (file) {
+    // 检查图片尺寸是否合格
+    let _this = this
+    var isSize = imgSize(file, 750, 420, _this)
+    return  isSize
+},
+</code></pre>
+<p>** URL.createObjectURL() 静态方法**</p>
+<pre><code>// URL.createObjectURL() 静态方法会创建一个 DOMString，其中包含一个表示参数中给出的对象的URL。
+// 这个 URL 的生命周期和创建它的窗口中的 document 绑定。这个新的URL 对象表示指定的 File 对象或 Blob 对象。
+// 语法
+objectURL = URL.createObjectURL(object);
+// 参数
+object
+用于创建 URL 的 File 对象、Blob 对象或者 MediaSource 对象。​
+// 返回值
+一个DOMString包含了一个对象URL，该URL可用于指定源 object的内容
+
+</code></pre>
+<h3 id="2-上传视频">2. 上传视频</h3>
+<ol>
+<li>上传视频</li>
+</ol>
+<pre><code>&lt;div&gt;
+    &lt;div class=&quot;video-wrapper&quot;&gt;
+        &lt;template v-if=&quot;uploadVideoList &amp;&amp; uploadVideoList.length != 0&quot; &gt;
+            &lt;div class=&quot;img-list-item&quot; v-for=&quot;(item, index) in uploadVideoList&quot; :key=&quot;index&quot;&gt;
+                &lt;video :src=&quot;item&quot; controls=&quot;controls&quot;&gt;&lt;/video&gt;
+                &lt;i class=&quot;el-icon-error&quot; @click=&quot;handleVideoRemove(item)&quot;&gt;&lt;/i&gt;
+            &lt;/div&gt;
+        &lt;/template&gt;
+        &lt;el-upload
+            class=&quot;video-uploader&quot;
+            action=&quot;&quot;
+            :show-file-list=&quot;false&quot;
+            :http-request=&quot;handleVideoUpload&quot;
+            :before-upload=&quot;beforeUploadVideo&quot;
+            accept=&quot;video/mp4, video/avi, video/mov&quot;
+            :limit=&quot;5&quot;
+        &gt;
+            &lt;i class=&quot;el-icon-plus avatar-uploader-icon&quot; v-loading=&quot;uploadVideoLoading&quot;&gt;&lt;/i&gt;
+        &lt;/el-upload&gt;
+    &lt;/div&gt;
+    &lt;div slot=&quot;tip&quot; class=&quot;el-upload__tip&quot;&gt;最多可以上传5个视频，建议大小50MB，推荐格式mp4，宽高为1920*1080&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<pre><code>import { videoSize } from '@/utils'
+export default{
+    data(){
+        return{
+            form: {
+                videoList: [],
+            },
+            uploadVideoList: [], 
+            uploadVideoLoading: false, // 加载中
+        }
+    },
+    methods: {
+         // 上传视频前
+         beforeUploadVideo(file){
+            const fileSize = file.size / 1024 / 1024 &lt; 50
+            const suffix = file.type == 'video/mp4' || file.type == 'video/avi' || file.type == 'video/mov'
+            if(!suffix){
+                this.$message.warning('上传的视频只能是mp4,avi,mov 格式!')
+            }
+            if(!fileSize){
+                this.$message.warning('视频大小不能超过50MB')
+            }
+        },
+
+        // 上传视频
+        handleVideoUpload(param){
+            const suffix = param.file.type == 'video/mp4' || aram.file.type == 'video/avi' || aram.file.type == 'video/mov'
+            const isLt1M = param.file.size / 1024 / 1024 &lt; 50
+            const isSize = videoSize(param.file, 1920, 1080, this)
+            if (suffix &amp;&amp; isLt1M) {
+                isSize.then(res =&gt;{
+                    this.uploadVideoLoading = true
+                    let obj = new FormData()
+                    obj.append('file', param.file)
+                    obj.append(&quot;storageLocation&quot;, this.form.storageLocation)
+                    advertiseUpload(obj).then(res =&gt; {
+                        if(res.code == 200){
+                            this.uploadVideoLoading = false
+                            this.form.videoList.push(res.data)
+                            this.uploadVideoList.push(`${process.env.VUE_APP_BASE_API}${res.data}`)
+                        }else{
+                            this.uploadVideoLoading = false
+                        }
+                    }).catch(err =&gt; {
+                        this.uploadVideoLoading = false
+                    })
+                })
+            }
+        },
+
+        // 移出视频
+        handleVideoRemove(val){
+            this.form.videoList.forEach((item, index) =&gt; {
+                if(item == val){
+                    this.form.videoList.splice(index, 1)
+                }
+            })
+            this.uploadVideoList.forEach((item, index) =&gt; {
+                if(item == val){
+                    this.uploadVideoList.splice(index, 1)
+                }
+            })
+        },
+
+    }
+}
+</code></pre>
+<pre><code>.video-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    .img-list-item {
+        position: relative;
+        margin: auto;
+        .el-icon-error{
+            position: absolute;
+            top: 0;
+            right: -1px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        video{
+            width: 100px;
+            height: 100px;
+        }
+    }
+    
+}
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://nancy-svy.github.io/post-images/1706516164057.png" alt="" loading="lazy"></figure>
+<ol>
+<li>限制视频的宽高、时长</li>
+</ol>
+<pre><code>/**
+ * 上传视频限制宽高
+ * 
+ * width： 限制的视频宽度
+ * height：限制的视频高度
+ * **/ 
+export const videoSize = (file, width, height, _this) =&gt; {
+  return new Promise(function(resolve, reject){
+    let _URL = window.URL || window.webkitURL
+    let videoElement = document.createElement('video')
+    videoElement.addEventListener('loadedmetadata', function(_event){
+      let vwidth = videoElement.videoWidth
+      let vheight = videoElement.videoHeight
+      let duration = videoElement.duration; // 视频时长
+      if(Math.floor(duration) &gt;= 30) return _this.$message.warning('上传视频时长不能超过 30S！')
+      let valid = vwidth === width &amp;&amp; vheight === height
+      valid ? resolve() : reject()
+    })
+    videoElement.src = _URL.createObjectURL(file)
+  }).then(() =&gt; {
+    return file
+  }, (err) =&gt; {
+    _this.$message.warning(`固定宽度为${width}px，高度为${height}px`)
+    // console.log(err)
+    return Promise.reject()
+  })
+}
+</code></pre>
 
             </div>
             
@@ -829,7 +954,7 @@ ECharts 在线构建 (apache.org) <a href="https://echarts.apache.org/zh/builder
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://nancy-svy.github.io/post/echartsFileSizeIssue/" title="uniapp 使用echarts并解决echarts文件过大的问题">https://nancy-svy.github.io/post/echartsFileSizeIssue/</a>
+      <a href="https://nancy-svy.github.io/post/elementui-shang-chuan-tu-pian-huo-shi-pin/" title="ElementUI 上传图片/视频">https://nancy-svy.github.io/post/elementui-shang-chuan-tu-pian-huo-shi-pin/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -838,21 +963,15 @@ ECharts 在线构建 (apache.org) <a href="https://echarts.apache.org/zh/builder
   </ul>
   <div class="tags">
     
-      <a href="https://nancy-svy.github.io/tag/XXkeG_S1Z/"># uniapp</a>
-    
   </div>
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="vue3  了解Arco Design Vue" href="https://nancy-svy.github.io/post/understandArcoDesignVue/">vue3  了解Arco Design Vue</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="vue3  了解Arco Design Vue" href="https://nancy-svy.github.io/post/understandArcoDesignVue/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="uniapp 取消掉默认导航栏样式，使用背景图片" href="https://nancy-svy.github.io/post/cancelTheDefaultNavigationBarStyle/">uniapp 取消掉默认导航栏样式，使用背景图片</a>
-        <a class="nav-mobile-next" title="uniapp 取消掉默认导航栏样式，使用背景图片" href="https://nancy-svy.github.io/post/cancelTheDefaultNavigationBarStyle/">下一篇</a>
+        <a class="nav-pc-next" title="vue 解决数据改变但视图没有刷新的几种情况以及解决方法" href="https://nancy-svy.github.io/post/vue-jie-jue-shu-ju-gai-bian-dan-shi-tu-mei-you-shua-xin-de-ji-chong-qing-kuang-yi-ji-jie-jue-fang-fa/">vue 解决数据改变但视图没有刷新的几种情况以及解决方法</a>
+        <a class="nav-mobile-next" title="vue 解决数据改变但视图没有刷新的几种情况以及解决方法" href="https://nancy-svy.github.io/post/vue-jie-jue-shu-ju-gai-bian-dan-shi-tu-mei-you-shua-xin-de-ji-chong-qing-kuang-yi-ji-jie-jue-fang-fa/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>
